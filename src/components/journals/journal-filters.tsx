@@ -64,19 +64,19 @@ export function JournalFilters({
   const copy = getCopy(locale);
 
   return (
-    <form className="grid gap-4 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm md:grid-cols-2 xl:grid-cols-5">
+    <form className="grid gap-4 rounded-[28px] border border-[#ECE3DC] bg-white p-5 shadow-sm md:grid-cols-2 xl:grid-cols-5">
       <input
         type="text"
         name="q"
         defaultValue={searchParams.q || ''}
         placeholder={copy.searchPlaceholder}
-        className="rounded-xl border border-slate-300 px-4 py-3 text-sm outline-none focus:border-slate-900"
+        className="rounded-2xl border border-[#ECE3DC] bg-[#FFFDFC] px-4 py-3 text-sm text-[#111111] outline-none placeholder:text-[#9A8F87] focus:border-[#FF6C26]"
       />
 
       <select
         name="scopus"
         defaultValue={searchParams.scopus || ''}
-        className="rounded-xl border border-slate-300 px-4 py-3 text-sm outline-none focus:border-slate-900"
+        className="rounded-2xl border border-[#ECE3DC] bg-white px-4 py-3 text-sm text-[#111111] outline-none focus:border-[#FF6C26]"
       >
         <option value="">{copy.scopusAll}</option>
         <option value="yes">{copy.scopusYes}</option>
@@ -86,7 +86,7 @@ export function JournalFilters({
       <select
         name="oak"
         defaultValue={searchParams.oak || ''}
-        className="rounded-xl border border-slate-300 px-4 py-3 text-sm outline-none focus:border-slate-900"
+        className="rounded-2xl border border-[#ECE3DC] bg-white px-4 py-3 text-sm text-[#111111] outline-none focus:border-[#FF6C26]"
       >
         <option value="">{copy.oakAll}</option>
         <option value="yes">{copy.oakYes}</option>
@@ -96,7 +96,7 @@ export function JournalFilters({
       <select
         name="subject"
         defaultValue={searchParams.subject || ''}
-        className="rounded-xl border border-slate-300 px-4 py-3 text-sm outline-none focus:border-slate-900"
+        className="rounded-2xl border border-[#ECE3DC] bg-white px-4 py-3 text-sm text-[#111111] outline-none focus:border-[#FF6C26]"
       >
         <option value="">{copy.subjectAll}</option>
         {subjects.map((subject) => (
@@ -110,7 +110,7 @@ export function JournalFilters({
         <select
           name="quartile"
           defaultValue={searchParams.quartile || ''}
-          className="w-full rounded-xl border border-slate-300 px-4 py-3 text-sm outline-none focus:border-slate-900"
+          className="w-full rounded-2xl border border-[#ECE3DC] bg-white px-4 py-3 text-sm text-[#111111] outline-none focus:border-[#FF6C26]"
         >
           <option value="">{copy.quartileAll}</option>
           <option value="Q1">Q1</option>
@@ -121,7 +121,7 @@ export function JournalFilters({
 
         <button
           type="submit"
-          className="rounded-xl bg-slate-900 px-5 py-3 text-sm font-medium text-white transition hover:bg-slate-700"
+          className="rounded-2xl bg-[#FF6C26] px-5 py-3 text-sm font-bold text-white transition hover:bg-[#E85E1B]"
         >
           {copy.submit}
         </button>

@@ -1,11 +1,11 @@
-import Link from "next/link";
+import Link from 'next/link';
 import {
   getUsefulPages,
   normalizeLocale,
   pickLocale,
-  siteLocales,
-} from "@/lib/useful";
-import type { SiteLocale } from "@/types/useful-page";
+  siteLocales
+} from '@/lib/useful';
+import type {SiteLocale} from '@/types/useful-page';
 
 const dictionary: Record<
   SiteLocale,
@@ -14,41 +14,52 @@ const dictionary: Record<
     title: string;
     description: string;
     open: string;
+    noteTitle: string;
+    noteText: string;
   }
 > = {
   ru: {
-    badge: "ПОЛЕЗНЫЕ МАТЕРИАЛЫ",
-    title: "Материалы для авторов и исследователей",
+    badge: 'ПОЛЕЗНЫЕ МАТЕРИАЛЫ',
+    title: 'Материалы для авторов и исследователей',
     description:
-      "Справочные материалы по ORCID, DOI, Scopus, OAK, антиплагиату, рецензированию, выбору журнала и публикационному процессу.",
-    open: "Открыть",
+      'Справочные материалы по ORCID, DOI, Scopus, ВАК, антиплагиату, рецензированию, выбору журнала и публикационному процессу.',
+    open: 'Открыть',
+    noteTitle: 'Как использовать раздел',
+    noteText:
+      'Здесь собраны краткие справочные материалы. Для финальной проверки требований всегда сверяйтесь с официальными источниками.'
   },
   uz: {
-    badge: "FOYDALI MATERIALLAR",
-    title: "Mualliflar va tadqiqotchilar uchun materiallar",
+    badge: 'FOYDALI MATERIALLAR',
+    title: 'Mualliflar va tadqiqotchilar uchun materiallar',
     description:
-      "ORCID, DOI, Scopus, OAK, antiplagiat, taqriz, jurnal tanlash va nashr jarayoni bo‘yicha foydali ma’lumotlar.",
-    open: "Ochish",
+      'ORCID, DOI, Scopus, OAK, antiplagiat, taqriz, jurnal tanlash va nashr jarayoni bo‘yicha foydali ma’lumotlar.',
+    open: 'Ochish',
+    noteTitle: 'Bo‘limdan foydalanish',
+    noteText:
+      'Bu yerda qisqa yo‘riqnoma va ma’lumotlar jamlangan. Yakuniy talablarni doimo rasmiy manbalar bilan solishtiring.'
   },
   en: {
-    badge: "USEFUL MATERIALS",
-    title: "Resources for authors and researchers",
+    badge: 'USEFUL MATERIALS',
+    title: 'Resources for authors and researchers',
     description:
-      "Reference materials on ORCID, DOI, Scopus, OAK, plagiarism checks, peer review, journal selection, and publication workflows.",
-    open: "Open",
-  },
+      'Reference materials on ORCID, DOI, Scopus, SAC, plagiarism checks, peer review, journal selection, and publication workflows.',
+    open: 'Open',
+    noteTitle: 'How to use this section',
+    noteText:
+      'This section contains short reference materials. Always compare final requirements with official sources.'
+  }
 };
 
 export const dynamicParams = false;
 
 export function generateStaticParams() {
-  return siteLocales.map((locale) => ({ locale }));
+  return siteLocales.map((locale) => ({locale}));
 }
 
 export default async function UsefulListPage({
-  params,
+  params
 }: {
-  params: Promise<{ locale: string }> | { locale: string };
+  params: Promise<{locale: string}> | {locale: string};
 }) {
   const resolvedParams = await Promise.resolve(params);
   const locale = normalizeLocale(resolvedParams.locale);
@@ -57,41 +68,54 @@ export default async function UsefulListPage({
   const pages = getUsefulPages();
 
   return (
-    <main className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
-      <section className="mb-8 rounded-3xl border border-slate-200 bg-white p-6 shadow-sm sm:p-8">
-        <div className="mb-3 inline-flex rounded-full border border-slate-300 px-3 py-1 text-xs font-semibold text-slate-700">
-          {t.badge}
+    <main className="pb-16">
+      <section className="mx-auto max-w-7xl px-4 pt-8 sm:px-6 lg:px-8">
+        <div className="rounded-[32px] border border-[#F1D8C8] bg-gradient-to-br from-[#FFF8F3] via-[#FFF4ED] to-white p-8 shadow-[0_10px_30px_rgba(17,17,17,0.06)] sm:p-10">
+          <div className="inline-flex rounded-full border border-[#FFD8C2] bg-white px-4 py-1 text-xs font-bold uppercase tracking-[0.18em] text-[#FF6C26]">
+            {t.badge}
+          </div>
+
+          <h1 className="mt-5 max-w-4xl text-4xl font-bold leading-tight text-[#111111] sm:text-5xl">
+            {t.title}
+          </h1>
+
+          <p className="mt-5 max-w-3xl text-base leading-8 text-[#5C5C5C] sm:text-lg">
+            {t.description}
+          </p>
         </div>
-
-        <h1 className="text-3xl font-bold tracking-tight text-slate-900">
-          {t.title}
-        </h1>
-
-        <p className="mt-3 max-w-3xl text-slate-600">{t.description}</p>
       </section>
 
-      <section className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        {pages.map((page) => (
-          <article
-            key={page.slug}
-            className="flex h-full flex-col rounded-3xl border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"
-          >
-            <h2 className="text-xl font-semibold text-slate-900">
-              {pickLocale(page.title, locale)}
-            </h2>
-
-            <p className="mt-3 flex-1 text-sm leading-7 text-slate-600">
-              {pickLocale(page.cardText, locale)}
-            </p>
-
-            <Link
-              href={`/${locale}/useful/${page.slug}`}
-              className="mt-5 inline-flex w-fit rounded-xl bg-slate-900 px-4 py-2 text-sm font-medium text-white transition hover:bg-slate-700"
+      <section className="mx-auto mt-10 max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {pages.map((page) => (
+            <article
+              key={page.slug}
+              className="flex h-full flex-col rounded-3xl border border-[#ECE3DC] bg-white p-6 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"
             >
-              {t.open}
-            </Link>
-          </article>
-        ))}
+              <h2 className="text-2xl font-bold leading-tight text-[#111111]">
+                {pickLocale(page.title, locale)}
+              </h2>
+
+              <p className="mt-4 flex-1 text-sm leading-7 text-[#5C5C5C]">
+                {pickLocale(page.cardText, locale)}
+              </p>
+
+              <Link
+                href={`/${locale}/useful/${page.slug}`}
+                className="mt-6 inline-flex w-fit rounded-2xl bg-[#FF6C26] px-5 py-3 text-sm font-bold text-white transition hover:bg-[#E85E1B]"
+              >
+                {t.open}
+              </Link>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section className="mx-auto mt-10 max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="rounded-3xl border border-[#ECE3DC] bg-[#FFF8F3] p-6">
+          <h3 className="text-xl font-bold text-[#111111]">{t.noteTitle}</h3>
+          <p className="mt-3 text-sm leading-7 text-[#5C5C5C]">{t.noteText}</p>
+        </div>
       </section>
     </main>
   );

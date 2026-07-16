@@ -16,6 +16,7 @@ type Props = {
 function getCopy(locale: string) {
   if (locale === 'uz') {
     return {
+      badge: 'Jurnallar katalogi',
       title: 'Ilmiy jurnallar katalogi',
       description:
         'Ilmiy maqolalarni chop etish uchun jurnallar bazasi: Scopus, OAK, yo‘nalishlar, kvartil va asosiy ma’lumotlar.',
@@ -28,6 +29,7 @@ function getCopy(locale: string) {
 
   if (locale === 'en') {
     return {
+      badge: 'Journal catalog',
       title: 'Scientific journals catalog',
       description:
         'A journal database for publishing scientific articles: Scopus, OAK, subject areas, quartile and key journal information.',
@@ -39,6 +41,7 @@ function getCopy(locale: string) {
   }
 
   return {
+    badge: 'Каталог журналов',
     title: 'Каталог научных журналов',
     description:
       'База журналов для публикации научных статей: Scopus, OAK, отраслевые направления, квартиль и основная информация по каждому изданию.',
@@ -66,24 +69,30 @@ export default async function LocalizedJournalsPage({
   });
 
   return (
-    <main className="bg-slate-50">
-      <section className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
-        <div className="mb-8">
-          <h1 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">
+    <main className="pb-16">
+      <section className="mx-auto max-w-7xl px-4 pt-8 sm:px-6 lg:px-8">
+        <div className="rounded-[32px] border border-[#F1D8C8] bg-gradient-to-br from-[#FFF8F3] via-[#FFF4ED] to-white p-8 shadow-[0_10px_30px_rgba(17,17,17,0.06)] sm:p-10">
+          <div className="inline-flex rounded-full border border-[#FFD8C2] bg-white px-4 py-1 text-xs font-bold uppercase tracking-[0.18em] text-[#FF6C26]">
+            {copy.badge}
+          </div>
+
+          <h1 className="mt-5 text-4xl font-bold leading-tight text-[#111111] sm:text-5xl">
             {copy.title}
           </h1>
-          <p className="mt-3 max-w-3xl text-slate-600">
+
+          <p className="mt-5 max-w-3xl text-base leading-8 text-[#5C5C5C] sm:text-lg">
             {copy.description}
           </p>
         </div>
+      </section>
 
-        <div className="mb-8">
-          <JournalFilters searchParams={query} locale={locale} />
-        </div>
+      <section className="mx-auto mt-10 max-w-7xl px-4 sm:px-6 lg:px-8">
+        <JournalFilters searchParams={query} locale={locale} />
+      </section>
 
-        <div className="mb-6 text-sm text-slate-500">
-          {copy.found}:{' '}
-          <span className="font-semibold">{filteredJournals.length}</span>
+      <section className="mx-auto mt-10 max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="mb-6 inline-flex rounded-full border border-[#ECE3DC] bg-[#FFF8F3] px-4 py-2 text-sm font-semibold text-[#6B6B6B]">
+          {copy.found}: {filteredJournals.length}
         </div>
 
         {filteredJournals.length > 0 ? (
@@ -93,11 +102,11 @@ export default async function LocalizedJournalsPage({
             ))}
           </div>
         ) : (
-          <div className="rounded-2xl border border-dashed border-slate-300 bg-white p-10 text-center">
-            <h2 className="text-xl font-semibold text-slate-900">
+          <div className="rounded-3xl border border-dashed border-[#D8CEC6] bg-white p-10 text-center shadow-sm">
+            <h2 className="text-2xl font-bold text-[#111111]">
               {copy.emptyTitle}
             </h2>
-            <p className="mt-2 text-slate-600">{copy.emptyDescription}</p>
+            <p className="mt-3 text-[#5C5C5C]">{copy.emptyDescription}</p>
           </div>
         )}
       </section>
