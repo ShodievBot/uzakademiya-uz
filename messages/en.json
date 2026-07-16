@@ -1,0 +1,11 @@
+{
+  "Site": {
+    "title": "UzAkademiya.uz"
+  },
+  "nav": {
+    "home": "Home",
+    "journals": "Journals",
+    "legislation": "Legislation",
+    "contacts": "Contacts"
+  }
+}
