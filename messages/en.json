@@ -1,11 +1,50 @@
 {
   "Site": {
-    "title": "UzAkademiya.uz"
+    "title": "UzAkademiya.uz",
+    "description": "Scientific journal catalog and reference platform for Scopus, OAK/SAC, legislation, and publication requirements."
   },
-  "nav": {
+  "Nav": {
     "home": "Home",
     "journals": "Journals",
+    "scopus": "Scopus",
+    "oak": "SAC",
     "legislation": "Legislation",
+    "useful": "Useful data",
     "contacts": "Contacts"
+  },
+  "Common": {
+    "open": "Open",
+    "details": "Details",
+    "back": "Back",
+    "contacts": "Contacts",
+    "sources": "Sources",
+    "allRightsReserved": "All rights reserved",
+    "publishArticle": "Publish article",
+    "learnMore": "Learn more"
+  },
+  "Home": {
+    "badge": "Academic platform",
+    "title": "A premium platform for navigating scientific journals and publications",
+    "subtitle": "Journal search, Scopus and SAC guidance, useful materials, official sources, and a convenient contact flow for article publication.",
+    "searchPlaceholder": "Search by journal title or publisher",
+    "searchButton": "Find journal",
+    "quickLinksTitle": "Quick sections",
+    "featuredTitle": "Featured journals",
+    "featuredDescription": "A quick-start selection of journals.",
+    "latestLegislationTitle": "Latest documents",
+    "latestLegislationDescription": "Key regulatory materials and official sources.",
+    "ctaTitle": "Need help with publication?",
+    "ctaText": "Contact us for journal selection, requirements, and submission support.",
+    "ctaButton": "Contact us",
+    "disclaimerTitle": "Important",
+    "disclaimerText": "The platform provides reference information and does not guarantee publication. Always verify final details using official sources."
+  },
+  "Legislation": {
+    "title": "Legislation",
+    "subtitle": "Documents, regulations, and official sources related to scientific activity and publications."
+  },
+  "Contacts": {
+    "title": "Contacts",
+    "subtitle": "Contact us regarding article publication, journal selection, and submission guidance."
   }
 }

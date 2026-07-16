@@ -1,11 +1,50 @@
 {
   "Site": {
-    "title": "UzAkademiya.uz"
+    "title": "UzAkademiya.uz",
+    "description": "Scopus, OAK/VAK, qonunchilik va nashr talablari bo‘yicha ilmiy jurnallar katalogi hamda ma’lumot platformasi."
   },
-  "nav": {
+  "Nav": {
     "home": "Bosh sahifa",
     "journals": "Jurnallar",
+    "scopus": "Scopus",
+    "oak": "OAK",
     "legislation": "Qonunchilik",
+    "useful": "Foydali ma’lumotlar",
     "contacts": "Kontaktlar"
+  },
+  "Common": {
+    "open": "Ochish",
+    "details": "Batafsil",
+    "back": "Orqaga",
+    "contacts": "Kontaktlar",
+    "sources": "Manbalar",
+    "allRightsReserved": "Barcha huquqlar himoyalangan",
+    "publishArticle": "Maqola chop etish",
+    "learnMore": "Batafsil"
+  },
+  "Home": {
+    "badge": "Akademik platforma",
+    "title": "Ilmiy jurnallar va nashrlar bo‘yicha premium navigatsiya platformasi",
+    "subtitle": "Jurnallarni qidirish, Scopus va OAK bo‘yicha yo‘riqnoma, foydali materiallar, rasmiy manbalar va maqola chop etish uchun qulay aloqa ssenariysi.",
+    "searchPlaceholder": "Jurnal nomi yoki nashriyot bo‘yicha qidiruv",
+    "searchButton": "Jurnal topish",
+    "quickLinksTitle": "Tezkor bo‘limlar",
+    "featuredTitle": "Tavsiya etilgan jurnallar",
+    "featuredDescription": "Tez boshlash uchun jurnal tanlovi.",
+    "latestLegislationTitle": "So‘nggi hujjatlar",
+    "latestLegislationDescription": "Asosiy normativ materiallar va rasmiy manbalar.",
+    "ctaTitle": "Nashr bo‘yicha yordam kerakmi?",
+    "ctaText": "Jurnal tanlash, talablar va maqola yuborish bo‘yicha biz bilan bog‘laning.",
+    "ctaButton": "Bog‘lanish",
+    "disclaimerTitle": "Muhim",
+    "disclaimerText": "Platforma ma’lumot uchun xizmat qiladi va nashrni kafolatlamaydi. Yakuniy tekshiruvni har doim rasmiy manbalar orqali bajaring."
+  },
+  "Legislation": {
+    "title": "Qonunchilik",
+    "subtitle": "Ilmiy faoliyat va nashrlar bilan bog‘liq hujjatlar, me’yorlar va rasmiy manbalar."
+  },
+  "Contacts": {
+    "title": "Kontaktlar",
+    "subtitle": "Maqola chop etish, jurnal tanlash va yuborish bo‘yicha biz bilan bog‘laning."
   }
 }
