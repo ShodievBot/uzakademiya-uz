@@ -31,7 +31,7 @@ function getCopy(locale: string) {
       basicInfo: 'Asosiy ma’lumotlar',
       indexing: 'Indekslash',
       publication: 'Nashr shartlari',
-      scopusBlock: 'Scopus bloki',
+      scopusBlock: 'Scopus ko‘rsatkichlari',
       sources: 'Manbalar',
       ctaTitle: 'Maqola yuborishga tayyormisiz?',
       ctaText:
@@ -48,19 +48,25 @@ function getCopy(locale: string) {
       website: 'Rasmiy sayt',
       scopusStatus: 'Scopus',
       oakStatus: 'OAK',
+      oakBadge: 'OAK',
       coverage: 'Qamrov yillari',
       quartile: 'Kvartil',
       percentile: 'Percentile',
       citescore2025: 'CiteScore 2025',
       citescore2026: 'CiteScore 2026',
       verification: 'Tekshiruv holati',
-      submission: 'Maqola yuborish usuli',
+      submission: 'Yuborish usuli',
       telegram: 'Telegram mavjud',
       submissionUrl: 'Submission URL mavjud',
       noWebsite: 'Sayt ko‘rsatilmagan',
       noData: 'Ma’lumot yo‘q',
       yes: 'Ha',
-      no: 'Yo‘q'
+      no: 'Yo‘q',
+      year: 'Yil',
+      documents: 'Hujjatlar',
+      submissionTelegram: 'Telegram',
+      submissionForm: 'Submission URL',
+      submissionWebsite: 'Website'
     };
   }
 
@@ -71,7 +77,7 @@ function getCopy(locale: string) {
       basicInfo: 'Basic information',
       indexing: 'Indexing',
       publication: 'Publication conditions',
-      scopusBlock: 'Scopus block',
+      scopusBlock: 'Scopus metrics',
       sources: 'Sources',
       ctaTitle: 'Ready to submit your article?',
       ctaText:
@@ -87,7 +93,8 @@ function getCopy(locale: string) {
       eissn: 'EISSN',
       website: 'Official website',
       scopusStatus: 'Scopus',
-      oakStatus: 'OAK',
+      oakStatus: 'SAC',
+      oakBadge: 'SAC',
       coverage: 'Coverage years',
       quartile: 'Quartile',
       percentile: 'Percentile',
@@ -100,7 +107,12 @@ function getCopy(locale: string) {
       noWebsite: 'Website not specified',
       noData: 'No data',
       yes: 'Yes',
-      no: 'No'
+      no: 'No',
+      year: 'Year',
+      documents: 'Documents',
+      submissionTelegram: 'Telegram',
+      submissionForm: 'Submission URL',
+      submissionWebsite: 'Website'
     };
   }
 
@@ -110,7 +122,7 @@ function getCopy(locale: string) {
     basicInfo: 'Основная информация',
     indexing: 'Индексация',
     publication: 'Условия публикации',
-    scopusBlock: 'Scopus-блок',
+    scopusBlock: 'Scopus-показатели',
     sources: 'Источники',
     ctaTitle: 'Готовы подать статью?',
     ctaText:
@@ -126,7 +138,8 @@ function getCopy(locale: string) {
     eissn: 'EISSN',
     website: 'Официальный сайт',
     scopusStatus: 'Scopus',
-    oakStatus: 'OAK',
+    oakStatus: 'ВАК',
+    oakBadge: 'ВАК',
     coverage: 'Годы покрытия',
     quartile: 'Квартиль',
     percentile: 'Percentile',
@@ -139,18 +152,38 @@ function getCopy(locale: string) {
     noWebsite: 'Сайт не указан',
     noData: 'Нет данных',
     yes: 'Да',
-    no: 'Нет'
+    no: 'Нет',
+    year: 'Год',
+    documents: 'Документы',
+    submissionTelegram: 'Telegram',
+    submissionForm: 'Submission URL',
+    submissionWebsite: 'Сайт'
   };
 }
 
-function formatVerificationStatus(value?: string) {
+function formatVerificationStatus(value?: string, locale = 'ru') {
   if (!value) return '—';
 
-  if (value === 'verified') return 'Verified';
-  if (value === 'partially_verified') return 'Partially verified';
-  if (value === 'needs_manual_review') return 'Needs manual review';
+  const dict =
+    locale === 'uz'
+      ? {
+          verified: 'Tasdiqlangan',
+          partially_verified: 'Qisman tasdiqlangan',
+          needs_manual_review: 'Qo‘lda tekshirish kerak'
+        }
+      : locale === 'en'
+        ? {
+            verified: 'Verified',
+            partially_verified: 'Partially verified',
+            needs_manual_review: 'Needs manual review'
+          }
+        : {
+            verified: 'Проверено',
+            partially_verified: 'Частично проверено',
+            needs_manual_review: 'Требуется ручная проверка'
+          };
 
-  return value;
+  return dict[value as keyof typeof dict] || value;
 }
 
 function InfoRow({
@@ -161,9 +194,11 @@ function InfoRow({
   value: string | number | null | undefined;
 }) {
   return (
-    <div className="flex items-start justify-between gap-4 border-b border-slate-200 py-3 last:border-b-0">
-      <div className="text-sm font-medium text-slate-500">{label}</div>
-      <div className="text-right text-sm text-slate-900">{value || '—'}</div>
+    <div className="flex items-start justify-between gap-4 border-b border-[#ECE3DC] py-3 last:border-b-0">
+      <div className="text-sm font-medium text-[#7A7A7A]">{label}</div>
+      <div className="max-w-[60%] break-words text-right text-sm text-[#111111]">
+        {value || '—'}
+      </div>
     </div>
   );
 }
@@ -182,13 +217,21 @@ export default async function LocalizedJournalDetailsPage({params}: Props) {
   const publishHref = getJournalPublishHref(journal, locale);
   const publishLabel = getJournalPublishLabel(journal, locale);
 
+  const submissionMethod = journal.telegramUrl
+    ? copy.submissionTelegram
+    : journal.submissionUrl
+      ? copy.submissionForm
+      : journal.website
+        ? copy.submissionWebsite
+        : copy.noData;
+
   return (
-    <main className="bg-slate-50">
-      <section className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
+    <main className="pb-16">
+      <section className="mx-auto max-w-7xl px-4 pt-8 sm:px-6 lg:px-8">
         <div className="mb-6">
           <Link
             href={`/${locale}/journals`}
-            className="inline-flex rounded-xl border border-slate-300 bg-white px-4 py-2 text-sm font-medium text-slate-700 transition hover:bg-slate-100"
+            className="inline-flex rounded-2xl border border-[#ECE3DC] bg-white px-4 py-2 text-sm font-semibold text-[#111111] transition hover:bg-[#FFF8F3]"
           >
             {copy.back}
           </Link>
@@ -196,47 +239,47 @@ export default async function LocalizedJournalDetailsPage({params}: Props) {
 
         <div className="grid gap-6 lg:grid-cols-[1.2fr_0.8fr]">
           <div className="space-y-6">
-            <section className="rounded-3xl border border-slate-200 bg-white p-8 shadow-sm">
+            <section className="rounded-[32px] border border-[#F1D8C8] bg-gradient-to-br from-[#FFF8F3] via-[#FFF4ED] to-white p-8 shadow-[0_10px_30px_rgba(17,17,17,0.06)]">
               <div className="mb-4 flex flex-wrap gap-2">
                 {journal.isScopusIndexed && (
-                  <span className="rounded-full bg-blue-100 px-3 py-1 text-xs font-medium text-blue-700">
+                  <span className="rounded-full border border-[#FFDCCB] bg-[#FFF4EC] px-3 py-1 text-xs font-semibold text-[#E56A22]">
                     Scopus
                   </span>
                 )}
+
                 {journal.isOakRecommended && (
-                  <span className="rounded-full bg-emerald-100 px-3 py-1 text-xs font-medium text-emerald-700">
-                    OAK
+                  <span className="rounded-full border border-[#E7D9CB] bg-[#F8F2EC] px-3 py-1 text-xs font-semibold text-[#6F4E37]">
+                    {copy.oakBadge}
                   </span>
                 )}
+
                 {journal.quartile && (
-                  <span className="rounded-full bg-violet-100 px-3 py-1 text-xs font-medium text-violet-700">
+                  <span className="rounded-full border border-[#E8D9FF] bg-[#F7F1FF] px-3 py-1 text-xs font-semibold text-[#8A63D2]">
                     {journal.quartile}
                   </span>
                 )}
               </div>
 
-              <h1 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">
+              <h1 className="max-w-4xl text-4xl font-bold leading-tight text-[#111111] sm:text-5xl">
                 {title}
               </h1>
 
-              <p className="mt-3 text-sm text-slate-500">{journal.title}</p>
+              <p className="mt-3 text-sm text-[#7A7A7A]">{journal.title}</p>
 
-              <p className="mt-6 max-w-3xl text-base leading-7 text-slate-600">
+              <p className="mt-6 max-w-3xl text-base leading-8 text-[#5C5C5C]">
                 {journal.shortDescription}
               </p>
             </section>
 
-            <section className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
-              <h2 className="text-xl font-semibold text-slate-900">
-                {copy.about}
-              </h2>
-              <p className="mt-4 text-sm leading-7 text-slate-600">
+            <section className="rounded-3xl border border-[#ECE3DC] bg-white p-6 shadow-sm">
+              <h2 className="text-2xl font-bold text-[#111111]">{copy.about}</h2>
+              <p className="mt-4 text-sm leading-7 text-[#5C5C5C]">
                 {journal.shortDescription}
               </p>
             </section>
 
-            <section className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
-              <h2 className="text-xl font-semibold text-slate-900">
+            <section className="rounded-3xl border border-[#ECE3DC] bg-white p-6 shadow-sm">
+              <h2 className="text-2xl font-bold text-[#111111]">
                 {copy.basicInfo}
               </h2>
 
@@ -257,12 +300,15 @@ export default async function LocalizedJournalDetailsPage({params}: Props) {
                 />
                 <InfoRow label={copy.issn} value={journal.issn} />
                 <InfoRow label={copy.eissn} value={journal.eissn} />
-                <InfoRow label={copy.website} value={journal.website || copy.noWebsite} />
+                <InfoRow
+                  label={copy.website}
+                  value={journal.website || copy.noWebsite}
+                />
               </div>
             </section>
 
-            <section className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
-              <h2 className="text-xl font-semibold text-slate-900">
+            <section className="rounded-3xl border border-[#ECE3DC] bg-white p-6 shadow-sm">
+              <h2 className="text-2xl font-bold text-[#111111]">
                 {copy.indexing}
               </h2>
 
@@ -297,13 +343,13 @@ export default async function LocalizedJournalDetailsPage({params}: Props) {
                 />
                 <InfoRow
                   label={copy.verification}
-                  value={formatVerificationStatus(journal.verificationStatus)}
+                  value={formatVerificationStatus(journal.verificationStatus, locale)}
                 />
               </div>
             </section>
 
-            <section className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
-              <h2 className="text-xl font-semibold text-slate-900">
+            <section className="rounded-3xl border border-[#ECE3DC] bg-white p-6 shadow-sm">
+              <h2 className="text-2xl font-bold text-[#111111]">
                 {copy.publication}
               </h2>
 
@@ -316,74 +362,63 @@ export default async function LocalizedJournalDetailsPage({params}: Props) {
                   label={copy.submissionUrl}
                   value={journal.submissionUrl ? copy.yes : copy.no}
                 />
-                <InfoRow
-                  label={copy.submission}
-                  value={
-                    journal.telegramUrl
-                      ? 'Telegram'
-                      : journal.submissionUrl
-                        ? 'Submission URL'
-                        : journal.website
-                          ? 'Website'
-                          : copy.noData
-                  }
-                />
+                <InfoRow label={copy.submission} value={submissionMethod} />
               </div>
             </section>
 
             {journal.isScopusIndexed && (
-              <section className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
-                <h2 className="text-xl font-semibold text-slate-900">
+              <section className="rounded-3xl border border-[#ECE3DC] bg-white p-6 shadow-sm">
+                <h2 className="text-2xl font-bold text-[#111111]">
                   {copy.scopusBlock}
                 </h2>
 
                 <div className="mt-5 grid gap-4 sm:grid-cols-3">
-                  <div className="rounded-2xl bg-slate-50 p-4">
-                    <div className="text-xs uppercase tracking-wide text-slate-500">
+                  <div className="rounded-2xl border border-[#ECE3DC] bg-[#FFF8F3] p-4">
+                    <div className="text-xs font-semibold uppercase tracking-wide text-[#7A7A7A]">
                       {copy.quartile}
                     </div>
-                    <div className="mt-2 text-2xl font-bold text-slate-900">
+                    <div className="mt-2 text-3xl font-bold text-[#111111]">
                       {journal.quartile || '—'}
                     </div>
                   </div>
 
-                  <div className="rounded-2xl bg-slate-50 p-4">
-                    <div className="text-xs uppercase tracking-wide text-slate-500">
+                  <div className="rounded-2xl border border-[#ECE3DC] bg-[#FFF8F3] p-4">
+                    <div className="text-xs font-semibold uppercase tracking-wide text-[#7A7A7A]">
                       {copy.percentile}
                     </div>
-                    <div className="mt-2 text-2xl font-bold text-slate-900">
+                    <div className="mt-2 text-3xl font-bold text-[#111111]">
                       {journal.percentile ?? '—'}
                     </div>
                   </div>
 
-                  <div className="rounded-2xl bg-slate-50 p-4">
-                    <div className="text-xs uppercase tracking-wide text-slate-500">
+                  <div className="rounded-2xl border border-[#ECE3DC] bg-[#FFF8F3] p-4">
+                    <div className="text-xs font-semibold uppercase tracking-wide text-[#7A7A7A]">
                       {copy.citescore2025}
                     </div>
-                    <div className="mt-2 text-2xl font-bold text-slate-900">
+                    <div className="mt-2 text-3xl font-bold text-[#111111]">
                       {journal.citescore2025 ?? '—'}
                     </div>
                   </div>
                 </div>
 
                 {journal.scopusContent && journal.scopusContent.length > 0 && (
-                  <div className="mt-6 overflow-hidden rounded-2xl border border-slate-200">
-                    <table className="min-w-full divide-y divide-slate-200 text-sm">
-                      <thead className="bg-slate-50">
+                  <div className="mt-6 overflow-hidden rounded-2xl border border-[#ECE3DC]">
+                    <table className="min-w-full text-sm">
+                      <thead className="bg-[#FFF8F3]">
                         <tr>
-                          <th className="px-4 py-3 text-left font-medium text-slate-600">
-                            Year
+                          <th className="px-4 py-3 text-left font-semibold text-[#7A7A7A]">
+                            {copy.year}
                           </th>
-                          <th className="px-4 py-3 text-left font-medium text-slate-600">
-                            Documents
+                          <th className="px-4 py-3 text-left font-semibold text-[#7A7A7A]">
+                            {copy.documents}
                           </th>
                         </tr>
                       </thead>
-                      <tbody className="divide-y divide-slate-200 bg-white">
+                      <tbody className="divide-y divide-[#ECE3DC] bg-white">
                         {journal.scopusContent.map((item) => (
                           <tr key={item.year}>
-                            <td className="px-4 py-3 text-slate-900">{item.year}</td>
-                            <td className="px-4 py-3 text-slate-700">
+                            <td className="px-4 py-3 text-[#111111]">{item.year}</td>
+                            <td className="px-4 py-3 text-[#5C5C5C]">
                               {item.documentsCount}
                             </td>
                           </tr>
@@ -395,8 +430,8 @@ export default async function LocalizedJournalDetailsPage({params}: Props) {
               </section>
             )}
 
-            <section className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
-              <h2 className="text-xl font-semibold text-slate-900">
+            <section className="rounded-3xl border border-[#ECE3DC] bg-white p-6 shadow-sm">
+              <h2 className="text-2xl font-bold text-[#111111]">
                 {copy.sources}
               </h2>
 
@@ -406,19 +441,19 @@ export default async function LocalizedJournalDetailsPage({params}: Props) {
                     href={journal.website}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex rounded-xl border border-slate-300 bg-white px-4 py-2 text-sm font-medium text-slate-900 transition hover:bg-slate-100"
+                    className="inline-flex rounded-2xl border border-[#ECE3DC] bg-white px-5 py-3 text-sm font-semibold text-[#111111] transition hover:bg-[#FFF8F3]"
                   >
                     {copy.openWebsite}
                   </a>
                 ) : (
-                  <div className="rounded-xl border border-dashed border-slate-300 px-4 py-2 text-sm text-slate-500">
+                  <div className="rounded-2xl border border-dashed border-[#D8CEC6] px-4 py-2 text-sm text-[#7A7A7A]">
                     {copy.noWebsite}
                   </div>
                 )}
 
                 <Link
                   href={`/${locale}/contacts?journal=${encodeURIComponent(journal.slug)}`}
-                  className="inline-flex rounded-xl bg-slate-900 px-4 py-2 text-sm font-medium text-white transition hover:bg-slate-700"
+                  className="inline-flex rounded-2xl bg-[#FF6C26] px-5 py-3 text-sm font-bold text-white transition hover:bg-[#E85E1B]"
                 >
                   {copy.contactUs}
                 </Link>
@@ -427,26 +462,26 @@ export default async function LocalizedJournalDetailsPage({params}: Props) {
           </div>
 
           <aside className="space-y-6 lg:sticky lg:top-24 lg:self-start">
-            <section className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
-              <h2 className="text-lg font-semibold text-slate-900">
+            <section className="rounded-3xl border border-[#ECE3DC] bg-white p-6 shadow-sm">
+              <h2 className="text-2xl font-bold text-[#111111]">
                 {copy.ctaTitle}
               </h2>
 
-              <p className="mt-3 text-sm leading-6 text-slate-600">
+              <p className="mt-3 text-sm leading-7 text-[#5C5C5C]">
                 {copy.ctaText}
               </p>
 
               <div className="mt-5 flex flex-col gap-3">
                 <Link
                   href={publishHref}
-                  className="inline-flex items-center justify-center rounded-xl bg-slate-900 px-5 py-3 text-sm font-semibold text-white transition hover:bg-slate-700"
+                  className="inline-flex items-center justify-center rounded-2xl bg-[#FF6C26] px-5 py-3 text-sm font-bold text-white transition hover:bg-[#E85E1B]"
                 >
                   {publishLabel}
                 </Link>
 
                 <Link
                   href={`/${locale}/contacts?journal=${encodeURIComponent(journal.slug)}`}
-                  className="inline-flex items-center justify-center rounded-xl border border-slate-300 px-5 py-3 text-sm font-semibold text-slate-700 transition hover:bg-slate-100"
+                  className="inline-flex items-center justify-center rounded-2xl border border-[#ECE3DC] bg-white px-5 py-3 text-sm font-semibold text-[#111111] transition hover:bg-[#FFF8F3]"
                 >
                   {copy.contactUs}
                 </Link>
@@ -456,7 +491,7 @@ export default async function LocalizedJournalDetailsPage({params}: Props) {
                     href={journal.website}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center justify-center rounded-xl border border-slate-300 px-5 py-3 text-sm font-semibold text-slate-700 transition hover:bg-slate-100"
+                    className="inline-flex items-center justify-center rounded-2xl border border-[#ECE3DC] bg-white px-5 py-3 text-sm font-semibold text-[#111111] transition hover:bg-[#FFF8F3]"
                   >
                     {copy.openWebsite}
                   </a>

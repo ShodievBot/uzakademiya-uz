@@ -43,7 +43,13 @@ function getCopy(locale: string) {
       contactDetails: 'Bog‘lanish ma’lumotlari',
       brandChannel: 'Brend sahifasi',
       note:
-        'Telegram, WhatsApp va Email tugmalari tayyor matn bilan ochiladi.'
+        'Telegram, WhatsApp va Email tugmalari tayyor matn bilan ochiladi.',
+      actions: {
+        email: 'Email yozish',
+        telegram: 'Telegram ochish',
+        whatsapp: 'WhatsApp ochish',
+        phone: 'Qo‘ng‘iroq qilish'
+      }
     };
   }
 
@@ -51,7 +57,7 @@ function getCopy(locale: string) {
     return {
       title: 'Contacts',
       subtitle:
-        'Contact us for article publication, journal selection and submission guidance.',
+        'Contact us for article publication, journal selection, and submission guidance.',
       selectedJournal: 'Selected journal',
       selectedJournalFallback: 'No journal selected',
       messageLabel: 'Auto-generated message',
@@ -64,9 +70,15 @@ function getCopy(locale: string) {
       phone: 'Call',
       instagram: 'Instagram',
       contactDetails: 'Contact details',
-      brandChannel: 'Brand channel',
+      brandChannel: 'Brand page',
       note:
-        'Telegram, WhatsApp and Email buttons open with a ready-made message.'
+        'Telegram, WhatsApp and Email open with a ready-made message.',
+      actions: {
+        email: 'Send email',
+        telegram: 'Open Telegram',
+        whatsapp: 'Open WhatsApp',
+        phone: 'Call now'
+      }
     };
   }
 
@@ -88,31 +100,43 @@ function getCopy(locale: string) {
     contactDetails: 'Контактные данные',
     brandChannel: 'Страница бренда',
     note:
-      'Кнопки Telegram, WhatsApp и Email открываются с готовым текстом.'
+      'Telegram, WhatsApp и Email открываются с готовым текстом сообщения.',
+    actions: {
+      email: 'Написать на email',
+      telegram: 'Открыть Telegram',
+      whatsapp: 'Открыть WhatsApp',
+      phone: 'Позвонить'
+    }
   };
 }
 
-function ContactActionCard({
+function ActionCard({
   title,
-  href,
   value,
+  href,
+  buttonLabel,
   external = false
 }: {
   title: string;
-  href: string;
   value: string;
+  href: string;
+  buttonLabel: string;
   external?: boolean;
 }) {
   return (
-    <a
-      href={href}
-      target={external ? '_blank' : undefined}
-      rel={external ? 'noopener noreferrer' : undefined}
-      className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"
-    >
-      <div className="text-sm font-medium text-slate-500">{title}</div>
-      <div className="mt-2 text-base font-semibold text-slate-900">{value}</div>
-    </a>
+    <article className="rounded-3xl border border-[#ECE3DC] bg-white p-5 shadow-sm">
+      <div className="text-sm font-medium text-[#7A7A7A]">{title}</div>
+      <div className="mt-2 text-lg font-bold text-[#111111] break-all">{value}</div>
+
+      <a
+        href={href}
+        target={external ? '_blank' : undefined}
+        rel={external ? 'noopener noreferrer' : undefined}
+        className="mt-5 inline-flex rounded-2xl bg-[#FF6C26] px-5 py-3 text-sm font-bold text-white transition hover:bg-[#E85E1B]"
+      >
+        {buttonLabel}
+      </a>
+    </article>
   );
 }
 
@@ -129,119 +153,121 @@ export default async function LocalizedContactsPage({
   const links = getContactLinks(locale, journalTitle);
 
   return (
-    <main className="bg-slate-50">
-      <section className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
-        <div className="mb-8 rounded-3xl border border-slate-200 bg-white p-8 shadow-sm">
-          <h1 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">
+    <main className="pb-16">
+      <section className="mx-auto max-w-7xl px-4 pt-8 sm:px-6 lg:px-8">
+        <div className="rounded-[32px] border border-[#F1D8C8] bg-gradient-to-br from-[#FFF8F3] via-[#FFF4ED] to-white p-8 shadow-[0_10px_30px_rgba(17,17,17,0.06)] sm:p-10">
+          <h1 className="text-4xl font-bold text-[#111111] sm:text-5xl">
             {copy.title}
           </h1>
-          <p className="mt-3 max-w-3xl text-slate-600">{copy.subtitle}</p>
+          <p className="mt-4 max-w-3xl text-base leading-8 text-[#5C5C5C] sm:text-lg">
+            {copy.subtitle}
+          </p>
+        </div>
+      </section>
+
+      <section className="mx-auto mt-10 grid max-w-7xl gap-6 px-4 sm:px-6 lg:grid-cols-[1.5fr_1fr] lg:px-8">
+        <div className="space-y-6">
+          <section className="rounded-3xl border border-[#ECE3DC] bg-white p-6 shadow-sm">
+            <div className="text-sm font-medium text-[#7A7A7A]">
+              {copy.selectedJournal}
+            </div>
+            <div className="mt-2 text-3xl font-bold text-[#111111]">
+              {journalTitle || copy.selectedJournalFallback}
+            </div>
+          </section>
+
+          <section className="rounded-3xl border border-[#ECE3DC] bg-white p-6 shadow-sm">
+            <div className="text-sm font-medium text-[#7A7A7A]">
+              {copy.messageLabel}
+            </div>
+
+            <div className="mt-4 rounded-2xl border border-[#ECE3DC] bg-[#FFFDFC] px-5 py-4 text-sm leading-7 text-[#5C5C5C]">
+              {links.message}
+            </div>
+
+            <p className="mt-4 text-sm text-[#6B6B6B]">{copy.note}</p>
+          </section>
+
+          <section className="rounded-3xl border border-[#ECE3DC] bg-white p-6 shadow-sm">
+            <h2 className="text-2xl font-bold text-[#111111]">
+              {copy.channelsTitle}
+            </h2>
+            <p className="mt-2 text-sm leading-7 text-[#5C5C5C]">
+              {copy.channelsDescription}
+            </p>
+
+            <div className="mt-6 grid gap-4 md:grid-cols-2">
+              <ActionCard
+                title={copy.email}
+                value={CONTACTS.email}
+                href={links.email}
+                buttonLabel={copy.actions.email}
+              />
+              <ActionCard
+                title={copy.telegram}
+                value={`@${CONTACTS.telegramUsername}`}
+                href={links.telegram}
+                buttonLabel={copy.actions.telegram}
+                external
+              />
+              <ActionCard
+                title={copy.whatsapp}
+                value={`+${CONTACTS.whatsappNumber}`}
+                href={links.whatsapp}
+                buttonLabel={copy.actions.whatsapp}
+                external
+              />
+              <ActionCard
+                title={copy.phone}
+                value={CONTACTS.phoneNumber}
+                href={links.phone}
+                buttonLabel={copy.actions.phone}
+              />
+            </div>
+          </section>
         </div>
 
-        <div className="grid gap-6 lg:grid-cols-[1.2fr_0.8fr]">
-          <div className="space-y-6">
-            <section className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
-              <div className="text-sm font-medium text-slate-500">
-                {copy.selectedJournal}
+        <aside className="space-y-6">
+          <section className="rounded-3xl border border-[#ECE3DC] bg-white p-6 shadow-sm">
+            <h2 className="text-2xl font-bold text-[#111111]">
+              {copy.contactDetails}
+            </h2>
+
+            <div className="mt-5 space-y-3 text-sm leading-7 text-[#5C5C5C]">
+              <div>
+                <span className="font-semibold text-[#111111]">{copy.email}:</span>{' '}
+                {CONTACTS.email}
               </div>
-              <div className="mt-2 text-2xl font-semibold text-slate-900">
-                {journalTitle || copy.selectedJournalFallback}
+              <div>
+                <span className="font-semibold text-[#111111]">{copy.telegram}:</span>{' '}
+                @{CONTACTS.telegramUsername}
               </div>
-
-              {journalSlug && !journalTitle ? (
-                <p className="mt-3 text-sm text-amber-700">
-                  slug: {journalSlug}
-                </p>
-              ) : null}
-            </section>
-
-            <section className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
-              <div className="text-sm font-medium text-slate-500">
-                {copy.messageLabel}
+              <div>
+                <span className="font-semibold text-[#111111]">{copy.whatsapp}:</span>{' '}
+                +{CONTACTS.whatsappNumber}
               </div>
-              <div className="mt-4 rounded-2xl border border-slate-200 bg-slate-50 p-4 text-sm leading-7 text-slate-700">
-                {links.message}
+              <div>
+                <span className="font-semibold text-[#111111]">{copy.phone}:</span>{' '}
+                {CONTACTS.phoneNumber}
               </div>
-              <p className="mt-4 text-sm text-slate-500">{copy.note}</p>
-            </section>
+            </div>
+          </section>
 
-            <section className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
-              <h2 className="text-xl font-semibold text-slate-900">
-                {copy.channelsTitle}
-              </h2>
-              <p className="mt-2 text-sm text-slate-600">
-                {copy.channelsDescription}
-              </p>
+          <section className="rounded-3xl border border-[#ECE3DC] bg-white p-6 shadow-sm">
+            <div className="text-sm font-medium text-[#7A7A7A]">
+              {copy.brandChannel}
+            </div>
 
-              <div className="mt-6 grid gap-4 sm:grid-cols-2">
-                <ContactActionCard
-                  title={copy.email}
-                  href={links.email}
-                  value={CONTACTS.email}
-                />
-                <ContactActionCard
-                  title={copy.telegram}
-                  href={links.telegram}
-                  value={`@${CONTACTS.telegramUsername}`}
-                  external
-                />
-                <ContactActionCard
-                  title={copy.whatsapp}
-                  href={links.whatsapp}
-                  value={`+${CONTACTS.whatsappNumber}`}
-                  external
-                />
-                <ContactActionCard
-                  title={copy.phone}
-                  href={links.phone}
-                  value={CONTACTS.phoneNumber}
-                />
-              </div>
-            </section>
-          </div>
-
-          <aside className="space-y-6">
-            <section className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
-              <h2 className="text-xl font-semibold text-slate-900">
-                {copy.contactDetails}
-              </h2>
-
-              <div className="mt-5 space-y-3 text-sm text-slate-600">
-                <div>
-                  <span className="font-medium text-slate-800">{copy.email}:</span>{' '}
-                  {CONTACTS.email}
-                </div>
-                <div>
-                  <span className="font-medium text-slate-800">{copy.telegram}:</span>{' '}
-                  @{CONTACTS.telegramUsername}
-                </div>
-                <div>
-                  <span className="font-medium text-slate-800">{copy.whatsapp}:</span>{' '}
-                  +{CONTACTS.whatsappNumber}
-                </div>
-                <div>
-                  <span className="font-medium text-slate-800">{copy.phone}:</span>{' '}
-                  {CONTACTS.phoneNumber}
-                </div>
-              </div>
-            </section>
-
-            <section className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
-              <div className="text-sm font-medium text-slate-500">
-                {copy.brandChannel}
-              </div>
-
-              <a
-                href={links.instagram}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="mt-3 inline-flex rounded-xl border border-slate-300 bg-white px-4 py-2 text-sm font-medium text-slate-900 transition hover:bg-slate-100"
-              >
-                {copy.instagram}: {CONTACTS.instagramHandle}
-              </a>
-            </section>
-          </aside>
-        </div>
+            <a
+              href={links.instagram}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-4 inline-flex rounded-2xl bg-[#FF6C26] px-5 py-3 text-sm font-bold text-white transition hover:bg-[#E85E1B]"
+            >
+              {copy.instagram}: {CONTACTS.instagramHandle}
+            </a>
+          </section>
+        </aside>
       </section>
     </main>
   );
