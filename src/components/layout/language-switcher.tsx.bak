@@ -40,10 +40,10 @@ export default function LanguageSwitcher() {
             key={item}
             href={buildLocalePath(pathname, item)}
             className={[
-              'inline-flex h-9 min-w-9 items-center justify-center rounded-full border px-3 text-xs transition',
+              'inline-flex h-8 min-w-8 items-center justify-center rounded-full border px-3 text-xs font-semibold transition',
               isActive
-                ? 'border-[#FF6C26] bg-[#FF6C26] font-bold text-white'
-                : 'border-[#E7DDD4] bg-white font-semibold text-[#555555] hover:border-[#FF6C26] hover:bg-[#FFF1E8] hover:text-[#111111]'
+                ? 'border-[#FF6C26] bg-[#FF6C26] text-white'
+                : 'border-[#e7e1db] bg-white text-[#444444] hover:border-[#FF6C26] hover:bg-[#FFF1E8] hover:text-[#111111]'
             ].join(' ')}
           >
             {item.toUpperCase()}
