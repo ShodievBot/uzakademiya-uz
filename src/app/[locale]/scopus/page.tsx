@@ -17,22 +17,47 @@ function getCopy(locale: string) {
       badge: 'Scopus guide',
       title: 'Scopus jurnallari va nashr bo‘yicha yo‘riqnoma',
       description:
-        'Ushbu sahifada Scopus bazasiga kiruvchi jurnallar, asosiy ko‘rsatkichlar va maqola yuborish jarayonining qisqacha tushuntirishi jamlangan.',
-      catalog: 'Jurnallar katalogi',
-      contacts: 'Bog‘lanish',
-      section1: 'Scopus nima?',
-      section1Text:
-        'Scopus — ilmiy manbalarni qidirish, tahlil qilish va baholash uchun ishlatiladigan xalqaro bibliografik va analitik baza.',
-      section2: 'Maqola yuborish bosqichlari',
-      section2Text:
-        'Quyida maqolaning jurnal bo‘ylab ko‘rib chiqilishidagi odatiy jarayon ko‘rsatilgan.',
-      section3: 'Scopus jurnallari vitrinası',
-      section3Text:
-        'Quyida Scopus bazasida indekslangan jurnallar ko‘rsatilgan.',
+        'Bu sahifada Scopus bazasiga kiruvchi jurnallar, asosiy ko‘rsatkichlar va maqolani nashrga tayyorlash bo‘yicha muhim ma’lumotlar jamlangan.',
+      primaryCta: 'Jurnallar katalogi',
+      secondaryCta: 'Bog‘lanish',
+      usefulCta: 'Foydali materiallar',
+      stats: {
+        journals: 'Scopus jurnallari',
+        q12: 'Q1–Q2 jurnallar',
+        subjects: 'Yo‘nalishlar soni'
+      },
+      highlightsTitle: 'Scopus haqida qisqacha',
+      highlightsDescription:
+        'Scopus — ilmiy nashrlar, iqtiboslar va jurnal ko‘rsatkichlarini tahlil qilish uchun ishlatiladigan xalqaro bibliografik va analitik baza.',
+      highlights: [
+        {
+          title: 'Xalqaro indeksatsiya',
+          text: 'Scopus bazasiga kiruvchi jurnallar ilmiy ko‘rinish va akademik ishonchlilikni oshiradi.'
+        },
+        {
+          title: 'Jurnal metrikalari',
+          text: 'CiteScore, percentile va quartile kabi ko‘rsatkichlar jurnal sifatini baholashga yordam beradi.'
+        },
+        {
+          title: 'To‘g‘ri tanlov muhim',
+          text: 'Mos jurnalni tanlash maqola ko‘rib chiqilishi va qabul qilinish ehtimoliga bevosita ta’sir qiladi.'
+        }
+      ],
+      processTitle: 'Maqola yuborish bosqichlari',
+      processDescription:
+        'Quyida maqolaning jurnal bo‘ylab ko‘rib chiqilishidagi odatiy jarayon keltirilgan.',
+      showcaseTitle: 'Scopus jurnallari vitrinası',
+      showcaseDescription:
+        'Quyida Scopus bazasida indekslangan jurnallar keltirilgan.',
       found: 'Topilgan Scopus jurnallari',
       noteTitle: 'Muhim eslatma',
       noteText:
-        'Jurnalning Scopus bazasida mavjudligi avtomatik nashr kafolatini bermaydi. Yakuniy qarorni jurnal tahririyati qabul qiladi.'
+        'Jurnalning Scopus bazasida mavjudligi avtomatik nashr kafolatini bermaydi. Yakuniy qarorni jurnal tahririyati qabul qiladi.',
+      bottomTitle: 'Jurnal tanlashda yordam kerakmi?',
+      bottomText:
+        'Biz sizga yo‘nalish, kvartil, jurnal talablari va yuborish tartibi bo‘yicha yo‘l-yo‘riq beramiz.',
+      bottomPrimary: 'Mutaxassis bilan bog‘lanish',
+      bottomSecondary: 'Barcha jurnallarni ko‘rish'
     };
   }
 
@@ -41,22 +66,47 @@ function getCopy(locale: string) {
       badge: 'Scopus guide',
       title: 'Scopus journals and publication guidance',
       description:
-        'This page brings together Scopus-indexed journals, key metrics, and a short explanation of the article submission process.',
-      catalog: 'Journal catalog',
-      contacts: 'Contact us',
-      section1: 'What is Scopus?',
-      section1Text:
-        'Scopus is an international bibliographic and analytical database used to search, analyze, and evaluate scientific sources.',
-      section2: 'Article submission stages',
-      section2Text:
-        'Below is a typical workflow of how an article is reviewed in a journal.',
-      section3: 'Scopus journals showcase',
-      section3Text:
+        'This page brings together Scopus-indexed journals, key metrics, and practical guidance for preparing and submitting an article.',
+      primaryCta: 'Journal catalog',
+      secondaryCta: 'Contact us',
+      usefulCta: 'Useful materials',
+      stats: {
+        journals: 'Scopus journals',
+        q12: 'Q1–Q2 journals',
+        subjects: 'Subject areas'
+      },
+      highlightsTitle: 'Scopus at a glance',
+      highlightsDescription:
+        'Scopus is an international bibliographic and analytical database used to evaluate journals, citations, and scientific visibility.',
+      highlights: [
+        {
+          title: 'International indexing',
+          text: 'Journals indexed in Scopus usually provide stronger academic visibility and broader recognition.'
+        },
+        {
+          title: 'Journal metrics',
+          text: 'Metrics such as CiteScore, percentile, and quartile help assess the journal’s position and quality.'
+        },
+        {
+          title: 'Choosing the right journal matters',
+          text: 'A strong journal match directly affects review outcomes and the overall publication path.'
+        }
+      ],
+      processTitle: 'Article submission stages',
+      processDescription:
+        'Below is a typical workflow of how an article moves through the journal review process.',
+      showcaseTitle: 'Scopus journals showcase',
+      showcaseDescription:
         'Below you can see journals indexed in the Scopus database.',
       found: 'Scopus journals found',
       noteTitle: 'Important note',
       noteText:
-        'A journal being present in Scopus does not guarantee publication. The final decision is always made by the editorial board.'
+        'A journal being present in Scopus does not guarantee publication. The final decision is always made by the editorial board.',
+      bottomTitle: 'Need help choosing a journal?',
+      bottomText:
+        'We can guide you on scope fit, quartile, journal requirements, and the submission pathway.',
+      bottomPrimary: 'Contact a specialist',
+      bottomSecondary: 'View all journals'
     };
   }
 
@@ -64,22 +114,47 @@ function getCopy(locale: string) {
     badge: 'Scopus guide',
     title: 'Scopus-журналы и навигация по публикации',
     description:
-      'На этой странице собраны журналы, индексируемые в Scopus, ключевые метрики и краткая схема процесса подачи статьи.',
-    catalog: 'Каталог журналов',
-    contacts: 'Связаться с нами',
-    section1: 'Что такое Scopus?',
-    section1Text:
-      'Scopus — международная библиографическая и аналитическая база научных публикаций, используемая для поиска, анализа и оценки научных источников.',
-    section2: 'Этапы подачи статьи',
-    section2Text:
+      'На этой странице собраны журналы, индексируемые в Scopus, ключевые метрики и практическая информация по подготовке и подаче статьи.',
+    primaryCta: 'Каталог журналов',
+    secondaryCta: 'Связаться с нами',
+    usefulCta: 'Полезные материалы',
+    stats: {
+      journals: 'Scopus-журналы',
+      q12: 'Журналы Q1–Q2',
+      subjects: 'Направления'
+    },
+    highlightsTitle: 'Кратко о Scopus',
+    highlightsDescription:
+      'Scopus — международная библиографическая и аналитическая база, которая помогает оценивать журналы, цитируемость и научную видимость.',
+    highlights: [
+      {
+        title: 'Международная индексация',
+        text: 'Журналы, входящие в Scopus, как правило, дают более высокий уровень академической видимости и доверия.'
+      },
+      {
+        title: 'Метрики журнала',
+        text: 'CiteScore, percentile и quartile помогают понять уровень, позицию и качество журнала.'
+      },
+      {
+        title: 'Правильный выбор журнала критичен',
+        text: 'Точное соответствие темы журналу напрямую влияет на процесс рецензирования и вероятность публикации.'
+      }
+    ],
+    processTitle: 'Этапы подачи статьи',
+    processDescription:
       'Ниже показан типовой сценарий прохождения статьи в журнале.',
-    section3: 'Витрина Scopus-журналов',
-    section3Text:
+    showcaseTitle: 'Витрина Scopus-журналов',
+    showcaseDescription:
       'Ниже представлены журналы, которые индексируются в базе Scopus.',
     found: 'Найдено Scopus-журналов',
     noteTitle: 'Важное примечание',
     noteText:
-      'Наличие журнала в Scopus не означает гарантию публикации. Финальное решение всегда принимает редакция журнала.'
+      'Наличие журнала в Scopus не означает гарантию публикации. Финальное решение всегда принимает редакция журнала.',
+    bottomTitle: 'Нужна помощь с выбором журнала?',
+    bottomText:
+      'Мы поможем с подбором по направлению, квартилю, требованиям журнала и маршруту подачи статьи.',
+    bottomPrimary: 'Связаться со специалистом',
+    bottomSecondary: 'Посмотреть все журналы'
   };
 }
 
@@ -170,80 +245,196 @@ function getStages(locale: string) {
   ];
 }
 
+function StatCard({
+  value,
+  label
+}: {
+  value: number | string;
+  label: string;
+}) {
+  return (
+    <div className="rounded-[28px] border border-[#F0E2D8] bg-white/95 p-5 shadow-[0_8px_24px_rgba(17,17,17,0.05)]">
+      <div className="text-3xl font-bold text-[#111111] sm:text-4xl">{value}</div>
+      <div className="mt-2 text-sm leading-6 text-[#6B6B6B]">{label}</div>
+    </div>
+  );
+}
+
+function HighlightCard({
+  title,
+  text
+}: {
+  title: string;
+  text: string;
+}) {
+  return (
+    <article className="rounded-[28px] border border-[#F0E2D8] bg-white p-6 shadow-[0_8px_24px_rgba(17,17,17,0.05)]">
+      <div className="inline-flex h-11 w-11 items-center justify-center rounded-2xl bg-[#FFF2E9] text-lg font-bold text-[#FF6C26]">
+        ●
+      </div>
+
+      <h3 className="mt-5 text-xl font-bold leading-tight text-[#111111]">
+        {title}
+      </h3>
+
+      <p className="mt-3 text-sm leading-7 text-[#5C5C5C]">{text}</p>
+    </article>
+  );
+}
+
+function StageCard({
+  index,
+  title,
+  text
+}: {
+  index: number;
+  title: string;
+  text: string;
+}) {
+  return (
+    <article className="relative overflow-hidden rounded-[28px] border border-[#ECE3DC] bg-white p-6 shadow-[0_8px_24px_rgba(17,17,17,0.05)]">
+      <div className="absolute right-5 top-4 text-5xl font-bold text-[#FFF1E8]">
+        {index}
+      </div>
+
+      <div className="inline-flex rounded-full border border-[#FFD8C2] bg-[#FFF7F2] px-3 py-1 text-xs font-bold uppercase tracking-[0.18em] text-[#FF6C26]">
+        Step
+      </div>
+
+      <h3 className="mt-4 max-w-[85%] text-xl font-bold text-[#111111]">
+        {title}
+      </h3>
+
+      <p className="mt-3 text-sm leading-7 text-[#5C5C5C]">{text}</p>
+    </article>
+  );
+}
+
 export default async function LocalizedScopusPage({params}: Props) {
   const {locale} = await params;
   const copy = getCopy(locale);
   const stages = getStages(locale);
   const scopusJournals = getFilteredJournals({scopus: 'yes'});
 
+  const q12Count = scopusJournals.filter(
+    (journal) => journal.quartile === 'Q1' || journal.quartile === 'Q2'
+  ).length;
+
+  const subjectCount = new Set(
+    scopusJournals.flatMap((journal) => journal.subjectAreas || [])
+  ).size;
+
   return (
     <main className="pb-16">
       <section className="mx-auto max-w-7xl px-4 pt-8 sm:px-6 lg:px-8">
-        <div className="rounded-[32px] border border-[#F1D8C8] bg-gradient-to-br from-[#FFF8F3] via-[#FFF4ED] to-white p-8 shadow-[0_10px_30px_rgba(17,17,17,0.06)] sm:p-10">
-          <div className="inline-flex rounded-full border border-[#FFD8C2] bg-white px-4 py-1 text-xs font-bold uppercase tracking-[0.18em] text-[#FF6C26]">
-            {copy.badge}
+        <div className="rounded-[36px] border border-[#F1D8C8] bg-gradient-to-br from-[#FFF8F3] via-[#FFF4ED] to-white p-6 shadow-[0_14px_40px_rgba(17,17,17,0.06)] sm:p-8 lg:p-10">
+          <div className="grid gap-8 lg:grid-cols-[1.15fr_0.85fr] lg:items-start">
+            <div>
+              <div className="inline-flex rounded-full border border-[#FFD8C2] bg-white px-4 py-2 text-xs font-bold uppercase tracking-[0.18em] text-[#FF6C26]">
+                {copy.badge}
+              </div>
+
+              <h1 className="mt-5 max-w-4xl text-4xl font-bold leading-tight text-[#111111] sm:text-5xl">
+                {copy.title}
+              </h1>
+
+              <p className="mt-5 max-w-3xl text-base leading-8 text-[#5C5C5C] sm:text-lg">
+                {copy.description}
+              </p>
+
+              <div className="mt-8 flex flex-wrap gap-3">
+                <Link
+                  href={withLocale(locale, '/journals')}
+                  className="inline-flex rounded-2xl bg-[#FF6C26] px-6 py-3 text-sm font-bold text-white transition hover:bg-[#E85E1B]"
+                >
+                  {copy.primaryCta}
+                </Link>
+
+                <Link
+                  href={withLocale(locale, '/contacts')}
+                  className="inline-flex rounded-2xl border border-[#ECE3DC] bg-white px-6 py-3 text-sm font-semibold text-[#111111] transition hover:bg-[#FFF8F3]"
+                >
+                  {copy.secondaryCta}
+                </Link>
+
+                <Link
+                  href={withLocale(locale, '/useful')}
+                  className="inline-flex rounded-2xl border border-[#ECE3DC] bg-white px-6 py-3 text-sm font-semibold text-[#111111] transition hover:bg-[#FFF8F3]"
+                >
+                  {copy.usefulCta}
+                </Link>
+              </div>
+            </div>
+
+            <aside className="grid gap-4 sm:grid-cols-3 lg:grid-cols-1">
+              <StatCard
+                value={scopusJournals.length}
+                label={copy.stats.journals}
+              />
+              <StatCard value={q12Count} label={copy.stats.q12} />
+              <StatCard value={subjectCount} label={copy.stats.subjects} />
+            </aside>
           </div>
+        </div>
+      </section>
 
-          <h1 className="mt-5 max-w-4xl text-4xl font-bold leading-tight text-[#111111] sm:text-5xl">
-            {copy.title}
-          </h1>
-
-          <p className="mt-5 max-w-3xl text-base leading-8 text-[#5C5C5C] sm:text-lg">
-            {copy.description}
+      <section className="mx-auto mt-10 max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="mb-6">
+          <h2 className="text-3xl font-bold text-[#111111]">
+            {copy.highlightsTitle}
+          </h2>
+          <p className="mt-3 max-w-3xl text-sm leading-7 text-[#6B6B6B]">
+            {copy.highlightsDescription}
           </p>
-
-          <div className="mt-8 flex flex-wrap gap-3">
-            <Link
-              href={withLocale(locale, '/journals')}
-              className="inline-flex rounded-2xl bg-[#FF6C26] px-6 py-3 text-sm font-bold text-white transition hover:bg-[#E85E1B]"
-            >
-              {copy.catalog}
-            </Link>
-
-            <Link
-              href={withLocale(locale, '/contacts')}
-              className="inline-flex rounded-2xl border border-[#ECE3DC] bg-white px-6 py-3 text-sm font-semibold text-[#111111] transition hover:bg-[#FFF8F3]"
-            >
-              {copy.contacts}
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      <section className="mx-auto mt-10 max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="rounded-3xl border border-[#ECE3DC] bg-white p-6 shadow-sm sm:p-8">
-          <h2 className="text-2xl font-bold text-[#111111]">{copy.section1}</h2>
-          <p className="mt-4 text-sm leading-7 text-[#5C5C5C]">{copy.section1Text}</p>
-        </div>
-      </section>
-
-      <section className="mx-auto mt-10 max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="mb-5">
-          <h2 className="text-3xl font-bold text-[#111111]">{copy.section2}</h2>
-          <p className="mt-2 text-sm text-[#6B6B6B]">{copy.section2Text}</p>
         </div>
 
         <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-          {stages.map((stage) => (
-            <div
-              key={stage.title}
-              className="rounded-3xl border border-[#ECE3DC] bg-white p-6 shadow-sm"
-            >
-              <h3 className="text-xl font-bold text-[#111111]">{stage.title}</h3>
-              <p className="mt-3 text-sm leading-7 text-[#5C5C5C]">{stage.text}</p>
-            </div>
+          {copy.highlights.map((item) => (
+            <HighlightCard
+              key={item.title}
+              title={item.title}
+              text={item.text}
+            />
           ))}
         </div>
       </section>
 
       <section className="mx-auto mt-14 max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="mb-6">
-          <h2 className="text-3xl font-bold text-[#111111]">{copy.section3}</h2>
-          <p className="mt-2 text-sm text-[#6B6B6B]">{copy.section3Text}</p>
+          <h2 className="text-3xl font-bold text-[#111111]">
+            {copy.processTitle}
+          </h2>
+          <p className="mt-2 text-sm leading-7 text-[#6B6B6B]">
+            {copy.processDescription}
+          </p>
         </div>
 
-        <div className="mb-6 inline-flex rounded-full border border-[#ECE3DC] bg-[#FFF8F3] px-4 py-2 text-sm font-semibold text-[#6B6B6B]">
-          {copy.found}: {scopusJournals.length}
+        <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+          {stages.map((stage, index) => (
+            <StageCard
+              key={stage.title}
+              index={index + 1}
+              title={stage.title}
+              text={stage.text}
+            />
+          ))}
+        </div>
+      </section>
+
+      <section className="mx-auto mt-14 max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="mb-6 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+          <div>
+            <h2 className="text-3xl font-bold text-[#111111]">
+              {copy.showcaseTitle}
+            </h2>
+            <p className="mt-2 text-sm leading-7 text-[#6B6B6B]">
+              {copy.showcaseDescription}
+            </p>
+          </div>
+
+          <div className="inline-flex rounded-full border border-[#ECE3DC] bg-[#FFF8F3] px-4 py-2 text-sm font-semibold text-[#6B6B6B]">
+            {copy.found}: {scopusJournals.length}
+          </div>
         </div>
 
         <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
@@ -254,9 +445,42 @@ export default async function LocalizedScopusPage({params}: Props) {
       </section>
 
       <section className="mx-auto mt-10 max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="rounded-3xl border border-[#ECE3DC] bg-[#FFF8F3] p-6">
+        <div className="rounded-[30px] border border-[#F1D8C8] bg-[#FFF8F3] p-6 shadow-[0_8px_24px_rgba(17,17,17,0.04)] sm:p-8">
           <h3 className="text-xl font-bold text-[#111111]">{copy.noteTitle}</h3>
-          <p className="mt-3 text-sm leading-7 text-[#5C5C5C]">{copy.noteText}</p>
+          <p className="mt-3 max-w-4xl text-sm leading-7 text-[#5C5C5C]">
+            {copy.noteText}
+          </p>
+        </div>
+      </section>
+
+      <section className="mx-auto mt-10 max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="rounded-[36px] border border-[#F1D8C8] bg-gradient-to-r from-[#FFF4EC] via-[#FFF8F4] to-white p-6 shadow-[0_14px_40px_rgba(17,17,17,0.06)] sm:p-8 lg:p-10">
+          <div className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
+            <div className="max-w-3xl">
+              <h2 className="text-3xl font-bold text-[#111111]">
+                {copy.bottomTitle}
+              </h2>
+              <p className="mt-3 text-sm leading-7 text-[#5C5C5C] sm:text-base">
+                {copy.bottomText}
+              </p>
+            </div>
+
+            <div className="flex flex-wrap gap-3">
+              <Link
+                href={withLocale(locale, '/contacts')}
+                className="inline-flex rounded-2xl bg-[#FF6C26] px-6 py-3 text-sm font-bold text-white transition hover:bg-[#E85E1B]"
+              >
+                {copy.bottomPrimary}
+              </Link>
+
+              <Link
+                href={withLocale(locale, '/journals')}
+                className="inline-flex rounded-2xl border border-[#ECE3DC] bg-white px-6 py-3 text-sm font-semibold text-[#111111] transition hover:bg-[#FFF8F3]"
+              >
+                {copy.bottomSecondary}
+              </Link>
+            </div>
+          </div>
         </div>
       </section>
     </main>

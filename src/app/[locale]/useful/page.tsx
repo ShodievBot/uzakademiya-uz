@@ -16,6 +16,7 @@ const dictionary: Record<
     open: string;
     noteTitle: string;
     noteText: string;
+    sourceNote: string;
   }
 > = {
   ru: {
@@ -26,7 +27,8 @@ const dictionary: Record<
     open: 'Открыть',
     noteTitle: 'Как использовать раздел',
     noteText:
-      'Здесь собраны краткие справочные материалы. Для финальной проверки требований всегда сверяйтесь с официальными источниками.'
+      'Здесь собраны краткие справочные материалы. Для финальной проверки требований всегда сверяйтесь с официальными источниками.',
+    sourceNote: 'Справочный материал'
   },
   uz: {
     badge: 'FOYDALI MATERIALLAR',
@@ -36,7 +38,8 @@ const dictionary: Record<
     open: 'Ochish',
     noteTitle: 'Bo‘limdan foydalanish',
     noteText:
-      'Bu yerda qisqa yo‘riqnoma va ma’lumotlar jamlangan. Yakuniy talablarni doimo rasmiy manbalar bilan solishtiring.'
+      'Bu yerda qisqa yo‘riqnoma va ma’lumotlar jamlangan. Yakuniy talablarni doimo rasmiy manbalar bilan solishtiring.',
+    sourceNote: 'Ma’lumot materiali'
   },
   en: {
     badge: 'USEFUL MATERIALS',
@@ -46,7 +49,8 @@ const dictionary: Record<
     open: 'Open',
     noteTitle: 'How to use this section',
     noteText:
-      'This section contains short reference materials. Always compare final requirements with official sources.'
+      'This section contains short reference materials. Always compare final requirements with official sources.',
+    sourceNote: 'Reference material'
   }
 };
 
@@ -86,13 +90,17 @@ export default async function UsefulListPage({
       </section>
 
       <section className="mx-auto mt-10 max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-6 sm:grid-cols-2 xl:grid-cols-3">
           {pages.map((page) => (
             <article
               key={page.slug}
               className="flex h-full flex-col rounded-3xl border border-[#ECE3DC] bg-white p-6 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"
             >
-              <h2 className="text-2xl font-bold leading-tight text-[#111111]">
+              <div className="inline-flex w-fit rounded-full bg-[#FFF4ED] px-3 py-1 text-xs font-semibold text-[#B85A2B]">
+                {t.sourceNote}
+              </div>
+
+              <h2 className="mt-4 text-2xl font-bold leading-tight text-[#111111]">
                 {pickLocale(page.title, locale)}
               </h2>
 

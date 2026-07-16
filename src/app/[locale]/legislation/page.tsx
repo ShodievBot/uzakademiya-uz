@@ -1,13 +1,12 @@
 import Link from 'next/link';
+import {
+  getAllLegislation,
+  normalizeLocale,
+  pickLocalizedText
+} from '@/lib/legislation';
 
 type Props = {
   params: Promise<{locale: string}>;
-};
-
-type DocCard = {
-  title: string;
-  text: string;
-  source: string;
 };
 
 function withLocale(locale: string, href: string) {
@@ -21,28 +20,15 @@ function getContent(locale: string) {
       badge: 'Rasmiy manbalar',
       title: 'Qonunchilik va rasmiy hujjatlar',
       description:
-        'Ilmiy faoliyat, attestatsiya, maqola chop etish talablari va rasmiy manbalar bo‘yicha asosiy yo‘riqnomalar.',
-      docs: [
-        {
-          title: 'Nashr etikasi va plagiat tekshiruvi',
-          text: 'Mualliflik, antiplagiat va tahririy etikaga oid asosiy tavsiyalar.',
-          source: 'Rasmiy va uslubiy materiallar'
-        },
-        {
-          title: 'OAK / VAK rasmiy manbalari',
-          text: 'Attestatsiya, ilmiy daraja va rasmiy talablar bo‘yicha foydali manbalar.',
-          source: 'Rasmiy me’yoriy hujjatlar'
-        },
-        {
-          title: 'Ilm-fan va ilmiy faoliyat bo‘yicha qonunchilik',
-          text: 'Ilmiy faoliyat va tadqiqotlar bilan bog‘liq asosiy normativ hujjatlar.',
-          source: 'Davlat va rasmiy huquqiy manbalar'
-        }
-      ] as DocCard[],
+        'Ilmiy faoliyat, attestatsiya, maqola chop etish talablari va rasmiy manbalar bo‘yicha asosiy hujjatlar ro‘yxati.',
+      open: 'Batafsil ochish',
+      source: 'Rasmiy manba',
+      published: 'E’lon qilingan sana',
+      updated: 'Yangilangan sana',
       noteTitle: 'Muhim eslatma',
       noteText:
-        'Yakuniy qaror va dolzarb talablarni doimo rasmiy davlat yoki attestatsiya manbalari orqali tekshiring.',
-      cta: 'Kontaktlarga o‘tish'
+        'Hujjatlarning dolzarb tahririni va yakuniy talablarni doimo rasmiy davlat yoki vakolatli manbalar orqali tekshiring.',
+      contactCta: 'Kontaktlarga o‘tish'
     };
   }
 
@@ -51,28 +37,15 @@ function getContent(locale: string) {
       badge: 'Official sources',
       title: 'Legislation and official documents',
       description:
-        'Core guidance on scientific activity, attestation, publication requirements, and official reference sources.',
-      docs: [
-        {
-          title: 'Publication ethics and plagiarism checks',
-          text: 'Core notes on authorship, editorial ethics, and plagiarism screening.',
-          source: 'Official and methodological materials'
-        },
-        {
-          title: 'Official SAC / VAK sources',
-          text: 'Useful references on certification, academic degrees, and official requirements.',
-          source: 'Regulatory and official documents'
-        },
-        {
-          title: 'Law on science and scientific activity',
-          text: 'Basic legal materials related to research activity and scientific work.',
-          source: 'Government and official legal sources'
-        }
-      ] as DocCard[],
+        'A structured list of key documents related to scientific activity, attestation, publication requirements, and official reference sources.',
+      open: 'Open details',
+      source: 'Official source',
+      published: 'Published',
+      updated: 'Updated',
       noteTitle: 'Important note',
       noteText:
-        'Always verify current rules and final requirements through official state or attestation sources.',
-      cta: 'Go to contacts'
+        'Always verify the latest version of documents and final requirements using official state or authorized sources.',
+      contactCta: 'Go to contacts'
     };
   }
 
@@ -80,34 +53,23 @@ function getContent(locale: string) {
     badge: 'Официальные источники',
     title: 'Законодательство и официальные документы',
     description:
-      'Основные материалы по научной деятельности, аттестации, публикационным требованиям и официальным источникам.',
-    docs: [
-      {
-        title: 'Публикационная этика и проверка на плагиат',
-        text: 'Краткие ориентиры по авторству, редакционной этике и проверке текста перед подачей статьи.',
-        source: 'Официальные и методические материалы'
-      },
-      {
-        title: 'Официальные источники ВАК / ОАК',
-        text: 'Полезные материалы по аттестации, научным степеням и актуальным требованиям к публикации.',
-        source: 'Нормативные и официальные документы'
-      },
-      {
-        title: 'Законодательство о науке и научной деятельности',
-        text: 'Базовые правовые материалы по научной деятельности, исследованиям и связанным требованиям.',
-        source: 'Государственные и правовые источники'
-      }
-    ] as DocCard[],
+      'Структурированный список основных документов по научной деятельности, аттестации, публикационным требованиям и официальным источникам.',
+    open: 'Открыть подробнее',
+    source: 'Официальный источник',
+    published: 'Дата публикации',
+    updated: 'Дата обновления',
     noteTitle: 'Важное примечание',
     noteText:
-      'Финальную проверку актуальности документов и требований всегда выполняйте по официальным государственным источникам.',
-    cta: 'Перейти в контакты'
+      'Финальную проверку актуальности документов и требований всегда выполняйте по официальным государственным или уполномоченным источникам.',
+    contactCta: 'Перейти в контакты'
   };
 }
 
 export default async function LocalizedLegislationPage({params}: Props) {
-  const {locale} = await params;
+  const {locale: rawLocale} = await params;
+  const locale = normalizeLocale(rawLocale);
   const t = getContent(locale);
+  const documents = getAllLegislation();
 
   return (
     <main className="pb-16">
@@ -128,22 +90,45 @@ export default async function LocalizedLegislationPage({params}: Props) {
       </section>
 
       <section className="mx-auto mt-10 max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="grid gap-6 lg:grid-cols-3">
-          {t.docs.map((doc) => (
+        <div className="grid gap-6">
+          {documents.map((doc) => (
             <article
-              key={doc.title}
-              className="rounded-3xl border border-[#ECE3DC] bg-white p-6 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"
+              key={doc.slug}
+              className="rounded-3xl border border-[#ECE3DC] bg-white p-6 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md sm:p-8"
             >
-              <h2 className="text-2xl font-bold leading-tight text-[#111111]">
-                {doc.title}
-              </h2>
+              <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
+                <div className="min-w-0 flex-1">
+                  <h2 className="text-2xl font-bold leading-tight text-[#111111] sm:text-3xl">
+                    {pickLocalizedText(doc.title, locale)}
+                  </h2>
 
-              <p className="mt-4 text-sm leading-7 text-[#5C5C5C]">
-                {doc.text}
-              </p>
+                  <p className="mt-4 max-w-3xl text-sm leading-7 text-[#5C5C5C] sm:text-base">
+                    {pickLocalizedText(doc.summary, locale)}
+                  </p>
 
-              <div className="mt-5 inline-flex rounded-full bg-[#FFF8F3] px-3 py-1 text-xs font-semibold text-[#B85A2B]">
-                {doc.source}
+                  <div className="mt-5 flex flex-wrap gap-3 text-xs font-semibold">
+                    <span className="inline-flex rounded-full bg-[#FFF4ED] px-3 py-1 text-[#B85A2B]">
+                      {t.published}: {doc.publishedAt}
+                    </span>
+
+                    <span className="inline-flex rounded-full bg-[#FFF8F3] px-3 py-1 text-[#8A6A56]">
+                      {t.updated}: {doc.updatedAt}
+                    </span>
+
+                    <span className="inline-flex rounded-full bg-[#FFF1E8] px-3 py-1 text-[#D05A1A]">
+                      {t.source}
+                    </span>
+                  </div>
+                </div>
+
+                <div className="flex shrink-0">
+                  <Link
+                    href={withLocale(locale, `/legislation/${doc.slug}`)}
+                    className="inline-flex rounded-2xl bg-[#FF6C26] px-5 py-3 text-sm font-bold text-white transition hover:bg-[#E85E1B]"
+                  >
+                    {t.open}
+                  </Link>
+                </div>
               </div>
             </article>
           ))}
@@ -159,7 +144,7 @@ export default async function LocalizedLegislationPage({params}: Props) {
             href={withLocale(locale, '/contacts')}
             className="mt-5 inline-flex rounded-2xl bg-[#FF6C26] px-5 py-3 text-sm font-bold text-white transition hover:bg-[#E85E1B]"
           >
-            {t.cta}
+            {t.contactCta}
           </Link>
         </div>
       </section>
