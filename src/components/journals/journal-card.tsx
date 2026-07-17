@@ -137,11 +137,13 @@ export function JournalCard({journal, locale = 'ru'}: JournalCardProps) {
           <span className="font-semibold text-[#111111]">{copy.publisher}:</span>{' '}
           {journal.publisher || '—'}
         </p>
+
         <p>
           <span className="font-semibold text-[#111111]">{copy.issn}:</span>{' '}
           {journal.issn || '—'}
           {journal.eissn ? ` / E-ISSN: ${journal.eissn}` : ''}
         </p>
+
         <p>
           <span className="font-semibold text-[#111111]">{copy.subjects}:</span>{' '}
           {formatSubjects(journal.subjectAreas)}

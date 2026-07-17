@@ -28,10 +28,14 @@ model Journal {
   id   String @id @default(cuid())
   slug String @unique
 
-  title            String
-  titleRu          String
-  titleUz          String
-  shortDescription String
+  title              String
+  titleRu            String
+  titleUz            String
+
+  shortDescription   String
+  shortDescriptionRu String?
+  shortDescriptionUz String?
+  shortDescriptionEn String?
 
   publisher  String
   website    String
