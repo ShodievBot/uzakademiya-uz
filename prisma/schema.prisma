@@ -1,0 +1,223 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum Quartile {
+  Q1
+  Q2
+  Q3
+  Q4
+}
+
+enum VerificationStatus {
+  VERIFIED
+  PARTIALLY_VERIFIED
+  NEEDS_MANUAL_REVIEW
+}
+
+enum UsefulBlockType {
+  PARAGRAPH
+  LIST
+}
+
+model Journal {
+  id   String @id @default(cuid())
+  slug String @unique
+
+  title            String
+  titleRu          String
+  titleUz          String
+  shortDescription String
+
+  publisher  String
+  website    String
+  coverImage String?
+
+  issn  String?
+  eissn String?
+
+  country      String?
+  languages    String[]
+  subjectAreas String[]
+  categories   String[]
+
+  isScopusIndexed  Boolean @default(false)
+  isOakRecommended Boolean @default(false)
+
+  scopusCoverageYears String?
+  citescore2025       Float?
+  citescore2026       Float?
+  percentile          Int?
+  quartile            Quartile?
+
+  verificationStatus VerificationStatus?
+
+  telegramUrl   String?
+  submissionUrl String?
+
+  scopusContent ScopusContent[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([slug])
+  @@index([isScopusIndexed])
+  @@index([isOakRecommended])
+  @@index([quartile])
+}
+
+model ScopusContent {
+  id             String @id @default(cuid())
+  journalId      String
+  year           Int
+  documentsCount Int
+
+  journal Journal @relation(fields: [journalId], references: [id], onDelete: Cascade)
+
+  @@unique([journalId, year])
+  @@index([journalId])
+  @@index([year])
+}
+
+model LegislationDocument {
+  id   String @id @default(cuid())
+  slug String @unique
+
+  titleRu String
+  titleUz String
+  titleEn String
+
+  summaryRu String
+  summaryUz String
+  summaryEn String
+
+  bodyRu String[]
+  bodyUz String[]
+  bodyEn String[]
+
+  sourceUrl String
+
+  sourceLabelRu String
+  sourceLabelUz String
+  sourceLabelEn String
+
+  category    String
+  publishedAt DateTime
+  updatedAt   DateTime
+
+  createdAt DateTime @default(now())
+  editedAt  DateTime @updatedAt
+
+  @@index([slug])
+  @@index([category])
+  @@index([publishedAt])
+}
+
+model UsefulPage {
+  id   String @id @default(cuid())
+  slug String @unique
+
+  titleRu String
+  titleUz String
+  titleEn String
+
+  cardTextRu String
+  cardTextUz String
+  cardTextEn String
+
+  shortTitleRu String?
+  shortTitleUz String?
+  shortTitleEn String?
+
+  shortTextRu String?
+  shortTextUz String?
+  shortTextEn String?
+
+  fullTitleRu String?
+  fullTitleUz String?
+  fullTitleEn String?
+
+  blocks  UsefulBlock[]
+  sources UsefulPageSource[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([slug])
+}
+
+model UsefulBlock {
+  id        String          @id @default(cuid())
+  pageId    String
+  sortOrder Int
+  type      UsefulBlockType
+
+  titleRu String?
+  titleUz String?
+  titleEn String?
+
+  textRu String?
+  textUz String?
+  textEn String?
+
+  itemsRu String[]
+  itemsUz String[]
+  itemsEn String[]
+
+  page UsefulPage @relation(fields: [pageId], references: [id], onDelete: Cascade)
+
+  @@index([pageId])
+  @@index([sortOrder])
+}
+
+model UsefulSource {
+  id        String @id @default(cuid())
+  sourceKey String @unique
+
+  titleRu String
+  titleUz String
+  titleEn String
+
+  url String
+
+  pages UsefulPageSource[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([sourceKey])
+}
+
+model UsefulPageSource {
+  pageId   String
+  sourceId String
+
+  page   UsefulPage   @relation(fields: [pageId], references: [id], onDelete: Cascade)
+  source UsefulSource @relation(fields: [sourceId], references: [id], onDelete: Cascade)
+
+  @@id([pageId, sourceId])
+  @@index([sourceId])
+}
+
+model SiteSettings {
+  id String @id @default(cuid())
+
+  siteName String @default("UzAkademiya.uz")
+  siteUrl  String @default("https://uzakademiya.uz")
+
+  contactEmail     String?
+  telegramUsername String?
+  whatsappNumber   String?
+  phoneNumber      String?
+  instagramHandle  String?
+  instagramUrl     String?
+
+  defaultLocale String @default("ru")
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
