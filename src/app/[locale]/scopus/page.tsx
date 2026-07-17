@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import {JournalCard} from '@/components/journals/journal-card';
 import {getFilteredJournals} from '@/lib/journals';
+import type {Metadata} from 'next';
 
 type Props = {
   params: Promise<{locale: string}>;
@@ -308,6 +309,49 @@ function StageCard({
       <p className="mt-3 text-sm leading-7 text-[#5C5C5C]">{text}</p>
     </article>
   );
+}
+function getMetadataCopy(locale: string) {
+  if (locale === 'uz') {
+    return {
+      title: 'Scopus — jurnallar va nashr yo‘riqnomasi',
+      description:
+        'Scopus bazasi, jurnal ko‘rsatkichlari, maqola yuborish bosqichlari va amaliy tavsiyalar.'
+    };
+  }
+
+  if (locale === 'en') {
+    return {
+      title: 'Scopus — journals and publication guidance',
+      description:
+        'Practical guidance on Scopus journals, metrics, article submission stages, and publication navigation.'
+    };
+  }
+
+  return {
+    title: 'Scopus — журналы и публикационная навигация',
+    description:
+      'Практическая навигация по журналам Scopus, метрикам, этапам подачи статьи и публикационному маршруту.'
+  };
+}
+
+export async function generateMetadata({
+  params
+}: Props): Promise<Metadata> {
+  const {locale} = await params;
+  const meta = getMetadataCopy(locale);
+
+  return {
+    title: meta.title,
+    description: meta.description,
+    alternates: {
+      canonical: `/${locale}/scopus`,
+      languages: {
+        ru: '/ru/scopus',
+        uz: '/uz/scopus',
+        en: '/en/scopus'
+      }
+    }
+  };
 }
 
 export default async function LocalizedScopusPage({params}: Props) {

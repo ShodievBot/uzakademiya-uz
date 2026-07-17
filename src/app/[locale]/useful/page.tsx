@@ -6,6 +6,7 @@ import {
   siteLocales
 } from '@/lib/useful';
 import type {SiteLocale} from '@/types/useful-page';
+import type {Metadata} from 'next';
 
 const dictionary: Record<
   SiteLocale,
@@ -53,6 +54,53 @@ const dictionary: Record<
     sourceNote: 'Reference material'
   }
 };
+
+function getMetadataCopy(locale: SiteLocale) {
+  if (locale === 'uz') {
+    return {
+      title: 'Foydali materiallar — mualliflar uchun resurslar',
+      description:
+        'ORCID, DOI, Scopus, OAK, antiplagiat, taqriz va maqola nashri bo‘yicha foydali materiallar.'
+    };
+  }
+
+  if (locale === 'en') {
+    return {
+      title: 'Useful materials — resources for authors',
+      description:
+        'Useful resources on ORCID, DOI, Scopus, SAC, plagiarism checks, peer review, and article publication.'
+    };
+  }
+
+  return {
+    title: 'Полезные материалы — ресурсы для авторов',
+    description:
+      'Справочные материалы по ORCID, DOI, Scopus, ВАК, антиплагиату, рецензированию и публикации статей.'
+  };
+}
+
+export async function generateMetadata({
+  params
+}: {
+  params: Promise<{locale: string}> | {locale: string};
+}): Promise<Metadata> {
+  const resolvedParams = await Promise.resolve(params);
+  const locale = normalizeLocale(resolvedParams.locale);
+  const meta = getMetadataCopy(locale);
+
+  return {
+    title: meta.title,
+    description: meta.description,
+    alternates: {
+      canonical: `/${locale}/useful`,
+      languages: {
+        ru: '/ru/useful',
+        uz: '/uz/useful',
+        en: '/en/useful'
+      }
+    }
+  };
+}
 
 export const dynamicParams = false;
 

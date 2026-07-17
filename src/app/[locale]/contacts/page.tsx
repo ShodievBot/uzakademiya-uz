@@ -1,10 +1,63 @@
+import type {Metadata} from 'next';
 import {getJournalBySlug} from '@/lib/journals';
-import {CONTACTS, getContactLinks} from '@/lib/contacts';
+import {getContactDisplayValues, getContactLinks} from '@/lib/contacts';
+import {getSiteSettings} from '@/lib/site-settings';
 
 type Props = {
   params: Promise<{locale: string}>;
   searchParams: Promise<{journal?: string}>;
 };
+
+function normalizeMetaLocale(locale: string) {
+  if (locale === 'uz' || locale === 'en') return locale;
+  return 'ru';
+}
+
+function getMetadataCopy(locale: string, siteName: string) {
+  if (locale === 'uz') {
+    return {
+      title: `Kontaktlar — ${siteName} bilan bog‘lanish`,
+      description:
+        'Jurnal tanlash, talablarni tekshirish va maqola nashri bo‘yicha biz bilan qulay aloqa kanallari orqali bog‘laning.'
+    };
+  }
+
+  if (locale === 'en') {
+    return {
+      title: `Contacts — get in touch with ${siteName}`,
+      description:
+        'Contact us about journal selection, article requirements, and publication support through convenient communication channels.'
+    };
+  }
+
+  return {
+    title: `Контакты — связь с ${siteName}`,
+    description:
+      'Свяжитесь с нами по вопросам подбора журнала, проверки требований и сопровождения публикации статьи.'
+  };
+}
+
+export async function generateMetadata({
+  params
+}: Props): Promise<Metadata> {
+  const {locale: rawLocale} = await params;
+  const locale = normalizeMetaLocale(rawLocale);
+  const settings = await getSiteSettings();
+  const meta = getMetadataCopy(locale, settings.siteName);
+
+  return {
+    title: meta.title,
+    description: meta.description,
+    alternates: {
+      canonical: `/${locale}/contacts`,
+      languages: {
+        ru: '/ru/contacts',
+        uz: '/uz/contacts',
+        en: '/en/contacts'
+      }
+    }
+  };
+}
 
 function getJournalTitleByLocale(
   journal:
@@ -234,9 +287,15 @@ export default async function LocalizedContactsPage({
   const {journal: journalSlug} = await searchParams;
 
   const copy = getCopy(locale);
-  const journal = journalSlug ? await getJournalBySlug(journalSlug) : undefined;
+
+  const [settings, journal] = await Promise.all([
+    getSiteSettings(),
+    journalSlug ? getJournalBySlug(journalSlug) : Promise.resolve(undefined)
+  ]);
+
   const journalTitle = getJournalTitleByLocale(journal, locale);
-  const links = getContactLinks(locale, journalTitle);
+  const links = getContactLinks(settings, locale, journalTitle);
+  const contactInfo = getContactDisplayValues(settings);
 
   return (
     <main className="pb-16">
@@ -269,27 +328,27 @@ export default async function LocalizedContactsPage({
                   <div className="mt-6 grid gap-4 md:grid-cols-2">
                     <ActionCard
                       title={copy.email}
-                      value={CONTACTS.email}
+                      value={contactInfo.email}
                       href={links.email}
                       buttonLabel={copy.actions.email}
                     />
                     <ActionCard
                       title={copy.telegram}
-                      value={`@${CONTACTS.telegramUsername}`}
+                      value={contactInfo.telegramHandle}
                       href={links.telegram}
                       buttonLabel={copy.actions.telegram}
                       external
                     />
                     <ActionCard
                       title={copy.whatsapp}
-                      value={`+${CONTACTS.whatsappNumber}`}
+                      value={contactInfo.whatsappDisplay}
                       href={links.whatsapp}
                       buttonLabel={copy.actions.whatsapp}
                       external
                     />
                     <ActionCard
                       title={copy.phone}
-                      value={CONTACTS.phoneNumber}
+                      value={contactInfo.phoneDisplay}
                       href={links.phone}
                       buttonLabel={copy.actions.phone}
                     />
@@ -343,7 +402,7 @@ export default async function LocalizedContactsPage({
           </div>
 
           <h2 className="mt-3 text-2xl font-bold text-[#111111]">
-            UzAkademiya.uz
+            {settings.siteName}
           </h2>
 
           <p className="mt-3 text-sm leading-7 text-[#5C5C5C]">
@@ -356,7 +415,7 @@ export default async function LocalizedContactsPage({
             rel="noopener noreferrer"
             className="mt-5 inline-flex rounded-2xl bg-[#FF6C26] px-5 py-3 text-sm font-bold text-white transition hover:bg-[#E85E1B]"
           >
-            {copy.instagram}: {CONTACTS.instagramHandle}
+            {copy.instagram}: {contactInfo.instagramHandle}
           </a>
         </aside>
       </section>
