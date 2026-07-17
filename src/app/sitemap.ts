@@ -1,66 +1,73 @@
 import type {MetadataRoute} from 'next';
+import {getAllJournals} from '@/lib/journals';
 import {getAllLegislation} from '@/lib/legislation';
-import {getUsefulPageSlugs} from '@/lib/useful';
+import {getUsefulSlugs, siteLocales} from '@/lib/useful';
 
 const baseUrl = 'https://uzakademiya.uz';
-const locales = ['ru', 'uz', 'en'] as const;
 
-function withLocale(locale: string, path: string) {
-  if (!path || path === '/') {
-    return `${baseUrl}/${locale}`;
-  }
-
-  return `${baseUrl}/${locale}${path}`;
-}
+const staticPaths = [
+  '',
+  '/journals',
+  '/scopus',
+  '/oak',
+  '/useful',
+  '/legislation',
+  '/contacts'
+];
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const lastModified = new Date();
 
-  const staticPaths = [
-    '/',
-    '/scopus',
-    '/oak',
-    '/legislation',
-    '/useful',
-    '/contacts'
-  ];
+  const usefulSlugs = await getUsefulSlugs();
+  const journals = getAllJournals();
+  const legislation = getAllLegislation();
 
-  const staticPages: MetadataRoute.Sitemap = locales.flatMap((locale) =>
+  const localizedStaticPages: MetadataRoute.Sitemap = siteLocales.flatMap((locale) =>
     staticPaths.map((path) => ({
-      url: withLocale(locale, path),
+      url: `${baseUrl}/${locale}${path}`,
       lastModified,
-      changeFrequency: path === '/' ? 'weekly' : 'monthly',
-      priority:
-        path === '/'
-          ? 1
-          : path === '/scopus' || path === '/oak'
-            ? 0.8
-            : path === '/legislation' || path === '/useful'
-              ? 0.7
-              : 0.6
+      changeFrequency: path === '' || path === '/journals' ? 'weekly' : 'monthly',
+      priority: path === '' ? 1 : path === '/journals' ? 0.9 : 0.7
     }))
   );
 
-  const legislation = await getAllLegislation();
-  const usefulSlugs = await getUsefulPageSlugs();
-
-  const legislationPages: MetadataRoute.Sitemap = locales.flatMap((locale) =>
-    legislation.map((doc) => ({
-      url: withLocale(locale, `/legislation/${doc.slug}`),
-      lastModified,
-      changeFrequency: 'monthly',
-      priority: 0.7
-    }))
-  );
-
-  const usefulPages: MetadataRoute.Sitemap = locales.flatMap((locale) =>
+  const usefulPages: MetadataRoute.Sitemap = siteLocales.flatMap((locale) =>
     usefulSlugs.map((slug) => ({
-      url: withLocale(locale, `/useful/${slug}`),
+      url: `${baseUrl}/${locale}/useful/${slug}`,
       lastModified,
       changeFrequency: 'monthly',
       priority: 0.7
     }))
   );
 
-  return [...staticPages, ...legislationPages, ...usefulPages];
+  const legislationPages: MetadataRoute.Sitemap = siteLocales.flatMap((locale) =>
+    legislation.map((doc) => ({
+      url: `${baseUrl}/${locale}/legislation/${doc.slug}`,
+      lastModified,
+      changeFrequency: 'monthly',
+      priority: 0.7
+    }))
+  );
+
+  const journalPages: MetadataRoute.Sitemap = siteLocales.flatMap((locale) =>
+    journals.map((journal) => ({
+      url: `${baseUrl}/${locale}/journals/${journal.slug}`,
+      lastModified,
+      changeFrequency: 'weekly',
+      priority: 0.8
+    }))
+  );
+
+  return [
+    {
+      url: `${baseUrl}/`,
+      lastModified,
+      changeFrequency: 'weekly',
+      priority: 1
+    },
+    ...localizedStaticPages,
+    ...usefulPages,
+    ...legislationPages,
+    ...journalPages
+  ];
 }

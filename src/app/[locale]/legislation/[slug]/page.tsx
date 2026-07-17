@@ -1,142 +1,61 @@
 import Link from 'next/link';
 import {notFound} from 'next/navigation';
-import {getLegislationBySlug, normalizeLocale} from '@/lib/legislation';
 import type {Metadata} from 'next';
-import type {LocalizedText, SiteLocale} from '@/types/legislation';
+import {
+  getLegislationBySlug,
+  getLegislationSlugs,
+  normalizeLocale,
+  pickLocalizedText,
+  siteLocales
+} from '@/lib/legislation';
+import type {SiteLocale} from '@/types/legislation';
 
 type Props = {
   params: Promise<{locale: string; slug: string}>;
 };
 
-type Locale = SiteLocale;
-
-type LocalizedMaybe = string | LocalizedText | null | undefined;
-
-type FlexibleLegislationDocument = {
-  slug: string;
-  title?: LocalizedMaybe;
-  titleRu?: string | null;
-  titleUz?: string | null;
-  titleEn?: string | null;
-
-  summary?: LocalizedMaybe;
-  summaryRu?: string | null;
-  summaryUz?: string | null;
-  summaryEn?: string | null;
-
-  body?: LocalizedMaybe[] | null;
-  bodyRu?: string[] | null;
-  bodyUz?: string[] | null;
-  bodyEn?: string[] | null;
-
-  sourceUrl?: string | null;
-};
-
-function getCopy(locale: Locale) {
+function getCopy(locale: SiteLocale) {
   if (locale === 'uz') {
     return {
       back: '← Qonunchilik bo‘limiga qaytish',
-      badge: 'Rasmiy hujjat',
       source: 'Rasmiy manba',
       openSource: 'Rasmiy manbani ochish',
-      summaryTitle: 'Qisqacha mazmun',
-      contentTitle: 'Hujjat matni',
-      note: 'Hujjatning eng dolzarb talqini va yakuniy talablari uchun rasmiy manbani tekshiring.'
+      summary: 'Qisqacha',
+      content: 'Asosiy mazmun',
+      note:
+        'Yakuniy tekshiruvni doimo hujjatning rasmiy manbasi va amaldagi tahriri orqali bajaring.'
     };
   }
 
   if (locale === 'en') {
     return {
       back: '← Back to legislation',
-      badge: 'Official document',
       source: 'Official source',
       openSource: 'Open official source',
-      summaryTitle: 'Summary',
-      contentTitle: 'Document text',
-      note: 'Please verify the latest version of the document and final requirements using the official source.'
+      summary: 'Overview',
+      content: 'Main content',
+      note:
+        'Always verify the final interpretation using the official source and the current version of the document.'
     };
   }
 
   return {
     back: '← Назад к законодательству',
-    badge: 'Официальный документ',
     source: 'Официальный источник',
     openSource: 'Открыть официальный источник',
-    summaryTitle: 'Краткое описание',
-    contentTitle: 'Текст документа',
-    note: 'Актуальную редакцию документа и финальные требования всегда проверяйте по официальному источнику.'
+    summary: 'Кратко',
+    content: 'Основное содержание',
+    note:
+      'Финальную проверку всегда выполняйте по официальному источнику и актуальной редакции документа.'
   };
 }
 
-function pickText(value: LocalizedMaybe, locale: Locale): string {
-  if (!value) return '';
-
-  if (typeof value === 'string') {
-    return value;
-  }
-
-  return value[locale] || value.ru || value.uz || value.en || '';
-}
-
-function getTitle(document: FlexibleLegislationDocument, locale: Locale): string {
-  if (document.title) {
-    return pickText(document.title, locale);
-  }
-
-  return (
-    (locale === 'ru' && document.titleRu) ||
-    (locale === 'uz' && document.titleUz) ||
-    (locale === 'en' && document.titleEn) ||
-    document.titleRu ||
-    document.titleUz ||
-    document.titleEn ||
-    ''
-  );
-}
-
-function getSummary(document: FlexibleLegislationDocument, locale: Locale): string {
-  if (document.summary) {
-    return pickText(document.summary, locale);
-  }
-
-  return (
-    (locale === 'ru' && document.summaryRu) ||
-    (locale === 'uz' && document.summaryUz) ||
-    (locale === 'en' && document.summaryEn) ||
-    document.summaryRu ||
-    document.summaryUz ||
-    document.summaryEn ||
-    ''
-  );
-}
-
-function getBody(document: FlexibleLegislationDocument, locale: Locale): string[] {
-  if (Array.isArray(document.body)) {
-    return document.body
-      .map((paragraph: LocalizedMaybe) => pickText(paragraph, locale))
-      .filter(Boolean);
-  }
-
-  const prismaBody =
-    (locale === 'ru' && document.bodyRu) ||
-    (locale === 'uz' && document.bodyUz) ||
-    (locale === 'en' && document.bodyEn) ||
-    document.bodyRu ||
-    document.bodyUz ||
-    document.bodyEn ||
-    [];
-
-  return Array.isArray(prismaBody) ? prismaBody.filter(Boolean) : [];
-}
-
-function getSourceUrl(document: FlexibleLegislationDocument): string {
-  return document.sourceUrl || '#';
-}
-
-export async function generateMetadata({params}: Props): Promise<Metadata> {
+export async function generateMetadata({
+  params
+}: Props): Promise<Metadata> {
   const {locale: rawLocale, slug} = await params;
-  const locale = normalizeLocale(rawLocale) as Locale;
-  const document = (await getLegislationBySlug(slug)) as FlexibleLegislationDocument | undefined;
+  const locale = normalizeLocale(rawLocale);
+  const document = await getLegislationBySlug(slug);
 
   if (!document) {
     return {
@@ -155,18 +74,9 @@ export async function generateMetadata({params}: Props): Promise<Metadata> {
     };
   }
 
-  const title = getTitle(document, locale);
-  const description =
-    getSummary(document, locale) ||
-    (locale === 'uz'
-      ? 'Ilmiy faoliyat va nashr talablari bo‘yicha rasmiy hujjat.'
-      : locale === 'en'
-        ? 'Official document related to scientific activity and publication requirements.'
-        : 'Официальный документ по научной деятельности и публикационным требованиям.');
-
   return {
-    title,
-    description,
+    title: pickLocalizedText(document.title, locale),
+    description: pickLocalizedText(document.summary, locale),
     alternates: {
       canonical: `/${locale}/legislation/${document.slug}`,
       languages: {
@@ -178,91 +88,87 @@ export async function generateMetadata({params}: Props): Promise<Metadata> {
   };
 }
 
+export async function generateStaticParams() {
+  const slugs = await getLegislationSlugs();
+
+  return siteLocales.flatMap((locale) =>
+    slugs.map((slug) => ({
+      locale,
+      slug
+    }))
+  );
+}
+
 export default async function LegislationDetailPage({params}: Props) {
   const {locale: rawLocale, slug} = await params;
-  const locale = normalizeLocale(rawLocale) as Locale;
+  const locale = normalizeLocale(rawLocale);
   const copy = getCopy(locale);
-  const document = (await getLegislationBySlug(slug)) as FlexibleLegislationDocument | undefined;
+  const document = await getLegislationBySlug(slug);
 
   if (!document) {
     notFound();
   }
 
-  const title = getTitle(document, locale);
-  const summary = getSummary(document, locale);
-  const body = getBody(document, locale);
-  const sourceUrl = getSourceUrl(document);
-
   return (
     <main className="pb-16">
-      <section className="mx-auto max-w-5xl px-4 pt-8 sm:px-6 lg:px-8">
+      <section className="mx-auto max-w-4xl px-4 pt-8 sm:px-6 lg:px-8">
         <Link
           href={`/${locale}/legislation`}
           className="inline-flex items-center text-sm font-medium text-[#6B6B6B] transition hover:text-[#FF6C26]"
         >
           {copy.back}
         </Link>
-      </section>
 
-      <section className="mx-auto mt-4 max-w-5xl px-4 sm:px-6 lg:px-8">
-        <article className="rounded-[32px] border border-[#F1D8C8] bg-gradient-to-br from-[#FFF8F3] via-[#FFF4ED] to-white p-6 shadow-[0_14px_40px_rgba(17,17,17,0.06)] sm:p-8 lg:p-10">
-          <div className="inline-flex rounded-full border border-[#FFD8C2] bg-white px-4 py-1 text-xs font-bold uppercase tracking-[0.18em] text-[#FF6C26]">
-            {copy.badge}
-          </div>
-
-          <h1 className="mt-5 text-3xl font-bold leading-tight text-[#111111] sm:text-4xl lg:text-5xl">
-            {title}
+        <article className="mt-6 rounded-[32px] border border-[#F1D8C8] bg-gradient-to-br from-[#FFF8F3] via-[#FFF4ED] to-white p-6 shadow-[0_14px_40px_rgba(17,17,17,0.06)] sm:p-8 lg:p-10">
+          <h1 className="text-3xl font-bold leading-tight text-[#111111] sm:text-4xl">
+            {pickLocalizedText(document.title, locale)}
           </h1>
 
-          {summary && (
-            <div className="mt-8 rounded-3xl border border-[#ECE3DC] bg-white p-5 shadow-sm sm:p-6">
-              <div className="text-xs font-bold uppercase tracking-[0.18em] text-[#B56A42]">
-                {copy.summaryTitle}
-              </div>
-
-              <p className="mt-3 text-base leading-8 text-[#5C5C5C] sm:text-lg">
-                {summary}
-              </p>
+          <section className="mt-8 rounded-3xl border border-[#ECE3DC] bg-white p-5 shadow-sm sm:p-6">
+            <div className="text-xs font-bold uppercase tracking-[0.18em] text-[#B56A42]">
+              {copy.summary}
             </div>
-          )}
 
-          {body.length > 0 && (
-            <div className="mt-8 rounded-3xl border border-[#ECE3DC] bg-white p-5 shadow-sm sm:p-6">
-              <div className="text-xs font-bold uppercase tracking-[0.18em] text-[#B56A42]">
-                {copy.contentTitle}
-              </div>
+            <p className="mt-3 text-sm leading-8 text-[#5C5C5C] sm:text-base">
+              {pickLocalizedText(document.summary, locale)}
+            </p>
+          </section>
 
-              <div className="mt-4 space-y-5">
-                {body.map((paragraph, index) => (
-                  <p
-                    key={index}
-                    className="text-sm leading-8 text-[#5C5C5C] sm:text-base"
-                  >
-                    {paragraph}
-                  </p>
-                ))}
-              </div>
+          <section className="mt-8 rounded-3xl border border-[#ECE3DC] bg-white p-5 shadow-sm sm:p-6">
+            <div className="text-xs font-bold uppercase tracking-[0.18em] text-[#B56A42]">
+              {copy.content}
             </div>
-          )}
 
-          <div className="mt-8 rounded-3xl border border-[#F3DDD1] bg-[#FFF8F3] p-5 sm:p-6">
+            <div className="mt-5 space-y-5">
+              {document.body.map((paragraph, index) => (
+                <p
+                  key={index}
+                  className="text-sm leading-8 text-[#5C5C5C] sm:text-base"
+                >
+                  {pickLocalizedText(paragraph, locale)}
+                </p>
+              ))}
+            </div>
+          </section>
+
+          <section className="mt-8 rounded-3xl border border-[#F3DDD1] bg-[#FFF8F3] p-5 sm:p-6">
             <div className="text-xs font-bold uppercase tracking-[0.18em] text-[#B56A42]">
               {copy.source}
             </div>
 
-            <p className="mt-3 max-w-3xl text-sm leading-7 text-[#6B6B6B]">
-              {copy.note}
-            </p>
-
             <a
-              href={sourceUrl}
+              href={document.sourceUrl}
               target="_blank"
               rel="noopener noreferrer"
               className="mt-5 inline-flex rounded-2xl bg-[#FF6C26] px-5 py-3 text-sm font-bold text-white transition hover:bg-[#E85E1B]"
             >
               {copy.openSource}
             </a>
-          </div>
+
+            <p className="mt-4 text-sm leading-7 text-[#5C5C5C]">
+              {copy.note}
+            </p>
+          </section>
         </article>
       </section>
     </main>

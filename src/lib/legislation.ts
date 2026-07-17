@@ -1,33 +1,46 @@
-import { prisma } from "@/lib/prisma";
+import {prisma} from '@/lib/prisma';
 import type {
-  LegislationCategory,
   LegislationDocument,
   LocalizedText,
-  SiteLocale,
-} from "@/types/legislation";
+  SiteLocale
+} from '@/types/legislation';
 
-export const siteLocales: SiteLocale[] = ["ru", "uz", "en"];
+export const siteLocales: SiteLocale[] = ['ru', 'uz', 'en'];
+
+function lt(ru = '', uz = '', en = ''): LocalizedText {
+  return {ru, uz, en};
+}
 
 export function normalizeLocale(input?: string): SiteLocale {
-  const value = (input || "ru").toLowerCase();
+  const value = (input || 'ru').toLowerCase();
 
-  if (value === "ru" || value === "uz" || value === "en") {
+  if (value === 'ru' || value === 'uz' || value === 'en') {
     return value;
   }
 
-  return "ru";
+  return 'ru';
 }
 
-export function pickLocalizedText(value: LocalizedText, locale: SiteLocale) {
+export function pickLocalizedText(
+  value: LocalizedText,
+  locale: SiteLocale
+) {
   return value[locale] || value.ru || value.uz || value.en;
 }
 
-function formatDate(date: Date | null | undefined) {
-  if (!date) return "";
-  return date.toISOString().slice(0, 10);
+function mapBody(
+  ru: string[],
+  uz: string[],
+  en: string[]
+): LocalizedText[] {
+  const maxLength = Math.max(ru.length, uz.length, en.length);
+
+  return Array.from({length: maxLength}, (_, index) =>
+    lt(ru[index] || '', uz[index] || '', en[index] || '')
+  );
 }
 
-function mapLegislationDocument(doc: {
+function mapDocumentFromDb(doc: {
   slug: string;
   titleRu: string;
   titleUz: string;
@@ -42,47 +55,31 @@ function mapLegislationDocument(doc: {
   sourceLabelRu: string;
   sourceLabelUz: string;
   sourceLabelEn: string;
+  category: string;
   publishedAt: Date;
   updatedAt: Date;
-  category: string;
 }): LegislationDocument {
   return {
     slug: doc.slug,
-    title: {
-      ru: doc.titleRu,
-      uz: doc.titleUz,
-      en: doc.titleEn,
-    },
-    summary: {
-      ru: doc.summaryRu,
-      uz: doc.summaryUz,
-      en: doc.summaryEn,
-    },
-    body: doc.bodyRu.map((ru, index) => ({
-      ru,
-      uz: doc.bodyUz[index] || "",
-      en: doc.bodyEn[index] || "",
-    })),
+    title: lt(doc.titleRu, doc.titleUz, doc.titleEn),
+    summary: lt(doc.summaryRu, doc.summaryUz, doc.summaryEn),
+    body: mapBody(doc.bodyRu, doc.bodyUz, doc.bodyEn),
     sourceUrl: doc.sourceUrl,
-    sourceLabel: {
-      ru: doc.sourceLabelRu,
-      uz: doc.sourceLabelUz,
-      en: doc.sourceLabelEn,
-    },
-    publishedAt: formatDate(doc.publishedAt),
-    updatedAt: formatDate(doc.updatedAt),
-    category: doc.category as LegislationCategory,
+    sourceLabel: lt(doc.sourceLabelRu, doc.sourceLabelUz, doc.sourceLabelEn),
+    publishedAt: doc.publishedAt.toISOString(),
+    updatedAt: doc.updatedAt.toISOString(),
+    category: doc.category as LegislationDocument['category']
   };
 }
 
 export async function getAllLegislation(): Promise<LegislationDocument[]> {
   const documents = await prisma.legislationDocument.findMany({
     orderBy: {
-      publishedAt: "desc",
-    },
+      publishedAt: 'desc'
+    }
   });
 
-  return documents.map(mapLegislationDocument);
+  return documents.map(mapDocumentFromDb);
 }
 
 export async function getLatestLegislation(
@@ -90,20 +87,35 @@ export async function getLatestLegislation(
 ): Promise<LegislationDocument[]> {
   const documents = await prisma.legislationDocument.findMany({
     orderBy: {
-      publishedAt: "desc",
+      publishedAt: 'desc'
     },
-    take: limit,
+    take: limit
   });
 
-  return documents.map(mapLegislationDocument);
+  return documents.map(mapDocumentFromDb);
 }
 
-export async function getLegislationBySlug(slug: string) {
+export async function getLegislationBySlug(
+  slug: string
+): Promise<LegislationDocument | null> {
   const document = await prisma.legislationDocument.findUnique({
-    where: { slug },
+    where: {slug}
   });
 
-  if (!document) return undefined;
+  if (!document) return null;
 
-  return mapLegislationDocument(document);
+  return mapDocumentFromDb(document);
+}
+
+export async function getLegislationSlugs(): Promise<string[]> {
+  const documents = await prisma.legislationDocument.findMany({
+    select: {
+      slug: true
+    },
+    orderBy: {
+      publishedAt: 'desc'
+    }
+  });
+
+  return documents.map((item) => item.slug);
 }
