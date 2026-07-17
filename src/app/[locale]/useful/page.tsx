@@ -118,9 +118,6 @@ export default async function UsefulListPage({
 
   const t = dictionary[locale];
   const pages = await getUsefulPages();
-console.log('USEFUL PAGES COUNT:', pages.length);
-console.log('USEFUL PAGE SLUGS:', pages.map((p) => p.slug));
-
 
   return (
     <main className="pb-16">
