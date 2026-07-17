@@ -6,6 +6,7 @@ import {
   siteLocales
 } from '@/lib/useful';
 import type {SiteLocale} from '@/types/useful-page';
+import type {Metadata} from 'next';
 
 const dictionary: Record<
   SiteLocale,
@@ -16,6 +17,7 @@ const dictionary: Record<
     open: string;
     noteTitle: string;
     noteText: string;
+    sourceNote: string;
   }
 > = {
   ru: {
@@ -26,7 +28,8 @@ const dictionary: Record<
     open: 'Открыть',
     noteTitle: 'Как использовать раздел',
     noteText:
-      'Здесь собраны краткие справочные материалы. Для финальной проверки требований всегда сверяйтесь с официальными источниками.'
+      'Здесь собраны краткие справочные материалы. Для финальной проверки требований всегда сверяйтесь с официальными источниками.',
+    sourceNote: 'Справочный материал'
   },
   uz: {
     badge: 'FOYDALI MATERIALLAR',
@@ -36,7 +39,8 @@ const dictionary: Record<
     open: 'Ochish',
     noteTitle: 'Bo‘limdan foydalanish',
     noteText:
-      'Bu yerda qisqa yo‘riqnoma va ma’lumotlar jamlangan. Yakuniy talablarni doimo rasmiy manbalar bilan solishtiring.'
+      'Bu yerda qisqa yo‘riqnoma va ma’lumotlar jamlangan. Yakuniy talablarni doimo rasmiy manbalar bilan solishtiring.',
+    sourceNote: 'Ma’lumot materiali'
   },
   en: {
     badge: 'USEFUL MATERIALS',
@@ -46,9 +50,57 @@ const dictionary: Record<
     open: 'Open',
     noteTitle: 'How to use this section',
     noteText:
-      'This section contains short reference materials. Always compare final requirements with official sources.'
+      'This section contains short reference materials. Always compare final requirements with official sources.',
+    sourceNote: 'Reference material'
   }
 };
+
+function getMetadataCopy(locale: SiteLocale) {
+  if (locale === 'uz') {
+    return {
+      title: 'Foydali materiallar — mualliflar uchun resurslar',
+      description:
+        'ORCID, DOI, Scopus, OAK, antiplagiat, taqriz va maqola nashri bo‘yicha foydali materiallar.'
+    };
+  }
+
+  if (locale === 'en') {
+    return {
+      title: 'Useful materials — resources for authors',
+      description:
+        'Useful resources on ORCID, DOI, Scopus, SAC, plagiarism checks, peer review, and article publication.'
+    };
+  }
+
+  return {
+    title: 'Полезные материалы — ресурсы для авторов',
+    description:
+      'Справочные материалы по ORCID, DOI, Scopus, ВАК, антиплагиату, рецензированию и публикации статей.'
+  };
+}
+
+export async function generateMetadata({
+  params
+}: {
+  params: Promise<{locale: string}> | {locale: string};
+}): Promise<Metadata> {
+  const resolvedParams = await Promise.resolve(params);
+  const locale = normalizeLocale(resolvedParams.locale);
+  const meta = getMetadataCopy(locale);
+
+  return {
+    title: meta.title,
+    description: meta.description,
+    alternates: {
+      canonical: `/${locale}/useful`,
+      languages: {
+        ru: '/ru/useful',
+        uz: '/uz/useful',
+        en: '/en/useful'
+      }
+    }
+  };
+}
 
 export const dynamicParams = false;
 
@@ -65,7 +117,7 @@ export default async function UsefulListPage({
   const locale = normalizeLocale(resolvedParams.locale);
 
   const t = dictionary[locale];
-  const pages = getUsefulPages();
+  const pages = await getUsefulPages();
 
   return (
     <main className="pb-16">
@@ -86,13 +138,17 @@ export default async function UsefulListPage({
       </section>
 
       <section className="mx-auto mt-10 max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-6 sm:grid-cols-2 xl:grid-cols-3">
           {pages.map((page) => (
             <article
               key={page.slug}
               className="flex h-full flex-col rounded-3xl border border-[#ECE3DC] bg-white p-6 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"
             >
-              <h2 className="text-2xl font-bold leading-tight text-[#111111]">
+              <div className="inline-flex w-fit rounded-full bg-[#FFF4ED] px-3 py-1 text-xs font-semibold text-[#B85A2B]">
+                {t.sourceNote}
+              </div>
+
+              <h2 className="mt-4 text-2xl font-bold leading-tight text-[#111111]">
                 {pickLocale(page.title, locale)}
               </h2>
 

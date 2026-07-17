@@ -10,6 +10,9 @@ export type Journal = {
   titleRu: string;
   titleUz: string;
   shortDescription: string;
+  shortDescriptionRu?: string | null;
+  shortDescriptionUz?: string | null;
+  shortDescriptionEn?: string | null;
   publisher: string;
   website: string;
   coverImage?: string | null;

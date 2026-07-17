@@ -20,7 +20,7 @@ function withLocale(pathname: string, href: string) {
 function getCopy(locale: string) {
   if (locale === 'uz') {
     return {
-      brandTitle: 'UzAkademiya.uz',
+      brandTitleFallback: 'UzAkademiya.uz',
       description:
         'Ilmiy jurnallar katalogi, Scopus va OAK bo‘yicha yo‘riqnoma, foydali materiallar hamda nashr navigatsiyasi uchun qulay platforma.',
       navTitle: 'Navigatsiya',
@@ -43,7 +43,7 @@ function getCopy(locale: string) {
 
   if (locale === 'en') {
     return {
-      brandTitle: 'UzAkademiya.uz',
+      brandTitleFallback: 'UzAkademiya.uz',
       description:
         'A practical platform for journal catalog navigation, Scopus and SAC guidance, useful materials, and publication support.',
       navTitle: 'Navigation',
@@ -65,7 +65,7 @@ function getCopy(locale: string) {
   }
 
   return {
-    brandTitle: 'UzAkademiya.uz',
+    brandTitleFallback: 'UzAkademiya.uz',
     description:
       'Удобная платформа для навигации по каталогу научных журналов, Scopus, ВАК, полезным материалам и публикационным маршрутам.',
     navTitle: 'Навигация',
@@ -86,11 +86,16 @@ function getCopy(locale: string) {
   };
 }
 
-export default function SiteFooter() {
+type Props = {
+  siteName?: string;
+};
+
+export default function SiteFooterClient({siteName}: Props) {
   const pathname = usePathname();
   const locale = getCurrentLocale(pathname);
   const copy = getCopy(locale);
   const year = new Date().getFullYear();
+  const brandTitle = siteName || copy.brandTitleFallback;
 
   const navLinks = [
     {href: '/', label: copy.home},
@@ -117,7 +122,7 @@ export default function SiteFooter() {
 
               <div>
                 <div className="text-lg font-bold text-[#111111]">
-                  {copy.brandTitle}
+                  {brandTitle}
                 </div>
                 <div className="text-xs font-medium text-[#8A7B72]">
                   {copy.note}
@@ -187,7 +192,7 @@ export default function SiteFooter() {
 
       <div className="border-t border-[#EEDFD5]">
         <div className="mx-auto flex max-w-7xl flex-col gap-2 px-4 py-5 text-sm text-[#7A6D65] sm:px-6 md:flex-row md:items-center md:justify-between lg:px-8">
-          <span>© {year} UzAkademiya.uz</span>
+          <span>© {year} {brandTitle}</span>
           <span>{copy.rights}</span>
         </div>
       </div>

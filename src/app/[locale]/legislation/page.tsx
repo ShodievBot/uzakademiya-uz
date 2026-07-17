@@ -1,13 +1,15 @@
 import Link from 'next/link';
+import type {Metadata} from 'next';
+import {
+  getAllLegislation,
+  normalizeLocale,
+  pickLocalizedText,
+  siteLocales
+} from '@/lib/legislation';
+import type {SiteLocale} from '@/types/legislation';
 
 type Props = {
-  params: Promise<{locale: string}>;
-};
-
-type DocCard = {
-  title: string;
-  text: string;
-  source: string;
+  params: Promise<{locale: string}> | {locale: string};
 };
 
 function withLocale(locale: string, href: string) {
@@ -15,99 +17,125 @@ function withLocale(locale: string, href: string) {
   return `/${locale}${href}`;
 }
 
-function getContent(locale: string) {
+const dictionary: Record<
+  SiteLocale,
+  {
+    badge: string;
+    title: string;
+    description: string;
+    open: string;
+    noteTitle: string;
+    noteText: string;
+    cta: string;
+    categories: Record<string, string>;
+  }
+> = {
+  ru: {
+    badge: 'Официальные источники',
+    title: 'Законодательство и официальные документы',
+    description:
+      'Основные материалы по научной деятельности, аттестации, публикационным требованиям и официальным источникам.',
+    open: 'Открыть документ',
+    noteTitle: 'Важное примечание',
+    noteText:
+      'Финальную проверку актуальности документов и требований всегда выполняйте по официальным государственным источникам.',
+    cta: 'Перейти в контакты',
+    categories: {
+      science: 'Научная деятельность',
+      attestation: 'Аттестация',
+      ethics: 'Публикационная этика'
+    }
+  },
+  uz: {
+    badge: 'Rasmiy manbalar',
+    title: 'Qonunchilik va rasmiy hujjatlar',
+    description:
+      'Ilmiy faoliyat, attestatsiya, maqola chop etish talablari va rasmiy manbalar bo‘yicha asosiy yo‘riqnomalar.',
+    open: 'Hujjatni ochish',
+    noteTitle: 'Muhim eslatma',
+    noteText:
+      'Yakuniy qaror va dolzarb talablarni doimo rasmiy davlat yoki attestatsiya manbalari orqali tekshiring.',
+    cta: 'Kontaktlarga o‘tish',
+    categories: {
+      science: 'Ilmiy faoliyat',
+      attestation: 'Attestatsiya',
+      ethics: 'Nashr etikasi'
+    }
+  },
+  en: {
+    badge: 'Official sources',
+    title: 'Legislation and official documents',
+    description:
+      'Core guidance on scientific activity, attestation, publication requirements, and official reference sources.',
+    open: 'Open document',
+    noteTitle: 'Important note',
+    noteText:
+      'Always verify current rules and final requirements through official state or attestation sources.',
+    cta: 'Go to contacts',
+    categories: {
+      science: 'Scientific activity',
+      attestation: 'Attestation',
+      ethics: 'Publication ethics'
+    }
+  }
+};
+
+function getMetadataCopy(locale: SiteLocale) {
   if (locale === 'uz') {
     return {
-      badge: 'Rasmiy manbalar',
       title: 'Qonunchilik va rasmiy hujjatlar',
       description:
-        'Ilmiy faoliyat, attestatsiya, maqola chop etish talablari va rasmiy manbalar bo‘yicha asosiy yo‘riqnomalar.',
-      docs: [
-        {
-          title: 'Nashr etikasi va plagiat tekshiruvi',
-          text: 'Mualliflik, antiplagiat va tahririy etikaga oid asosiy tavsiyalar.',
-          source: 'Rasmiy va uslubiy materiallar'
-        },
-        {
-          title: 'OAK / VAK rasmiy manbalari',
-          text: 'Attestatsiya, ilmiy daraja va rasmiy talablar bo‘yicha foydali manbalar.',
-          source: 'Rasmiy me’yoriy hujjatlar'
-        },
-        {
-          title: 'Ilm-fan va ilmiy faoliyat bo‘yicha qonunchilik',
-          text: 'Ilmiy faoliyat va tadqiqotlar bilan bog‘liq asosiy normativ hujjatlar.',
-          source: 'Davlat va rasmiy huquqiy manbalar'
-        }
-      ] as DocCard[],
-      noteTitle: 'Muhim eslatma',
-      noteText:
-        'Yakuniy qaror va dolzarb talablarni doimo rasmiy davlat yoki attestatsiya manbalari orqali tekshiring.',
-      cta: 'Kontaktlarga o‘tish'
+        'Ilmiy faoliyat, attestatsiya va nashr talablari bo‘yicha rasmiy manbalar.'
     };
   }
 
   if (locale === 'en') {
     return {
-      badge: 'Official sources',
       title: 'Legislation and official documents',
       description:
-        'Core guidance on scientific activity, attestation, publication requirements, and official reference sources.',
-      docs: [
-        {
-          title: 'Publication ethics and plagiarism checks',
-          text: 'Core notes on authorship, editorial ethics, and plagiarism screening.',
-          source: 'Official and methodological materials'
-        },
-        {
-          title: 'Official SAC / VAK sources',
-          text: 'Useful references on certification, academic degrees, and official requirements.',
-          source: 'Regulatory and official documents'
-        },
-        {
-          title: 'Law on science and scientific activity',
-          text: 'Basic legal materials related to research activity and scientific work.',
-          source: 'Government and official legal sources'
-        }
-      ] as DocCard[],
-      noteTitle: 'Important note',
-      noteText:
-        'Always verify current rules and final requirements through official state or attestation sources.',
-      cta: 'Go to contacts'
+        'Official sources on scientific activity, attestation, and publication requirements.'
     };
   }
 
   return {
-    badge: 'Официальные источники',
     title: 'Законодательство и официальные документы',
     description:
-      'Основные материалы по научной деятельности, аттестации, публикационным требованиям и официальным источникам.',
-    docs: [
-      {
-        title: 'Публикационная этика и проверка на плагиат',
-        text: 'Краткие ориентиры по авторству, редакционной этике и проверке текста перед подачей статьи.',
-        source: 'Официальные и методические материалы'
-      },
-      {
-        title: 'Официальные источники ВАК / ОАК',
-        text: 'Полезные материалы по аттестации, научным степеням и актуальным требованиям к публикации.',
-        source: 'Нормативные и официальные документы'
-      },
-      {
-        title: 'Законодательство о науке и научной деятельности',
-        text: 'Базовые правовые материалы по научной деятельности, исследованиям и связанным требованиям.',
-        source: 'Государственные и правовые источники'
-      }
-    ] as DocCard[],
-    noteTitle: 'Важное примечание',
-    noteText:
-      'Финальную проверку актуальности документов и требований всегда выполняйте по официальным государственным источникам.',
-    cta: 'Перейти в контакты'
+      'Официальные источники по научной деятельности, аттестации и публикационным требованиям.'
   };
 }
 
+export async function generateMetadata({
+  params
+}: Props): Promise<Metadata> {
+  const resolvedParams = await Promise.resolve(params);
+  const locale = normalizeLocale(resolvedParams.locale);
+  const meta = getMetadataCopy(locale);
+
+  return {
+    title: meta.title,
+    description: meta.description,
+    alternates: {
+      canonical: `/${locale}/legislation`,
+      languages: {
+        ru: '/ru/legislation',
+        uz: '/uz/legislation',
+        en: '/en/legislation'
+      }
+    }
+  };
+}
+
+export const dynamicParams = false;
+
+export function generateStaticParams() {
+  return siteLocales.map((locale) => ({locale}));
+}
+
 export default async function LocalizedLegislationPage({params}: Props) {
-  const {locale} = await params;
-  const t = getContent(locale);
+  const resolvedParams = await Promise.resolve(params);
+  const locale = normalizeLocale(resolvedParams.locale);
+  const t = dictionary[locale];
+  const documents = await getAllLegislation();
 
   return (
     <main className="pb-16">
@@ -129,22 +157,29 @@ export default async function LocalizedLegislationPage({params}: Props) {
 
       <section className="mx-auto mt-10 max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="grid gap-6 lg:grid-cols-3">
-          {t.docs.map((doc) => (
+          {documents.map((doc) => (
             <article
-              key={doc.title}
-              className="rounded-3xl border border-[#ECE3DC] bg-white p-6 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"
+              key={doc.slug}
+              className="flex h-full flex-col rounded-3xl border border-[#ECE3DC] bg-white p-6 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"
             >
-              <h2 className="text-2xl font-bold leading-tight text-[#111111]">
-                {doc.title}
+              <div className="inline-flex w-fit rounded-full bg-[#FFF8F3] px-3 py-1 text-xs font-semibold text-[#B85A2B]">
+                {t.categories[doc.category] || doc.category}
+              </div>
+
+              <h2 className="mt-4 text-2xl font-bold leading-tight text-[#111111]">
+                {pickLocalizedText(doc.title, locale)}
               </h2>
 
-              <p className="mt-4 text-sm leading-7 text-[#5C5C5C]">
-                {doc.text}
+              <p className="mt-4 flex-1 text-sm leading-7 text-[#5C5C5C]">
+                {pickLocalizedText(doc.summary, locale)}
               </p>
 
-              <div className="mt-5 inline-flex rounded-full bg-[#FFF8F3] px-3 py-1 text-xs font-semibold text-[#B85A2B]">
-                {doc.source}
-              </div>
+              <Link
+                href={`/${locale}/legislation/${doc.slug}`}
+                className="mt-6 inline-flex w-fit rounded-2xl bg-[#FF6C26] px-5 py-3 text-sm font-bold text-white transition hover:bg-[#E85E1B]"
+              >
+                {t.open}
+              </Link>
             </article>
           ))}
         </div>
