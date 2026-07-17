@@ -5,6 +5,7 @@ import {hasLocale} from 'next-intl';
 import {routing} from '@/i18n/routing';
 import SiteHeader from '@/components/layout/site-header';
 import SiteFooter from '@/components/layout/site-footer';
+import LocaleHtmlUpdater from '@/components/locale-html-updater';
 
 type Props = {
   children: React.ReactNode;
@@ -22,6 +23,7 @@ export default async function LocaleLayout({children, params}: Props) {
 
   return (
     <NextIntlClientProvider locale={locale} messages={messages}>
+      <LocaleHtmlUpdater />
       <div className="min-h-screen bg-white text-slate-900">
         <SiteHeader />
         {children}
