@@ -2,21 +2,26 @@ import {prisma} from '@/lib/prisma';
 import type {
   LocalizedText,
   SiteLocale,
-  UsefulBlock as UiUsefulBlock,
-  UsefulPage as UiUsefulPage,
-  UsefulSource as UiUsefulSource
+  UsefulBlock,
+  UsefulPage
 } from '@/types/useful-page';
 
 export const siteLocales: SiteLocale[] = ['ru', 'uz', 'en'];
 
-export type UsefulPageCard = Pick<
-  UiUsefulPage,
-  'slug' | 'title' | 'cardText' | 'shortTitle' | 'shortText' | 'fullTitle'
->;
-
-export type UsefulPageDetail = Omit<UiUsefulPage, 'sourceIds'> & {
-  sources: UiUsefulSource[];
+type UsefulSourceItem = {
+  id: string;
+  sourceKey: string;
+  title: LocalizedText;
+  url: string;
 };
+
+export type UsefulPageWithSources = UsefulPage & {
+  sources: UsefulSourceItem[];
+};
+
+function lt(ru = '', uz = '', en = ''): LocalizedText {
+  return {ru, uz, en};
+}
 
 export function normalizeLocale(input?: string): SiteLocale {
   const value = (input || 'ru').toLowerCase();
@@ -41,117 +46,118 @@ export function pickLocaleArray(
   locale: SiteLocale
 ) {
   if (!values) return [];
-  return values.map((item) => pickLocale(item, locale)).filter(Boolean);
+  return values.map((item) => pickLocale(item, locale));
 }
 
-function mapRequiredText(
-  ru: string,
-  uz: string,
-  en: string
-): LocalizedText {
-  return {ru, uz, en};
-}
+function mapBlockItems(
+  itemsRu: string[],
+  itemsUz: string[],
+  itemsEn: string[]
+): LocalizedText[] {
+  const maxLength = Math.max(itemsRu.length, itemsUz.length, itemsEn.length);
 
-function mapOptionalText(
-  ru?: string | null,
-  uz?: string | null,
-  en?: string | null
-): LocalizedText | undefined {
-  if (!ru && !uz && !en) return undefined;
-
-  return {
-    ru: ru ?? '',
-    uz: uz ?? '',
-    en: en ?? ''
-  };
-}
-
-function mapBlock(block: {
-  type: 'PARAGRAPH' | 'LIST';
-  titleRu: string | null;
-  titleUz: string | null;
-  titleEn: string | null;
-  textRu: string | null;
-  textUz: string | null;
-  textEn: string | null;
-  itemsRu: string[];
-  itemsUz: string[];
-  itemsEn: string[];
-}): UiUsefulBlock {
-  const maxItemsLength = Math.max(
-    block.itemsRu.length,
-    block.itemsUz.length,
-    block.itemsEn.length
+  return Array.from({length: maxLength}, (_, index) =>
+    lt(itemsRu[index] || '', itemsUz[index] || '', itemsEn[index] || '')
   );
-
-  const items =
-    maxItemsLength > 0
-      ? Array.from({length: maxItemsLength}, (_, index) => ({
-          ru: block.itemsRu[index] || '',
-          uz: block.itemsUz[index] || '',
-          en: block.itemsEn[index] || ''
-        }))
-      : undefined;
-
-  return {
-    type: block.type === 'PARAGRAPH' ? 'paragraph' : 'list',
-    title: mapOptionalText(block.titleRu, block.titleUz, block.titleEn),
-    text: mapOptionalText(block.textRu, block.textUz, block.textEn),
-    items
-  };
 }
 
-function mapSource(source: {
-  sourceKey: string;
+function mapPageFromDb(page: {
+  slug: string;
   titleRu: string;
   titleUz: string;
   titleEn: string;
-  url: string;
-}): UiUsefulSource {
+  cardTextRu: string;
+  cardTextUz: string;
+  cardTextEn: string;
+  shortTitleRu: string | null;
+  shortTitleUz: string | null;
+  shortTitleEn: string | null;
+  shortTextRu: string | null;
+  shortTextUz: string | null;
+  shortTextEn: string | null;
+  fullTitleRu: string | null;
+  fullTitleUz: string | null;
+  fullTitleEn: string | null;
+  blocks: Array<{
+    type: 'PARAGRAPH' | 'LIST';
+    titleRu: string | null;
+    titleUz: string | null;
+    titleEn: string | null;
+    textRu: string | null;
+    textUz: string | null;
+    textEn: string | null;
+    itemsRu: string[];
+    itemsUz: string[];
+    itemsEn: string[];
+  }>;
+  sources: Array<{
+    source: {
+      id: string;
+      sourceKey: string;
+      titleRu: string;
+      titleUz: string;
+      titleEn: string;
+      url: string;
+    };
+  }>;
+}): UsefulPageWithSources {
+  const blocks: UsefulBlock[] = page.blocks.map((block) => ({
+    type: block.type === 'LIST' ? 'list' : 'paragraph',
+    title:
+      block.titleRu || block.titleUz || block.titleEn
+        ? lt(block.titleRu || '', block.titleUz || '', block.titleEn || '')
+        : undefined,
+    text:
+      block.textRu || block.textUz || block.textEn
+        ? lt(block.textRu || '', block.textUz || '', block.textEn || '')
+        : undefined,
+    items:
+      block.itemsRu.length || block.itemsUz.length || block.itemsEn.length
+        ? mapBlockItems(block.itemsRu, block.itemsUz, block.itemsEn)
+        : undefined
+  }));
+
+  const sources: UsefulSourceItem[] = page.sources.map((item) => ({
+    id: item.source.id,
+    sourceKey: item.source.sourceKey,
+    title: lt(item.source.titleRu, item.source.titleUz, item.source.titleEn),
+    url: item.source.url
+  }));
+
   return {
-    id: source.sourceKey,
-    title: mapRequiredText(source.titleRu, source.titleUz, source.titleEn),
-    url: source.url
+    slug: page.slug,
+    title: lt(page.titleRu, page.titleUz, page.titleEn),
+    cardText: lt(page.cardTextRu, page.cardTextUz, page.cardTextEn),
+    shortTitle:
+      page.shortTitleRu || page.shortTitleUz || page.shortTitleEn
+        ? lt(
+            page.shortTitleRu || '',
+            page.shortTitleUz || '',
+            page.shortTitleEn || ''
+          )
+        : undefined,
+    shortText:
+      page.shortTextRu || page.shortTextUz || page.shortTextEn
+        ? lt(
+            page.shortTextRu || '',
+            page.shortTextUz || '',
+            page.shortTextEn || ''
+          )
+        : undefined,
+    fullTitle:
+      page.fullTitleRu || page.fullTitleUz || page.fullTitleEn
+        ? lt(page.fullTitleRu || '', page.fullTitleUz || '', page.fullTitleEn || '')
+        : undefined,
+    blocks,
+    sourceIds: sources.map((item) => item.sourceKey),
+    sources
   };
 }
 
-export async function getUsefulPages(): Promise<UsefulPageCard[]> {
+export async function getUsefulPages(): Promise<UsefulPageWithSources[]> {
   const pages = await prisma.usefulPage.findMany({
     orderBy: {
-      createdAt: 'desc'
-    }
-  });
-
-  return pages.map((page) => ({
-    slug: page.slug,
-    title: mapRequiredText(page.titleRu, page.titleUz, page.titleEn),
-    cardText: mapRequiredText(page.cardTextRu, page.cardTextUz, page.cardTextEn),
-    shortTitle: mapOptionalText(
-      page.shortTitleRu,
-      page.shortTitleUz,
-      page.shortTitleEn
-    ),
-    shortText: mapOptionalText(
-      page.shortTextRu,
-      page.shortTextUz,
-      page.shortTextEn
-    ),
-    fullTitle: mapOptionalText(
-      page.fullTitleRu,
-      page.fullTitleUz,
-      page.fullTitleEn
-    )
-  }));
-}
-
-export async function getUsefulPageBySlug(
-  slug: string
-): Promise<UsefulPageDetail | undefined> {
-  const normalizedSlug = decodeURIComponent(slug).trim();
-
-  const page = await prisma.usefulPage.findUnique({
-    where: {
-      slug: normalizedSlug
+      createdAt: 'asc'
     },
     include: {
       blocks: {
@@ -167,40 +173,65 @@ export async function getUsefulPageBySlug(
     }
   });
 
-  if (!page) {
-    return undefined;
-  }
-
-  return {
-    slug: page.slug,
-    title: mapRequiredText(page.titleRu, page.titleUz, page.titleEn),
-    cardText: mapRequiredText(page.cardTextRu, page.cardTextUz, page.cardTextEn),
-    shortTitle: mapOptionalText(
-      page.shortTitleRu,
-      page.shortTitleUz,
-      page.shortTitleEn
-    ),
-    shortText: mapOptionalText(
-      page.shortTextRu,
-      page.shortTextUz,
-      page.shortTextEn
-    ),
-    fullTitle: mapOptionalText(
-      page.fullTitleRu,
-      page.fullTitleUz,
-      page.fullTitleEn
-    ),
-    blocks: page.blocks.map(mapBlock),
-    sources: page.sources.map((item) => mapSource(item.source))
-  };
+  return pages.map(mapPageFromDb);
 }
 
-export async function getUsefulPageSlugs(): Promise<string[]> {
+export async function getUsefulPageBySlug(
+  slug: string
+): Promise<UsefulPageWithSources | null> {
+  const page = await prisma.usefulPage.findUnique({
+    where: {slug},
+    include: {
+      blocks: {
+        orderBy: {
+          sortOrder: 'asc'
+        }
+      },
+      sources: {
+        include: {
+          source: true
+        }
+      }
+    }
+  });
+
+  if (!page) return null;
+
+  return mapPageFromDb(page);
+}
+
+export async function getUsefulSlugs(): Promise<string[]> {
   const pages = await prisma.usefulPage.findMany({
     select: {
       slug: true
+    },
+    orderBy: {
+      createdAt: 'asc'
     }
   });
 
   return pages.map((page) => page.slug);
+}
+
+export async function getUsefulSourcesByKeys(keys: string[]) {
+  if (!keys.length) return [];
+
+  const sources = await prisma.usefulSource.findMany({
+    where: {
+      sourceKey: {
+        in: keys
+      }
+    }
+  });
+
+  const map = new Map(sources.map((source) => [source.sourceKey, source]));
+
+  return keys
+    .map((key) => map.get(key))
+    .filter(Boolean)
+    .map((source) => ({
+      sourceKey: source!.sourceKey,
+      title: lt(source!.titleRu, source!.titleUz, source!.titleEn),
+      url: source!.url
+    }));
 }
