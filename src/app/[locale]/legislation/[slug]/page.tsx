@@ -2,14 +2,37 @@ import Link from 'next/link';
 import {notFound} from 'next/navigation';
 import {getLegislationBySlug, normalizeLocale} from '@/lib/legislation';
 import type {Metadata} from 'next';
+import type {LocalizedText, SiteLocale} from '@/types/legislation';
 
 type Props = {
   params: Promise<{locale: string; slug: string}>;
 };
 
-type Locale = 'ru' | 'uz' | 'en';
+type Locale = SiteLocale;
 
-function getCopy(locale: string) {
+type LocalizedMaybe = string | LocalizedText | null | undefined;
+
+type FlexibleLegislationDocument = {
+  slug: string;
+  title?: LocalizedMaybe;
+  titleRu?: string | null;
+  titleUz?: string | null;
+  titleEn?: string | null;
+
+  summary?: LocalizedMaybe;
+  summaryRu?: string | null;
+  summaryUz?: string | null;
+  summaryEn?: string | null;
+
+  body?: LocalizedMaybe[] | null;
+  bodyRu?: string[] | null;
+  bodyUz?: string[] | null;
+  bodyEn?: string[] | null;
+
+  sourceUrl?: string | null;
+};
+
+function getCopy(locale: Locale) {
   if (locale === 'uz') {
     return {
       back: '← Qonunchilik bo‘limiga qaytish',
@@ -45,14 +68,7 @@ function getCopy(locale: string) {
   };
 }
 
-function pickText(
-  value:
-    | string
-    | {ru?: string; uz?: string; en?: string}
-    | null
-    | undefined,
-  locale: Locale
-): string {
+function pickText(value: LocalizedMaybe, locale: Locale): string {
   if (!value) return '';
 
   if (typeof value === 'string') {
@@ -62,67 +78,65 @@ function pickText(
   return value[locale] || value.ru || value.uz || value.en || '';
 }
 
-function getTitle(document: any, locale: Locale): string {
-  if (document?.title) {
+function getTitle(document: FlexibleLegislationDocument, locale: Locale): string {
+  if (document.title) {
     return pickText(document.title, locale);
   }
 
   return (
-    (locale === 'ru' && document?.titleRu) ||
-    (locale === 'uz' && document?.titleUz) ||
-    (locale === 'en' && document?.titleEn) ||
-    document?.titleRu ||
-    document?.titleUz ||
-    document?.titleEn ||
+    (locale === 'ru' && document.titleRu) ||
+    (locale === 'uz' && document.titleUz) ||
+    (locale === 'en' && document.titleEn) ||
+    document.titleRu ||
+    document.titleUz ||
+    document.titleEn ||
     ''
   );
 }
 
-function getSummary(document: any, locale: Locale): string {
-  if (document?.summary) {
+function getSummary(document: FlexibleLegislationDocument, locale: Locale): string {
+  if (document.summary) {
     return pickText(document.summary, locale);
   }
 
   return (
-    (locale === 'ru' && document?.summaryRu) ||
-    (locale === 'uz' && document?.summaryUz) ||
-    (locale === 'en' && document?.summaryEn) ||
-    document?.summaryRu ||
-    document?.summaryUz ||
-    document?.summaryEn ||
+    (locale === 'ru' && document.summaryRu) ||
+    (locale === 'uz' && document.summaryUz) ||
+    (locale === 'en' && document.summaryEn) ||
+    document.summaryRu ||
+    document.summaryUz ||
+    document.summaryEn ||
     ''
   );
 }
 
-function getBody(document: any, locale: Locale): string[] {
-  if (Array.isArray(document?.body)) {
+function getBody(document: FlexibleLegislationDocument, locale: Locale): string[] {
+  if (Array.isArray(document.body)) {
     return document.body
-      .map((paragraph: any) => pickText(paragraph, locale))
+      .map((paragraph: LocalizedMaybe) => pickText(paragraph, locale))
       .filter(Boolean);
   }
 
   const prismaBody =
-    (locale === 'ru' && document?.bodyRu) ||
-    (locale === 'uz' && document?.bodyUz) ||
-    (locale === 'en' && document?.bodyEn) ||
-    document?.bodyRu ||
-    document?.bodyUz ||
-    document?.bodyEn ||
+    (locale === 'ru' && document.bodyRu) ||
+    (locale === 'uz' && document.bodyUz) ||
+    (locale === 'en' && document.bodyEn) ||
+    document.bodyRu ||
+    document.bodyUz ||
+    document.bodyEn ||
     [];
 
   return Array.isArray(prismaBody) ? prismaBody.filter(Boolean) : [];
 }
 
-function getSourceUrl(document: any): string {
-  return document?.sourceUrl || '#';
+function getSourceUrl(document: FlexibleLegislationDocument): string {
+  return document.sourceUrl || '#';
 }
 
-export async function generateMetadata({
-  params
-}: Props): Promise<Metadata> {
+export async function generateMetadata({params}: Props): Promise<Metadata> {
   const {locale: rawLocale, slug} = await params;
   const locale = normalizeLocale(rawLocale) as Locale;
-  const document = await getLegislationBySlug(slug);
+  const document = (await getLegislationBySlug(slug)) as FlexibleLegislationDocument | undefined;
 
   if (!document) {
     return {
@@ -141,9 +155,9 @@ export async function generateMetadata({
     };
   }
 
-  const title = pickText(document.title, locale);
+  const title = getTitle(document, locale);
   const description =
-    pickText(document.summary, locale) ||
+    getSummary(document, locale) ||
     (locale === 'uz'
       ? 'Ilmiy faoliyat va nashr talablari bo‘yicha rasmiy hujjat.'
       : locale === 'en'
@@ -168,7 +182,7 @@ export default async function LegislationDetailPage({params}: Props) {
   const {locale: rawLocale, slug} = await params;
   const locale = normalizeLocale(rawLocale) as Locale;
   const copy = getCopy(locale);
-  const document = await getLegislationBySlug(slug);
+  const document = (await getLegislationBySlug(slug)) as FlexibleLegislationDocument | undefined;
 
   if (!document) {
     notFound();

@@ -1,0 +1,5168 @@
+{
+  "version": 1,
+  "source": "scopus-import-2026",
+  "updatedAt": "2026-07-17",
+  "journals": [
+    {
+      "id": "russian-language-studies",
+      "slug": "russian-language-studies",
+      "sourceType": "journal",
+      "titles": {
+        "original": "Russian Language Studies",
+        "ru": "Исследования русского языка",
+        "uz": "Rus tili tadqiqotlari",
+        "en": "Russian Language Studies",
+        "former": null
+      },
+      "publisher": "RUDN University",
+      "identifiers": {
+        "issn": "2618-8163",
+        "eissn": "2618-8171"
+      },
+      "access": {
+        "label": "Открытый доступ",
+        "isOpenAccess": true
+      },
+      "indexing": {
+        "isScopusIndexed": true,
+        "scopusCoverage": "2018-2026",
+        "isOakRecommended": null
+      },
+      "subjectAreas": [
+        {
+          "group": "Arts and Humanities",
+          "name": "Language and Linguistics"
+        },
+        {
+          "group": "Social Sciences",
+          "name": "Linguistics and Language"
+        },
+        {
+          "group": "Social Sciences",
+          "name": "Education"
+        }
+      ],
+      "metrics": {
+        "citescore2025": 1.3,
+        "sjr2025": 0.352,
+        "snip2025": 1.173,
+        "citescoreTracker2026": 1.1,
+        "citations2022_2025": 187,
+        "documents2022_2025": 142,
+        "currentCitations2026": 145,
+        "currentDocuments2026": 129
+      },
+      "rankings": [
+        {
+          "group": "Arts and Humanities",
+          "category": "Language and Linguistics",
+          "rank": 313,
+          "total": 437,
+          "percentile": 72,
+          "quartile": "Q2",
+          "raw": "Arts and Humanities > Language and Linguistics #313/437 (72%)"
+        },
+        {
+          "group": "Social Sciences",
+          "category": "Linguistics and Language",
+          "rank": 374,
+          "total": 1221,
+          "percentile": 69,
+          "quartile": "Q2",
+          "raw": "Social Sciences > Linguistics and Language #374/1221 (69%)"
+        },
+        {
+          "group": "Social Sciences",
+          "category": "Education",
+          "rank": 1108,
+          "total": 1698,
+          "percentile": 34,
+          "quartile": "Q3",
+          "raw": "Social Sciences > Education #1108/1698 (34%)"
+        }
+      ],
+      "assets": {
+        "website": "https://journals.rudn.ru/russian-language-studies",
+        "screenshotUrl": "https://www.genspark.ai/api/files/s/KkKqsW7i"
+      },
+      "content": {
+        "shortDescriptionRu": "Рецензируемый журнал по русскому языку и методике преподавания русского как иностранного, неродного и родного языка. Публикует исследования по лингвистике, лингводидактике и функционированию русского языка в разных социокультурных контекстах.",
+        "shortDescriptionUz": "Rus tili va rus tilini xorijiy, ona bo‘lmagan hamda ona tili sifatida o‘qitish metodikasiga bag‘ishlangan taqrizdan o‘tuvchi jurnal. Unda lingvistika, lingvodidaktika va rus tilining turli ijtimoiy-madaniy sharoitlardagi qo‘llanilishiga oid tadqiqotlar chop etiladi.",
+        "shortDescriptionEn": "A peer-reviewed journal focused on the Russian language and the teaching of Russian as a foreign, non-native, and native language. It publishes research in linguistics, linguodidactics, and the use of Russian in diverse sociocultural contexts."
+      },
+      "review": {
+        "notes": "verified via official journal site, DOAJ, and OpenAlex",
+        "verificationStatus": "verified",
+        "dataIssues": []
+      },
+      "status": {
+        "isPublished": true
+      }
+    },
+    {
+      "id": "russian-journal-of-linguistics",
+      "slug": "russian-journal-of-linguistics",
+      "sourceType": "journal",
+      "titles": {
+        "original": "Russian Journal of Linguistics",
+        "ru": "Российский журнал лингвистики",
+        "uz": "Rossiya lingvistika jurnali",
+        "en": "Russian Journal of Linguistics",
+        "former": null
+      },
+      "publisher": "RUDN University",
+      "identifiers": {
+        "issn": "2687-0088",
+        "eissn": "2686-8024"
+      },
+      "access": {
+        "label": "Открытый доступ",
+        "isOpenAccess": true
+      },
+      "indexing": {
+        "isScopusIndexed": true,
+        "scopusCoverage": "2018-2026",
+        "isOakRecommended": null
+      },
+      "subjectAreas": [
+        {
+          "group": "Arts and Humanities",
+          "name": "Language and Linguistics"
+        },
+        {
+          "group": "Social Sciences",
+          "name": "Linguistics and Language"
+        }
+      ],
+      "metrics": {
+        "citescore2025": 3.2,
+        "sjr2025": 0.847,
+        "snip2025": 1.879,
+        "citescoreTracker2026": 3.2,
+        "citations2022_2025": 515,
+        "documents2022_2025": 159,
+        "currentCitations2026": 399,
+        "currentDocuments2026": 126
+      },
+      "rankings": [
+        {
+          "group": "Arts and Humanities",
+          "category": "Language and Linguistics",
+          "rank": 128,
+          "total": 437,
+          "percentile": 88,
+          "quartile": "Q1",
+          "raw": "Arts and Humanities > Language and Linguistics #128/437 (88%)"
+        },
+        {
+          "group": "Social Sciences",
+          "category": "Linguistics and Language",
+          "rank": 148,
+          "total": 1221,
+          "percentile": 87,
+          "quartile": "Q1",
+          "raw": "Social Sciences > Linguistics and Language #148/1221 (87%)"
+        }
+      ],
+      "assets": {
+        "website": "https://journals.rudn.ru/linguistics",
+        "screenshotUrl": "https://www.genspark.ai/api/files/s/B9IhxEp8"
+      },
+      "content": {
+        "shortDescriptionRu": "Международный рецензируемый журнал по лингвистике и смежным дисциплинам. Публикует исследования по языку, культуре, когниции и коммуникации, включая социолингвистику, прагматику, межкультурную коммуникацию и переводоведение.",
+        "shortDescriptionUz": "Tilshunoslik va unga yaqin yo‘nalishlarga bag‘ishlangan xalqaro taqrizli jurnal. Unda til, madaniyat, kognitsiya va kommunikatsiya, jumladan sotsiolingvistika, pragmatika, madaniyatlararo muloqot va tarjimashunoslik bo‘yicha tadqiqotlar chop etiladi.",
+        "shortDescriptionEn": "An international peer-reviewed journal in linguistics and related fields. It publishes research on language, culture, cognition, and communication, including sociolinguistics, pragmatics, intercultural communication, and translation studies."
+      },
+      "review": {
+        "notes": "verified via official journal site, DOAJ, and OpenAlex",
+        "verificationStatus": "verified",
+        "dataIssues": []
+      },
+      "status": {
+        "isPublished": true
+      }
+    },
+    {
+      "id": "world-journal-for-pediatric-and-congenital-heart-surgery",
+      "slug": "world-journal-for-pediatric-and-congenital-heart-surgery",
+      "sourceType": "journal",
+      "titles": {
+        "original": "World Journal for Pediatric and Congenital Heart Surgery",
+        "ru": "Всемирный журнал детской и врожденной кардиохирургии",
+        "uz": "Pediatrik va tug‘ma yurak jarrohligi bo‘yicha jahon jurnali",
+        "en": "World Journal for Pediatric and Congenital Heart Surgery",
+        "former": null
+      },
+      "publisher": "SAGE",
+      "identifiers": {
+        "issn": "2150-1351",
+        "eissn": "2150-136X"
+      },
+      "access": {
+        "label": "Подписка / гибридная модель",
+        "isOpenAccess": false
+      },
+      "indexing": {
+        "isScopusIndexed": true,
+        "scopusCoverage": "2010-2026",
+        "isOakRecommended": null
+      },
+      "subjectAreas": [
+        {
+          "group": "Medicine",
+          "name": "Surgery"
+        },
+        {
+          "group": "Medicine",
+          "name": "Pediatrics, Perinatology and Child Health"
+        },
+        {
+          "group": "Medicine",
+          "name": "Cardiology and Cardiovascular Medicine"
+        }
+      ],
+      "metrics": {
+        "citescore2025": 1.7,
+        "sjr2025": 0.373,
+        "snip2025": 0.667,
+        "citescoreTracker2026": 1.4,
+        "citations2022_2025": 883,
+        "documents2022_2025": 505,
+        "currentCitations2026": 622,
+        "currentDocuments2026": 444
+      },
+      "rankings": [
+        {
+          "group": "Medicine",
+          "category": "Surgery",
+          "rank": 318,
+          "total": 597,
+          "percentile": 46,
+          "quartile": "Q3",
+          "raw": "Medicine > Surgery #318/597 (46%)"
+        },
+        {
+          "group": "Medicine",
+          "category": "Pediatrics, Perinatology and Child Health",
+          "rank": 195,
+          "total": 351,
+          "percentile": 44,
+          "quartile": "Q3",
+          "raw": "Medicine > Pediatrics, Perinatology and Child Health #195/351 (44%)"
+        },
+        {
+          "group": "Medicine",
+          "category": "Cardiology and Cardiovascular Medicine",
+          "rank": 274,
+          "total": 409,
+          "percentile": 33,
+          "quartile": "Q3",
+          "raw": "Medicine > Cardiology and Cardiovascular Medicine #274/409 (33%)"
+        }
+      ],
+      "assets": {
+        "website": "https://journals.sagepub.com/home/pch",
+        "screenshotUrl": "https://www.genspark.ai/api/files/s/N6L0mndf"
+      },
+      "content": {
+        "shortDescriptionRu": "Рецензируемый журнал, посвященный развитию и распространению знаний в области детской и врожденной кардиохирургии. Охватывает хирургические, клинические и образовательные аспекты лечения врожденных заболеваний сердца у детей.",
+        "shortDescriptionUz": "Bolalar va tug‘ma yurak jarrohligi sohasidagi bilimlarni rivojlantirish va tarqatishga bag‘ishlangan taqrizli jurnal. U bolalardagi tug‘ma yurak kasalliklarini davolashning jarrohlik, klinik va ta’lim jihatlarini qamrab oladi.",
+        "shortDescriptionEn": "A peer-reviewed journal dedicated to the advancement and dissemination of knowledge in pediatric and congenital heart surgery. It covers surgical, clinical, and educational aspects of care for congenital heart disease in children."
+      },
+      "review": {
+        "notes": "verified via official journal site and OpenAlex",
+        "verificationStatus": "verified",
+        "dataIssues": []
+      },
+      "status": {
+        "isPublished": true
+      }
+    },
+    {
+      "id": "transportation-research-procedia",
+      "slug": "transportation-research-procedia",
+      "sourceType": "conference_proceedings",
+      "titles": {
+        "original": "Transportation Research Procedia",
+        "ru": "Материалы конференций по транспортным исследованиям",
+        "uz": "Transport tadqiqotlari bo‘yicha konferensiya materiallari",
+        "en": "Transportation Research Procedia",
+        "former": null
+      },
+      "publisher": "Elsevier",
+      "identifiers": {
+        "issn": "2352-1457",
+        "eissn": "2352-1465"
+      },
+      "access": {
+        "label": "Открытый доступ",
+        "isOpenAccess": true
+      },
+      "indexing": {
+        "isScopusIndexed": true,
+        "scopusCoverage": "2014-2026",
+        "isOakRecommended": null
+      },
+      "subjectAreas": [
+        {
+          "group": "Social Sciences",
+          "name": "Transportation"
+        }
+      ],
+      "metrics": {
+        "citescore2025": 2.6,
+        "sjr2025": 0.308,
+        "snip2025": 0.512,
+        "citescoreTracker2026": 1.9,
+        "citations2022_2025": 8525,
+        "documents2022_2025": 3307,
+        "currentCitations2026": 5386,
+        "currentDocuments2026": 2890
+      },
+      "rankings": [
+        {
+          "group": "Social Sciences",
+          "category": "Transportation",
+          "rank": 102,
+          "total": 169,
+          "percentile": 39,
+          "quartile": "Q3",
+          "raw": "Social Sciences > Transportation #102/169 (39%)"
+        }
+      ],
+      "assets": {
+        "website": "https://www.sciencedirect.com/journal/transportation-research-procedia",
+        "screenshotUrl": "https://www.genspark.ai/api/files/s/shnWUkda"
+      },
+      "content": {
+        "shortDescriptionRu": "Open access серия, публикующая полные комплекты материалов научных конференций по транспортным исследованиям. Ориентирована на быстрое и широкое распространение материалов конференций в области транспорта и мобильности.",
+        "shortDescriptionUz": "Transport tadqiqotlariga oid ilmiy konferensiyalar materiallarining to‘liq to‘plamlarini chop etuvchi open access nashrlar seriyasi. U transport va mobillik sohasidagi konferensiya ishlarini tez va keng tarqatishga yo‘naltirilgan.",
+        "shortDescriptionEn": "An open access publication series focused entirely on publishing complete sets of conference proceedings in transportation research. It is designed for rapid and wide dissemination of conference outputs in transport and mobility."
+      },
+      "review": {
+        "notes": "verified via official journal page and OpenAlex",
+        "verificationStatus": "verified",
+        "dataIssues": [
+          "sourceType normalized to conference_proceedings for local schema; OpenAlex classifies this source as journal"
+        ]
+      },
+      "status": {
+        "isPublished": true
+      }
+    },
+    {
+      "id": "hepatology-communications",
+      "slug": "hepatology-communications",
+      "sourceType": "journal",
+      "titles": {
+        "original": "Hepatology Communications",
+        "ru": "Сообщения по гепатологии",
+        "uz": "Gepatologiya bo‘yicha xabarlar",
+        "en": "Hepatology Communications",
+        "former": null
+      },
+      "publisher": "Wolters Kluwer Health",
+      "identifiers": {
+        "issn": null,
+        "eissn": "2471-254X"
+      },
+      "access": {
+        "label": "Открытый доступ",
+        "isOpenAccess": true
+      },
+      "indexing": {
+        "isScopusIndexed": true,
+        "scopusCoverage": "2017-2026",
+        "isOakRecommended": null
+      },
+      "subjectAreas": [
+        {
+          "group": "Medicine",
+          "name": "Hepatology"
+        }
+      ],
+      "metrics": {
+        "citescore2025": 11.0,
+        "sjr2025": 2.423,
+        "snip2025": 1.403,
+        "citescoreTracker2026": 9.5,
+        "citations2022_2025": 11030,
+        "documents2022_2025": 1005,
+        "currentCitations2026": 7719,
+        "currentDocuments2026": 813
+      },
+      "rankings": [
+        {
+          "group": "Medicine",
+          "category": "Hepatology",
+          "rank": 13,
+          "total": 88,
+          "percentile": 85,
+          "quartile": "Q1",
+          "raw": "Medicine > Hepatology #13/88 (85%)"
+        }
+      ],
+      "assets": {
+        "website": "https://journals.lww.com/hepcomm",
+        "screenshotUrl": "https://www.genspark.ai/api/files/s/6kO211E5"
+      },
+      "content": {
+        "shortDescriptionRu": "Рецензируемый онлайн-журнал открытого доступа для быстрого распространения высококачественных фундаментальных, трансляционных и клинических исследований по гепатологии.",
+        "shortDescriptionUz": "Gepatologiya bo‘yicha yuqori sifatli fundamental, translyatsion va klinik tadqiqotlarni tez tarqatishga mo‘ljallangan taqrizli, faqat onlayn open access jurnal.",
+        "shortDescriptionEn": "A peer-reviewed, online-only open access journal for the rapid dissemination of high-quality basic, translational, and clinical research in hepatology."
+      },
+      "review": {
+        "notes": "verified via AASLD journal page and OpenAlex",
+        "verificationStatus": "verified",
+        "dataIssues": []
+      },
+      "status": {
+        "isPublished": true
+      }
+    },
+    {
+      "id": "veterinary-sciences",
+      "slug": "veterinary-sciences",
+      "sourceType": "journal",
+      "titles": {
+        "original": "Veterinary Sciences",
+        "ru": "Ветеринарные науки",
+        "uz": "Veterinariya fanlari",
+        "en": "Veterinary Sciences",
+        "former": null
+      },
+      "publisher": "MDPI",
+      "identifiers": {
+        "issn": null,
+        "eissn": "2306-7381"
+      },
+      "access": {
+        "label": "Открытый доступ",
+        "isOpenAccess": true
+      },
+      "indexing": {
+        "isScopusIndexed": true,
+        "scopusCoverage": "2014-2026",
+        "isOakRecommended": null
+      },
+      "subjectAreas": [
+        {
+          "group": "Veterinary",
+          "name": "General Veterinary"
+        }
+      ],
+      "metrics": {
+        "citescore2025": 3.9,
+        "sjr2025": 0.653,
+        "snip2025": 1.072,
+        "citescoreTracker2026": 3.5,
+        "citations2022_2025": 12740,
+        "documents2022_2025": 3284,
+        "currentCitations2026": 11016,
+        "currentDocuments2026": 3184
+      },
+      "rankings": [
+        {
+          "group": "Veterinary",
+          "category": "General Veterinary",
+          "rank": 36,
+          "total": 204,
+          "percentile": 82,
+          "quartile": "Q1",
+          "raw": "Veterinary > General Veterinary #36/204 (82%)"
+        }
+      ],
+      "assets": {
+        "website": "https://www.mdpi.com/journal/vetsci",
+        "screenshotUrl": "https://www.genspark.ai/api/files/s/4ieViG44"
+      },
+      "content": {
+        "shortDescriptionRu": "Международный междисциплинарный open access журнал по ветеринарии. Публикует исследования по профилактике, диагностике и лечению заболеваний, нарушений и травм у животных, а также по широкому кругу направлений ветеринарной медицины.",
+        "shortDescriptionUz": "Veterinariya sohasidagi xalqaro fanlararo open access jurnal. Unda hayvonlardagi kasalliklar, buzilishlar va shikastlanishlarning oldini olish, diagnostikasi va davolashiga oid tadqiqotlar, shuningdek veterinariya tibbiyotining keng yo‘nalishlari bo‘yicha ishlar chop etiladi.",
+        "shortDescriptionEn": "An international interdisciplinary open access journal in veterinary science. It publishes research on the prevention, diagnosis, and treatment of diseases, disorders, and injuries in animals across a broad range of veterinary fields."
+      },
+      "review": {
+        "notes": "verified via official journal site and OpenAlex",
+        "verificationStatus": "verified",
+        "dataIssues": []
+      },
+      "status": {
+        "isPublished": true
+      }
+    },
+    {
+      "id": "neurorehabilitation-and-neural-repair",
+      "slug": "neurorehabilitation-and-neural-repair",
+      "sourceType": "journal",
+      "titles": {
+        "original": "Neurorehabilitation and Neural Repair",
+        "ru": "Нейрореабилитация и восстановление нервной системы",
+        "uz": "Neyroreabilitatsiya va asab tizimini tiklash",
+        "en": "Neurorehabilitation and Neural Repair",
+        "former": "Journal of Neurologic Rehabilitation"
+      },
+      "publisher": "SAGE",
+      "identifiers": {
+        "issn": "1545-9683",
+        "eissn": "1552-6844"
+      },
+      "access": {
+        "label": "Подписка / гибридная модель",
+        "isOpenAccess": false
+      },
+      "indexing": {
+        "isScopusIndexed": true,
+        "scopusCoverage": "1987-2026",
+        "isOakRecommended": null
+      },
+      "subjectAreas": [
+        {
+          "group": "Medicine",
+          "name": "Rehabilitation"
+        },
+        {
+          "group": "Neuroscience",
+          "name": "Neurology"
+        },
+        {
+          "group": "Medicine",
+          "name": "Neurology (clinical)"
+        }
+      ],
+      "metrics": {
+        "citescore2025": 6.9,
+        "sjr2025": 1.284,
+        "snip2025": 1.555,
+        "citescoreTracker2026": 5.9,
+        "citations2022_2025": 2012,
+        "documents2022_2025": 291,
+        "currentCitations2026": 1583,
+        "currentDocuments2026": 267
+      },
+      "rankings": [
+        {
+          "group": "Medicine",
+          "category": "Rehabilitation",
+          "rank": 5,
+          "total": 172,
+          "percentile": 97,
+          "quartile": "Q1",
+          "raw": "Medicine > Rehabilitation #5/172 (97%)"
+        },
+        {
+          "group": "Neuroscience",
+          "category": "Neurology",
+          "rank": 37,
+          "total": 201,
+          "percentile": 81,
+          "quartile": "Q1",
+          "raw": "Neuroscience > Neurology #37/201 (81%)"
+        },
+        {
+          "group": "Medicine",
+          "category": "Neurology (clinical)",
+          "rank": 74,
+          "total": 403,
+          "percentile": 81,
+          "quartile": "Q1",
+          "raw": "Medicine > Neurology (clinical) #74/403 (81%)"
+        }
+      ],
+      "assets": {
+        "website": "https://journals.sagepub.com/home/nnr",
+        "screenshotUrl": "https://www.genspark.ai/api/files/s/Su1nC3yf"
+      },
+      "content": {
+        "shortDescriptionRu": "Ведущий международный рецензируемый журнал, публикующий исследования по функциональному восстановлению после поражений нервной системы и длительной неврологической инвалидности. Охватывает инсульт, рассеянный склероз, ДЦП, болезнь Паркинсона, деменцию, черепно-мозговые и спинальные травмы.",
+        "shortDescriptionUz": "Asab tizimi shikastlanishidan keyingi funksional tiklanish va uzoq muddatli nevrologik nogironlik bo‘yicha tadqiqotlarni chop etuvchi yetakchi xalqaro taqrizli jurnal. U insult, ko‘p skleroz, bolalar serebral falaji, Parkinson kasalligi, demensiya hamda bosh va orqa miya shikastlanishlarini qamrab oladi.",
+        "shortDescriptionEn": "A leading international peer-reviewed journal publishing research on functional recovery from neural injury and long-term neurological disability. It covers stroke, multiple sclerosis, cerebral palsy, Parkinson’s disease, dementia, brain injury, and spinal cord injury."
+      },
+      "review": {
+        "notes": "verified via official journal site, NLM catalog metadata, and OpenAlex",
+        "verificationStatus": "verified",
+        "dataIssues": [
+          "OpenAlex also lists historical ISSN 0888-4390 associated with an earlier title lineage"
+        ]
+      },
+      "status": {
+        "isPublished": true
+      }
+    },
+    {
+      "id": "journal-of-natural-products",
+      "slug": "journal-of-natural-products",
+      "sourceType": "journal",
+      "titles": {
+        "original": "Journal of Natural Products",
+        "ru": "Журнал природных продуктов",
+        "uz": "Tabiiy mahsulotlar jurnali",
+        "en": "Journal of Natural Products",
+        "former": "Lloydia: A Quarterly Journal of Biological Science"
+      },
+      "publisher": "American Chemical Society",
+      "identifiers": {
+        "issn": "0163-3864",
+        "eissn": "1520-6025"
+      },
+      "access": {
+        "label": "Подписка / гибридная модель",
+        "isOpenAccess": false
+      },
+      "indexing": {
+        "isScopusIndexed": true,
+        "scopusCoverage": "1949, 1971, 1973, or 1978-2026",
+        "isOakRecommended": null
+      },
+      "subjectAreas": [
+        {
+          "group": "Medicine",
+          "name": "Complementary and Alternative Medicine"
+        },
+        {
+          "group": "Chemistry",
+          "name": "Organic Chemistry"
+        },
+        {
+          "group": "Pharmacology, Toxicology and Pharmaceutics",
+          "name": "Pharmacology"
+        },
+        {
+          "group": "Pharmacology, Toxicology and Pharmaceutics",
+          "name": "Pharmaceutical Science"
+        },
+        {
+          "group": "Pharmacology, Toxicology and Pharmaceutics",
+          "name": "Drug Discovery"
+        }
+      ],
+      "metrics": {
+        "citescore2025": 6.3,
+        "sjr2025": 0.585,
+        "snip2025": 1.091,
+        "citescoreTracker2026": 5.1,
+        "citations2022_2025": 6912,
+        "documents2022_2025": 1100,
+        "currentCitations2026": 5199,
+        "currentDocuments2026": 1017
+      },
+      "rankings": [
+        {
+          "group": "Medicine",
+          "category": "Complementary and Alternative Medicine",
+          "rank": 17,
+          "total": 115,
+          "percentile": 85,
+          "quartile": "Q1",
+          "raw": "Medicine > Complementary and Alternative Medicine #17/115 (85%)"
+        },
+        {
+          "group": "Chemistry",
+          "category": "Organic Chemistry",
+          "rank": 58,
+          "total": 215,
+          "percentile": 73,
+          "quartile": "Q2",
+          "raw": "Chemistry > Organic Chemistry #58/215 (73%)"
+        },
+        {
+          "group": "Pharmacology, Toxicology and Pharmaceutics",
+          "category": "Pharmacology",
+          "rank": 96,
+          "total": 328,
+          "percentile": 70,
+          "quartile": "Q2",
+          "raw": "Pharmacology, Toxicology and Pharmaceutics > Pharmacology #96/328 (70%)"
+        },
+        {
+          "group": "Pharmacology, Toxicology and Pharmaceutics",
+          "category": "Pharmaceutical Science",
+          "rank": 57,
+          "total": 191,
+          "percentile": 70,
+          "quartile": "Q2",
+          "raw": "Pharmacology, Toxicology and Pharmaceutics > Pharmaceutical Science #57/191 (70%)"
+        },
+        {
+          "group": "Pharmacology, Toxicology and Pharmaceutics",
+          "category": "Drug Discovery",
+          "rank": 57,
+          "total": 161,
+          "percentile": 64,
+          "quartile": "Q2",
+          "raw": "Pharmacology, Toxicology and Pharmaceutics > Drug Discovery #57/161 (64%)"
+        }
+      ],
+      "assets": {
+        "website": "https://pubs.acs.org/journal/jnprdf",
+        "screenshotUrl": "https://www.genspark.ai/api/files/s/v3D5vOCy"
+      },
+      "content": {
+        "shortDescriptionRu": "Международный журнал, публикующий высокоимпактные исследования по химии и биологии низкомолекулярных природных соединений. Охватывает структуру, биоактивность, функции, биосинтез и получение природных продуктов, а также их связи с фармакологией и химической биологией.",
+        "shortDescriptionUz": "Tabiiy kichik molekulali birikmalarning kimyosi va biologiyasiga oid yuqori darajadagi tadqiqotlarni chop etuvchi xalqaro jurnal. U tabiiy mahsulotlarning tuzilishi, biofaolligi, funksiyasi, biosintezi va olinishi, shuningdek ularning farmakologiya hamda kimyoviy biologiya bilan bog‘liqligini qamrab oladi.",
+        "shortDescriptionEn": "An international journal publishing rigorous, high-impact research on the chemistry and biology of natural product small molecules. It covers structure, bioactivity, function, biosynthesis, production, and related work in pharmacology, analytical chemistry, and chemical biology."
+      },
+      "review": {
+        "notes": "verified via official ACS journal pages and OpenAlex",
+        "verificationStatus": "verified",
+        "dataIssues": []
+      },
+      "status": {
+        "isPublished": true
+      }
+    },
+    {
+      "id": "animal-microbiome",
+      "slug": "animal-microbiome",
+      "sourceType": "journal",
+      "titles": {
+        "original": "Animal Microbiome",
+        "ru": "Микробиом животных",
+        "uz": "Hayvonlar mikrobiomi",
+        "en": "Animal Microbiome",
+        "former": null
+      },
+      "publisher": "Springer Nature",
+      "identifiers": {
+        "issn": null,
+        "eissn": "2524-4671"
+      },
+      "access": {
+        "label": "Открытый доступ",
+        "isOpenAccess": true
+      },
+      "indexing": {
+        "isScopusIndexed": true,
+        "scopusCoverage": "2019-2026",
+        "isOakRecommended": null
+      },
+      "subjectAreas": [
+        {
+          "group": "Veterinary",
+          "name": "Veterinary (miscellaneous)"
+        },
+        {
+          "group": "Agricultural and Biological Sciences",
+          "name": "Animal Science and Zoology"
+        },
+        {
+          "group": "Agricultural and Biological Sciences",
+          "name": "Agricultural and Biological Sciences (miscellaneous)"
+        },
+        {
+          "group": "Medicine",
+          "name": "Microbiology (medical)"
+        }
+      ],
+      "metrics": {
+        "citescore2025": 6.9,
+        "sjr2025": 1.16,
+        "snip2025": 1.209,
+        "citescoreTracker2026": 5.2,
+        "citations2022_2025": 2297,
+        "documents2022_2025": 333,
+        "currentCitations2026": 1792,
+        "currentDocuments2026": 347
+      },
+      "rankings": [
+        {
+          "group": "Veterinary",
+          "category": "Veterinary (miscellaneous)",
+          "rank": 2,
+          "total": 44,
+          "percentile": 96,
+          "quartile": "Q1",
+          "raw": "Veterinary > Veterinary (miscellaneous) #2/44 (96%)"
+        },
+        {
+          "group": "Agricultural and Biological Sciences",
+          "category": "Animal Science and Zoology",
+          "rank": 25,
+          "total": 520,
+          "percentile": 95,
+          "quartile": "Q1",
+          "raw": "Agricultural and Biological Sciences > Animal Science and Zoology #25/520 (95%)"
+        },
+        {
+          "group": "Agricultural and Biological Sciences",
+          "category": "Agricultural and Biological Sciences (miscellaneous)",
+          "rank": 26,
+          "total": 253,
+          "percentile": 89,
+          "quartile": "Q1",
+          "raw": "Agricultural and Biological Sciences > Agricultural and Biological Sciences (miscellaneous) #26/253 (89%)"
+        },
+        {
+          "group": "Medicine",
+          "category": "Microbiology (medical)",
+          "rank": 39,
+          "total": 147,
+          "percentile": 73,
+          "quartile": "Q2",
+          "raw": "Medicine > Microbiology (medical) #39/147 (73%)"
+        }
+      ],
+      "assets": {
+        "website": "https://animalmicrobiome.biomedcentral.com/",
+        "screenshotUrl": "https://www.genspark.ai/api/files/s/j8F2tCJI"
+      },
+      "content": {
+        "shortDescriptionRu": "Журнал публикует исследования по микробиому домашних и диких животных с акцентом на функциональное понимание микробных сообществ и их взаимодействия с организмом хозяина.",
+        "shortDescriptionUz": "Jurnal uy va yovvoyi hayvonlar mikrobiomi bo‘yicha tadqiqotlarni, ayniqsa mikrob jamoalari va ularning xo‘jayin organizmi bilan o‘zaro ta’sirini funksional tushuntirishga qaratilgan ishlarni chop etadi.",
+        "shortDescriptionEn": "The journal publishes animal microbiome research relating to domestic and non-domestic animals, with an emphasis on moving beyond diversity measures toward a functional understanding of host-associated microbiomes."
+      },
+      "review": {
+        "notes": "verified via official journal site, DOAJ, and OpenAlex",
+        "verificationStatus": "verified",
+        "dataIssues": []
+      },
+      "status": {
+        "isPublished": true
+      }
+    },
+    {
+      "id": "fetal-and-pediatric-pathology",
+      "slug": "fetal-and-pediatric-pathology",
+      "sourceType": "journal",
+      "titles": {
+        "original": "Fetal and Pediatric Pathology",
+        "ru": "Фетальная и педиатрическая патология",
+        "uz": "Fetal va pediatrik patologiya",
+        "en": "Fetal and Pediatric Pathology",
+        "former": "Pediatric Pathology and Molecular Medicine"
+      },
+      "publisher": "Taylor & Francis",
+      "identifiers": {
+        "issn": "1551-3815",
+        "eissn": "1551-3823"
+      },
+      "access": {
+        "label": "Подписка / гибридная модель",
+        "isOpenAccess": false
+      },
+      "indexing": {
+        "isScopusIndexed": true,
+        "scopusCoverage": "1983-1998, 2000-2001, 2003-2026",
+        "isOakRecommended": null
+      },
+      "subjectAreas": [
+        {
+          "group": "Medicine",
+          "name": "Pediatrics, Perinatology and Child Health"
+        },
+        {
+          "group": "Medicine",
+          "name": "Pathology and Forensic Medicine"
+        }
+      ],
+      "metrics": {
+        "citescore2025": 1.9,
+        "sjr2025": 0.364,
+        "snip2025": 0.5,
+        "citescoreTracker2026": 1.4,
+        "citations2022_2025": 649,
+        "documents2022_2025": 334,
+        "currentCitations2026": 330,
+        "currentDocuments2026": 229
+      },
+      "rankings": [
+        {
+          "group": "Medicine",
+          "category": "Pediatrics, Perinatology and Child Health",
+          "rank": 179,
+          "total": 351,
+          "percentile": 49,
+          "quartile": "Q3",
+          "raw": "Medicine > Pediatrics, Perinatology and Child Health #179/351 (49%)"
+        },
+        {
+          "group": "Medicine",
+          "category": "Pathology and Forensic Medicine",
+          "rank": 130,
+          "total": 209,
+          "percentile": 38,
+          "quartile": "Q3",
+          "raw": "Medicine > Pathology and Forensic Medicine #130/209 (38%)"
+        }
+      ],
+      "assets": {
+        "website": "https://www.tandfonline.com/journals/ipdp20",
+        "screenshotUrl": "https://www.genspark.ai/api/files/s/mDYNjxJh"
+      },
+      "content": {
+        "shortDescriptionRu": "Международный журнал, публикующий исследования и обзоры по заболеваниям эмбриона, новорождённых, детей и подростков. Особое внимание уделяется молекулярным и патогенетическим аспектам пренатальной, перинатальной и детской патологии.",
+        "shortDescriptionUz": "Embriyon, yangi tug‘ilgan chaqaloqlar, bolalar va o‘smirlardagi kasalliklarga oid tadqiqotlar va sharhlarni chop etuvchi xalqaro jurnal. Unda prenatal, perinatal va bolalar patologiyasining molekulyar hamda patogenetik jihatlariga alohida e’tibor qaratiladi.",
+        "shortDescriptionEn": "An international journal publishing research and reviews on diseases of the embryo, newborns, children, and adolescents. It emphasizes molecular and pathogenetic aspects of prenatal, perinatal, and pediatric pathology."
+      },
+      "review": {
+        "notes": "verified via official journal page and OpenAlex",
+        "verificationStatus": "verified",
+        "dataIssues": []
+      },
+      "status": {
+        "isPublished": true
+      }
+    },
+    {
+      "id": "3-biotech",
+      "slug": "3-biotech",
+      "sourceType": "journal",
+      "titles": {
+        "original": "3 Biotech",
+        "ru": "3 Biotech",
+        "uz": "3 Biotech",
+        "en": "3 Biotech",
+        "former": null
+      },
+      "publisher": "Springer Nature",
+      "identifiers": {
+        "issn": "2190-572X",
+        "eissn": "2190-5738"
+      },
+      "access": {
+        "label": "Подписка / гибридная модель",
+        "isOpenAccess": false
+      },
+      "indexing": {
+        "isScopusIndexed": true,
+        "scopusCoverage": "2011-2026",
+        "isOakRecommended": null
+      },
+      "subjectAreas": [
+        {
+          "group": "Agricultural and Biological Sciences",
+          "name": "Agricultural and Biological Sciences (miscellaneous)"
+        },
+        {
+          "group": "Environmental Science",
+          "name": "Environmental Science (miscellaneous)"
+        },
+        {
+          "group": "Biochemistry, Genetics and Molecular Biology",
+          "name": "Biotechnology"
+        }
+      ],
+      "metrics": {
+        "citescore2025": 5.7,
+        "sjr2025": 0.658,
+        "snip2025": 0.838,
+        "citescoreTracker2026": 4.8,
+        "citations2022_2025": 8682,
+        "documents2022_2025": 1523,
+        "currentCitations2026": 7105,
+        "currentDocuments2026": 1469
+      },
+      "rankings": [
+        {
+          "group": "Agricultural and Biological Sciences",
+          "category": "Agricultural and Biological Sciences (miscellaneous)",
+          "rank": 36,
+          "total": 253,
+          "percentile": 85,
+          "quartile": "Q1",
+          "raw": "Agricultural and Biological Sciences > Agricultural and Biological Sciences (miscellaneous) #36/253 (85%)"
+        },
+        {
+          "group": "Environmental Science",
+          "category": "Environmental Science (miscellaneous)",
+          "rank": 92,
+          "total": 307,
+          "percentile": 70,
+          "quartile": "Q2",
+          "raw": "Environmental Science > Environmental Science (miscellaneous) #92/307 (70%)"
+        },
+        {
+          "group": "Biochemistry, Genetics and Molecular Biology",
+          "category": "Biotechnology",
+          "rank": 132,
+          "total": 325,
+          "percentile": 59,
+          "quartile": "Q2",
+          "raw": "Biochemistry, Genetics and Molecular Biology > Biotechnology #132/325 (59%)"
+        }
+      ],
+      "assets": {
+        "website": "https://link.springer.com/journal/13205",
+        "screenshotUrl": "https://www.genspark.ai/api/files/s/PiGGOl8V"
+      },
+      "content": {
+        "shortDescriptionRu": "Междисциплинарный журнал по биотехнологии и смежным направлениям, публикующий исследования на стыке биологических, сельскохозяйственных и экологических наук.",
+        "shortDescriptionUz": "Biotexnologiya va unga yaqin yo‘nalishlarga bag‘ishlangan fanlararo jurnal bo‘lib, biologik, qishloq xo‘jaligi va ekologik fanlar kesishmasidagi tadqiqotlarni chop etadi.",
+        "shortDescriptionEn": "An interdisciplinary journal in biotechnology and related fields, publishing research at the interface of biological, agricultural, and environmental sciences."
+      },
+      "review": {
+        "notes": "verified via Springer journal page and OpenAlex",
+        "verificationStatus": "verified",
+        "dataIssues": []
+      },
+      "status": {
+        "isPublished": true
+      }
+    },
+    {
+      "id": "journal-of-shipping-and-trade",
+      "slug": "journal-of-shipping-and-trade",
+      "sourceType": "journal",
+      "titles": {
+        "original": "Journal of Shipping and Trade",
+        "ru": "Журнал судоходства и торговли",
+        "uz": "Kema qatnovi va savdo jurnali",
+        "en": "Journal of Shipping and Trade",
+        "former": null
+      },
+      "publisher": "Springer Nature",
+      "identifiers": {
+        "issn": null,
+        "eissn": "2364-4575"
+      },
+      "access": {
+        "label": "Открытый доступ",
+        "isOpenAccess": true
+      },
+      "indexing": {
+        "isScopusIndexed": true,
+        "scopusCoverage": "2023-2026",
+        "isOakRecommended": null
+      },
+      "subjectAreas": [
+        {
+          "group": "Economics, Econometrics and Finance",
+          "name": "General Economics, Econometrics and Finance"
+        },
+        {
+          "group": "Business, Management and Accounting",
+          "name": "General Business, Management and Accounting"
+        },
+        {
+          "group": "Social Sciences",
+          "name": "Transportation"
+        }
+      ],
+      "metrics": {
+        "citescore2025": 4.6,
+        "sjr2025": 0.606,
+        "snip2025": 1.733,
+        "citescoreTracker2026": 5.4,
+        "citations2022_2025": 407,
+        "documents2022_2025": 88,
+        "currentCitations2026": 604,
+        "currentDocuments2026": 112
+      },
+      "rankings": [
+        {
+          "group": "Economics, Econometrics and Finance",
+          "category": "General Economics, Econometrics and Finance",
+          "rank": 54,
+          "total": 289,
+          "percentile": 81,
+          "quartile": "Q1",
+          "raw": "Economics, Econometrics and Finance > General Economics, Econometrics and Finance #54/289 (81%)"
+        },
+        {
+          "group": "Business, Management and Accounting",
+          "category": "General Business, Management and Accounting",
+          "rank": 90,
+          "total": 235,
+          "percentile": 61,
+          "quartile": "Q2",
+          "raw": "Business, Management and Accounting > General Business, Management and Accounting #90/235 (61%)"
+        }
+      ],
+      "assets": {
+        "website": "https://jshippingandtrade.springeropen.com/",
+        "screenshotUrl": "https://www.genspark.ai/api/files/s/CNY4nhPO"
+      },
+      "content": {
+        "shortDescriptionRu": "Журнал открытого доступа, посвящённый практике и исследованиям в области судоходства, глобальной торговли, портового менеджмента и управления транспортом.",
+        "shortDescriptionUz": "Open access jurnal bo‘lib, unda kema qatnovi, global savdo, port boshqaruvi va transport menejmenti sohasidagi amaliyot hamda tadqiqotlar yoritiladi.",
+        "shortDescriptionEn": "An open access journal focused on research and practice in shipping, global trade, port management, and transportation management."
+      },
+      "review": {
+        "notes": "verified via DOAJ, Springer journal page, and OpenAlex",
+        "verificationStatus": "verified",
+        "dataIssues": [
+          "Transportation ranking was cropped in the source screenshot and was not included"
+        ]
+      },
+      "status": {
+        "isPublished": true
+      }
+    },
+    {
+      "id": "journal-of-obesity-and-metabolic-syndrome",
+      "slug": "journal-of-obesity-and-metabolic-syndrome",
+      "sourceType": "journal",
+      "titles": {
+        "original": "Journal of Obesity and Metabolic Syndrome",
+        "ru": "Журнал ожирения и метаболического синдрома",
+        "uz": "Semizlik va metabolik sindrom jurnali",
+        "en": "Journal of Obesity and Metabolic Syndrome",
+        "former": null
+      },
+      "publisher": "Korean Society for the Study of Obesity",
+      "identifiers": {
+        "issn": "2508-6235",
+        "eissn": "2508-7576"
+      },
+      "access": {
+        "label": "Открытый доступ",
+        "isOpenAccess": true
+      },
+      "indexing": {
+        "isScopusIndexed": true,
+        "scopusCoverage": "2017-2026",
+        "isOakRecommended": null
+      },
+      "subjectAreas": [
+        {
+          "group": "Medicine",
+          "name": "Endocrinology, Diabetes and Metabolism"
+        }
+      ],
+      "metrics": {
+        "citescore2025": 14.4,
+        "sjr2025": 3.116,
+        "snip2025": 2.744,
+        "citescoreTracker2026": 14.5,
+        "citations2022_2025": 1812,
+        "documents2022_2025": 126,
+        "currentCitations2026": 1799,
+        "currentDocuments2026": 124
+      },
+      "rankings": [
+        {
+          "group": "Medicine",
+          "category": "Endocrinology, Diabetes and Metabolism",
+          "rank": 17,
+          "total": 250,
+          "percentile": 93,
+          "quartile": "Q1",
+          "raw": "Medicine > Endocrinology, Diabetes and Metabolism #17/250 (93%)"
+        }
+      ],
+      "assets": {
+        "website": "https://www.jomes.org/",
+        "screenshotUrl": "https://www.genspark.ai/api/files/s/MH5AHjkV"
+      },
+      "content": {
+        "shortDescriptionRu": "Рецензируемый журнал, посвящённый исследованиям по ожирению, метаболическому синдрому и связанным нарушениям обмена веществ. Публикует клинические и научные работы, направленные на улучшение профилактики, диагностики и лечения этих состояний.",
+        "shortDescriptionUz": "Semizlik, metabolik sindrom va ular bilan bog‘liq modda almashinuvi buzilishlariga bag‘ishlangan taqrizli jurnal. Unda ushbu holatlarning oldini olish, diagnostikasi va davolashini yaxshilashga qaratilgan klinik hamda ilmiy ishlar chop etiladi.",
+        "shortDescriptionEn": "A peer-reviewed journal devoted to obesity, metabolic syndrome, and related metabolic disorders. It publishes clinical and scientific work aimed at improving prevention, diagnosis, and treatment in this field."
+      },
+      "review": {
+        "notes": "verified via official journal site and official metadata pages; OpenAlex exact source match not available in retrieved results",
+        "verificationStatus": "verified",
+        "dataIssues": []
+      },
+      "status": {
+        "isPublished": true
+      }
+    },
+    {
+      "id": "journal-of-clinical-microbiology",
+      "slug": "journal-of-clinical-microbiology",
+      "sourceType": "journal",
+      "titles": {
+        "original": "Journal of Clinical Microbiology",
+        "ru": "Журнал клинической микробиологии",
+        "uz": "Klinik mikrobiologiya jurnali",
+        "en": "Journal of Clinical Microbiology",
+        "former": null
+      },
+      "publisher": "American Society for Microbiology",
+      "identifiers": {
+        "issn": "0095-1137",
+        "eissn": "1098-660X"
+      },
+      "access": {
+        "label": "Открытый доступ",
+        "isOpenAccess": true
+      },
+      "indexing": {
+        "isScopusIndexed": true,
+        "scopusCoverage": "1975-2026",
+        "isOakRecommended": null
+      },
+      "subjectAreas": [
+        {
+          "group": "Medicine",
+          "name": "Microbiology (medical)"
+        }
+      ],
+      "metrics": {
+        "citescore2025": 8.1,
+        "sjr2025": 1.641,
+        "snip2025": 1.981,
+        "citescoreTracker2026": 6.9,
+        "citations2022_2025": 6702,
+        "documents2022_2025": 831,
+        "currentCitations2026": 5242,
+        "currentDocuments2026": 758
+      },
+      "rankings": [
+        {
+          "group": "Medicine",
+          "category": "Microbiology (medical)",
+          "rank": 28,
+          "total": 147,
+          "percentile": 81,
+          "quartile": "Q1",
+          "raw": "Medicine > Microbiology (medical) #28/147 (81%)"
+        }
+      ],
+      "assets": {
+        "website": "https://journals.asm.org/journal/jcm",
+        "screenshotUrl": "https://www.genspark.ai/api/files/s/42n8Njj4"
+      },
+      "content": {
+        "shortDescriptionRu": "Журнал публикует актуальные исследования по лабораторной диагностике и ведению инфекций у человека и животных. Основной фокус — клиническая микробиология, диагностика патогенов и вопросы антимикробной устойчивости.",
+        "shortDescriptionUz": "Jurnal odam va hayvonlardagi infeksiyalarni laboratoriya diagnostikasi va boshqaruviga oid dolzarb tadqiqotlarni chop etadi. Asosiy yo‘nalishlari klinik mikrobiologiya, patogenlar diagnostikasi va antimikrob qarshilik masalalaridir.",
+        "shortDescriptionEn": "The journal publishes current research related to the laboratory diagnosis and management of human and animal infections. Its main focus is clinical microbiology, pathogen detection, and antimicrobial resistance."
+      },
+      "review": {
+        "notes": "verified via official ASM journal page and OpenAlex",
+        "verificationStatus": "verified",
+        "dataIssues": [
+          "OpenAlex also lists additional ISSN 1070-633X in source metadata; main print/electronic ISSN pair kept from dataset"
+        ]
+      },
+      "status": {
+        "isPublished": true
+      }
+    },
+    {
+      "id": "applied-linguistics",
+      "slug": "applied-linguistics",
+      "sourceType": "journal",
+      "titles": {
+        "original": "Applied Linguistics",
+        "ru": "Прикладная лингвистика",
+        "uz": "Amaliy tilshunoslik",
+        "en": "Applied Linguistics",
+        "former": null
+      },
+      "publisher": "Oxford University Press",
+      "identifiers": {
+        "issn": "0142-6001",
+        "eissn": "1477-450X"
+      },
+      "access": {
+        "label": "Подписка / гибридная модель",
+        "isOpenAccess": false
+      },
+      "indexing": {
+        "isScopusIndexed": true,
+        "scopusCoverage": "1980-2026",
+        "isOakRecommended": null
+      },
+      "subjectAreas": [
+        {
+          "group": "Arts and Humanities",
+          "name": "Language and Linguistics"
+        },
+        {
+          "group": "Social Sciences",
+          "name": "Linguistics and Language"
+        },
+        {
+          "group": "Social Sciences",
+          "name": "Communication"
+        }
+      ],
+      "metrics": {
+        "citescore2025": 10.3,
+        "sjr2025": 2.207,
+        "snip2025": 3.01,
+        "citescoreTracker2026": 10.2,
+        "citations2022_2025": 2047,
+        "documents2022_2025": 199,
+        "currentCitations2026": 1650,
+        "currentDocuments2026": 161
+      },
+      "rankings": [
+        {
+          "group": "Arts and Humanities",
+          "category": "Language and Linguistics",
+          "rank": 18,
+          "total": 137,
+          "percentile": 98,
+          "quartile": "Q1",
+          "raw": "Arts and Humanities > Language and Linguistics #18/137 (98%)"
+        },
+        {
+          "group": "Social Sciences",
+          "category": "Linguistics and Language",
+          "rank": 20,
+          "total": 1221,
+          "percentile": 98,
+          "quartile": "Q1",
+          "raw": "Social Sciences > Linguistics and Language #20/1221 (98%)"
+        },
+        {
+          "group": "Social Sciences",
+          "category": "Communication",
+          "rank": 20,
+          "total": 541,
+          "percentile": 96,
+          "quartile": "Q1",
+          "raw": "Social Sciences > Communication #20/541 (96%)"
+        }
+      ],
+      "assets": {
+        "website": "https://academic.oup.com/applij",
+        "screenshotUrl": "https://www.genspark.ai/api/files/s/2DLCnSQs"
+      },
+      "content": {
+        "shortDescriptionRu": "Журнал публикует исследования языка, связанные с реальными практическими проблемами. Он ориентирован на междисциплинарные и теоретически обоснованные подходы в прикладной лингвистике.",
+        "shortDescriptionUz": "Jurnal tilga oid real amaliy muammolar bilan bog‘liq tadqiqotlarni chop etadi. U amaliy tilshunoslikda fanlararo va nazariy jihatdan asoslangan yondashuvlarga yo‘naltirilgan.",
+        "shortDescriptionEn": "The journal publishes research on language with relevance to real-world issues. It promotes principled, interdisciplinary approaches in applied linguistics."
+      },
+      "review": {
+        "notes": "verified via Oxford Academic journal page and OpenAlex",
+        "verificationStatus": "verified",
+        "dataIssues": []
+      },
+      "status": {
+        "isPublished": true
+      }
+    },
+    {
+      "id": "european-journal-of-transport-and-infrastructure-research",
+      "slug": "european-journal-of-transport-and-infrastructure-research",
+      "sourceType": "journal",
+      "titles": {
+        "original": "European Journal of Transport and Infrastructure Research",
+        "ru": "Европейский журнал исследований транспорта и инфраструктуры",
+        "uz": "Transport va infratuzilma tadqiqotlari bo‘yicha Yevropa jurnali",
+        "en": "European Journal of Transport and Infrastructure Research",
+        "former": null
+      },
+      "publisher": "TU Delft",
+      "identifiers": {
+        "issn": "1567-7133",
+        "eissn": "1567-7141"
+      },
+      "access": {
+        "label": "Открытый доступ",
+        "isOpenAccess": true
+      },
+      "indexing": {
+        "isScopusIndexed": true,
+        "scopusCoverage": "2008-2026",
+        "isOakRecommended": null
+      },
+      "subjectAreas": [
+        {
+          "group": "Social Sciences",
+          "name": "Urban Studies"
+        },
+        {
+          "group": "Social Sciences",
+          "name": "Geography, Planning and Development"
+        },
+        {
+          "group": "Social Sciences",
+          "name": "Transportation"
+        }
+      ],
+      "metrics": {
+        "citescore2025": 3.1,
+        "sjr2025": 0.372,
+        "snip2025": 0.661,
+        "citescoreTracker2026": 2.5,
+        "citations2022_2025": 183,
+        "documents2022_2025": 59,
+        "currentCitations2026": 103,
+        "currentDocuments2026": 42
+      },
+      "rankings": [
+        {
+          "group": "Social Sciences",
+          "category": "Urban Studies",
+          "rank": 94,
+          "total": 295,
+          "percentile": 68,
+          "quartile": "Q2",
+          "raw": "Social Sciences > Urban Studies #94/295 (68%)"
+        },
+        {
+          "group": "Social Sciences",
+          "category": "Geography, Planning and Development",
+          "rank": 337,
+          "total": 876,
+          "percentile": 61,
+          "quartile": "Q2",
+          "raw": "Social Sciences > Geography, Planning and Development #337/876 (61%)"
+        },
+        {
+          "group": "Social Sciences",
+          "category": "Transportation",
+          "rank": 96,
+          "total": 169,
+          "percentile": 43,
+          "quartile": "Q3",
+          "raw": "Social Sciences > Transportation #96/169 (43%)"
+        }
+      ],
+      "assets": {
+        "website": "https://journals.open.tudelft.nl/ejtir",
+        "screenshotUrl": "https://www.genspark.ai/api/files/s/K49geS4J"
+      },
+      "content": {
+        "shortDescriptionRu": "Рецензируемый open access журнал по транспорту и инфраструктуре, специализирующийся на поведенческих, организационных, экономических и политических аспектах планирования и функционирования транспортных систем.",
+        "shortDescriptionUz": "Transport va infratuzilma bo‘yicha taqrizli open access jurnal bo‘lib, transport tizimlarini rejalashtirish va boshqarishning xulq-atvor, tashkiliy, iqtisodiy va siyosiy jihatlariga ixtisoslashgan.",
+        "shortDescriptionEn": "A peer-reviewed open access journal specializing in the behavioral, organizational, economic, and public-policy dimensions of planning and operating transport systems and infrastructure."
+      },
+      "review": {
+        "notes": "verified via official journal site, DOAJ, and OpenAlex",
+        "verificationStatus": "verified",
+        "dataIssues": []
+      },
+      "status": {
+        "isPublished": true
+      }
+    },
+    {
+      "id": "transport-problems",
+      "slug": "transport-problems",
+      "sourceType": "journal",
+      "titles": {
+        "original": "Transport Problems",
+        "ru": "Транспортные проблемы",
+        "uz": "Transport muammolari",
+        "en": "Transport Problems",
+        "former": null
+      },
+      "publisher": "Silesian University of Technology",
+      "identifiers": {
+        "issn": "1896-0596",
+        "eissn": "2300-861X"
+      },
+      "access": {
+        "label": "Открытый доступ",
+        "isOpenAccess": true
+      },
+      "indexing": {
+        "isScopusIndexed": true,
+        "scopusCoverage": "2012-2026",
+        "isOakRecommended": null
+      },
+      "subjectAreas": [
+        {
+          "group": "Engineering",
+          "name": "Automotive Engineering"
+        },
+        {
+          "group": "Engineering",
+          "name": "Mechanical Engineering"
+        },
+        {
+          "group": "Social Sciences",
+          "name": "Transportation"
+        }
+      ],
+      "metrics": {
+        "citescore2025": 1.3,
+        "sjr2025": 0.217,
+        "snip2025": 0.338,
+        "citescoreTracker2026": 1.2,
+        "citations2022_2025": 371,
+        "documents2022_2025": 286,
+        "currentCitations2026": 292,
+        "currentDocuments2026": 250
+      },
+      "rankings": [
+        {
+          "group": "Engineering",
+          "category": "Automotive Engineering",
+          "rank": 101,
+          "total": 143,
+          "percentile": 29,
+          "quartile": "Q3",
+          "raw": "Engineering > Automotive Engineering #101/143 (29%)"
+        },
+        {
+          "group": "Engineering",
+          "category": "Mechanical Engineering",
+          "rank": 534,
+          "total": 740,
+          "percentile": 27,
+          "quartile": "Q3",
+          "raw": "Engineering > Mechanical Engineering #534/740 (27%)"
+        },
+        {
+          "group": "Social Sciences",
+          "category": "Transportation",
+          "rank": 136,
+          "total": 169,
+          "percentile": 19,
+          "quartile": "Q4",
+          "raw": "Social Sciences > Transportation #136/169 (19%)"
+        }
+      ],
+      "assets": {
+        "website": "http://transportproblems.polsl.pl/default.aspx",
+        "screenshotUrl": "https://www.genspark.ai/api/files/s/RVtB2j0x"
+      },
+      "content": {
+        "shortDescriptionRu": "Междисциплинарный журнал по транспортным исследованиям, логистике, экономике и технологиям транспорта. Публикует работы, связанные с функционированием и развитием транспортных систем.",
+        "shortDescriptionUz": "Transport tadqiqotlari, logistika, iqtisodiyot va transport texnologiyalariga bag‘ishlangan fanlararo jurnal. U transport tizimlarining faoliyati va rivojlanishiga oid ishlarni chop etadi.",
+        "shortDescriptionEn": "An interdisciplinary journal covering transport research, logistics, transport economics, and transport technologies, with a focus on the functioning and development of transport systems."
+      },
+      "review": {
+        "notes": "verified via DOAJ and OpenAlex",
+        "verificationStatus": "verified",
+        "dataIssues": []
+      },
+      "status": {
+        "isPublished": true
+      }
+    },
+    {
+      "id": "research-result-theoretical-and-applied-linguistics",
+      "slug": "research-result-theoretical-and-applied-linguistics",
+      "sourceType": "journal",
+      "titles": {
+        "original": "Research Result. Theoretical and Applied Linguistics",
+        "ru": "Научный результат. Теоретическая и прикладная лингвистика",
+        "uz": "Ilmiy natija. Nazariy va amaliy tilshunoslik",
+        "en": "Research Result. Theoretical and Applied Linguistics",
+        "former": null
+      },
+      "publisher": "Belgorod State National Research University",
+      "identifiers": {
+        "issn": null,
+        "eissn": "2313-8912"
+      },
+      "access": {
+        "label": "Открытый доступ",
+        "isOpenAccess": true
+      },
+      "indexing": {
+        "isScopusIndexed": true,
+        "scopusCoverage": "2019-2026",
+        "isOakRecommended": null
+      },
+      "subjectAreas": [
+        {
+          "group": "Arts and Humanities",
+          "name": "Literature and Literary Theory"
+        },
+        {
+          "group": "Arts and Humanities",
+          "name": "Language and Linguistics"
+        },
+        {
+          "group": "Social Sciences",
+          "name": "Linguistics and Language"
+        }
+      ],
+      "metrics": {
+        "citescore2025": 1.3,
+        "sjr2025": 0.187,
+        "snip2025": 0.434,
+        "citescoreTracker2026": 1.5,
+        "citations2022_2025": 159,
+        "documents2022_2025": 123,
+        "currentCitations2026": 145,
+        "currentDocuments2026": 99
+      },
+      "rankings": [
+        {
+          "group": "Arts and Humanities",
+          "category": "Literature and Literary Theory",
+          "rank": 57,
+          "total": 1186,
+          "percentile": 95,
+          "quartile": "Q1",
+          "raw": "Arts and Humanities > Literature and Literary Theory #57/1186 (95%)"
+        },
+        {
+          "group": "Arts and Humanities",
+          "category": "Language and Linguistics",
+          "rank": 315,
+          "total": 1137,
+          "percentile": 72,
+          "quartile": "Q2",
+          "raw": "Arts and Humanities > Language and Linguistics #315/1137 (72%)"
+        },
+        {
+          "group": "Social Sciences",
+          "category": "Linguistics and Language",
+          "rank": 378,
+          "total": 1221,
+          "percentile": 69,
+          "quartile": "Q2",
+          "raw": "Social Sciences > Linguistics and Language #378/1221 (69%)"
+        }
+      ],
+      "assets": {
+        "website": "http://rrlinguistics.ru/",
+        "screenshotUrl": "https://www.genspark.ai/api/files/s/IHyzlEzf"
+      },
+      "content": {
+        "shortDescriptionRu": "Международный рецензируемый журнал открытого доступа, посвящённый теоретической и прикладной лингвистике. Публикует исследования по языку, дискурсу, переводу, грамматике и другим направлениям современного языкознания.",
+        "shortDescriptionUz": "Nazariy va amaliy tilshunoslikka bag‘ishlangan xalqaro taqrizli open access jurnal. Unda til, diskurs, tarjima, grammatika va zamonaviy tilshunoslikning boshqa yo‘nalishlari bo‘yicha tadqiqotlar chop etiladi.",
+        "shortDescriptionEn": "An international peer-reviewed open access journal devoted to theoretical and applied linguistics. It publishes research on language, discourse, translation, grammar, and other areas of contemporary linguistic inquiry."
+      },
+      "review": {
+        "notes": "verified via official university journal site and OpenAlex",
+        "verificationStatus": "verified",
+        "dataIssues": [
+          "ISSN not confirmed from retrieved official page content; eISSN retained from source data and OpenAlex"
+        ]
+      },
+      "status": {
+        "isPublished": true
+      }
+    },
+    {
+      "id": "hernia",
+      "slug": "hernia",
+      "sourceType": "journal",
+      "titles": {
+        "original": "Hernia",
+        "ru": "Грыжа",
+        "uz": "Churra",
+        "en": "Hernia",
+        "former": null
+      },
+      "publisher": "Springer Nature",
+      "identifiers": {
+        "issn": "1265-4906",
+        "eissn": "1248-9204"
+      },
+      "access": {
+        "label": "Подписка / гибридная модель",
+        "isOpenAccess": false
+      },
+      "indexing": {
+        "isScopusIndexed": true,
+        "scopusCoverage": "1999-2026",
+        "isOakRecommended": null
+      },
+      "subjectAreas": [
+        {
+          "group": "Medicine",
+          "name": "Surgery"
+        }
+      ],
+      "metrics": {
+        "citescore2025": 4.6,
+        "sjr2025": 0.998,
+        "snip2025": 1.511,
+        "citescoreTracker2026": 3.6,
+        "citations2022_2025": 3753,
+        "documents2022_2025": 809,
+        "currentCitations2026": 3206,
+        "currentDocuments2026": 898
+      },
+      "rankings": [
+        {
+          "group": "Medicine",
+          "category": "Surgery",
+          "rank": 91,
+          "total": 597,
+          "percentile": 84,
+          "quartile": "Q1",
+          "raw": "Medicine > Surgery #91/597 (84%)"
+        }
+      ],
+      "assets": {
+        "website": "https://link.springer.com/journal/10029",
+        "screenshotUrl": "https://www.genspark.ai/api/files/s/pqPH0iYt"
+      },
+      "content": {
+        "shortDescriptionRu": "Журнал посвящён клиническим исследованиям и фундаментальным работам по паховым, внутренним, абдоминальным, диафрагмальным и промежностным грыжам, а также хирургии брюшной стенки.",
+        "shortDescriptionUz": "Jurnal chov, ichki, qorin devori, diafragma va oraliq churralari hamda qorin devori jarrohligiga oid klinik va fundamental tadqiqotlarga bag‘ishlangan.",
+        "shortDescriptionEn": "The journal promotes clinical studies and basic research related to groin hernias, internal hernias, the abdominal wall, the diaphragm, and the perineum."
+      },
+      "review": {
+        "notes": "verified via Springer journal page and OpenAlex",
+        "verificationStatus": "verified",
+        "dataIssues": []
+      },
+      "status": {
+        "isPublished": true
+      }
+    },
+    {
+      "id": "journal-of-music-teacher-education",
+      "slug": "journal-of-music-teacher-education",
+      "sourceType": "journal",
+      "titles": {
+        "original": "Journal of Music Teacher Education",
+        "ru": "Журнал музыкально-педагогического образования",
+        "uz": "Musiqa o‘qituvchisi ta’limi jurnali",
+        "en": "Journal of Music Teacher Education",
+        "former": null
+      },
+      "publisher": "SAGE",
+      "identifiers": {
+        "issn": "1057-0837",
+        "eissn": "1945-0079"
+      },
+      "access": {
+        "label": "Подписка / гибридная модель",
+        "isOpenAccess": false
+      },
+      "indexing": {
+        "isScopusIndexed": true,
+        "scopusCoverage": "1991-2026",
+        "isOakRecommended": null
+      },
+      "subjectAreas": [
+        {
+          "group": "Arts and Humanities",
+          "name": "Music"
+        },
+        {
+          "group": "Social Sciences",
+          "name": "Education"
+        }
+      ],
+      "metrics": {
+        "citescore2025": 2.0,
+        "sjr2025": 0.548,
+        "snip2025": 1.173,
+        "citescoreTracker2026": 2.0,
+        "citations2022_2025": 127,
+        "documents2022_2025": 64,
+        "currentCitations2026": 104,
+        "currentDocuments2026": 53
+      },
+      "rankings": [
+        {
+          "group": "Arts and Humanities",
+          "category": "Music",
+          "rank": 22,
+          "total": 96,
+          "percentile": 89,
+          "quartile": "Q1",
+          "raw": "Arts and Humanities > Music #22/96 (89%)"
+        },
+        {
+          "group": "Social Sciences",
+          "category": "Education",
+          "rank": 886,
+          "total": 1698,
+          "percentile": 47,
+          "quartile": "Q3",
+          "raw": "Social Sciences > Education #886/1698 (47%)"
+        }
+      ],
+      "assets": {
+        "website": "https://journals.sagepub.com/home/jmt",
+        "screenshotUrl": "https://www.genspark.ai/api/files/s/fAsKLT9r"
+      },
+      "content": {
+        "shortDescriptionRu": "Рецензируемый онлайн-журнал, посвящённый вопросам подготовки учителей музыки. Публикует исследовательские и обзорные материалы по музыкальному образованию и педагогической практике.",
+        "shortDescriptionUz": "Musiqa o‘qituvchilarini tayyorlash masalalariga bag‘ishlangan taqrizli onlayn jurnal. Unda musiqiy ta’lim va pedagogik amaliyot bo‘yicha tadqiqot hamda sharh materiallari chop etiladi.",
+        "shortDescriptionEn": "A peer-reviewed online journal focused on issues in music teacher education. It publishes research and professional scholarship related to music education and teaching practice."
+      },
+      "review": {
+        "notes": "verified via official journal homepage snippet and OpenAlex",
+        "verificationStatus": "verified",
+        "dataIssues": []
+      },
+      "status": {
+        "isPublished": true
+      }
+    },
+    {
+      "id": "international-journal-of-educational-technology-in-higher-education",
+      "slug": "international-journal-of-educational-technology-in-higher-education",
+      "sourceType": "journal",
+      "titles": {
+        "original": "International Journal of Educational Technology in Higher Education",
+        "ru": "Международный журнал образовательных технологий в высшем образовании",
+        "uz": "Oliy ta’limda ta’lim texnologiyalari bo‘yicha xalqaro jurnal",
+        "en": "International Journal of Educational Technology in Higher Education",
+        "former": "RUSC Universities and Knowledge Society Journal"
+      },
+      "publisher": "Springer Nature",
+      "identifiers": {
+        "issn": null,
+        "eissn": "2365-9440"
+      },
+      "access": {
+        "label": "Открытый доступ",
+        "isOpenAccess": true
+      },
+      "indexing": {
+        "isScopusIndexed": true,
+        "scopusCoverage": "2016-2026",
+        "isOakRecommended": null
+      },
+      "subjectAreas": [
+        {
+          "group": "Social Sciences",
+          "name": "Education"
+        },
+        {
+          "group": "Computer Science",
+          "name": "Computer Science Applications"
+        }
+      ],
+      "metrics": {
+        "citescore2025": 48.4,
+        "sjr2025": 7.947,
+        "snip2025": 9.221,
+        "citescoreTracker2026": 64.6,
+        "citations2022_2025": 12387,
+        "documents2022_2025": 256,
+        "currentCitations2026": 14655,
+        "currentDocuments2026": 227
+      },
+      "rankings": [
+        {
+          "group": "Social Sciences",
+          "category": "Education",
+          "rank": 1,
+          "total": 1698,
+          "percentile": 99,
+          "quartile": "Q1",
+          "raw": "Social Sciences > Education #1/1698 (99%)"
+        },
+        {
+          "group": "Computer Science",
+          "category": "Computer Science Applications",
+          "rank": 3,
+          "total": 1022,
+          "percentile": 99,
+          "quartile": "Q1",
+          "raw": "Computer Science > Computer Science Applications #3/1022 (99%)"
+        }
+      ],
+      "assets": {
+        "website": "https://link.springer.com/journal/41239",
+        "screenshotUrl": "https://www.genspark.ai/api/files/s/CjybfB0y"
+      },
+      "content": {
+        "shortDescriptionRu": "Рецензируемый журнал, публикующий актуальные исследования по образовательным технологиям в высшем образовании. Особое внимание уделяется инновационным подходам к использованию технологий для улучшения обучения, дизайна курсов и образовательных результатов.",
+        "shortDescriptionUz": "Oliy ta’limdagi ta’lim texnologiyalariga oid dolzarb tadqiqotlarni chop etuvchi taqrizli jurnal. Unda ta’lim natijalari, kurs dizayni va o‘qitishni yaxshilash uchun texnologiyalardan innovatsion foydalanishga alohida e’tibor qaratiladi.",
+        "shortDescriptionEn": "A peer-reviewed journal featuring current research on educational technology in higher education. It emphasizes innovative approaches to using technology to enhance learning, course design, and educational outcomes."
+      },
+      "review": {
+        "notes": "verified via Springer Nature journal page and OpenAlex",
+        "verificationStatus": "verified",
+        "dataIssues": [
+          "journal page also lists Universitat Oberta de Catalunya as co-publisher"
+        ]
+      },
+      "status": {
+        "isPublished": true
+      }
+    },
+    {
+      "id": "social-psychology-of-education",
+      "slug": "social-psychology-of-education",
+      "sourceType": "journal",
+      "titles": {
+        "original": "Social Psychology of Education",
+        "ru": "Социальная психология образования",
+        "uz": "Ta’limning ijtimoiy psixologiyasi",
+        "en": "Social Psychology of Education",
+        "former": null
+      },
+      "publisher": "Springer Nature",
+      "identifiers": {
+        "issn": "1381-2890",
+        "eissn": "1573-1928"
+      },
+      "access": {
+        "label": "Подписка / гибридная модель",
+        "isOpenAccess": false
+      },
+      "indexing": {
+        "isScopusIndexed": true,
+        "scopusCoverage": "1996-2026",
+        "isOakRecommended": null
+      },
+      "subjectAreas": [
+        {
+          "group": "Social Sciences",
+          "name": "Sociology and Political Science"
+        },
+        {
+          "group": "Social Sciences",
+          "name": "Education"
+        },
+        {
+          "group": "Psychology",
+          "name": "Developmental and Educational Psychology"
+        },
+        {
+          "group": "Psychology",
+          "name": "Social Psychology"
+        }
+      ],
+      "metrics": {
+        "citescore2025": 5.1,
+        "sjr2025": 1.256,
+        "snip2025": 1.729,
+        "citescoreTracker2026": 4.9,
+        "citations2022_2025": 2377,
+        "documents2022_2025": 467,
+        "currentCitations2026": 2374,
+        "currentDocuments2026": 483
+      },
+      "rankings": [
+        {
+          "group": "Social Sciences",
+          "category": "Sociology and Political Science",
+          "rank": 210,
+          "total": 1530,
+          "percentile": 86,
+          "quartile": "Q1",
+          "raw": "Social Sciences > Sociology and Political Science #210/1530 (86%)"
+        },
+        {
+          "group": "Social Sciences",
+          "category": "Education",
+          "rank": 324,
+          "total": 1698,
+          "percentile": 80,
+          "quartile": "Q1",
+          "raw": "Social Sciences > Education #324/1698 (80%)"
+        },
+        {
+          "group": "Psychology",
+          "category": "Developmental and Educational Psychology",
+          "rank": 93,
+          "total": 380,
+          "percentile": 75,
+          "quartile": "Q1",
+          "raw": "Psychology > Developmental and Educational Psychology #93/380 (75%)"
+        }
+      ],
+      "assets": {
+        "website": "https://link.springer.com/journal/11218",
+        "screenshotUrl": "https://www.genspark.ai/api/files/s/wQ3DRza5"
+      },
+      "content": {
+        "shortDescriptionRu": "Междисциплинарный журнал, направленный на понимание человеческого поведения в образовании. Объединяет подходы психологии, социологии и педагогики для изучения социальных и психологических процессов в образовательной среде.",
+        "shortDescriptionUz": "Ta’limdagi inson xulq-atvorini tushunishga qaratilgan fanlararo jurnal. U ta’lim muhitidagi ijtimoiy va psixologik jarayonlarni o‘rganish uchun psixologiya, sotsiologiya va pedagogika yondashuvlarini birlashtiradi.",
+        "shortDescriptionEn": "A multidisciplinary journal aimed at understanding human behavior in education. It draws on psychology, sociology, and education to examine social and psychological processes in educational settings."
+      },
+      "review": {
+        "notes": "verified via Springer journal page and OpenAlex",
+        "verificationStatus": "verified",
+        "dataIssues": [
+          "fourth ranking in the source screenshot was cropped and not included"
+        ]
+      },
+      "status": {
+        "isPublished": true
+      }
+    },
+    {
+      "id": "asia-pacific-journal-of-tourism-research",
+      "slug": "asia-pacific-journal-of-tourism-research",
+      "sourceType": "journal",
+      "titles": {
+        "original": "Asia Pacific Journal of Tourism Research",
+        "ru": "Азиатско-Тихоокеанский журнал исследований туризма",
+        "uz": "Osiyo-Tinch okeani turizm tadqiqotlari jurnali",
+        "en": "Asia Pacific Journal of Tourism Research",
+        "former": null
+      },
+      "publisher": "Taylor & Francis",
+      "identifiers": {
+        "issn": "1094-1665",
+        "eissn": "1741-6507"
+      },
+      "access": {
+        "label": "Подписка / гибридная модель",
+        "isOpenAccess": false
+      },
+      "indexing": {
+        "isScopusIndexed": true,
+        "scopusCoverage": "2003-2026",
+        "isOakRecommended": null
+      },
+      "subjectAreas": [
+        {
+          "group": "Social Sciences",
+          "name": "Geography, Planning and Development"
+        },
+        {
+          "group": "Business, Management and Accounting",
+          "name": "Tourism, Leisure and Hospitality Management"
+        }
+      ],
+      "metrics": {
+        "citescore2025": 6.1,
+        "sjr2025": 0.912,
+        "snip2025": 1.097,
+        "citescoreTracker2026": 6.5,
+        "citations2022_2025": 2071,
+        "documents2022_2025": 339,
+        "currentCitations2026": 2062,
+        "currentDocuments2026": 318
+      },
+      "rankings": [
+        {
+          "group": "Social Sciences",
+          "category": "Geography, Planning and Development",
+          "rank": 142,
+          "total": 876,
+          "percentile": 83,
+          "quartile": "Q1",
+          "raw": "Social Sciences > Geography, Planning and Development #142/876 (83%)"
+        },
+        {
+          "group": "Business, Management and Accounting",
+          "category": "Tourism, Leisure and Hospitality Management",
+          "rank": 55,
+          "total": 156,
+          "percentile": 65,
+          "quartile": "Q2",
+          "raw": "Business, Management and Accounting > Tourism, Leisure and Hospitality Management #55/156 (65%)"
+        }
+      ],
+      "assets": {
+        "website": "https://www.tandfonline.com/journals/rapt20",
+        "screenshotUrl": "https://www.genspark.ai/api/files/s/WxsRwNRI"
+      },
+      "content": {
+        "shortDescriptionRu": "Международный журнал, посвящённый исследованиям туризма в Азиатско-Тихоокеанском регионе и за его пределами. Публикует работы по развитию туризма, туристскому поведению, планированию и управлению в сфере гостеприимства.",
+        "shortDescriptionUz": "Osiyo-Tinch okeani mintaqasi va undan tashqaridagi turizm tadqiqotlariga bag‘ishlangan xalqaro jurnal. Unda turizm rivoji, sayyohlar xulqi, rejalashtirish va mehmondo‘stlik boshqaruviga oid ishlar chop etiladi.",
+        "shortDescriptionEn": "An international journal devoted to tourism research in the Asia-Pacific region and beyond. It publishes work on tourism development, tourist behavior, planning, and hospitality management."
+      },
+      "review": {
+        "notes": "verified via OpenAlex and official journal listings",
+        "verificationStatus": "verified",
+        "dataIssues": []
+      },
+      "status": {
+        "isPublished": true
+      }
+    },
+    {
+      "id": "regional-studies",
+      "slug": "regional-studies",
+      "sourceType": "journal",
+      "titles": {
+        "original": "Regional Studies",
+        "ru": "Региональные исследования",
+        "uz": "Hududiy tadqiqotlar",
+        "en": "Regional Studies",
+        "former": null
+      },
+      "publisher": "Taylor & Francis",
+      "identifiers": {
+        "issn": "0034-3404",
+        "eissn": "1360-0591"
+      },
+      "access": {
+        "label": "Подписка / гибридная модель",
+        "isOpenAccess": false
+      },
+      "indexing": {
+        "isScopusIndexed": true,
+        "scopusCoverage": "1967-2026",
+        "isOakRecommended": null
+      },
+      "subjectAreas": [
+        {
+          "group": "Social Sciences",
+          "name": "General Social Sciences"
+        },
+        {
+          "group": "Environmental Science",
+          "name": "General Environmental Science"
+        }
+      ],
+      "metrics": {
+        "citescore2025": 10.0,
+        "sjr2025": 1.883,
+        "snip2025": 2.152,
+        "citescoreTracker2026": 9.5,
+        "citations2022_2025": 6695,
+        "documents2022_2025": 669,
+        "currentCitations2026": 5543,
+        "currentDocuments2026": 582
+      },
+      "rankings": [
+        {
+          "group": "Social Sciences",
+          "category": "General Social Sciences",
+          "rank": 8,
+          "total": 286,
+          "percentile": 97,
+          "quartile": "Q1",
+          "raw": "Social Sciences > General Social Sciences #8/286 (97%)"
+        },
+        {
+          "group": "Environmental Science",
+          "category": "General Environmental Science",
+          "rank": 28,
+          "total": 249,
+          "percentile": 88,
+          "quartile": "Q1",
+          "raw": "Environmental Science > General Environmental Science #28/249 (88%)"
+        }
+      ],
+      "assets": {
+        "website": "https://www.tandfonline.com/journals/cres20",
+        "screenshotUrl": "https://www.genspark.ai/api/files/s/Uodxf9O5"
+      },
+      "content": {
+        "shortDescriptionRu": "Ведущий международный журнал по теории, эмпирическому анализу и политическим дебатам в области региональных исследований. Публикует исследования экономических, социальных, политических и экологических аспектов городских и региональных изменений.",
+        "shortDescriptionUz": "Hududiy tadqiqotlar sohasida nazariya, empirik tahlil va siyosiy munozaralarga bag‘ishlangan yetakchi xalqaro jurnal. Unda shahar va hududiy o‘zgarishlarning iqtisodiy, ijtimoiy, siyosiy hamda ekologik jihatlariga oid tadqiqotlar chop etiladi.",
+        "shortDescriptionEn": "A leading international journal covering theory development, empirical analysis, and policy debate in regional studies. It publishes research on the economic, social, political, and environmental dimensions of urban and regional change."
+      },
+      "review": {
+        "notes": "verified via official journal page and OpenAlex",
+        "verificationStatus": "verified",
+        "dataIssues": []
+      },
+      "status": {
+        "isPublished": true
+      }
+    },
+    {
+      "id": "contact-dermatitis",
+      "slug": "contact-dermatitis",
+      "sourceType": "journal",
+      "titles": {
+        "original": "Contact Dermatitis",
+        "ru": "Контактный дерматит",
+        "uz": "Kontakt dermatiti",
+        "en": "Contact Dermatitis",
+        "former": null
+      },
+      "publisher": "John Wiley & Sons",
+      "identifiers": {
+        "issn": "0105-1873",
+        "eissn": "1600-0536"
+      },
+      "access": {
+        "label": "Подписка / гибридная модель",
+        "isOpenAccess": false
+      },
+      "indexing": {
+        "isScopusIndexed": true,
+        "scopusCoverage": "1975-2026",
+        "isOakRecommended": null
+      },
+      "subjectAreas": [
+        {
+          "group": "Medicine",
+          "name": "Dermatology"
+        },
+        {
+          "group": "Medicine",
+          "name": "Immunology and Allergy"
+        }
+      ],
+      "metrics": {
+        "citescore2025": 4.4,
+        "sjr2025": 0.779,
+        "snip2025": 1.335,
+        "citescoreTracker2026": 3.2,
+        "citations2022_2025": 2907,
+        "documents2022_2025": 656,
+        "currentCitations2026": 1955,
+        "currentDocuments2026": 608
+      },
+      "rankings": [
+        {
+          "group": "Medicine",
+          "category": "Dermatology",
+          "rank": 36,
+          "total": 152,
+          "percentile": 76,
+          "quartile": "Q1",
+          "raw": "Medicine > Dermatology #36/152 (76%)"
+        },
+        {
+          "group": "Medicine",
+          "category": "Immunology and Allergy",
+          "rank": 127,
+          "total": 234,
+          "percentile": 45,
+          "quartile": "Q3",
+          "raw": "Medicine > Immunology and Allergy #127/234 (45%)"
+        }
+      ],
+      "assets": {
+        "website": "https://www.wiley.com/journals/Contact+Dermatitis-p-b16000536",
+        "screenshotUrl": "https://www.genspark.ai/api/files/s/f25dhZxi"
+      },
+      "content": {
+        "shortDescriptionRu": "Дерматологический журнал, ориентированный прежде всего на клиницистов и посвящённый аллергическим и раздражающим формам контактного дерматита, профессиональному и потребительскому дерматиту.",
+        "shortDescriptionUz": "Asosan klinitsistlarga mo‘ljallangan dermatologiya jurnali bo‘lib, allergik va irritant kontakt dermatiti, kasbiy hamda iste’molchi dermatitiga bag‘ishlangan.",
+        "shortDescriptionEn": "A dermatology journal primarily for clinicians, focusing on allergic and irritant contact dermatitis, occupational dermatitis, and consumer dermatitis."
+      },
+      "review": {
+        "notes": "verified via official Wiley journal page and OpenAlex",
+        "verificationStatus": "verified",
+        "dataIssues": []
+      },
+      "status": {
+        "isPublished": true
+      }
+    },
+    {
+      "id": "journal-of-family-psychology",
+      "slug": "journal-of-family-psychology",
+      "sourceType": "journal",
+      "titles": {
+        "original": "Journal of Family Psychology",
+        "ru": "Журнал семейной психологии",
+        "uz": "Oila psixologiyasi jurnali",
+        "en": "Journal of Family Psychology",
+        "former": null
+      },
+      "publisher": "American Psychological Association",
+      "identifiers": {
+        "issn": "0893-3200",
+        "eissn": "1939-1293"
+      },
+      "access": {
+        "label": "Подписка / гибридная модель",
+        "isOpenAccess": false
+      },
+      "indexing": {
+        "isScopusIndexed": true,
+        "scopusCoverage": "1990-2026",
+        "isOakRecommended": null
+      },
+      "subjectAreas": [
+        {
+          "group": "Psychology",
+          "name": "General Psychology"
+        }
+      ],
+      "metrics": {
+        "citescore2025": 4.4,
+        "sjr2025": 0.999,
+        "snip2025": 1.163,
+        "citescoreTracker2026": 3.3,
+        "citations2022_2025": 1968,
+        "documents2022_2025": 448,
+        "currentCitations2026": 1075,
+        "currentDocuments2026": 329
+      },
+      "rankings": [
+        {
+          "group": "Psychology",
+          "category": "General Psychology",
+          "rank": 72,
+          "total": 220,
+          "percentile": 67,
+          "quartile": "Q2",
+          "raw": "Psychology > General Psychology #72/220 (67%)"
+        }
+      ],
+      "assets": {
+        "website": "https://www.apa.org/pubs/journals/fam",
+        "screenshotUrl": "https://www.genspark.ai/api/files/s/mPAhcqkK"
+      },
+      "content": {
+        "shortDescriptionRu": "Ведущий журнал по семейным исследованиям, рассматривающий семейные отношения с системной, developmental и культурной точек зрения. Публикует работы о партнёрских, родительских и семейных отношениях, а также о социальных вызовах, с которыми сталкиваются семьи.",
+        "shortDescriptionUz": "Oilaviy tadqiqotlar bo‘yicha yetakchi jurnal bo‘lib, oilaviy munosabatlarni tizimli, rivojlanish va madaniy nuqtayi nazardan ko‘rib chiqadi. Unda juftlik, ota-ona va oilaviy munosabatlar hamda oilalar duch keladigan ijtimoiy muammolar haqidagi ishlar chop etiladi.",
+        "shortDescriptionEn": "A leading family research journal examining family relationships from systems, developmental, and cultural perspectives. It publishes work on couple, parent, and family relationships and the societal challenges families face."
+      },
+      "review": {
+        "notes": "verified via official APA journal page and OpenAlex",
+        "verificationStatus": "verified",
+        "dataIssues": []
+      },
+      "status": {
+        "isPublished": true
+      }
+    },
+    {
+      "id": "assessment-and-evaluation-in-higher-education",
+      "slug": "assessment-and-evaluation-in-higher-education",
+      "sourceType": "journal",
+      "titles": {
+        "original": "Assessment and Evaluation in Higher Education",
+        "ru": "Оценивание и оценка в высшем образовании",
+        "uz": "Oliy ta’limda baholash va evaluatsiya",
+        "en": "Assessment and Evaluation in Higher Education",
+        "former": "Assessment in Higher Education"
+      },
+      "publisher": "Taylor & Francis",
+      "identifiers": {
+        "issn": "0260-2938",
+        "eissn": "1469-297X"
+      },
+      "access": {
+        "label": "Подписка / гибридная модель",
+        "isOpenAccess": false
+      },
+      "indexing": {
+        "isScopusIndexed": true,
+        "scopusCoverage": "1981-2026",
+        "isOakRecommended": null
+      },
+      "subjectAreas": [
+        {
+          "group": "Social Sciences",
+          "name": "Education"
+        }
+      ],
+      "metrics": {
+        "citescore2025": 14.1,
+        "sjr2025": 2.796,
+        "snip2025": 3.064,
+        "citescoreTracker2026": 13.2,
+        "citations2022_2025": 5215,
+        "documents2022_2025": 371,
+        "currentCitations2026": 4154,
+        "currentDocuments2026": 315
+      },
+      "rankings": [
+        {
+          "group": "Social Sciences",
+          "category": "Education",
+          "rank": 31,
+          "total": 1698,
+          "percentile": 98,
+          "quartile": "Q1",
+          "raw": "Social Sciences > Education #31/1698 (98%)"
+        }
+      ],
+      "assets": {
+        "website": "https://www.tandfonline.com/journals/caeh20",
+        "screenshotUrl": "https://www.genspark.ai/api/files/s/r6OoV1dO"
+      },
+      "content": {
+        "shortDescriptionRu": "Международный рецензируемый журнал, посвящённый всем аспектам оценивания и оценки в высшем образовании. Его цель — углублять понимание того, как практики оценки влияют на обучение студентов и качество образования.",
+        "shortDescriptionUz": "Oliy ta’limdagi baholash va evaluatsiyaning barcha jihatlariga bag‘ishlangan xalqaro taqrizli jurnal. Uning maqsadi baholash amaliyotlarining talabalar ta’limi va ta’lim sifatiga ta’sirini chuqurroq anglashga yordam berishdir.",
+        "shortDescriptionEn": "An international peer-reviewed journal devoted to all aspects of assessment and evaluation in higher education. Its purpose is to advance understanding of how assessment practices contribute to student learning and educational quality."
+      },
+      "review": {
+        "notes": "verified via official Taylor & Francis journal pages and OpenAlex",
+        "verificationStatus": "verified",
+        "dataIssues": []
+      },
+      "status": {
+        "isPublished": true
+      }
+    },
+    {
+      "id": "agrobiological-records",
+      "slug": "agrobiological-records",
+      "sourceType": "journal",
+      "titles": {
+        "original": "Agrobiological Records",
+        "ru": "Агробиологические записи",
+        "uz": "Agrobiologik qaydlar",
+        "en": "Agrobiological Records",
+        "former": null
+      },
+      "publisher": "Unique Scientific Publishers",
+      "identifiers": {
+        "issn": "2708-7182",
+        "eissn": "2708-7190"
+      },
+      "access": {
+        "label": "Не определено",
+        "isOpenAccess": false
+      },
+      "indexing": {
+        "isScopusIndexed": true,
+        "scopusCoverage": "2023-2026",
+        "isOakRecommended": null
+      },
+      "subjectAreas": [
+        {
+          "group": "Agricultural and Biological Sciences",
+          "name": "Animal Science and Zoology"
+        },
+        {
+          "group": "Agricultural and Biological Sciences",
+          "name": "Agricultural and Biological Sciences (miscellaneous)"
+        },
+        {
+          "group": "Agricultural and Biological Sciences",
+          "name": "Plant Science"
+        },
+        {
+          "group": "Agricultural and Biological Sciences",
+          "name": "Agronomy and Crop Science"
+        }
+      ],
+      "metrics": {
+        "citescore2025": 4.4,
+        "sjr2025": 0.495,
+        "snip2025": 0.867,
+        "citescoreTracker2026": 5.8,
+        "citations2022_2025": 658,
+        "documents2022_2025": 151,
+        "currentCitations2026": 1036,
+        "currentDocuments2026": 179
+      },
+      "rankings": [
+        {
+          "group": "Agricultural and Biological Sciences",
+          "category": "Animal Science and Zoology",
+          "rank": 75,
+          "total": 520,
+          "percentile": 85,
+          "quartile": "Q1",
+          "raw": "Agricultural and Biological Sciences > Animal Science and Zoology #75/520 (85%)"
+        },
+        {
+          "group": "Agricultural and Biological Sciences",
+          "category": "Agricultural and Biological Sciences (miscellaneous)",
+          "rank": 61,
+          "total": 253,
+          "percentile": 76,
+          "quartile": "Q1",
+          "raw": "Agricultural and Biological Sciences > Agricultural and Biological Sciences (miscellaneous) #61/253 (76%)"
+        },
+        {
+          "group": "Agricultural and Biological Sciences",
+          "category": "Plant Science",
+          "rank": 153,
+          "total": 541,
+          "percentile": 71,
+          "quartile": "Q2",
+          "raw": "Agricultural and Biological Sciences > Plant Science #153/541 (71%)"
+        }
+      ],
+      "assets": {
+        "website": "https://agrobiologicalrecords.com/",
+        "screenshotUrl": "https://www.genspark.ai/api/files/s/IRintypB"
+      },
+      "content": {
+        "shortDescriptionRu": "Ежеквартальный журнал, публикующий оригинальные исследования, обзоры, клинические статьи и краткие сообщения в области сельского хозяйства, ветеринарии, зоологии и смежных агробиологических дисциплин.",
+        "shortDescriptionUz": "Qishloq xo‘jaligi, veterinariya, hayvonotshunoslik va ularga yaqin agrobiologik yo‘nalishlar bo‘yicha original tadqiqotlar, sharhlar, klinik maqolalar va qisqa xabarlarni chop etuvchi choraklik jurnal.",
+        "shortDescriptionEn": "A quarterly journal publishing original research papers, reviews, clinical articles, case reports, and short communications in agriculture, veterinary science, animal science, and allied agrobiological disciplines."
+      },
+      "review": {
+        "notes": "verified via official journal site and OpenAlex",
+        "verificationStatus": "verified",
+        "dataIssues": [
+          "open access status was not independently confirmed from the retrieved official metadata",
+          "fourth ranking for Agronomy and Crop Science was cropped in the source screenshot and not included"
+        ]
+      },
+      "status": {
+        "isPublished": true
+      }
+    },
+    {
+      "id": "journal-of-language-and-education",
+      "slug": "journal-of-language-and-education",
+      "sourceType": "journal",
+      "titles": {
+        "original": "Journal of Language and Education",
+        "ru": "Журнал языка и образования",
+        "uz": "Til va ta’lim jurnali",
+        "en": "Journal of Language and Education",
+        "former": null
+      },
+      "publisher": "HSE University",
+      "identifiers": {
+        "issn": null,
+        "eissn": "2411-7390"
+      },
+      "access": {
+        "label": "Открытый доступ",
+        "isOpenAccess": true
+      },
+      "indexing": {
+        "isScopusIndexed": true,
+        "scopusCoverage": "2018-2026",
+        "isOakRecommended": null
+      },
+      "subjectAreas": [
+        {
+          "group": "Arts and Humanities",
+          "name": "Language and Linguistics"
+        },
+        {
+          "group": "Social Sciences",
+          "name": "Linguistics and Language"
+        },
+        {
+          "group": "Social Sciences",
+          "name": "Education"
+        }
+      ],
+      "metrics": {
+        "citescore2025": 3.1,
+        "sjr2025": 0.412,
+        "snip2025": 0.758,
+        "citescoreTracker2026": 3.5,
+        "citations2022_2025": 569,
+        "documents2022_2025": 186,
+        "currentCitations2026": 483,
+        "currentDocuments2026": 140
+      },
+      "rankings": [
+        {
+          "group": "Arts and Humanities",
+          "category": "Language and Linguistics",
+          "rank": 149,
+          "total": 1137,
+          "percentile": 86,
+          "quartile": "Q1",
+          "raw": "Arts and Humanities > Language and Linguistics #149/1137 (86%)"
+        },
+        {
+          "group": "Social Sciences",
+          "category": "Linguistics and Language",
+          "rank": 170,
+          "total": 1221,
+          "percentile": 86,
+          "quartile": "Q1",
+          "raw": "Social Sciences > Linguistics and Language #170/1221 (86%)"
+        },
+        {
+          "group": "Social Sciences",
+          "category": "Education",
+          "rank": 620,
+          "total": 1698,
+          "percentile": 63,
+          "quartile": "Q2",
+          "raw": "Social Sciences > Education #620/1698 (63%)"
+        }
+      ],
+      "assets": {
+        "website": "https://jle.hse.ru/",
+        "screenshotUrl": "https://www.genspark.ai/api/files/s/8Hd19xgQ"
+      },
+      "content": {
+        "shortDescriptionRu": "Высококачественный международный журнал открытого доступа, посвящённый языку и образованию. Публикует эмпирические и теоретические исследования по академическому письму, многоязычию, языковой политике, высшему образованию и современным образовательным практикам.",
+        "shortDescriptionUz": "Til va ta’limga bag‘ishlangan yuqori sifatli xalqaro open access jurnal. Unda akademik yozuv, ko‘ptillilik, til siyosati, oliy ta’lim va zamonaviy ta’lim amaliyotlariga oid empirik hamda nazariy tadqiqotlar chop etiladi.",
+        "shortDescriptionEn": "A high-quality international open access journal devoted to language and education. It publishes empirical and theoretical research on academic writing, multilingualism, language-related scholarly communication, higher education, and contemporary educational practices."
+      },
+      "review": {
+        "notes": "verified via official HSE journal site and OpenAlex",
+        "verificationStatus": "verified",
+        "dataIssues": []
+      },
+      "status": {
+        "isPublished": true
+      }
+    },
+    {
+      "id": "journal-of-antimicrobial-chemotherapy",
+      "slug": "journal-of-antimicrobial-chemotherapy",
+      "sourceType": "journal",
+      "titles": {
+        "original": "Journal of Antimicrobial Chemotherapy",
+        "ru": "Журнал антимикробной химиотерапии",
+        "uz": "Antimikrob kimyoterapiya jurnali",
+        "en": "Journal of Antimicrobial Chemotherapy",
+        "former": null
+      },
+      "publisher": "Oxford University Press",
+      "identifiers": {
+        "issn": "0305-7453",
+        "eissn": "1460-2091"
+      },
+      "access": {
+        "label": "Подписка / гибридная модель",
+        "isOpenAccess": false
+      },
+      "indexing": {
+        "isScopusIndexed": true,
+        "scopusCoverage": "1975-2026",
+        "isOakRecommended": null
+      },
+      "subjectAreas": [
+        {
+          "group": "Medicine",
+          "name": "Infectious Diseases"
+        },
+        {
+          "group": "Medicine",
+          "name": "Pharmacology (medical)"
+        },
+        {
+          "group": "Pharmacology, Toxicology and Pharmaceutics",
+          "name": "Pharmacology"
+        },
+        {
+          "group": "Medicine",
+          "name": "Microbiology (medical)"
+        }
+      ],
+      "metrics": {
+        "citescore2025": 6.6,
+        "sjr2025": 1.258,
+        "snip2025": 1.219,
+        "citescoreTracker2026": 5.5,
+        "citations2022_2025": 11334,
+        "documents2022_2025": 1713,
+        "currentCitations2026": 8559,
+        "currentDocuments2026": 1561
+      },
+      "rankings": [
+        {
+          "group": "Medicine",
+          "category": "Infectious Diseases",
+          "rank": 69,
+          "total": 361,
+          "percentile": 81,
+          "quartile": "Q1",
+          "raw": "Medicine > Infectious Diseases #69/361 (81%)"
+        },
+        {
+          "group": "Medicine",
+          "category": "Pharmacology (medical)",
+          "rank": 59,
+          "total": 278,
+          "percentile": 78,
+          "quartile": "Q1",
+          "raw": "Medicine > Pharmacology (medical) #59/278 (78%)"
+        },
+        {
+          "group": "Pharmacology, Toxicology and Pharmaceutics",
+          "category": "Pharmacology",
+          "rank": 87,
+          "total": 328,
+          "percentile": 73,
+          "quartile": "Q2",
+          "raw": "Pharmacology, Toxicology and Pharmaceutics > Pharmacology #87/328 (73%)"
+        }
+      ],
+      "assets": {
+        "website": "https://academic.oup.com/jac",
+        "screenshotUrl": "https://www.genspark.ai/api/files/s/0WgSgjh2"
+      },
+      "content": {
+        "shortDescriptionRu": "Рецензируемый медицинский журнал, публикующий исследования, которые расширяют знания и продвигают науку и практику антимикробной химиотерапии.",
+        "shortDescriptionUz": "Antimikrob kimyoterapiya ilm-fani va amaliyotini rivojlantiruvchi hamda bu sohadagi bilimlarni kengaytiruvchi tadqiqotlarni chop etuvchi taqrizli tibbiy jurnal.",
+        "shortDescriptionEn": "A peer-reviewed medical journal that publishes articles advancing knowledge and the science and application of antimicrobial chemotherapy."
+      },
+      "review": {
+        "notes": "verified via Oxford Academic journal page, official guidelines snippet, and OpenAlex",
+        "verificationStatus": "verified",
+        "dataIssues": [
+          "fourth ranking for Medicine > Microbiology (medical) was cropped in the source screenshot and not included"
+        ]
+      },
+      "status": {
+        "isPublished": true
+      }
+    },
+    {
+      "id": "studies-in-higher-education",
+      "slug": "studies-in-higher-education",
+      "sourceType": "journal",
+      "titles": {
+        "original": "Studies in Higher Education",
+        "ru": "Исследования в высшем образовании",
+        "uz": "Oliy ta’lim tadqiqotlari",
+        "en": "Studies in Higher Education",
+        "former": null
+      },
+      "publisher": "Taylor & Francis",
+      "identifiers": {
+        "issn": "0307-5079",
+        "eissn": "1470-174X"
+      },
+      "access": {
+        "label": "Подписка / гибридная модель",
+        "isOpenAccess": false
+      },
+      "indexing": {
+        "isScopusIndexed": true,
+        "scopusCoverage": "1976-2026",
+        "isOakRecommended": null
+      },
+      "subjectAreas": [
+        {
+          "group": "Social Sciences",
+          "name": "Education"
+        }
+      ],
+      "metrics": {
+        "citescore2025": 11.4,
+        "sjr2025": 1.99,
+        "snip2025": 2.839,
+        "citescoreTracker2026": 10.1,
+        "citations2022_2025": 7338,
+        "documents2022_2025": 645,
+        "currentCitations2026": 5666,
+        "currentDocuments2026": 561
+      },
+      "rankings": [
+        {
+          "group": "Social Sciences",
+          "category": "Education",
+          "rank": 55,
+          "total": 1698,
+          "percentile": 96,
+          "quartile": "Q1",
+          "raw": "Social Sciences > Education #55/1698 (96%)"
+        }
+      ],
+      "assets": {
+        "website": "https://www.tandfonline.com/journals/cshe20",
+        "screenshotUrl": "https://www.genspark.ai/api/files/s/ZEP3pWzC"
+      },
+      "content": {
+        "shortDescriptionRu": "Ведущий международный журнал, публикующий исследовательские статьи по проблемам высшего образования. Охватывает вопросы управления, преподавания, обучения и развития систем высшего образования.",
+        "shortDescriptionUz": "Oliy ta’lim masalalariga oid tadqiqot maqolalarini chop etuvchi yetakchi xalqaro jurnal. U boshqaruv, o‘qitish, o‘rganish va oliy ta’lim tizimlari rivojiga doir mavzularni qamrab oladi.",
+        "shortDescriptionEn": "A leading international journal publishing research-based articles on higher education issues. It covers teaching, learning, management, and the development of higher education systems."
+      },
+      "review": {
+        "notes": "verified via official Taylor & Francis journal page and OpenAlex",
+        "verificationStatus": "verified",
+        "dataIssues": []
+      },
+      "status": {
+        "isPublished": true
+      }
+    },
+    {
+      "id": "russian-journal-of-economics",
+      "slug": "russian-journal-of-economics",
+      "sourceType": "journal",
+      "titles": {
+        "original": "Russian Journal of Economics",
+        "ru": "Российский журнал экономики",
+        "uz": "Rossiya iqtisodiyot jurnali",
+        "en": "Russian Journal of Economics",
+        "former": null
+      },
+      "publisher": "Non-profit partnership 'Voprosy Ekonomiki'",
+      "identifiers": {
+        "issn": "2618-7213",
+        "eissn": "2405-4739"
+      },
+      "access": {
+        "label": "Открытый доступ",
+        "isOpenAccess": true
+      },
+      "indexing": {
+        "isScopusIndexed": true,
+        "scopusCoverage": "2015-2026",
+        "isOakRecommended": null
+      },
+      "subjectAreas": [
+        {
+          "group": "Arts and Humanities",
+          "name": "History"
+        },
+        {
+          "group": "Economics, Econometrics and Finance",
+          "name": "General Economics, Econometrics and Finance"
+        },
+        {
+          "group": "Economics, Econometrics and Finance",
+          "name": "Finance"
+        },
+        {
+          "group": "Economics, Econometrics and Finance",
+          "name": "Economics and Econometrics"
+        }
+      ],
+      "metrics": {
+        "citescore2025": 2.7,
+        "sjr2025": 0.338,
+        "snip2025": 0.788,
+        "citescoreTracker2026": 2.4,
+        "citations2022_2025": 224,
+        "documents2022_2025": 84,
+        "currentCitations2026": 168,
+        "currentDocuments2026": 69
+      },
+      "rankings": [
+        {
+          "group": "Arts and Humanities",
+          "category": "History",
+          "rank": 64,
+          "total": 1936,
+          "percentile": 96,
+          "quartile": "Q1",
+          "raw": "Arts and Humanities > History #64/1936 (96%)"
+        },
+        {
+          "group": "Economics, Econometrics and Finance",
+          "category": "General Economics, Econometrics and Finance",
+          "rank": 95,
+          "total": 289,
+          "percentile": 66,
+          "quartile": "Q2",
+          "raw": "Economics, Econometrics and Finance > General Economics, Econometrics and Finance #95/289 (66%)"
+        },
+        {
+          "group": "Economics, Econometrics and Finance",
+          "category": "Finance",
+          "rank": 169,
+          "total": 342,
+          "percentile": 50,
+          "quartile": "Q2",
+          "raw": "Economics, Econometrics and Finance > Finance #169/342 (50%)"
+        }
+      ],
+      "assets": {
+        "website": "https://rujec.org/",
+        "screenshotUrl": "https://www.genspark.ai/api/files/s/kBwP4u2k"
+      },
+      "content": {
+        "shortDescriptionRu": "Рецензируемый журнал открытого доступа, публикующий качественные исследования по всем направлениям экономики, особенно по вопросам экономической политики, институциональных реформ и российской экономики в международном контексте.",
+        "shortDescriptionUz": "Open access taqrizli jurnal bo‘lib, iqtisodiyotning barcha yo‘nalishlari bo‘yicha, ayniqsa iqtisodiy siyosat, institutsional islohotlar va Rossiya iqtisodiyoti haqida xalqaro kontekstdagi sifatli tadqiqotlarni chop etadi.",
+        "shortDescriptionEn": "An open access peer-reviewed quarterly journal publishing high-quality research across economics, with particular emphasis on economic policy, institutional reform, and the Russian economy in broader international context."
+      },
+      "review": {
+        "notes": "verified via official journal site and OpenAlex",
+        "verificationStatus": "verified",
+        "dataIssues": [
+          "fourth ranking for Economics and Econometrics was cropped in the source screenshot and not included"
+        ]
+      },
+      "status": {
+        "isPublished": true
+      }
+    },
+    {
+      "id": "teaching-and-teacher-education",
+      "slug": "teaching-and-teacher-education",
+      "sourceType": "journal",
+      "titles": {
+        "original": "Teaching and Teacher Education",
+        "ru": "Преподавание и педагогическое образование",
+        "uz": "O‘qitish va o‘qituvchilar ta’limi",
+        "en": "Teaching and Teacher Education",
+        "former": null
+      },
+      "publisher": "Elsevier",
+      "identifiers": {
+        "issn": "0742-051X",
+        "eissn": "1879-2480"
+      },
+      "access": {
+        "label": "Подписка / гибридная модель",
+        "isOpenAccess": false
+      },
+      "indexing": {
+        "isScopusIndexed": true,
+        "scopusCoverage": "1985-2026",
+        "isOakRecommended": null
+      },
+      "subjectAreas": [
+        {
+          "group": "Social Sciences",
+          "name": "Education"
+        }
+      ],
+      "metrics": {
+        "citescore2025": 8.5,
+        "sjr2025": 1.779,
+        "snip2025": 2.455,
+        "citescoreTracker2026": 6.9,
+        "citations2022_2025": 10785,
+        "documents2022_2025": 1264,
+        "currentCitations2026": 9227,
+        "currentDocuments2026": 1332
+      },
+      "rankings": [
+        {
+          "group": "Social Sciences",
+          "category": "Education",
+          "rank": 117,
+          "total": 1698,
+          "percentile": 93,
+          "quartile": "Q1",
+          "raw": "Social Sciences > Education #117/1698 (93%)"
+        }
+      ],
+      "assets": {
+        "website": "https://www.sciencedirect.com/journal/teaching-and-teacher-education",
+        "screenshotUrl": "https://www.genspark.ai/api/files/s/5lynx68y"
+      },
+      "content": {
+        "shortDescriptionRu": "Международный журнал, посвящённый развитию знаний о преподавании как профессиональной практике, педагогическом образовании и подготовке учителей.",
+        "shortDescriptionUz": "O‘qitishni professional amaliyot, pedagogik ta’lim va o‘qituvchilar tayyorlash haqidagi bilimlarni rivojlantirishga bag‘ishlangan xalqaro jurnal.",
+        "shortDescriptionEn": "An international journal dedicated to advancing knowledge on teaching as a professional practice, teacher education, and teacher development."
+      },
+      "review": {
+        "notes": "verified via official Elsevier journal page and OpenAlex",
+        "verificationStatus": "verified",
+        "dataIssues": [
+          "original source table lacked eISSN; completed from OpenAlex"
+        ]
+      },
+      "status": {
+        "isPublished": true
+      }
+    },
+    {
+      "id": "applied-corpus-linguistics",
+      "slug": "applied-corpus-linguistics",
+      "sourceType": "journal",
+      "titles": {
+        "original": "Applied Corpus Linguistics",
+        "ru": "Прикладная корпусная лингвистика",
+        "uz": "Amaliy korpus tilshunosligi",
+        "en": "Applied Corpus Linguistics",
+        "former": null
+      },
+      "publisher": "Elsevier",
+      "identifiers": {
+        "issn": null,
+        "eissn": "2666-7991"
+      },
+      "access": {
+        "label": "Подписка / гибридная модель",
+        "isOpenAccess": false
+      },
+      "indexing": {
+        "isScopusIndexed": true,
+        "scopusCoverage": "2021-2026",
+        "isOakRecommended": null
+      },
+      "subjectAreas": [
+        {
+          "group": "Social Sciences",
+          "name": "Linguistics and Language"
+        },
+        {
+          "group": "Social Sciences",
+          "name": "Social Sciences (miscellaneous)"
+        }
+      ],
+      "metrics": {
+        "citescore2025": 4.4,
+        "sjr2025": 1.288,
+        "snip2025": 1.874,
+        "citescoreTracker2026": 4.4,
+        "citations2022_2025": 579,
+        "documents2022_2025": 133,
+        "currentCitations2026": 745,
+        "currentDocuments2026": 170
+      },
+      "rankings": [
+        {
+          "group": "Social Sciences",
+          "category": "Linguistics and Language",
+          "rank": 99,
+          "total": 1221,
+          "percentile": 91,
+          "quartile": "Q1",
+          "raw": "Social Sciences > Linguistics and Language #99/1221 (91%)"
+        },
+        {
+          "group": "Social Sciences",
+          "category": "Social Sciences (miscellaneous)",
+          "rank": 112,
+          "total": 744,
+          "percentile": 85,
+          "quartile": "Q1",
+          "raw": "Social Sciences > Social Sciences (miscellaneous) #112/744 (85%)"
+        }
+      ],
+      "assets": {
+        "website": "https://www.sciencedirect.com/journal/applied-corpus-linguistics",
+        "screenshotUrl": "https://www.genspark.ai/api/files/s/aa3s32Gj"
+      },
+      "content": {
+        "shortDescriptionRu": "Журнал предоставляет площадку для развития теории и практики корпусного анализа, публикации кейсов и обмена методами, инструментами и ресурсами корпусной лингвистики.",
+        "shortDescriptionUz": "Jurnal korpus tahlili nazariyasi va amaliyotini rivojlantirish, keyslar, metodlar, vositalar va korpus tilshunosligi resurslari almashinuvi uchun maydon yaratadi.",
+        "shortDescriptionEn": "The journal provides a forum for further theorisation of corpus data analysis techniques and for sharing case studies, methods, tools, and resources in corpus linguistics."
+      },
+      "review": {
+        "notes": "verified via official Elsevier journal listing and OpenAlex",
+        "verificationStatus": "verified",
+        "dataIssues": [
+          "print ISSN not identified in retrieved official metadata"
+        ]
+      },
+      "status": {
+        "isPublished": true
+      }
+    },
+    {
+      "id": "international-journal-of-dermatology",
+      "slug": "international-journal-of-dermatology",
+      "sourceType": "journal",
+      "titles": {
+        "original": "International Journal of Dermatology",
+        "ru": "Международный журнал дерматологии",
+        "uz": "Xalqaro dermatologiya jurnali",
+        "en": "International Journal of Dermatology",
+        "former": "Dermatologia Internationalis"
+      },
+      "publisher": "John Wiley & Sons",
+      "identifiers": {
+        "issn": "0011-9059",
+        "eissn": "1365-4632"
+      },
+      "access": {
+        "label": "Подписка / гибридная модель",
+        "isOpenAccess": false
+      },
+      "indexing": {
+        "isScopusIndexed": true,
+        "scopusCoverage": "1963-2026",
+        "isOakRecommended": null
+      },
+      "subjectAreas": [
+        {
+          "group": "Medicine",
+          "name": "Dermatology"
+        }
+      ],
+      "metrics": {
+        "citescore2025": 5.1,
+        "sjr2025": 0.875,
+        "snip2025": 1.288,
+        "citescoreTracker2026": 4.4,
+        "citations2022_2025": 4057,
+        "documents2022_2025": 798,
+        "currentCitations2026": 3534,
+        "currentDocuments2026": 796
+      },
+      "rankings": [
+        {
+          "group": "Medicine",
+          "category": "Dermatology",
+          "rank": 28,
+          "total": 152,
+          "percentile": 81,
+          "quartile": "Q1",
+          "raw": "Medicine > Dermatology #28/152 (81%)"
+        }
+      ],
+      "assets": {
+        "website": "https://onlinelibrary.wiley.com/journal/13654632",
+        "screenshotUrl": "https://www.genspark.ai/api/files/s/tyamTLet"
+      },
+      "content": {
+        "shortDescriptionRu": "Журнал публикует актуальные данные по всем аспектам диагностики и лечения заболеваний кожи. Охватывает клиническую дерматологию, терапию и смежные вопросы практики.",
+        "shortDescriptionUz": "Jurnal teri kasalliklarini diagnostika qilish va davolashning barcha jihatlariga oid dolzarb ma’lumotlarni chop etadi. U klinik dermatologiya, terapiya va amaliyotga oid turdosh masalalarni qamrab oladi.",
+        "shortDescriptionEn": "The journal is devoted to publishing current findings and topical data on all aspects of the diagnosis and management of skin disease."
+      },
+      "review": {
+        "notes": "verified via official Wiley pages and OpenAlex",
+        "verificationStatus": "verified",
+        "dataIssues": [
+          "OpenAlex also lists additional ISSN 1365-4362; main dataset pair retained"
+        ]
+      },
+      "status": {
+        "isPublished": true
+      }
+    },
+    {
+      "id": "journal-of-sustainable-tourism",
+      "slug": "journal-of-sustainable-tourism",
+      "sourceType": "journal",
+      "titles": {
+        "original": "Journal of Sustainable Tourism",
+        "ru": "Журнал устойчивого туризма",
+        "uz": "Barqaror turizm jurnali",
+        "en": "Journal of Sustainable Tourism",
+        "former": null
+      },
+      "publisher": "Taylor & Francis",
+      "identifiers": {
+        "issn": "0966-9582",
+        "eissn": "1747-7646"
+      },
+      "access": {
+        "label": "Подписка / гибридная модель",
+        "isOpenAccess": false
+      },
+      "indexing": {
+        "isScopusIndexed": true,
+        "scopusCoverage": "1993-2026",
+        "isOakRecommended": null
+      },
+      "subjectAreas": [
+        {
+          "group": "Social Sciences",
+          "name": "Geography, Planning and Development"
+        },
+        {
+          "group": "Business, Management and Accounting",
+          "name": "Tourism, Leisure and Hospitality Management"
+        }
+      ],
+      "metrics": {
+        "citescore2025": 22.8,
+        "sjr2025": 2.381,
+        "snip2025": 3.101,
+        "citescoreTracker2026": 21.6,
+        "citations2022_2025": 12269,
+        "documents2022_2025": 539,
+        "currentCitations2026": 10222,
+        "currentDocuments2026": 473
+      },
+      "rankings": [
+        {
+          "group": "Social Sciences",
+          "category": "Geography, Planning and Development",
+          "rank": 4,
+          "total": 876,
+          "percentile": 99,
+          "quartile": "Q1",
+          "raw": "Social Sciences > Geography, Planning and Development #4/876 (99%)"
+        },
+        {
+          "group": "Business, Management and Accounting",
+          "category": "Tourism, Leisure and Hospitality Management",
+          "rank": 5,
+          "total": 156,
+          "percentile": 97,
+          "quartile": "Q1",
+          "raw": "Business, Management and Accounting > Tourism, Leisure and Hospitality Management #5/156 (97%)"
+        }
+      ],
+      "assets": {
+        "website": "https://www.tandfonline.com/journals/rsus20",
+        "screenshotUrl": "https://www.genspark.ai/api/files/s/lSGSpaBl"
+      },
+      "content": {
+        "shortDescriptionRu": "Международный журнал, публикующий исследования о туризме и устойчивом развитии, включая экономические, социальные, культурные и политические аспекты.",
+        "shortDescriptionUz": "Turizm va barqaror rivojlanish bo‘yicha iqtisodiy, ijtimoiy, madaniy va siyosiy jihatlarni qamrab oluvchi tadqiqotlarni chop etuvchi xalqaro jurnal.",
+        "shortDescriptionEn": "An international journal publishing research on tourism and sustainable development, including economic, social, cultural, and political dimensions."
+      },
+      "review": {
+        "notes": "verified via official Taylor & Francis journal page and OpenAlex",
+        "verificationStatus": "verified",
+        "dataIssues": []
+      },
+      "status": {
+        "isPublished": true
+      }
+    },
+    {
+      "id": "journal-of-the-european-academy-of-dermatology-and-venereology",
+      "slug": "journal-of-the-european-academy-of-dermatology-and-venereology",
+      "sourceType": "journal",
+      "titles": {
+        "original": "Journal of the European Academy of Dermatology and Venereology",
+        "ru": "Журнал Европейской академии дерматологии и венерологии",
+        "uz": "Yevropa dermatologiya va venerologiya akademiyasi jurnali",
+        "en": "Journal of the European Academy of Dermatology and Venereology",
+        "former": null
+      },
+      "publisher": "John Wiley & Sons",
+      "identifiers": {
+        "issn": "0926-9959",
+        "eissn": "1468-3083"
+      },
+      "access": {
+        "label": "Подписка / гибридная модель",
+        "isOpenAccess": false
+      },
+      "indexing": {
+        "isScopusIndexed": true,
+        "scopusCoverage": "1991-2026",
+        "isOakRecommended": null
+      },
+      "subjectAreas": [
+        {
+          "group": "Medicine",
+          "name": "Dermatology"
+        },
+        {
+          "group": "Medicine",
+          "name": "Infectious Diseases"
+        }
+      ],
+      "metrics": {
+        "citescore2025": 13.2,
+        "sjr2025": 2.337,
+        "snip2025": 2.647,
+        "citescoreTracker2026": 12.9,
+        "citations2022_2025": 12513,
+        "documents2022_2025": 945,
+        "currentCitations2026": 9618,
+        "currentDocuments2026": 747
+      },
+      "rankings": [
+        {
+          "group": "Medicine",
+          "category": "Dermatology",
+          "rank": 3,
+          "total": 152,
+          "percentile": 98,
+          "quartile": "Q1",
+          "raw": "Medicine > Dermatology #3/152 (98%)"
+        },
+        {
+          "group": "Medicine",
+          "category": "Infectious Diseases",
+          "rank": 19,
+          "total": 361,
+          "percentile": 94,
+          "quartile": "Q1",
+          "raw": "Medicine > Infectious Diseases #19/361 (94%)"
+        }
+      ],
+      "assets": {
+        "website": "https://onlinelibrary.wiley.com/journal/14683083",
+        "screenshotUrl": "https://www.genspark.ai/api/files/s/6JGuRFRH"
+      },
+      "content": {
+        "shortDescriptionRu": "Официальный журнал Европейской академии дерматологии и венерологии, публикующий клинические и научные исследования в области дерматологии, венерологии и смежных направлений.",
+        "shortDescriptionUz": "Yevropa Dermatologiya va Venerologiya Akademiyasining rasmiy jurnali bo‘lib, dermatologiya, venerologiya va ularga yaqin yo‘nalishlar bo‘yicha klinik hamda ilmiy tadqiqotlarni chop etadi.",
+        "shortDescriptionEn": "The official journal of the European Academy of Dermatology and Venereology, publishing clinical and scientific research in dermatology, venereology, and related fields."
+      },
+      "review": {
+        "notes": "verified via official Wiley/EADV pages and OpenAlex",
+        "verificationStatus": "verified",
+        "dataIssues": []
+      },
+      "status": {
+        "isPublished": true
+      }
+    },
+    {
+      "id": "journal-of-the-pediatric-infectious-diseases-society",
+      "slug": "journal-of-the-pediatric-infectious-diseases-society",
+      "sourceType": "journal",
+      "titles": {
+        "original": "Journal of the Pediatric Infectious Diseases Society",
+        "ru": "Журнал общества детских инфекционных болезней",
+        "uz": "Bolalar yuqumli kasalliklari jamiyati jurnali",
+        "en": "Journal of the Pediatric Infectious Diseases Society",
+        "former": null
+      },
+      "publisher": "Oxford University Press",
+      "identifiers": {
+        "issn": "2048-7193",
+        "eissn": "2048-7207"
+      },
+      "access": {
+        "label": "Подписка / гибридная модель",
+        "isOpenAccess": false
+      },
+      "indexing": {
+        "isScopusIndexed": true,
+        "scopusCoverage": "2012-2026",
+        "isOakRecommended": null
+      },
+      "subjectAreas": [
+        {
+          "group": "Medicine",
+          "name": "Pediatrics, Perinatology and Child Health"
+        },
+        {
+          "group": "Medicine",
+          "name": "Infectious Diseases"
+        }
+      ],
+      "metrics": {
+        "citescore2025": 4.6,
+        "sjr2025": 0.981,
+        "snip2025": 0.998,
+        "citescoreTracker2026": 4.0,
+        "citations2022_2025": 2098,
+        "documents2022_2025": 455,
+        "currentCitations2026": 1511,
+        "currentDocuments2026": 378
+      },
+      "rankings": [
+        {
+          "group": "Medicine",
+          "category": "Pediatrics, Perinatology and Child Health",
+          "rank": 61,
+          "total": 351,
+          "percentile": 82,
+          "quartile": "Q1",
+          "raw": "Medicine > Pediatrics, Perinatology and Child Health #61/351 (82%)"
+        },
+        {
+          "group": "Medicine",
+          "category": "Infectious Diseases",
+          "rank": 132,
+          "total": 361,
+          "percentile": 63,
+          "quartile": "Q2",
+          "raw": "Medicine > Infectious Diseases #132/361 (63%)"
+        }
+      ],
+      "assets": {
+        "website": "https://academic.oup.com/jpids",
+        "screenshotUrl": "https://www.genspark.ai/api/files/s/NjGozhbw"
+      },
+      "content": {
+        "shortDescriptionRu": "Журнал публикует оригинальные исследования, отчёты о клинических испытаниях, рекомендации, редакционные комментарии и обзоры по детским инфекционным заболеваниям.",
+        "shortDescriptionUz": "Jurnal bolalar yuqumli kasalliklariga oid original tadqiqotlar, klinik sinov hisobotlari, tavsiyalar, tahririy sharhlar va topical reviewlarni chop etadi.",
+        "shortDescriptionEn": "The journal publishes original research articles, clinical trial reports, guidelines, editorial commentaries, and topical reviews in pediatric infectious diseases."
+      },
+      "review": {
+        "notes": "verified via Oxford Academic journal pages and OpenAlex",
+        "verificationStatus": "verified",
+        "dataIssues": []
+      },
+      "status": {
+        "isPublished": true
+      }
+    },
+    {
+      "id": "anz-journal-of-surgery",
+      "slug": "anz-journal-of-surgery",
+      "sourceType": "journal",
+      "titles": {
+        "original": "ANZ Journal of Surgery",
+        "ru": "Австрало-новозеландский журнал хирургии",
+        "uz": "Avstraliya va Yangi Zelandiya jarrohlik jurnali",
+        "en": "ANZ Journal of Surgery",
+        "former": "Australian and New Zealand Journal of Surgery"
+      },
+      "publisher": "John Wiley & Sons",
+      "identifiers": {
+        "issn": "1445-1433",
+        "eissn": "1445-2197"
+      },
+      "access": {
+        "label": "Подписка / гибридная модель",
+        "isOpenAccess": false
+      },
+      "indexing": {
+        "isScopusIndexed": true,
+        "scopusCoverage": "2001-2026",
+        "isOakRecommended": null
+      },
+      "subjectAreas": [
+        {
+          "group": "Medicine",
+          "name": "Surgery"
+        }
+      ],
+      "metrics": {
+        "citescore2025": 2.4,
+        "sjr2025": 0.466,
+        "snip2025": 0.727,
+        "citescoreTracker2026": 2.0,
+        "citations2022_2025": 3698,
+        "documents2022_2025": 1552,
+        "currentCitations2026": 2645,
+        "currentDocuments2026": 1347
+      },
+      "rankings": [
+        {
+          "group": "Medicine",
+          "category": "Surgery",
+          "rank": 266,
+          "total": 597,
+          "percentile": 55,
+          "quartile": "Q2",
+          "raw": "Medicine > Surgery #266/597 (55%)"
+        }
+      ],
+      "assets": {
+        "website": "https://anzjsurg.onlinelibrary.wiley.com/journal/14452197",
+        "screenshotUrl": "https://www.genspark.ai/api/files/s/8MpMHrTb"
+      },
+      "content": {
+        "shortDescriptionRu": "Ведущий журнал хирургических исследований Австралии и Новой Зеландии, публикующий оригинальные статьи по клинической практике и исследованиям во всех областях хирургии.",
+        "shortDescriptionUz": "Avstraliya va Yangi Zelandiyadagi jarrohlik tadqiqotlari bo‘yicha yetakchi jurnal bo‘lib, jarrohlikning barcha yo‘nalishlarida klinik amaliyot va tadqiqotlarga oid original maqolalarni chop etadi.",
+        "shortDescriptionEn": "A leading journal for surgical research in Australia and New Zealand, publishing original articles related to clinical practice and research in all fields of surgery."
+      },
+      "review": {
+        "notes": "verified via official Wiley pages and OpenAlex",
+        "verificationStatus": "verified",
+        "dataIssues": []
+      },
+      "status": {
+        "isPublished": true
+      }
+    },
+    {
+      "id": "turkish-journal-of-physical-medicine-and-rehabilitation",
+      "slug": "turkish-journal-of-physical-medicine-and-rehabilitation",
+      "sourceType": "journal",
+      "titles": {
+        "original": "Turkish Journal of Physical Medicine and Rehabilitation",
+        "ru": "Турецкий журнал физической и реабилитационной медицины",
+        "uz": "Turk jismoniy va reabilitatsion tibbiyot jurnali",
+        "en": "Turkish Journal of Physical Medicine and Rehabilitation",
+        "former": null
+      },
+      "publisher": "Turkish Society of Physical Medicine and Rehabilitation",
+      "identifiers": {
+        "issn": "2587-0823",
+        "eissn": "2587-1250"
+      },
+      "access": {
+        "label": "Открытый доступ",
+        "isOpenAccess": true
+      },
+      "indexing": {
+        "isScopusIndexed": true,
+        "scopusCoverage": "2018-2026",
+        "isOakRecommended": null
+      },
+      "subjectAreas": [
+        {
+          "group": "Medicine",
+          "name": "Rehabilitation"
+        },
+        {
+          "group": "Health Professions",
+          "name": "Physical Therapy, Sports Therapy and Rehabilitation"
+        }
+      ],
+      "metrics": {
+        "citescore2025": 2.3,
+        "sjr2025": 0.489,
+        "snip2025": 0.741,
+        "citescoreTracker2026": 2.1,
+        "citations2022_2025": 625,
+        "documents2022_2025": 270,
+        "currentCitations2026": 489,
+        "currentDocuments2026": 231
+      },
+      "rankings": [
+        {
+          "group": "Medicine",
+          "category": "Rehabilitation",
+          "rank": 79,
+          "total": 172,
+          "percentile": 54,
+          "quartile": "Q2",
+          "raw": "Medicine > Rehabilitation #79/172 (54%)"
+        },
+        {
+          "group": "Health Professions",
+          "category": "Physical Therapy, Sports Therapy and Rehabilitation",
+          "rank": 134,
+          "total": 257,
+          "percentile": 48,
+          "quartile": "Q3",
+          "raw": "Health Professions > Physical Therapy, Sports Therapy and Rehabilitation #134/257 (48%)"
+        }
+      ],
+      "assets": {
+        "website": "https://www.ftrdergisi.com/",
+        "screenshotUrl": "https://www.genspark.ai/api/files/s/4rclLOsy"
+      },
+      "content": {
+        "shortDescriptionRu": "Международный журнал открытого доступа с двойным слепым рецензированием, публикующий новейшие разработки по всем аспектам физической и реабилитационной медицины.",
+        "shortDescriptionUz": "Jismoniy va reabilitatsion tibbiyotning barcha jihatlari bo‘yicha eng so‘nggi ishlanmalarni chop etuvchi xalqaro, open access, ikki tomonlama ko‘r taqrizli jurnal.",
+        "shortDescriptionEn": "An international open access, double-blind peer-reviewed journal bringing the latest developments in all aspects of physical medicine and rehabilitation."
+      },
+      "review": {
+        "notes": "verified via official journal site and OpenAlex",
+        "verificationStatus": "verified",
+        "dataIssues": []
+      },
+      "status": {
+        "isPublished": true
+      }
+    },
+    {
+      "id": "annals-of-physical-and-rehabilitation-medicine",
+      "slug": "annals-of-physical-and-rehabilitation-medicine",
+      "sourceType": "journal",
+      "titles": {
+        "original": "Annals of Physical and Rehabilitation Medicine",
+        "ru": "Анналы физической и реабилитационной медицины",
+        "uz": "Jismoniy va reabilitatsiya tibbiyoti annallari",
+        "en": "Annals of Physical and Rehabilitation Medicine",
+        "former": "Annales de Readaptation et de Medecine Physique"
+      },
+      "publisher": "Elsevier",
+      "identifiers": {
+        "issn": "1877-0657",
+        "eissn": "1877-0665"
+      },
+      "access": {
+        "label": "Подписка / гибридная модель",
+        "isOpenAccess": false
+      },
+      "indexing": {
+        "isScopusIndexed": true,
+        "scopusCoverage": "2009-2026",
+        "isOakRecommended": null
+      },
+      "subjectAreas": [
+        {
+          "group": "Medicine",
+          "name": "Rehabilitation"
+        },
+        {
+          "group": "Medicine",
+          "name": "Orthopedics and Sports Medicine"
+        }
+      ],
+      "metrics": {
+        "citescore2025": 8.9,
+        "sjr2025": 1.359,
+        "snip2025": 1.984,
+        "citescoreTracker2026": 5.3,
+        "citations2022_2025": 1964,
+        "documents2022_2025": 221,
+        "currentCitations2026": 1199,
+        "currentDocuments2026": 228
+      },
+      "rankings": [
+        {
+          "group": "Medicine",
+          "category": "Rehabilitation",
+          "rank": 2,
+          "total": 172,
+          "percentile": 99,
+          "quartile": "Q1",
+          "raw": "Medicine > Rehabilitation #2/172 (99%)"
+        },
+        {
+          "group": "Medicine",
+          "category": "Orthopedics and Sports Medicine",
+          "rank": 16,
+          "total": 340,
+          "percentile": 95,
+          "quartile": "Q1",
+          "raw": "Medicine > Orthopedics and Sports Medicine #16/340 (95%)"
+        }
+      ],
+      "assets": {
+        "website": "https://www.sciencedirect.com/journal/annals-of-physical-and-rehabilitation-medicine",
+        "screenshotUrl": "https://www.genspark.ai/api/files/s/I3LtYBUq"
+      },
+      "content": {
+        "shortDescriptionRu": "Рецензируемый журнал по физической и реабилитационной медицине, публикующий клинические исследования, работы по методам оценки и вопросам реабилитационной практики.",
+        "shortDescriptionUz": "Jismoniy va reabilitatsiya tibbiyotiga bag‘ishlangan, klinik tadqiqotlar, baholash usullari va reabilitatsiya amaliyotini yorituvchi taqrizlanadigan jurnal.",
+        "shortDescriptionEn": "A peer-reviewed journal covering physical medicine and rehabilitation, including clinical research, evaluation methods, and rehabilitation practice."
+      },
+      "review": {
+        "notes": "verified via official journal listing and supporting metadata sources",
+        "verificationStatus": "verified",
+        "dataIssues": []
+      },
+      "status": {
+        "isPublished": true
+      }
+    },
+    {
+      "id": "journal-of-baltic-science-education",
+      "slug": "journal-of-baltic-science-education",
+      "sourceType": "journal",
+      "titles": {
+        "original": "Journal of Baltic Science Education",
+        "ru": "Журнал балтийского научного образования",
+        "uz": "Boltiq ilmiy ta’lim jurnali",
+        "en": "Journal of Baltic Science Education",
+        "former": null
+      },
+      "publisher": "Scientia Socialis Ltd",
+      "identifiers": {
+        "issn": "1648-3898",
+        "eissn": "2538-7138"
+      },
+      "access": {
+        "label": "Открытый доступ",
+        "isOpenAccess": true
+      },
+      "indexing": {
+        "isScopusIndexed": true,
+        "scopusCoverage": "2008-2026",
+        "isOakRecommended": null
+      },
+      "subjectAreas": [
+        {
+          "group": "Social Sciences",
+          "name": "Education"
+        }
+      ],
+      "metrics": {
+        "citescore2025": 2.5,
+        "sjr2025": 0.432,
+        "snip2025": 0.649,
+        "citescoreTracker2026": 2.7,
+        "citations2022_2025": 733,
+        "documents2022_2025": 289,
+        "currentCitations2026": 647,
+        "currentDocuments2026": 238
+      },
+      "rankings": [
+        {
+          "group": "Social Sciences",
+          "category": "Education",
+          "rank": 749,
+          "total": 1698,
+          "percentile": 55,
+          "quartile": "Q2",
+          "raw": "Social Sciences > Education #749/1698 (55%)"
+        }
+      ],
+      "assets": {
+        "website": "https://www.scientiasocialis.lt/jbse/",
+        "screenshotUrl": "https://www.genspark.ai/api/files/s/KDUIq6dI"
+      },
+      "content": {
+        "shortDescriptionRu": "Международный журнал открытого доступа, публикующий теоретические, экспериментальные и методические исследования в области естественно-научного образования на всех уровнях обучения.",
+        "shortDescriptionUz": "Barcha ta’lim bosqichlarida tabiiy fanlar ta’limi bo‘yicha nazariy, eksperimental va metodik tadqiqotlarni chop etuvchi xalqaro ochiq kirish jurnali.",
+        "shortDescriptionEn": "An international open access journal publishing theoretical, experimental, and methodological studies in science education across all educational levels."
+      },
+      "review": {
+        "notes": "verified via official journal site",
+        "verificationStatus": "verified",
+        "dataIssues": []
+      },
+      "status": {
+        "isPublished": true
+      }
+    },
+    {
+      "id": "journal-of-tourism-and-cultural-change",
+      "slug": "journal-of-tourism-and-cultural-change",
+      "sourceType": "journal",
+      "titles": {
+        "original": "Journal of Tourism and Cultural Change",
+        "ru": "Журнал туризма и культурных изменений",
+        "uz": "Turizm va madaniy o‘zgarishlar jurnali",
+        "en": "Journal of Tourism and Cultural Change",
+        "former": null
+      },
+      "publisher": "Taylor & Francis",
+      "identifiers": {
+        "issn": "1476-6825",
+        "eissn": "1747-7654"
+      },
+      "access": {
+        "label": "Подписка / гибридная модель",
+        "isOpenAccess": false
+      },
+      "indexing": {
+        "isScopusIndexed": true,
+        "scopusCoverage": "2003-2026",
+        "isOakRecommended": null
+      },
+      "subjectAreas": [
+        {
+          "group": "Social Sciences",
+          "name": "Cultural Studies"
+        },
+        {
+          "group": "Environmental Science",
+          "name": "Nature and Landscape Conservation"
+        },
+        {
+          "group": "Social Sciences",
+          "name": "Geography, Planning and Development"
+        },
+        {
+          "group": "Social Sciences",
+          "name": "Transportation"
+        },
+        {
+          "group": "Business, Management and Accounting",
+          "name": "Tourism, Leisure and Hospitality Management"
+        }
+      ],
+      "metrics": {
+        "citescore2025": 6.4,
+        "sjr2025": 0.658,
+        "snip2025": 1.361,
+        "citescoreTracker2026": 3.8,
+        "citations2022_2025": 940,
+        "documents2022_2025": 148,
+        "currentCitations2026": 454,
+        "currentDocuments2026": 118
+      },
+      "rankings": [
+        {
+          "group": "Social Sciences",
+          "category": "Cultural Studies",
+          "rank": 20,
+          "total": 434,
+          "percentile": 98,
+          "quartile": "Q1",
+          "raw": "Social Sciences > Cultural Studies #20/434 (98%)"
+        },
+        {
+          "group": "Environmental Science",
+          "category": "Nature and Landscape Conservation",
+          "rank": 33,
+          "total": 231,
+          "percentile": 85,
+          "quartile": "Q1",
+          "raw": "Environmental Science > Nature and Landscape Conservation #33/231 (85%)"
+        },
+        {
+          "group": "Social Sciences",
+          "category": "Geography, Planning and Development",
+          "rank": 130,
+          "total": 876,
+          "percentile": 85,
+          "quartile": "Q1",
+          "raw": "Social Sciences > Geography, Planning and Development #130/876 (85%)"
+        }
+      ],
+      "assets": {
+        "website": "https://www.tandfonline.com/journals/rtcc20",
+        "screenshotUrl": "https://www.genspark.ai/api/files/s/K2nEA33P"
+      },
+      "content": {
+        "shortDescriptionRu": "Рецензируемый междисциплинарный журнал, посвящённый изучению связей, противоречий и трансформаций между туризмом, путешествиями и культурой в глобальном контексте.",
+        "shortDescriptionUz": "Turizm, sayohat va madaniyat o‘rtasidagi aloqalar, ziddiyatlar va o‘zgarishlarni global kontekstda tahlil qiluvchi taqrizlanadigan fanlararo jurnal.",
+        "shortDescriptionEn": "A peer-reviewed transdisciplinary journal examining relationships, tensions, and transformations between tourism, travel, and culture in global contexts."
+      },
+      "review": {
+        "notes": "verified via official Taylor & Francis journal page",
+        "verificationStatus": "verified",
+        "dataIssues": [
+          "lower rankings for Transportation and Tourism/Leisure/Hospitality were cropped in the source screenshot and not included"
+        ]
+      },
+      "status": {
+        "isPublished": true
+      }
+    },
+    {
+      "id": "translation-studies",
+      "slug": "translation-studies",
+      "sourceType": "journal",
+      "titles": {
+        "original": "Translation Studies",
+        "ru": "Исследования перевода",
+        "uz": "Tarjimashunoslik tadqiqotlari",
+        "en": "Translation Studies",
+        "former": null
+      },
+      "publisher": "Taylor & Francis",
+      "identifiers": {
+        "issn": "1478-1700",
+        "eissn": "1751-2921"
+      },
+      "access": {
+        "label": "Подписка / гибридная модель",
+        "isOpenAccess": false
+      },
+      "indexing": {
+        "isScopusIndexed": true,
+        "scopusCoverage": "2008-2026",
+        "isOakRecommended": null
+      },
+      "subjectAreas": [
+        {
+          "group": "Arts and Humanities",
+          "name": "Language and Linguistics"
+        },
+        {
+          "group": "Social Sciences",
+          "name": "Linguistics and Language"
+        }
+      ],
+      "metrics": {
+        "citescore2025": 2.7,
+        "sjr2025": 0.874,
+        "snip2025": 2.664,
+        "citescoreTracker2026": 3.3,
+        "citations2022_2025": 255,
+        "documents2022_2025": 93,
+        "currentCitations2026": 245,
+        "currentDocuments2026": 75
+      },
+      "rankings": [
+        {
+          "group": "Arts and Humanities",
+          "category": "Language and Linguistics",
+          "rank": 173,
+          "total": 1137,
+          "percentile": 84,
+          "quartile": "Q1",
+          "raw": "Arts and Humanities > Language and Linguistics #173/1137 (84%)"
+        },
+        {
+          "group": "Social Sciences",
+          "category": "Linguistics and Language",
+          "rank": 203,
+          "total": 1221,
+          "percentile": 83,
+          "quartile": "Q1",
+          "raw": "Social Sciences > Linguistics and Language #203/1221 (83%)"
+        }
+      ],
+      "assets": {
+        "website": "https://www.tandfonline.com/journals/rtrs20",
+        "screenshotUrl": "https://www.genspark.ai/api/files/s/sKZH6o54"
+      },
+      "content": {
+        "shortDescriptionRu": "Журнал по переводоведению, расширяющий методологии и концептуальные рамки дисциплины и рассматривающий исторические, социальные, институциональные и культурные аспекты перевода.",
+        "shortDescriptionUz": "Tarjimashunoslikka bag‘ishlangan jurnal bo‘lib, metodologiyalar va konseptual yondashuvlarni kengaytiradi hamda tarjimaning tarixiy, ijtimoiy, institutsional va madaniy jihatlarini yoritadi.",
+        "shortDescriptionEn": "A journal devoted to translation studies, expanding methodologies and conceptual frameworks while exploring historical, social, institutional, and cultural dimensions of translation."
+      },
+      "review": {
+        "notes": "verified via official Taylor & Francis journal page",
+        "verificationStatus": "verified",
+        "dataIssues": []
+      },
+      "status": {
+        "isPublished": true
+      }
+    },
+    {
+      "id": "journal-of-advanced-research",
+      "slug": "journal-of-advanced-research",
+      "sourceType": "journal",
+      "titles": {
+        "original": "Journal of Advanced Research",
+        "ru": "Журнал передовых исследований",
+        "uz": "Ilg‘or tadqiqotlar jurnali",
+        "en": "Journal of Advanced Research",
+        "former": null
+      },
+      "publisher": "Elsevier",
+      "identifiers": {
+        "issn": "2090-1232",
+        "eissn": "2090-1224"
+      },
+      "access": {
+        "label": "Открытый доступ",
+        "isOpenAccess": true
+      },
+      "indexing": {
+        "isScopusIndexed": true,
+        "scopusCoverage": "2010-2026",
+        "isOakRecommended": null
+      },
+      "subjectAreas": [
+        {
+          "group": "Multidisciplinary",
+          "name": "Multidisciplinary"
+        }
+      ],
+      "metrics": {
+        "citescore2025": 21.7,
+        "sjr2025": 3.148,
+        "snip2025": 2.879,
+        "citescoreTracker2026": 18.2,
+        "citations2022_2025": 23057,
+        "documents2022_2025": 1061,
+        "currentCitations2026": 25019,
+        "currentDocuments2026": 1372
+      },
+      "rankings": [
+        {
+          "group": "Multidisciplinary",
+          "category": "Multidisciplinary",
+          "rank": 7,
+          "total": 223,
+          "percentile": 97,
+          "quartile": "Q1",
+          "raw": "Multidisciplinary > Multidisciplinary #7/223 (97%)"
+        }
+      ],
+      "assets": {
+        "website": "https://www.sciencedirect.com/journal/journal-of-advanced-research",
+        "screenshotUrl": "https://www.genspark.ai/api/files/s/YcfkFunx"
+      },
+      "content": {
+        "shortDescriptionRu": "Междисциплинарный рецензируемый журнал открытого доступа Каирского университета, публикующий исследования в области прикладных и естественных наук, медицины, инженерии и смежных дисциплин.",
+        "shortDescriptionUz": "Qohira universitetining fanlararo taqrizlanadigan ochiq kirish jurnali bo‘lib, amaliy va tabiiy fanlar, tibbiyot, muhandislik hamda turdosh yo‘nalishlardagi tadqiqotlarni nashr etadi.",
+        "shortDescriptionEn": "An interdisciplinary peer-reviewed open access journal of Cairo University publishing research across applied and natural sciences, medicine, engineering, and related fields."
+      },
+      "review": {
+        "notes": "verified via DOAJ, official journal page, and OpenAlex",
+        "verificationStatus": "verified",
+        "dataIssues": []
+      },
+      "status": {
+        "isPublished": true
+      }
+    },
+    {
+      "id": "transportation-planning-and-technology",
+      "slug": "transportation-planning-and-technology",
+      "sourceType": "journal",
+      "titles": {
+        "original": "Transportation Planning and Technology",
+        "ru": "Планирование транспорта и технологии",
+        "uz": "Transportni rejalashtirish va texnologiya",
+        "en": "Transportation Planning and Technology",
+        "former": null
+      },
+      "publisher": "Taylor & Francis",
+      "identifiers": {
+        "issn": "0308-1060",
+        "eissn": "1029-0354"
+      },
+      "access": {
+        "label": "Подписка / гибридная модель",
+        "isOpenAccess": false
+      },
+      "indexing": {
+        "isScopusIndexed": true,
+        "scopusCoverage": "1972-2026",
+        "isOakRecommended": null
+      },
+      "subjectAreas": [
+        {
+          "group": "Social Sciences",
+          "name": "Geography, Planning and Development"
+        },
+        {
+          "group": "Social Sciences",
+          "name": "Transportation"
+        }
+      ],
+      "metrics": {
+        "citescore2025": 3.3,
+        "sjr2025": 0.508,
+        "snip2025": 0.791,
+        "citescoreTracker2026": 3.8,
+        "citations2022_2025": 709,
+        "documents2022_2025": 217,
+        "currentCitations2026": 830,
+        "currentDocuments2026": 219
+      },
+      "rankings": [
+        {
+          "group": "Social Sciences",
+          "category": "Geography, Planning and Development",
+          "rank": 320,
+          "total": 876,
+          "percentile": 63,
+          "quartile": "Q2",
+          "raw": "Social Sciences > Geography, Planning and Development #320/876 (63%)"
+        },
+        {
+          "group": "Social Sciences",
+          "category": "Transportation",
+          "rank": 91,
+          "total": 169,
+          "percentile": 46,
+          "quartile": "Q3",
+          "raw": "Social Sciences > Transportation #91/169 (46%)"
+        }
+      ],
+      "assets": {
+        "website": "https://www.tandfonline.com/journals/gtpt20",
+        "screenshotUrl": "https://www.genspark.ai/api/files/s/9z6Dm97Y"
+      },
+      "content": {
+        "shortDescriptionRu": "Международный рецензируемый журнал, публикующий исследования по транспортным системам, планированию, моделированию, политике и технологиям, улучшающим пассажирские и грузовые перевозки.",
+        "shortDescriptionUz": "Yo‘lovchi va yuk tashishni yaxshilovchi transport tizimlari, rejalashtirish, modellashtirish, siyosat va texnologiyalar bo‘yicha tadqiqotlarni chop etuvchi xalqaro taqrizlanadigan jurnal.",
+        "shortDescriptionEn": "An international peer-reviewed journal publishing research on transport systems, planning, modelling, policy, and technologies that improve passenger and freight transport."
+      },
+      "review": {
+        "notes": "verified via official Taylor & Francis journal page",
+        "verificationStatus": "verified",
+        "dataIssues": [
+          "eISSN in source table differed from an earlier preliminary note; source table value retained"
+        ]
+      },
+      "status": {
+        "isPublished": true
+      }
+    },
+    {
+      "id": "education-and-information-technologies",
+      "slug": "education-and-information-technologies",
+      "sourceType": "journal",
+      "titles": {
+        "original": "Education and Information Technologies",
+        "ru": "Образование и информационные технологии",
+        "uz": "Ta’lim va axborot texnologiyalari",
+        "en": "Education and Information Technologies",
+        "former": null
+      },
+      "publisher": "Springer Nature",
+      "identifiers": {
+        "issn": "1360-2357",
+        "eissn": "1573-7608"
+      },
+      "access": {
+        "label": "Подписка / гибридная модель",
+        "isOpenAccess": false
+      },
+      "indexing": {
+        "isScopusIndexed": true,
+        "scopusCoverage": "1996-2002, 2005-2026",
+        "isOakRecommended": null
+      },
+      "subjectAreas": [
+        {
+          "group": "Social Sciences",
+          "name": "Education"
+        },
+        {
+          "group": "Social Sciences",
+          "name": "Library and Information Sciences"
+        }
+      ],
+      "metrics": {
+        "citescore2025": 15.5,
+        "sjr2025": 2.131,
+        "snip2025": 2.703,
+        "citescoreTracker2026": 17.8,
+        "citations2022_2025": 47349,
+        "documents2022_2025": 3047,
+        "currentCitations2026": 47216,
+        "currentDocuments2026": 2653
+      },
+      "rankings": [
+        {
+          "group": "Social Sciences",
+          "category": "Education",
+          "rank": 22,
+          "total": 1698,
+          "percentile": 98,
+          "quartile": "Q1",
+          "raw": "Social Sciences > Education #22/1698 (98%)"
+        },
+        {
+          "group": "Social Sciences",
+          "category": "Library and Information Sciences",
+          "rank": 9,
+          "total": 296,
+          "percentile": 97,
+          "quartile": "Q1",
+          "raw": "Social Sciences > Library and Information Sciences #9/296 (97%)"
+        }
+      ],
+      "assets": {
+        "website": "https://link.springer.com/journal/10639",
+        "screenshotUrl": "https://www.genspark.ai/api/files/s/EgudT1bH"
+      },
+      "content": {
+        "shortDescriptionRu": "Журнал, посвящённый пересечению информационных технологий и образования, включая применение вычислительных технологий для улучшения преподавания, обучения и управления образованием.",
+        "shortDescriptionUz": "Axborot texnologiyalari va ta’lim kesishmasiga bag‘ishlangan jurnal bo‘lib, o‘qitish, o‘rganish va ta’lim boshqaruvini yaxshilashga xizmat qiluvchi texnologik yechimlarni yoritadi.",
+        "shortDescriptionEn": "A journal focused on the intersection of information technology and education, covering computing applications that improve teaching, learning, and educational management."
+      },
+      "review": {
+        "notes": "verified via Springer journal page",
+        "verificationStatus": "verified",
+        "dataIssues": []
+      },
+      "status": {
+        "isPublished": true
+      }
+    },
+    {
+      "id": "international-journal-of-educational-research-open",
+      "slug": "international-journal-of-educational-research-open",
+      "sourceType": "journal",
+      "titles": {
+        "original": "International Journal of Educational Research Open",
+        "ru": "Международный журнал открытых исследований в образовании",
+        "uz": "Ta’lim bo‘yicha ochiq tadqiqotlar xalqaro jurnali",
+        "en": "International Journal of Educational Research Open",
+        "former": null
+      },
+      "publisher": "Elsevier",
+      "identifiers": {
+        "issn": null,
+        "eissn": "2666-3740"
+      },
+      "access": {
+        "label": "Открытый доступ",
+        "isOpenAccess": true
+      },
+      "indexing": {
+        "isScopusIndexed": true,
+        "scopusCoverage": "2020-2026",
+        "isOakRecommended": null
+      },
+      "subjectAreas": [
+        {
+          "group": "Social Sciences",
+          "name": "Education"
+        }
+      ],
+      "metrics": {
+        "citescore2025": 6.1,
+        "sjr2025": 0.876,
+        "snip2025": 1.571,
+        "citescoreTracker2026": 6.5,
+        "citations2022_2025": 2577,
+        "documents2022_2025": 424,
+        "currentCitations2026": 2234,
+        "currentDocuments2026": 345
+      },
+      "rankings": [
+        {
+          "group": "Social Sciences",
+          "category": "Education",
+          "rank": 233,
+          "total": 1698,
+          "percentile": 86,
+          "quartile": "Q1",
+          "raw": "Social Sciences > Education #233/1698 (86%)"
+        }
+      ],
+      "assets": {
+        "website": "https://www.sciencedirect.com/journal/international-journal-of-educational-research-open",
+        "screenshotUrl": "https://www.genspark.ai/api/files/s/boBO35k5"
+      },
+      "content": {
+        "shortDescriptionRu": "Рецензируемый журнал открытого доступа, связанный с International Journal of Educational Research, публикующий международные и междисциплинарные исследования в области образования.",
+        "shortDescriptionUz": "International Journal of Educational Research bilan bog‘liq bo‘lgan, ta’lim sohasidagi xalqaro va fanlararo tadqiqotlarni chop etuvchi taqrizlanadigan ochiq kirish jurnali.",
+        "shortDescriptionEn": "A peer-reviewed open access companion journal to the International Journal of Educational Research, publishing international and interdisciplinary studies in education."
+      },
+      "review": {
+        "notes": "verified via DOAJ and official journal page",
+        "verificationStatus": "verified",
+        "dataIssues": []
+      },
+      "status": {
+        "isPublished": true
+      }
+    },
+    {
+      "id": "call-ej",
+      "slug": "call-ej",
+      "sourceType": "journal",
+      "titles": {
+        "original": "CALL-EJ",
+        "ru": "CALL-EJ",
+        "uz": "CALL-EJ",
+        "en": "CALL-EJ",
+        "former": null
+      },
+      "publisher": "The Pacific Association for Computer Assisted Language Learning (PacCALL)",
+      "identifiers": {
+        "issn": null,
+        "eissn": "2187-9036"
+      },
+      "access": {
+        "label": "Открытый доступ",
+        "isOpenAccess": true
+      },
+      "indexing": {
+        "isScopusIndexed": true,
+        "scopusCoverage": "2013-2026",
+        "isOakRecommended": null
+      },
+      "subjectAreas": [
+        {
+          "group": "Arts and Humanities",
+          "name": "Language and Linguistics"
+        },
+        {
+          "group": "Social Sciences",
+          "name": "Linguistics and Language"
+        },
+        {
+          "group": "Computer Science",
+          "name": "Computer Science Applications"
+        }
+      ],
+      "metrics": {
+        "citescore2025": 2.4,
+        "sjr2025": 0.394,
+        "snip2025": 0.578,
+        "citescoreTracker2026": 2.0,
+        "citations2022_2025": 585,
+        "documents2022_2025": 239,
+        "currentCitations2026": 387,
+        "currentDocuments2026": 189
+      },
+      "rankings": [
+        {
+          "group": "Arts and Humanities",
+          "category": "Language and Linguistics",
+          "rank": 202,
+          "total": 1137,
+          "percentile": 82,
+          "quartile": "Q1",
+          "raw": "Arts and Humanities > Language and Linguistics #202/1137 (82%)"
+        },
+        {
+          "group": "Social Sciences",
+          "category": "Linguistics and Language",
+          "rank": 235,
+          "total": 1221,
+          "percentile": 80,
+          "quartile": "Q1",
+          "raw": "Social Sciences > Linguistics and Language #235/1221 (80%)"
+        },
+        {
+          "group": "Computer Science",
+          "category": "Computer Science Applications",
+          "rank": 598,
+          "total": 1022,
+          "percentile": 41,
+          "quartile": "Q3",
+          "raw": "Computer Science > Computer Science Applications #598/1022 (41%)"
+        }
+      ],
+      "assets": {
+        "website": "https://callej.org/",
+        "screenshotUrl": "https://www.genspark.ai/api/files/s/w5wxhxA7"
+      },
+      "content": {
+        "shortDescriptionRu": "Электронный журнал открытого доступа, посвящённый компьютерно-опосредованному обучению языкам и смежным исследованиям в области технологически поддерживаемого языкового образования.",
+        "shortDescriptionUz": "Kompyuter yordamida til o‘qitish hamda texnologiya asosidagi til ta’limi bo‘yicha tadqiqotlarga bag‘ishlangan ochiq kirishdagi elektron jurnal.",
+        "shortDescriptionEn": "An open access electronic journal focused on computer-assisted language learning and related research on technology-enhanced language teaching and learning."
+      },
+      "review": {
+        "notes": "verified via official journal site, ISSN Portal, and OpenAlex",
+        "verificationStatus": "verified",
+        "dataIssues": []
+      },
+      "status": {
+        "isPublished": true
+      }
+    },
+    {
+      "id": "scientific-reports",
+      "slug": "scientific-reports",
+      "sourceType": "journal",
+      "titles": {
+        "original": "Scientific Reports",
+        "ru": "Научные отчёты",
+        "uz": "Ilmiy hisobotlar",
+        "en": "Scientific Reports",
+        "former": null
+      },
+      "publisher": "Springer Nature",
+      "identifiers": {
+        "issn": null,
+        "eissn": "2045-2322"
+      },
+      "access": {
+        "label": "Открытый доступ",
+        "isOpenAccess": true
+      },
+      "indexing": {
+        "isScopusIndexed": true,
+        "scopusCoverage": "2011-2026",
+        "isOakRecommended": null
+      },
+      "subjectAreas": [
+        {
+          "group": "Multidisciplinary",
+          "name": "Multidisciplinary"
+        }
+      ],
+      "metrics": {
+        "citescore2025": 6.4,
+        "sjr2025": 0.893,
+        "snip2025": 1.339,
+        "citescoreTracker2026": 6.4,
+        "citations2022_2025": 768195,
+        "documents2022_2025": 119519,
+        "currentCitations2026": 754633,
+        "currentDocuments2026": 117171
+      },
+      "rankings": [
+        {
+          "group": "Multidisciplinary",
+          "category": "Multidisciplinary",
+          "rank": 29,
+          "total": 223,
+          "percentile": 87,
+          "quartile": "Q1",
+          "raw": "Multidisciplinary > Multidisciplinary #29/223 (87%)"
+        }
+      ],
+      "assets": {
+        "website": "https://www.nature.com/srep/",
+        "screenshotUrl": "https://www.genspark.ai/api/files/s/b7ZJ4Z1G"
+      },
+      "content": {
+        "shortDescriptionRu": "Крупный журнал открытого доступа издательства Nature Portfolio, публикующий оригинальные исследования в области естественных наук, психологии, медицины и инженерии.",
+        "shortDescriptionUz": "Nature Portfolio nashriyotining yirik ochiq kirish jurnali bo‘lib, tabiiy fanlar, psixologiya, tibbiyot va muhandislik bo‘yicha original tadqiqotlarni nashr etadi.",
+        "shortDescriptionEn": "A large-scale open access journal from Nature Portfolio publishing original research across the natural sciences, psychology, medicine, and engineering."
+      },
+      "review": {
+        "notes": "verified via DOAJ, Nature journal pages, and OpenAlex",
+        "verificationStatus": "verified",
+        "dataIssues": []
+      },
+      "status": {
+        "isPublished": true
+      }
+    },
+    {
+      "id": "revista-cientifica-de-sistemas-e-informatica",
+      "slug": "revista-cientifica-de-sistemas-e-informatica",
+      "sourceType": "journal",
+      "titles": {
+        "original": "Revista Cientifica de Sistemas e Informatica",
+        "ru": "Научный журнал систем и информатики",
+        "uz": "Tizimlar va informatika ilmiy jurnali",
+        "en": "Revista Cientifica de Sistemas e Informatica",
+        "former": null
+      },
+      "publisher": "Universidad Nacional de San Martín",
+      "identifiers": {
+        "issn": null,
+        "eissn": "2709-992X"
+      },
+      "access": {
+        "label": "Открытый доступ",
+        "isOpenAccess": true
+      },
+      "indexing": {
+        "isScopusIndexed": true,
+        "scopusCoverage": "2021-2026",
+        "isOakRecommended": null
+      },
+      "subjectAreas": [
+        {
+          "group": "Computer Science",
+          "name": "Information Systems"
+        },
+        {
+          "group": "Computer Science",
+          "name": "Computer Science Applications"
+        },
+        {
+          "group": "Computer Science",
+          "name": "Hardware and Architecture"
+        },
+        {
+          "group": "Computer Science",
+          "name": "Computer Science (miscellaneous)"
+        }
+      ],
+      "metrics": {
+        "citescore2025": 1.1,
+        "sjr2025": 0.192,
+        "snip2025": 0.442,
+        "citescoreTracker2026": 1.2,
+        "citations2022_2025": 78,
+        "documents2022_2025": 74,
+        "currentCitations2026": 81,
+        "currentDocuments2026": 65
+      },
+      "rankings": [
+        {
+          "group": "Computer Science",
+          "category": "Information Systems",
+          "rank": 387,
+          "total": 519,
+          "percentile": 25,
+          "quartile": "Q3",
+          "raw": "Computer Science > Information Systems #387/519 (25%)"
+        },
+        {
+          "group": "Computer Science",
+          "category": "Computer Science Applications",
+          "rank": 823,
+          "total": 1022,
+          "percentile": 19,
+          "quartile": "Q4",
+          "raw": "Computer Science > Computer Science Applications #823/1022 (19%)"
+        },
+        {
+          "group": "Computer Science",
+          "category": "Hardware and Architecture",
+          "rank": 198,
+          "total": 245,
+          "percentile": 19,
+          "quartile": "Q4",
+          "raw": "Computer Science > Hardware and Architecture #198/245 (19%)"
+        }
+      ],
+      "assets": {
+        "website": "https://revistas.unsm.edu.pe/index.php/rcsi",
+        "screenshotUrl": "https://www.genspark.ai/api/files/s/F9jnpCx9"
+      },
+      "content": {
+        "shortDescriptionRu": "Журнал открытого доступа Университета Сан-Мартин, публикующий рецензируемые исследования по компьютерным наукам, информационным системам, программной инженерии, искусственному интеллекту и смежным технологиям.",
+        "shortDescriptionUz": "Universidad Nacional de San Martín nashr etadigan, kompyuter fanlari, axborot tizimlari, dasturiy injiniring, sun’iy intellekt va turdosh texnologiyalar bo‘yicha taqrizlanadigan ochiq kirish jurnalidir.",
+        "shortDescriptionEn": "An open access journal of Universidad Nacional de San Martín publishing peer-reviewed research in computer science, information systems, software engineering, artificial intelligence, and related technologies."
+      },
+      "review": {
+        "notes": "verified via DOAJ, official journal site, and OpenAlex",
+        "verificationStatus": "verified",
+        "dataIssues": [
+          "fourth ranking for Computer Science (miscellaneous) was cropped in the source screenshot and not included"
+        ]
+      },
+      "status": {
+        "isPublished": true
+      }
+    },
+    {
+      "id": "international-journal-of-electrical-power-and-energy-systems",
+      "slug": "international-journal-of-electrical-power-and-energy-systems",
+      "sourceType": "journal",
+      "titles": {
+        "original": "International Journal of Electrical Power and Energy Systems",
+        "ru": "Международный журнал электроэнергетических и энергетических систем",
+        "uz": "Elektr energetikasi va energiya tizimlari xalqaro jurnali",
+        "en": "International Journal of Electrical Power and Energy Systems",
+        "former": null
+      },
+      "publisher": "Elsevier",
+      "identifiers": {
+        "issn": "0142-0615",
+        "eissn": "1879-3517"
+      },
+      "access": {
+        "label": "Открытый доступ",
+        "isOpenAccess": true
+      },
+      "indexing": {
+        "isScopusIndexed": true,
+        "scopusCoverage": "1970, 1979-2026",
+        "isOakRecommended": null
+      },
+      "subjectAreas": [
+        {
+          "group": "Engineering",
+          "name": "Electrical and Electronic Engineering"
+        },
+        {
+          "group": "Energy",
+          "name": "Energy Engineering and Power Technology"
+        }
+      ],
+      "metrics": {
+        "citescore2025": 12.6,
+        "sjr2025": 1.482,
+        "snip2025": 1.47,
+        "citescoreTracker2026": 10.0,
+        "citations2022_2025": 46836,
+        "documents2022_2025": 3720,
+        "currentCitations2026": 32733,
+        "currentDocuments2026": 3264
+      },
+      "rankings": [
+        {
+          "group": "Engineering",
+          "category": "Electrical and Electronic Engineering",
+          "rank": 69,
+          "total": 1030,
+          "percentile": 93,
+          "quartile": "Q1",
+          "raw": "Engineering > Electrical and Electronic Engineering #69/1030 (93%)"
+        },
+        {
+          "group": "Energy",
+          "category": "Energy Engineering and Power Technology",
+          "rank": 31,
+          "total": 347,
+          "percentile": 91,
+          "quartile": "Q1",
+          "raw": "Energy > Energy Engineering and Power Technology #31/347 (91%)"
+        }
+      ],
+      "assets": {
+        "website": "https://www.sciencedirect.com/journal/international-journal-of-electrical-power-and-energy-systems",
+        "screenshotUrl": "https://www.genspark.ai/api/files/s/U8AVPSGg"
+      },
+      "content": {
+        "shortDescriptionRu": "Рецензируемый журнал, публикующий исследования по моделированию, анализу и проектированию электроэнергетических и энергетических систем.",
+        "shortDescriptionUz": "Elektr energetikasi va energiya tizimlarini modellashtirish, tahlil qilish va loyihalash bo‘yicha tadqiqotlarni chop etuvchi taqrizlanadigan jurnal.",
+        "shortDescriptionEn": "A peer-reviewed journal publishing research that advances the modelling, analysis, and design of electrical power and energy systems."
+      },
+      "review": {
+        "notes": "verified via OpenAlex and official journal listings",
+        "verificationStatus": "verified",
+        "dataIssues": []
+      },
+      "status": {
+        "isPublished": true
+      }
+    },
+    {
+      "id": "transportation-research-part-e-logistics-and-transportation-review",
+      "slug": "transportation-research-part-e-logistics-and-transportation-review",
+      "sourceType": "journal",
+      "titles": {
+        "original": "Transportation Research Part E: Logistics and Transportation Review",
+        "ru": "Transportation Research Part E: Логистика и транспортный обзор",
+        "uz": "Transportation Research Part E: Logistika va transport sharhi",
+        "en": "Transportation Research Part E: Logistics and Transportation Review",
+        "former": "Logistics and Transportation Review"
+      },
+      "publisher": "Elsevier",
+      "identifiers": {
+        "issn": "1366-5545",
+        "eissn": "1878-5794"
+      },
+      "access": {
+        "label": "Подписка / гибридная модель",
+        "isOpenAccess": false
+      },
+      "indexing": {
+        "isScopusIndexed": true,
+        "scopusCoverage": "1997-2026",
+        "isOakRecommended": null
+      },
+      "subjectAreas": [
+        {
+          "group": "Engineering",
+          "name": "Civil and Structural Engineering"
+        },
+        {
+          "group": "Social Sciences",
+          "name": "Transportation"
+        },
+        {
+          "group": "Business, Management and Accounting",
+          "name": "Business and International Management"
+        }
+      ],
+      "metrics": {
+        "citescore2025": 14.0,
+        "sjr2025": 2.332,
+        "snip2025": 2.402,
+        "citescoreTracker2026": 11.2,
+        "citations2022_2025": 19979,
+        "documents2022_2025": 1423,
+        "currentCitations2026": 17736,
+        "currentDocuments2026": 1579
+      },
+      "rankings": [
+        {
+          "group": "Engineering",
+          "category": "Civil and Structural Engineering",
+          "rank": 18,
+          "total": 434,
+          "percentile": 95,
+          "quartile": "Q1",
+          "raw": "Engineering > Civil and Structural Engineering #18/434 (95%)"
+        },
+        {
+          "group": "Social Sciences",
+          "category": "Transportation",
+          "rank": 11,
+          "total": 169,
+          "percentile": 93,
+          "quartile": "Q1",
+          "raw": "Social Sciences > Transportation #11/169 (93%)"
+        },
+        {
+          "group": "Business, Management and Accounting",
+          "category": "Business and International Management",
+          "rank": 32,
+          "total": 456,
+          "percentile": 93,
+          "quartile": "Q1",
+          "raw": "Business, Management and Accounting > Business and International Management #32/456 (93%)"
+        }
+      ],
+      "assets": {
+        "website": "https://www.sciencedirect.com/journal/transportation-research-part-e-logistics-and-transportation-review",
+        "screenshotUrl": "https://www.genspark.ai/api/files/s/TRZCRVHZ"
+      },
+      "content": {
+        "shortDescriptionRu": "Рецензируемый журнал, публикующий качественные исследования в области логистики, грузовых перевозок, транспортных систем, а также связанных с ними вопросов управления и политики.",
+        "shortDescriptionUz": "Logistika, yuk tashish, transport tizimlari hamda ular bilan bog‘liq boshqaruv va siyosat masalalari bo‘yicha sifatli tadqiqotlarni chop etuvchi taqrizlanadigan jurnal.",
+        "shortDescriptionEn": "A peer-reviewed journal publishing high-quality research across logistics, freight transport, transportation systems, and related management and policy issues."
+      },
+      "review": {
+        "notes": "verified via official Elsevier journal listing and OpenAlex",
+        "verificationStatus": "verified",
+        "dataIssues": []
+      },
+      "status": {
+        "isPublished": true
+      }
+    },
+    {
+      "id": "chemical-science",
+      "slug": "chemical-science",
+      "sourceType": "journal",
+      "titles": {
+        "original": "Chemical Science",
+        "ru": "Химическая наука",
+        "uz": "Kimyo fani",
+        "en": "Chemical Science",
+        "former": null
+      },
+      "publisher": "Royal Society of Chemistry",
+      "identifiers": {
+        "issn": "2041-6520",
+        "eissn": "2041-6539"
+      },
+      "access": {
+        "label": "Открытый доступ",
+        "isOpenAccess": true
+      },
+      "indexing": {
+        "isScopusIndexed": true,
+        "scopusCoverage": "2010-2026",
+        "isOakRecommended": null
+      },
+      "subjectAreas": [
+        {
+          "group": "Chemistry",
+          "name": "General Chemistry"
+        }
+      ],
+      "metrics": {
+        "citescore2025": 12.0,
+        "sjr2025": 2.011,
+        "snip2025": 1.42,
+        "citescoreTracker2026": 10.9,
+        "citations2022_2025": 77971,
+        "documents2022_2025": 6498,
+        "currentCitations2026": 65894,
+        "currentDocuments2026": 6020
+      },
+      "rankings": [
+        {
+          "group": "Chemistry",
+          "category": "General Chemistry",
+          "rank": 42,
+          "total": 402,
+          "percentile": 89,
+          "quartile": "Q1",
+          "raw": "Chemistry > General Chemistry #42/402 (89%)"
+        }
+      ],
+      "assets": {
+        "website": "https://www.rsc.org/publishing/journals/chemical-science",
+        "screenshotUrl": "https://www.genspark.ai/api/files/s/KTcHckBI"
+      },
+      "content": {
+        "shortDescriptionRu": "Флагманский журнал открытого доступа Королевского химического общества, охватывающий весь спектр химических наук и публикующий смелые междисциплинарные исследования высокого уровня.",
+        "shortDescriptionUz": "Qirollik Kimyo Jamiyatining flagman ochiq kirish jurnali bo‘lib, kimyo fanlarining barcha yo‘nalishlarini qamrab oladi va yuqori ta’sirga ega fanlararo tadqiqotlarni nashr etadi.",
+        "shortDescriptionEn": "The flagship open access journal of the Royal Society of Chemistry, covering the full breadth of the chemical sciences and publishing bold, high-impact interdisciplinary research."
+      },
+      "review": {
+        "notes": "verified via official RSC journal page and OpenAlex",
+        "verificationStatus": "verified",
+        "dataIssues": []
+      },
+      "status": {
+        "isPublished": true
+      }
+    },
+    {
+      "id": "maternal-and-child-health-journal",
+      "slug": "maternal-and-child-health-journal",
+      "sourceType": "journal",
+      "titles": {
+        "original": "Maternal and Child Health Journal",
+        "ru": "Журнал материнского и детского здоровья",
+        "uz": "Ona va bola salomatligi jurnali",
+        "en": "Maternal and Child Health Journal",
+        "former": null
+      },
+      "publisher": "Springer Nature",
+      "identifiers": {
+        "issn": "1092-7875",
+        "eissn": "1573-6628"
+      },
+      "access": {
+        "label": "Подписка / гибридная модель",
+        "isOpenAccess": false
+      },
+      "indexing": {
+        "isScopusIndexed": true,
+        "scopusCoverage": "1997-2026",
+        "isOakRecommended": null
+      },
+      "subjectAreas": [
+        {
+          "group": "Medicine",
+          "name": "Pediatrics, Perinatology and Child Health"
+        },
+        {
+          "group": "Medicine",
+          "name": "Obstetrics and Gynecology"
+        },
+        {
+          "group": "Medicine",
+          "name": "Public Health, Environmental and Occupational Health"
+        },
+        {
+          "group": "Medicine",
+          "name": "Epidemiology"
+        }
+      ],
+      "metrics": {
+        "citescore2025": 3.8,
+        "sjr2025": 0.788,
+        "snip2025": 0.87,
+        "citescoreTracker2026": 3.0,
+        "citations2022_2025": 3314,
+        "documents2022_2025": 877,
+        "currentCitations2026": 2103,
+        "currentDocuments2026": 703
+      },
+      "rankings": [
+        {
+          "group": "Medicine",
+          "category": "Pediatrics, Perinatology and Child Health",
+          "rank": 96,
+          "total": 351,
+          "percentile": 72,
+          "quartile": "Q2",
+          "raw": "Medicine > Pediatrics, Perinatology and Child Health #96/351 (72%)"
+        },
+        {
+          "group": "Medicine",
+          "category": "Obstetrics and Gynecology",
+          "rank": 79,
+          "total": 218,
+          "percentile": 63,
+          "quartile": "Q2",
+          "raw": "Medicine > Obstetrics and Gynecology #79/218 (63%)"
+        },
+        {
+          "group": "Medicine",
+          "category": "Public Health, Environmental and Occupational Health",
+          "rank": 279,
+          "total": 725,
+          "percentile": 61,
+          "quartile": "Q2",
+          "raw": "Medicine > Public Health, Environmental and Occupational Health #279/725 (61%)"
+        }
+      ],
+      "assets": {
+        "website": "https://link.springer.com/journal/10995",
+        "screenshotUrl": "https://www.genspark.ai/api/files/s/WhVityZ4"
+      },
+      "content": {
+        "shortDescriptionRu": "Журнал, направленный на развитие научных и профессиональных знаний в области охраны здоровья матери и ребёнка через публикацию исследований, обзоров и материалов, значимых для политики здравоохранения.",
+        "shortDescriptionUz": "Onalar va bolalar salomatligi sohasidagi ilmiy hamda amaliy bilimlarni rivojlantirishga qaratilgan, tadqiqotlar, sharhlar va siyosat uchun muhim materiallarni nashr etuvchi jurnal.",
+        "shortDescriptionEn": "A journal devoted to advancing scientific and professional knowledge in maternal and child health through research, reviews, and policy-relevant studies."
+      },
+      "review": {
+        "notes": "verified via Springer journal page and OpenAlex",
+        "verificationStatus": "verified",
+        "dataIssues": [
+          "fourth ranking for Medicine > Epidemiology was cropped in the source screenshot and not included"
+        ]
+      },
+      "status": {
+        "isPublished": true
+      }
+    },
+    {
+      "id": "educational-technology-research-and-development",
+      "slug": "educational-technology-research-and-development",
+      "sourceType": "journal",
+      "titles": {
+        "original": "Educational Technology Research and Development",
+        "ru": "Исследования и разработки в области образовательных технологий",
+        "uz": "Ta’lim texnologiyalari bo‘yicha tadqiqotlar va ishlanmalar",
+        "en": "Educational Technology Research and Development",
+        "former": "Educational Communication and Technology Journal"
+      },
+      "publisher": "Springer Nature",
+      "identifiers": {
+        "issn": "1042-1629",
+        "eissn": "1556-6501"
+      },
+      "access": {
+        "label": "Подписка / гибридная модель",
+        "isOpenAccess": false
+      },
+      "indexing": {
+        "isScopusIndexed": true,
+        "scopusCoverage": "1957, 1989-2026",
+        "isOakRecommended": null
+      },
+      "subjectAreas": [
+        {
+          "group": "Social Sciences",
+          "name": "Education"
+        }
+      ],
+      "metrics": {
+        "citescore2025": 10.7,
+        "sjr2025": 1.836,
+        "snip2025": 2.366,
+        "citescoreTracker2026": 11.3,
+        "citations2022_2025": 4979,
+        "documents2022_2025": 464,
+        "currentCitations2026": 4715,
+        "currentDocuments2026": 418
+      },
+      "rankings": [
+        {
+          "group": "Social Sciences",
+          "category": "Education",
+          "rank": 60,
+          "total": 1698,
+          "percentile": 96,
+          "quartile": "Q1",
+          "raw": "Social Sciences > Education #60/1698 (96%)"
+        }
+      ],
+      "assets": {
+        "website": "https://link.springer.com/journal/11423",
+        "screenshotUrl": "https://www.genspark.ai/api/files/s/AX9PnmrO"
+      },
+      "content": {
+        "shortDescriptionRu": "Научный журнал, посвящённый исследованиям и разработкам в области образовательных технологий, включая instructional design, учебные среды и технологии, поддерживающие обучение.",
+        "shortDescriptionUz": "Ta’lim texnologiyalari, instructional design, o‘quv muhitlari va texnologiya bilan boyitilgan ta’lim bo‘yicha tadqiqotlar hamda ishlanmalarga bag‘ishlangan ilmiy jurnal.",
+        "shortDescriptionEn": "A scholarly journal focused on research and development in educational technology, including instructional design, learning environments, and technology-enhanced education."
+      },
+      "review": {
+        "notes": "verified via Springer journal page",
+        "verificationStatus": "verified",
+        "dataIssues": []
+      },
+      "status": {
+        "isPublished": true
+      }
+    },
+    {
+      "id": "international-journal-of-society-culture-and-language",
+      "slug": "international-journal-of-society-culture-and-language",
+      "sourceType": "journal",
+      "titles": {
+        "original": "International Journal of Society, Culture and Language",
+        "ru": "Международный журнал общества, культуры и языка",
+        "uz": "Jamiyat, madaniyat va til xalqaro jurnali",
+        "en": "International Journal of Society, Culture and Language",
+        "former": null
+      },
+      "publisher": "Lulu Press Inc",
+      "identifiers": {
+        "issn": null,
+        "eissn": "2329-2210"
+      },
+      "access": {
+        "label": "Открытый доступ",
+        "isOpenAccess": true
+      },
+      "indexing": {
+        "isScopusIndexed": true,
+        "scopusCoverage": "2019-2026",
+        "isOakRecommended": null
+      },
+      "subjectAreas": [
+        {
+          "group": "Social Sciences",
+          "name": "Anthropology"
+        },
+        {
+          "group": "Social Sciences",
+          "name": "Linguistics and Language"
+        },
+        {
+          "group": "Social Sciences",
+          "name": "Gender Studies"
+        },
+        {
+          "group": "Social Sciences",
+          "name": "Education"
+        }
+      ],
+      "metrics": {
+        "citescore2025": 3.8,
+        "sjr2025": 0.431,
+        "snip2025": 1.154,
+        "citescoreTracker2026": 3.5,
+        "citations2022_2025": 768,
+        "documents2022_2025": 202,
+        "currentCitations2026": 645,
+        "currentDocuments2026": 186
+      },
+      "rankings": [
+        {
+          "group": "Social Sciences",
+          "category": "Anthropology",
+          "rank": 45,
+          "total": 536,
+          "percentile": 91,
+          "quartile": "Q1",
+          "raw": "Social Sciences > Anthropology #45/536 (91%)"
+        },
+        {
+          "group": "Social Sciences",
+          "category": "Linguistics and Language",
+          "rank": 118,
+          "total": 1221,
+          "percentile": 90,
+          "quartile": "Q1",
+          "raw": "Social Sciences > Linguistics and Language #118/1221 (90%)"
+        },
+        {
+          "group": "Social Sciences",
+          "category": "Gender Studies",
+          "rank": 45,
+          "total": 233,
+          "percentile": 80,
+          "quartile": "Q1",
+          "raw": "Social Sciences > Gender Studies #45/233 (80%)"
+        }
+      ],
+      "assets": {
+        "website": "https://www.ijscl.com/",
+        "screenshotUrl": "https://www.genspark.ai/api/files/s/0eumBPVq"
+      },
+      "content": {
+        "shortDescriptionRu": "Полностью рецензируемый журнал открытого доступа, публикующий оригинальные исследования и обзоры о взаимосвязях общества, культуры и языка, значимые для лингвистики, антропологии, образования и межкультурных исследований.",
+        "shortDescriptionUz": "Jamiyat, madaniyat va til o‘rtasidagi bog‘liqliklar haqida original tadqiqotlar va sharhlarni nashr etuvchi, tilshunoslik, antropologiya, ta’lim va madaniyatlararo tadqiqotlar uchun amaliy ahamiyatga ega ochiq kirishdagi to‘liq taqrizlanadigan jurnal.",
+        "shortDescriptionEn": "A fully peer-reviewed open access journal publishing original research and reviews on the relationships between society, culture, and language, with practical relevance for linguistics, anthropology, education, and intercultural studies."
+      },
+      "review": {
+        "notes": "verified via official journal site and ISSN portal metadata",
+        "verificationStatus": "verified",
+        "dataIssues": [
+          "fourth ranking for Social Sciences > Education was cropped in the source screenshot and not included"
+        ]
+      },
+      "status": {
+        "isPublished": true
+      }
+    },
+    {
+      "id": "3l-language-linguistics-literature",
+      "slug": "3l-language-linguistics-literature",
+      "sourceType": "journal",
+      "titles": {
+        "original": "3L: Language, Linguistics, Literature",
+        "ru": "3L: Язык, лингвистика, литература",
+        "uz": "3L: Til, tilshunoslik, adabiyot",
+        "en": "3L: Language, Linguistics, Literature",
+        "former": null
+      },
+      "publisher": "Penerbit Universiti Kebangsaan Malaysia",
+      "identifiers": {
+        "issn": "0128-5157",
+        "eissn": "2550-2247"
+      },
+      "access": {
+        "label": "Открытый доступ",
+        "isOpenAccess": true
+      },
+      "indexing": {
+        "isScopusIndexed": true,
+        "scopusCoverage": "2008-2026",
+        "isOakRecommended": null
+      },
+      "subjectAreas": [
+        {
+          "group": "Arts and Humanities",
+          "name": "Literature and Literary Theory"
+        },
+        {
+          "group": "Arts and Humanities",
+          "name": "Language and Linguistics"
+        },
+        {
+          "group": "Social Sciences",
+          "name": "Linguistics and Language"
+        }
+      ],
+      "metrics": {
+        "citescore2025": 1.6,
+        "sjr2025": 0.401,
+        "snip2025": 1.077,
+        "citescoreTracker2026": 1.3,
+        "citations2022_2025": 481,
+        "documents2022_2025": 304,
+        "currentCitations2026": 344,
+        "currentDocuments2026": 263
+      },
+      "rankings": [
+        {
+          "group": "Arts and Humanities",
+          "category": "Literature and Literary Theory",
+          "rank": 36,
+          "total": 1186,
+          "percentile": 97,
+          "quartile": "Q1",
+          "raw": "Arts and Humanities > Literature and Literary Theory #36/1186 (97%)"
+        },
+        {
+          "group": "Arts and Humanities",
+          "category": "Language and Linguistics",
+          "rank": 278,
+          "total": 1137,
+          "percentile": 75,
+          "quartile": "Q1",
+          "raw": "Arts and Humanities > Language and Linguistics #278/1137 (75%)"
+        },
+        {
+          "group": "Social Sciences",
+          "category": "Linguistics and Language",
+          "rank": 331,
+          "total": 1221,
+          "percentile": 72,
+          "quartile": "Q2",
+          "raw": "Social Sciences > Linguistics and Language #331/1221 (72%)"
+        }
+      ],
+      "assets": {
+        "website": "https://ejournal.ukm.my/3l",
+        "screenshotUrl": "https://www.genspark.ai/api/files/s/6eXUYwho"
+      },
+      "content": {
+        "shortDescriptionRu": "Международный рецензируемый журнал издательства UKM Press, рассматривающий ключевые вопросы языка, лингвистики, литературы и английских языковых исследований, особенно в многоязычных контекстах.",
+        "shortDescriptionUz": "UKM Press tomonidan nashr etiladigan xalqaro taqrizlanadigan jurnal bo‘lib, til, tilshunoslik, adabiyot va ingliz tili tadqiqotlarining asosiy masalalarini, ayniqsa ko‘p tilli kontekstlarda, yoritadi.",
+        "shortDescriptionEn": "A peer-reviewed international journal published by UKM Press that explores key issues in language, linguistics, literature, and English language studies, especially in multilingual contexts."
+      },
+      "review": {
+        "notes": "verified via official journal site and OpenAlex",
+        "verificationStatus": "verified",
+        "dataIssues": []
+      },
+      "status": {
+        "isPublished": true
+      }
+    },
+    {
+      "id": "australasian-accounting-business-and-finance-journal",
+      "slug": "australasian-accounting-business-and-finance-journal",
+      "sourceType": "journal",
+      "titles": {
+        "original": "Australasian Accounting, Business and Finance Journal",
+        "ru": "Австралазийский журнал бухгалтерского учёта, бизнеса и финансов",
+        "uz": "Avstralaziya buxgalteriya hisobi, biznes va moliya jurnali",
+        "en": "Australasian Accounting, Business and Finance Journal",
+        "former": null
+      },
+      "publisher": "University of Wollongong",
+      "identifiers": {
+        "issn": "1834-2000",
+        "eissn": "1834-2019"
+      },
+      "access": {
+        "label": "Открытый доступ",
+        "isOpenAccess": true
+      },
+      "indexing": {
+        "isScopusIndexed": true,
+        "scopusCoverage": "2014-2026",
+        "isOakRecommended": null
+      },
+      "subjectAreas": [
+        {
+          "group": "Economics, Econometrics and Finance",
+          "name": "Finance"
+        },
+        {
+          "group": "Business, Management and Accounting",
+          "name": "General Business, Management and Accounting"
+        }
+      ],
+      "metrics": {
+        "citescore2025": 4.9,
+        "sjr2025": 0.386,
+        "snip2025": 0.675,
+        "citescoreTracker2026": 3.3,
+        "citations2022_2025": 1078,
+        "documents2022_2025": 222,
+        "currentCitations2026": 566,
+        "currentDocuments2026": 174
+      },
+      "rankings": [
+        {
+          "group": "Economics, Econometrics and Finance",
+          "category": "Finance",
+          "rank": 102,
+          "total": 342,
+          "percentile": 70,
+          "quartile": "Q2",
+          "raw": "Economics, Econometrics and Finance > Finance #102/342 (70%)"
+        },
+        {
+          "group": "Business, Management and Accounting",
+          "category": "General Business, Management and Accounting",
+          "rank": 85,
+          "total": 235,
+          "percentile": 64,
+          "quartile": "Q2",
+          "raw": "Business, Management and Accounting > General Business, Management and Accounting #85/235 (64%)"
+        }
+      ],
+      "assets": {
+        "website": "https://www.uowoajournals.org/aabfj/",
+        "screenshotUrl": "https://www.genspark.ai/api/files/s/DVCblyql"
+      },
+      "content": {
+        "shortDescriptionRu": "Двухсторонне слепо рецензируемый журнал открытого доступа, публикующий междисциплинарные исследования в области бухгалтерского учёта, бизнеса, финансов и финансового планирования.",
+        "shortDescriptionUz": "Buxgalteriya hisobi, biznes, moliya va moliyaviy rejalashtirish bo‘yicha fanlararo tadqiqotlarni chop etuvchi ikki tomonlama anonim taqrizli ochiq kirish jurnali.",
+        "shortDescriptionEn": "A double-blind peer-reviewed open access journal publishing interdisciplinary research across accounting, business, finance, and financial planning."
+      },
+      "review": {
+        "notes": "verified via official journal site and OpenAlex",
+        "verificationStatus": "verified",
+        "dataIssues": []
+      },
+      "status": {
+        "isPublished": true
+      }
+    },
+    {
+      "id": "fermentation",
+      "slug": "fermentation",
+      "sourceType": "journal",
+      "titles": {
+        "original": "Fermentation",
+        "ru": "Ферментация",
+        "uz": "Fermentatsiya",
+        "en": "Fermentation",
+        "former": null
+      },
+      "publisher": "MDPI",
+      "identifiers": {
+        "issn": null,
+        "eissn": "2311-5637"
+      },
+      "access": {
+        "label": "Открытый доступ",
+        "isOpenAccess": true
+      },
+      "indexing": {
+        "isScopusIndexed": true,
+        "scopusCoverage": "2015-2026",
+        "isOakRecommended": null
+      },
+      "subjectAreas": [
+        {
+          "group": "Agricultural and Biological Sciences",
+          "name": "Plant Science"
+        },
+        {
+          "group": "Biochemistry, Genetics and Molecular Biology",
+          "name": "Biochemistry, Genetics and Molecular Biology (miscellaneous)"
+        },
+        {
+          "group": "Agricultural and Biological Sciences",
+          "name": "Food Science"
+        }
+      ],
+      "metrics": {
+        "citescore2025": 7.7,
+        "sjr2025": 0.735,
+        "snip2025": 0.99,
+        "citescoreTracker2026": 7.7,
+        "citations2022_2025": 23734,
+        "documents2022_2025": 3097,
+        "currentCitations2026": 20297,
+        "currentDocuments2026": 2642
+      },
+      "rankings": [
+        {
+          "group": "Agricultural and Biological Sciences",
+          "category": "Plant Science",
+          "rank": 62,
+          "total": 541,
+          "percentile": 88,
+          "quartile": "Q1",
+          "raw": "Agricultural and Biological Sciences > Plant Science #62/541 (88%)"
+        },
+        {
+          "group": "Biochemistry, Genetics and Molecular Biology",
+          "category": "Biochemistry, Genetics and Molecular Biology (miscellaneous)",
+          "rank": 19,
+          "total": 144,
+          "percentile": 87,
+          "quartile": "Q1",
+          "raw": "Biochemistry, Genetics and Molecular Biology > Biochemistry, Genetics and Molecular Biology (miscellaneous) #19/144 (87%)"
+        },
+        {
+          "group": "Agricultural and Biological Sciences",
+          "category": "Food Science",
+          "rank": 80,
+          "total": 420,
+          "percentile": 81,
+          "quartile": "Q1",
+          "raw": "Agricultural and Biological Sciences > Food Science #80/420 (81%)"
+        }
+      ],
+      "assets": {
+        "website": "https://www.mdpi.com/journal/fermentation",
+        "screenshotUrl": "https://www.genspark.ai/api/files/s/trgVuL52"
+      },
+      "content": {
+        "shortDescriptionRu": "Международный рецензируемый журнал открытого доступа, посвящённый процессам ферментации, технологиям ферментации и их применениям в биотехнологии, пищевой науке и микробиологии.",
+        "shortDescriptionUz": "Fermentatsiya jarayonlari, fermentatsiya texnologiyasi hamda ularning biotexnologiya, oziq-ovqat fani va mikrobiologiyadagi qo‘llanishlariga bag‘ishlangan xalqaro taqrizlanadigan ochiq kirish jurnali.",
+        "shortDescriptionEn": "An international peer-reviewed open access journal focused on fermentation processes, fermentation technology, and related applications in biotechnology, food science, and microbiology."
+      },
+      "review": {
+        "notes": "verified via official journal site and OpenAlex",
+        "verificationStatus": "verified",
+        "dataIssues": []
+      },
+      "status": {
+        "isPublished": true
+      }
+    }
+  ]
+}

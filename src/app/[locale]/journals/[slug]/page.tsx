@@ -376,10 +376,6 @@ export default async function LocalizedJournalDetailsPage({params}: Props) {
 
               <p className="mt-3 text-sm text-[#8A6A56]">{altTitle}</p>
 
-              <p className="mt-6 max-w-3xl text-base leading-8 text-[#5C5C5C] sm:text-lg">
-                {journal.shortDescription}
-              </p>
-
               <div className="mt-6 flex flex-wrap gap-3">
                 <Link
                   href={publishHref}
