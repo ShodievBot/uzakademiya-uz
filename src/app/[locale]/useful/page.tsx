@@ -69,7 +69,7 @@ export default async function UsefulListPage({
   const locale = normalizeLocale(resolvedParams.locale);
 
   const t = dictionary[locale];
-  const pages = getUsefulPages();
+  const pages = await getUsefulPages();
 
   return (
     <main className="pb-16">
