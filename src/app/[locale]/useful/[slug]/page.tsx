@@ -6,6 +6,7 @@ import {
   pickLocale,
   pickLocaleArray
 } from '@/lib/useful';
+import type {Metadata} from 'next';
 
 type Locale = 'ru' | 'uz' | 'en';
 
@@ -97,6 +98,55 @@ function ParagraphBlock({text}: {text: string}) {
   }
 
   return <p className="text-sm leading-8 text-[#5C5C5C] sm:text-base">{text}</p>;
+}
+
+export async function generateMetadata({
+  params
+}: {
+  params: Promise<{locale: string; slug: string}>;
+}): Promise<Metadata> {
+  const {locale: rawLocale, slug} = await params;
+  const locale = normalizeLocale(rawLocale) as Locale;
+  const page = await getUsefulPageBySlug(slug);
+
+  if (!page) {
+    return {
+      title:
+        locale === 'uz'
+          ? 'Material topilmadi'
+          : locale === 'en'
+            ? 'Material not found'
+            : 'Материал не найден',
+      description:
+        locale === 'uz'
+          ? 'So‘ralgan foydali material topilmadi.'
+          : locale === 'en'
+            ? 'The requested useful material was not found.'
+            : 'Запрошенный полезный материал не найден.'
+    };
+  }
+
+  const title = pickLocale(page.fullTitle || page.title, locale);
+  const description =
+    pickLocale(page.shortText || page.cardText, locale) ||
+    (locale === 'uz'
+      ? 'Mualliflar va tadqiqotchilar uchun foydali material.'
+      : locale === 'en'
+        ? 'Useful material for authors and researchers.'
+        : 'Полезный материал для авторов и исследователей.');
+
+  return {
+    title,
+    description,
+    alternates: {
+      canonical: `/${locale}/useful/${page.slug}`,
+      languages: {
+        ru: `/ru/useful/${page.slug}`,
+        uz: `/uz/useful/${page.slug}`,
+        en: `/en/useful/${page.slug}`
+      }
+    }
+  };
 }
 
 export default async function UsefulDetailPage({

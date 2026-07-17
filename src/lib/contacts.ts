@@ -1,16 +1,41 @@
-export const CONTACTS = {
-  email: 'info@uzakademiya.uz',
-  telegramUsername: 'scopus_nashri',
-  whatsappNumber: '998901234567',
-  phoneNumber: '+998901234567',
-  instagramHandle: '@Scopus_nashri',
-  instagramUrl: 'https://instagram.com/Scopus_nashri',
-  siteUrl: 'https://uzakademiya.uz'
-};
+import type {SiteSettingsData} from '@/lib/site-settings';
 
 function normalizeLocale(locale?: string) {
   if (locale === 'uz' || locale === 'en') return locale;
   return 'ru';
+}
+
+function normalizePhoneLinkValue(value: string) {
+  return value.replace(/\s+/g, '');
+}
+
+function normalizeDigits(value: string) {
+  return value.replace(/\D+/g, '');
+}
+
+export function formatTelegramHandle(username: string) {
+  const clean = username.trim().replace(/^@+/, '');
+  return `@${clean}`;
+}
+
+export function formatWhatsappDisplay(value: string) {
+  const trimmed = value.trim();
+
+  if (trimmed.startsWith('+')) {
+    return trimmed;
+  }
+
+  const digits = normalizeDigits(trimmed);
+  return digits ? `+${digits}` : trimmed;
+}
+
+export function formatInstagramHandle(value: string) {
+  const trimmed = value.trim();
+
+  if (!trimmed) return '';
+  if (trimmed.startsWith('@')) return trimmed;
+
+  return `@${trimmed}`;
 }
 
 export function getLocalizedLeadMessage(
@@ -18,7 +43,6 @@ export function getLocalizedLeadMessage(
   journalTitle?: string | null
 ) {
   const safeTitle = journalTitle?.trim();
-
   const normalizedLocale = normalizeLocale(locale);
 
   if (normalizedLocale === 'uz') {
@@ -61,20 +85,42 @@ export function getLocalizedLeadSubject(
     : 'Публикация статьи';
 }
 
-export function getContactLinks(locale: string, journalTitle?: string | null) {
+export function getContactDisplayValues(settings: SiteSettingsData) {
+  return {
+    email: settings.contactEmail,
+    telegramUsername: settings.telegramUsername.replace(/^@+/, ''),
+    telegramHandle: formatTelegramHandle(settings.telegramUsername),
+    whatsappDisplay: formatWhatsappDisplay(settings.whatsappNumber),
+    whatsappDigits: normalizeDigits(settings.whatsappNumber),
+    phoneDisplay: settings.phoneNumber,
+    phoneLink: normalizePhoneLinkValue(settings.phoneNumber),
+    instagramHandle: formatInstagramHandle(settings.instagramHandle),
+    instagramUrl: settings.instagramUrl,
+    siteName: settings.siteName,
+    siteUrl: settings.siteUrl
+  };
+}
+
+export function getContactLinks(
+  settings: SiteSettingsData,
+  locale: string,
+  journalTitle?: string | null
+) {
   const message = getLocalizedLeadMessage(locale, journalTitle);
   const subject = getLocalizedLeadSubject(locale, journalTitle);
 
   const encodedMessage = encodeURIComponent(message);
   const encodedSubject = encodeURIComponent(subject);
-  const encodedSiteUrl = encodeURIComponent(CONTACTS.siteUrl);
+  const encodedSiteUrl = encodeURIComponent(settings.siteUrl);
+
+  const display = getContactDisplayValues(settings);
 
   return {
-    email: `mailto:${CONTACTS.email}?subject=${encodedSubject}&body=${encodedMessage}`,
+    email: `mailto:${settings.contactEmail}?subject=${encodedSubject}&body=${encodedMessage}`,
     telegram: `https://t.me/share/url?url=${encodedSiteUrl}&text=${encodedMessage}`,
-    whatsapp: `https://wa.me/${CONTACTS.whatsappNumber}?text=${encodedMessage}`,
-    phone: `tel:${CONTACTS.phoneNumber.replace(/\s+/g, '')}`,
-    instagram: CONTACTS.instagramUrl,
+    whatsapp: `https://wa.me/${display.whatsappDigits}?text=${encodedMessage}`,
+    phone: `tel:${display.phoneLink}`,
+    instagram: settings.instagramUrl,
     message,
     subject
   };

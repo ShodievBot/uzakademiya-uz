@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import {notFound} from 'next/navigation';
 import {getLegislationBySlug, normalizeLocale} from '@/lib/legislation';
+import type {Metadata} from 'next';
 
 type Props = {
   params: Promise<{locale: string; slug: string}>;
@@ -114,6 +115,53 @@ function getBody(document: any, locale: Locale): string[] {
 
 function getSourceUrl(document: any): string {
   return document?.sourceUrl || '#';
+}
+
+export async function generateMetadata({
+  params
+}: Props): Promise<Metadata> {
+  const {locale: rawLocale, slug} = await params;
+  const locale = normalizeLocale(rawLocale) as Locale;
+  const document = await getLegislationBySlug(slug);
+
+  if (!document) {
+    return {
+      title:
+        locale === 'uz'
+          ? 'Hujjat topilmadi'
+          : locale === 'en'
+            ? 'Document not found'
+            : 'Документ не найден',
+      description:
+        locale === 'uz'
+          ? 'So‘ralgan hujjat topilmadi.'
+          : locale === 'en'
+            ? 'The requested document was not found.'
+            : 'Запрошенный документ не найден.'
+    };
+  }
+
+  const title = pickText(document.title, locale);
+  const description =
+    pickText(document.summary, locale) ||
+    (locale === 'uz'
+      ? 'Ilmiy faoliyat va nashr talablari bo‘yicha rasmiy hujjat.'
+      : locale === 'en'
+        ? 'Official document related to scientific activity and publication requirements.'
+        : 'Официальный документ по научной деятельности и публикационным требованиям.');
+
+  return {
+    title,
+    description,
+    alternates: {
+      canonical: `/${locale}/legislation/${document.slug}`,
+      languages: {
+        ru: `/ru/legislation/${document.slug}`,
+        uz: `/uz/legislation/${document.slug}`,
+        en: `/en/legislation/${document.slug}`
+      }
+    }
+  };
 }
 
 export default async function LegislationDetailPage({params}: Props) {

@@ -4,6 +4,7 @@ import {
   normalizeLocale,
   pickLocalizedText
 } from '@/lib/legislation';
+import type {Metadata} from 'next';
 
 type Props = {
   params: Promise<{locale: string}>;
@@ -62,6 +63,51 @@ function getContent(locale: string) {
     noteText:
       'Финальную проверку актуальности документов и требований всегда выполняйте по официальным государственным или уполномоченным источникам.',
     contactCta: 'Перейти в контакты'
+  };
+}
+
+function getMetadataCopy(locale: string) {
+  if (locale === 'uz') {
+    return {
+      title: 'Qonunchilik — rasmiy hujjatlar va manbalar',
+      description:
+        'Ilmiy faoliyat, attestatsiya va nashr talablari bo‘yicha qonunchilik hujjatlari va rasmiy manbalar.'
+    };
+  }
+
+  if (locale === 'en') {
+    return {
+      title: 'Legislation — official documents and sources',
+      description:
+        'Official documents and reference sources related to scientific activity, attestation, and publication requirements.'
+    };
+  }
+
+  return {
+    title: 'Законодательство — официальные документы и источники',
+    description:
+      'Официальные документы и нормативные источники по научной деятельности, аттестации и публикационным требованиям.'
+  };
+}
+
+export async function generateMetadata({
+  params
+}: Props): Promise<Metadata> {
+  const {locale: rawLocale} = await params;
+  const locale = normalizeLocale(rawLocale);
+  const meta = getMetadataCopy(locale);
+
+  return {
+    title: meta.title,
+    description: meta.description,
+    alternates: {
+      canonical: `/${locale}/legislation`,
+      languages: {
+        ru: '/ru/legislation',
+        uz: '/uz/legislation',
+        en: '/en/legislation'
+      }
+    }
   };
 }
 

@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import {JournalCard} from '@/components/journals/journal-card';
 import {getFilteredJournals} from '@/lib/journals';
+import type {Metadata} from 'next';
 
 type Props = {
   params: Promise<{locale: string}>;
@@ -244,6 +245,49 @@ function CheckCard({
       <p className="mt-4 text-sm leading-7 text-[#5C5C5C]">{text}</p>
     </article>
   );
+}
+function getMetadataCopy(locale: string) {
+  if (locale === 'uz') {
+    return {
+      title: 'OAK — jurnallar va muallif yo‘riqnomasi',
+      description:
+        'OAK tavsiya etgan jurnallar, tanlash mezonlari, muallif uchun tekshiruv nuqtalari va amaliy tavsiyalar.'
+    };
+  }
+
+  if (locale === 'en') {
+    return {
+      title: 'SAC — journals and author guidance',
+      description:
+        'Guidance on SAC-recommended journals, selection criteria, author checkpoints, and publication preparation.'
+    };
+  }
+
+  return {
+    title: 'ВАК — журналы и рекомендации для автора',
+    description:
+      'Навигация по рекомендованным журналам ВАК, критериям выбора, проверочным пунктам и подготовке к публикации.'
+  };
+}
+
+export async function generateMetadata({
+  params
+}: Props): Promise<Metadata> {
+  const {locale} = await params;
+  const meta = getMetadataCopy(locale);
+
+  return {
+    title: meta.title,
+    description: meta.description,
+    alternates: {
+      canonical: `/${locale}/oak`,
+      languages: {
+        ru: '/ru/oak',
+        uz: '/uz/oak',
+        en: '/en/oak'
+      }
+    }
+  };
 }
 
 export default async function LocalizedOakPage({params}: Props) {
