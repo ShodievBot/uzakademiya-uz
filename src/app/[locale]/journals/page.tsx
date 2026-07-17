@@ -214,7 +214,7 @@ export default async function LocalizedJournalsPage({
   const query = (await searchParams) || {};
   const copy = getCopy(locale);
 
-  const filteredJournals = getFilteredJournals({
+  const filteredJournals = await getFilteredJournals({
     q: query.q,
     scopus: query.scopus,
     oak: query.oak,
@@ -222,7 +222,7 @@ export default async function LocalizedJournalsPage({
     quartile: query.quartile
   });
 
-  const allJournals = getFilteredJournals({});
+  const allJournals = await getFilteredJournals({});
   const scopusCount = allJournals.filter((journal) => journal.isScopusIndexed).length;
   const oakCount = allJournals.filter((journal) => journal.isOakRecommended).length;
   const activeFiltersCount = getActiveFiltersCount(query);

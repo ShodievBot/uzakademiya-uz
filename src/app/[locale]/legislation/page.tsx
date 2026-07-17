@@ -69,7 +69,7 @@ export default async function LocalizedLegislationPage({params}: Props) {
   const {locale: rawLocale} = await params;
   const locale = normalizeLocale(rawLocale);
   const t = getContent(locale);
-  const documents = getAllLegislation();
+  const documents = await getAllLegislation();
 
   return (
     <main className="pb-16">

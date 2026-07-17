@@ -250,7 +250,7 @@ export default async function LocalizedOakPage({params}: Props) {
   const {locale} = await params;
   const copy = getCopy(locale);
   const checks = getChecks(locale);
-  const oakJournals = getFilteredJournals({oak: 'yes'});
+  const oakJournals = await getFilteredJournals({oak: 'yes'});
 
   const scopusCount = oakJournals.filter((journal) => journal.isScopusIndexed).length;
   const countriesCount = new Set(oakJournals.map((journal) => journal.country)).size;

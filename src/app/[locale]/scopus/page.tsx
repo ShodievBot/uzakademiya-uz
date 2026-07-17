@@ -314,7 +314,7 @@ export default async function LocalizedScopusPage({params}: Props) {
   const {locale} = await params;
   const copy = getCopy(locale);
   const stages = getStages(locale);
-  const scopusJournals = getFilteredJournals({scopus: 'yes'});
+  const scopusJournals = await getFilteredJournals({scopus: 'yes'});
 
   const q12Count = scopusJournals.filter(
     (journal) => journal.quartile === 'Q1' || journal.quartile === 'Q2'

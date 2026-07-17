@@ -308,7 +308,7 @@ export default async function LocalizedJournalDetailsPage({params}: Props) {
   const {locale, slug} = await params;
   const copy = getCopy(locale);
 
-  const journal = getJournalBySlug(slug);
+  const journal = await getJournalBySlug(slug);
 
   if (!journal) {
     notFound();

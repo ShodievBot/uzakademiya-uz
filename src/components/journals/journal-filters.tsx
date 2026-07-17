@@ -99,11 +99,11 @@ function hasActiveFilters(searchParams: JournalFiltersProps['searchParams']) {
   );
 }
 
-export function JournalFilters({
+export async function JournalFilters({
   searchParams,
   locale = 'ru'
 }: JournalFiltersProps) {
-  const subjects = getUniqueSubjects();
+  const subjects = await getUniqueSubjects();
   const copy = getCopy(locale);
   const active = hasActiveFilters(searchParams);
 
