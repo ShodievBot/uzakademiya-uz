@@ -1,4 +1,8 @@
-import {Quartile, type Prisma, type VerificationStatus as PrismaVerificationStatus} from '@prisma/client';
+import {
+  Quartile,
+  type Prisma,
+  type VerificationStatus as PrismaVerificationStatus
+} from '@prisma/client';
 import {prisma} from '@/lib/prisma';
 import {getQuartileFromPercentile} from '@/lib/scopus';
 import type {Journal} from '@/types/journal';
@@ -27,6 +31,9 @@ function mapJournalFromDb(journal: {
   titleRu: string;
   titleUz: string;
   shortDescription: string;
+  shortDescriptionRu: string | null;
+  shortDescriptionUz: string | null;
+  shortDescriptionEn: string | null;
   publisher: string;
   website: string;
   coverImage: string | null;
@@ -58,6 +65,9 @@ function mapJournalFromDb(journal: {
     titleRu: journal.titleRu,
     titleUz: journal.titleUz,
     shortDescription: journal.shortDescription,
+    shortDescriptionRu: journal.shortDescriptionRu ?? '',
+    shortDescriptionUz: journal.shortDescriptionUz ?? '',
+    shortDescriptionEn: journal.shortDescriptionEn ?? '',
     publisher: journal.publisher,
     website: journal.website,
     coverImage: journal.coverImage,
@@ -136,7 +146,11 @@ export async function getFilteredJournals(
       {title: {contains: query, mode: 'insensitive'}},
       {titleRu: {contains: query, mode: 'insensitive'}},
       {titleUz: {contains: query, mode: 'insensitive'}},
-      {publisher: {contains: query, mode: 'insensitive'}}
+      {publisher: {contains: query, mode: 'insensitive'}},
+      {shortDescription: {contains: query, mode: 'insensitive'}},
+      {shortDescriptionRu: {contains: query, mode: 'insensitive'}},
+      {shortDescriptionUz: {contains: query, mode: 'insensitive'}},
+      {shortDescriptionEn: {contains: query, mode: 'insensitive'}}
     ];
   }
 
@@ -197,4 +211,43 @@ export async function getUniqueSubjects(): Promise<string[]> {
 
   const allSubjects = journals.flatMap((journal) => journal.subjectAreas || []);
   return [...new Set(allSubjects)].sort((a, b) => a.localeCompare(b));
+}
+
+export function getJournalShortDescriptionByLocale(
+  journal: Pick<
+    Journal,
+    | 'shortDescription'
+    | 'shortDescriptionRu'
+    | 'shortDescriptionUz'
+    | 'shortDescriptionEn'
+  >,
+  locale: string
+) {
+  if (locale === 'uz') {
+    return (
+      journal.shortDescriptionUz ||
+      journal.shortDescriptionEn ||
+      journal.shortDescriptionRu ||
+      journal.shortDescription ||
+      '—'
+    );
+  }
+
+  if (locale === 'en') {
+    return (
+      journal.shortDescriptionEn ||
+      journal.shortDescriptionRu ||
+      journal.shortDescriptionUz ||
+      journal.shortDescription ||
+      '—'
+    );
+  }
+
+  return (
+    journal.shortDescriptionRu ||
+    journal.shortDescriptionEn ||
+    journal.shortDescriptionUz ||
+    journal.shortDescription ||
+    '—'
+  );
 }

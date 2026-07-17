@@ -1,6 +1,9 @@
 import Link from 'next/link';
 import {notFound} from 'next/navigation';
-import {getJournalBySlug} from '@/lib/journals';
+import {
+  getJournalBySlug,
+  getJournalShortDescriptionByLocale
+} from '@/lib/journals';
 import {
   getJournalPublishHref,
   getJournalPublishLabel
@@ -316,6 +319,7 @@ export default async function LocalizedJournalDetailsPage({params}: Props) {
 
   const title = getJournalTitle(journal, locale);
   const altTitle = getJournalAltTitle(journal, locale);
+  const shortDescription = getJournalShortDescriptionByLocale(journal, locale);
   const publishHref = getJournalPublishHref(journal, locale);
   const publishLabel = getJournalPublishLabel(journal, locale);
 
@@ -428,7 +432,7 @@ export default async function LocalizedJournalDetailsPage({params}: Props) {
               </div>
 
               <p className="text-sm leading-8 text-[#5C5C5C] sm:text-base">
-                {journal.shortDescription}
+                {shortDescription}
               </p>
 
               <div className="mt-6 grid gap-4 md:grid-cols-2">
