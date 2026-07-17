@@ -1,13 +1,15 @@
 import Link from 'next/link';
+import type {Metadata} from 'next';
 import {
   getAllLegislation,
   normalizeLocale,
-  pickLocalizedText
+  pickLocalizedText,
+  siteLocales
 } from '@/lib/legislation';
-import type {Metadata} from 'next';
+import type {SiteLocale} from '@/types/legislation';
 
 type Props = {
-  params: Promise<{locale: string}>;
+  params: Promise<{locale: string}> | {locale: string};
 };
 
 function withLocale(locale: string, href: string) {
@@ -15,86 +17,98 @@ function withLocale(locale: string, href: string) {
   return `/${locale}${href}`;
 }
 
-function getContent(locale: string) {
-  if (locale === 'uz') {
-    return {
-      badge: 'Rasmiy manbalar',
-      title: 'Qonunchilik va rasmiy hujjatlar',
-      description:
-        'Ilmiy faoliyat, attestatsiya, maqola chop etish talablari va rasmiy manbalar bo‘yicha asosiy hujjatlar ro‘yxati.',
-      open: 'Batafsil ochish',
-      source: 'Rasmiy manba',
-      published: 'E’lon qilingan sana',
-      updated: 'Yangilangan sana',
-      noteTitle: 'Muhim eslatma',
-      noteText:
-        'Hujjatlarning dolzarb tahririni va yakuniy talablarni doimo rasmiy davlat yoki vakolatli manbalar orqali tekshiring.',
-      contactCta: 'Kontaktlarga o‘tish'
-    };
+const dictionary: Record<
+  SiteLocale,
+  {
+    badge: string;
+    title: string;
+    description: string;
+    open: string;
+    noteTitle: string;
+    noteText: string;
+    cta: string;
+    categories: Record<string, string>;
   }
-
-  if (locale === 'en') {
-    return {
-      badge: 'Official sources',
-      title: 'Legislation and official documents',
-      description:
-        'A structured list of key documents related to scientific activity, attestation, publication requirements, and official reference sources.',
-      open: 'Open details',
-      source: 'Official source',
-      published: 'Published',
-      updated: 'Updated',
-      noteTitle: 'Important note',
-      noteText:
-        'Always verify the latest version of documents and final requirements using official state or authorized sources.',
-      contactCta: 'Go to contacts'
-    };
-  }
-
-  return {
+> = {
+  ru: {
     badge: 'Официальные источники',
     title: 'Законодательство и официальные документы',
     description:
-      'Структурированный список основных документов по научной деятельности, аттестации, публикационным требованиям и официальным источникам.',
-    open: 'Открыть подробнее',
-    source: 'Официальный источник',
-    published: 'Дата публикации',
-    updated: 'Дата обновления',
+      'Основные материалы по научной деятельности, аттестации, публикационным требованиям и официальным источникам.',
+    open: 'Открыть документ',
     noteTitle: 'Важное примечание',
     noteText:
-      'Финальную проверку актуальности документов и требований всегда выполняйте по официальным государственным или уполномоченным источникам.',
-    contactCta: 'Перейти в контакты'
-  };
-}
+      'Финальную проверку актуальности документов и требований всегда выполняйте по официальным государственным источникам.',
+    cta: 'Перейти в контакты',
+    categories: {
+      science: 'Научная деятельность',
+      attestation: 'Аттестация',
+      ethics: 'Публикационная этика'
+    }
+  },
+  uz: {
+    badge: 'Rasmiy manbalar',
+    title: 'Qonunchilik va rasmiy hujjatlar',
+    description:
+      'Ilmiy faoliyat, attestatsiya, maqola chop etish talablari va rasmiy manbalar bo‘yicha asosiy yo‘riqnomalar.',
+    open: 'Hujjatni ochish',
+    noteTitle: 'Muhim eslatma',
+    noteText:
+      'Yakuniy qaror va dolzarb talablarni doimo rasmiy davlat yoki attestatsiya manbalari orqali tekshiring.',
+    cta: 'Kontaktlarga o‘tish',
+    categories: {
+      science: 'Ilmiy faoliyat',
+      attestation: 'Attestatsiya',
+      ethics: 'Nashr etikasi'
+    }
+  },
+  en: {
+    badge: 'Official sources',
+    title: 'Legislation and official documents',
+    description:
+      'Core guidance on scientific activity, attestation, publication requirements, and official reference sources.',
+    open: 'Open document',
+    noteTitle: 'Important note',
+    noteText:
+      'Always verify current rules and final requirements through official state or attestation sources.',
+    cta: 'Go to contacts',
+    categories: {
+      science: 'Scientific activity',
+      attestation: 'Attestation',
+      ethics: 'Publication ethics'
+    }
+  }
+};
 
-function getMetadataCopy(locale: string) {
+function getMetadataCopy(locale: SiteLocale) {
   if (locale === 'uz') {
     return {
-      title: 'Qonunchilik — rasmiy hujjatlar va manbalar',
+      title: 'Qonunchilik va rasmiy hujjatlar',
       description:
-        'Ilmiy faoliyat, attestatsiya va nashr talablari bo‘yicha qonunchilik hujjatlari va rasmiy manbalar.'
+        'Ilmiy faoliyat, attestatsiya va nashr talablari bo‘yicha rasmiy manbalar.'
     };
   }
 
   if (locale === 'en') {
     return {
-      title: 'Legislation — official documents and sources',
+      title: 'Legislation and official documents',
       description:
-        'Official documents and reference sources related to scientific activity, attestation, and publication requirements.'
+        'Official sources on scientific activity, attestation, and publication requirements.'
     };
   }
 
   return {
-    title: 'Законодательство — официальные документы и источники',
+    title: 'Законодательство и официальные документы',
     description:
-      'Официальные документы и нормативные источники по научной деятельности, аттестации и публикационным требованиям.'
+      'Официальные источники по научной деятельности, аттестации и публикационным требованиям.'
   };
 }
 
 export async function generateMetadata({
   params
 }: Props): Promise<Metadata> {
-  const {locale: rawLocale} = await params;
-  const locale = normalizeLocale(rawLocale);
+  const resolvedParams = await Promise.resolve(params);
+  const locale = normalizeLocale(resolvedParams.locale);
   const meta = getMetadataCopy(locale);
 
   return {
@@ -111,10 +125,16 @@ export async function generateMetadata({
   };
 }
 
+export const dynamicParams = false;
+
+export function generateStaticParams() {
+  return siteLocales.map((locale) => ({locale}));
+}
+
 export default async function LocalizedLegislationPage({params}: Props) {
-  const {locale: rawLocale} = await params;
-  const locale = normalizeLocale(rawLocale);
-  const t = getContent(locale);
+  const resolvedParams = await Promise.resolve(params);
+  const locale = normalizeLocale(resolvedParams.locale);
+  const t = dictionary[locale];
   const documents = await getAllLegislation();
 
   return (
@@ -136,46 +156,30 @@ export default async function LocalizedLegislationPage({params}: Props) {
       </section>
 
       <section className="mx-auto mt-10 max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="grid gap-6">
+        <div className="grid gap-6 lg:grid-cols-3">
           {documents.map((doc) => (
             <article
               key={doc.slug}
-              className="rounded-3xl border border-[#ECE3DC] bg-white p-6 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md sm:p-8"
+              className="flex h-full flex-col rounded-3xl border border-[#ECE3DC] bg-white p-6 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"
             >
-              <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
-                <div className="min-w-0 flex-1">
-                  <h2 className="text-2xl font-bold leading-tight text-[#111111] sm:text-3xl">
-                    {pickLocalizedText(doc.title, locale)}
-                  </h2>
-
-                  <p className="mt-4 max-w-3xl text-sm leading-7 text-[#5C5C5C] sm:text-base">
-                    {pickLocalizedText(doc.summary, locale)}
-                  </p>
-
-                  <div className="mt-5 flex flex-wrap gap-3 text-xs font-semibold">
-                    <span className="inline-flex rounded-full bg-[#FFF4ED] px-3 py-1 text-[#B85A2B]">
-                      {t.published}: {doc.publishedAt}
-                    </span>
-
-                    <span className="inline-flex rounded-full bg-[#FFF8F3] px-3 py-1 text-[#8A6A56]">
-                      {t.updated}: {doc.updatedAt}
-                    </span>
-
-                    <span className="inline-flex rounded-full bg-[#FFF1E8] px-3 py-1 text-[#D05A1A]">
-                      {t.source}
-                    </span>
-                  </div>
-                </div>
-
-                <div className="flex shrink-0">
-                  <Link
-                    href={withLocale(locale, `/legislation/${doc.slug}`)}
-                    className="inline-flex rounded-2xl bg-[#FF6C26] px-5 py-3 text-sm font-bold text-white transition hover:bg-[#E85E1B]"
-                  >
-                    {t.open}
-                  </Link>
-                </div>
+              <div className="inline-flex w-fit rounded-full bg-[#FFF8F3] px-3 py-1 text-xs font-semibold text-[#B85A2B]">
+                {t.categories[doc.category] || doc.category}
               </div>
+
+              <h2 className="mt-4 text-2xl font-bold leading-tight text-[#111111]">
+                {pickLocalizedText(doc.title, locale)}
+              </h2>
+
+              <p className="mt-4 flex-1 text-sm leading-7 text-[#5C5C5C]">
+                {pickLocalizedText(doc.summary, locale)}
+              </p>
+
+              <Link
+                href={`/${locale}/legislation/${doc.slug}`}
+                className="mt-6 inline-flex w-fit rounded-2xl bg-[#FF6C26] px-5 py-3 text-sm font-bold text-white transition hover:bg-[#E85E1B]"
+              >
+                {t.open}
+              </Link>
             </article>
           ))}
         </div>
@@ -190,7 +194,7 @@ export default async function LocalizedLegislationPage({params}: Props) {
             href={withLocale(locale, '/contacts')}
             className="mt-5 inline-flex rounded-2xl bg-[#FF6C26] px-5 py-3 text-sm font-bold text-white transition hover:bg-[#E85E1B]"
           >
-            {t.contactCta}
+            {t.cta}
           </Link>
         </div>
       </section>
