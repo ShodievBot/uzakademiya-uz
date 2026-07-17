@@ -234,7 +234,7 @@ export default async function LocalizedContactsPage({
   const {journal: journalSlug} = await searchParams;
 
   const copy = getCopy(locale);
-  const journal = journalSlug ? getJournalBySlug(journalSlug) : undefined;
+  const journal = journalSlug ? await getJournalBySlug(journalSlug) : undefined;
   const journalTitle = getJournalTitleByLocale(journal, locale);
   const links = getContactLinks(locale, journalTitle);
 

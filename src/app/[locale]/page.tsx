@@ -279,9 +279,9 @@ export default async function LocaleHomePage({params}: Props) {
   const normalizedLocale = normalizeLocale(locale);
   const content = getContent(normalizedLocale);
 
-  const allJournals = getAllJournals();
+  const allJournals = await getAllJournals();
   const recommended = allJournals.slice(0, 6);
-  const latestDocs = getLatestLegislation(3);
+  const latestDocs = await getLatestLegislation(3);
 
   const totalCount = allJournals.length;
   const scopusCount = allJournals.filter((journal) => journal.isScopusIndexed).length;
