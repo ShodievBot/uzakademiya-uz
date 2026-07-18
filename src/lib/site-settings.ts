@@ -24,17 +24,22 @@ const DEFAULT_SITE_SETTINGS: SiteSettingsData = {
   defaultLocale: 'ru'
 };
 
-export async function getSiteSettings(): Promise<SiteSettingsData> {
-  const settings = await prisma.siteSettings.findFirst({
-    orderBy: {
-      createdAt: 'asc'
-    }
-  });
+function toOptionalString(value: string | undefined): string | null {
+  const normalized = value?.trim() ?? '';
+  return normalized.length > 0 ? normalized : null;
+}
 
-  if (!settings) {
-    return DEFAULT_SITE_SETTINGS;
-  }
-
+function mapSettings(settings: {
+  siteName: string;
+  siteUrl: string;
+  contactEmail: string | null;
+  telegramUsername: string | null;
+  whatsappNumber: string | null;
+  phoneNumber: string | null;
+  instagramHandle: string | null;
+  instagramUrl: string | null;
+  defaultLocale: string;
+}): SiteSettingsData {
   return {
     siteName: settings.siteName || DEFAULT_SITE_SETTINGS.siteName,
     siteUrl: settings.siteUrl || DEFAULT_SITE_SETTINGS.siteUrl,
@@ -52,3 +57,57 @@ export async function getSiteSettings(): Promise<SiteSettingsData> {
       settings.defaultLocale || DEFAULT_SITE_SETTINGS.defaultLocale
   };
 }
+
+export async function getSiteSettings(): Promise<SiteSettingsData> {
+  const settings = await prisma.siteSettings.findFirst({
+    orderBy: {
+      createdAt: 'asc'
+    }
+  });
+
+  if (!settings) {
+    return DEFAULT_SITE_SETTINGS;
+  }
+
+  return mapSettings(settings);
+}
+
+export async function saveSiteSettings(
+  input: SiteSettingsData
+): Promise<SiteSettingsData> {
+  const payload = {
+    siteName: input.siteName.trim() || DEFAULT_SITE_SETTINGS.siteName,
+    siteUrl: input.siteUrl.trim() || DEFAULT_SITE_SETTINGS.siteUrl,
+    contactEmail: toOptionalString(input.contactEmail),
+    telegramUsername: toOptionalString(input.telegramUsername),
+    whatsappNumber: toOptionalString(input.whatsappNumber),
+    phoneNumber: toOptionalString(input.phoneNumber),
+    instagramHandle: toOptionalString(input.instagramHandle),
+    instagramUrl: toOptionalString(input.instagramUrl),
+    defaultLocale: input.defaultLocale.trim() || DEFAULT_SITE_SETTINGS.defaultLocale
+  };
+
+  const existing = await prisma.siteSettings.findFirst({
+    orderBy: {
+      createdAt: 'asc'
+    },
+    select: {
+      id: true
+    }
+  });
+
+  const saved = existing
+    ? await prisma.siteSettings.update({
+        where: {
+          id: existing.id
+        },
+        data: payload
+      })
+    : await prisma.siteSettings.create({
+        data: payload
+      });
+
+  return mapSettings(saved);
+}
+
+export {DEFAULT_SITE_SETTINGS};
