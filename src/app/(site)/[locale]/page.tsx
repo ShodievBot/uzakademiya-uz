@@ -1,16 +1,16 @@
-import type {Metadata} from 'next';
-import Link from 'next/link';
-import {JournalCard} from '@/components/journals/journal-card';
-import {getAllJournals} from '@/lib/journals';
+import type {Metadata} from 'next'
+import Link from 'next/link'
+import {JournalCard} from '@/components/journals/journal-card'
+import {getAllJournals} from '@/lib/journals'
 import {
   getLatestLegislation,
   normalizeLocale,
   pickLocalizedText
-} from '@/lib/legislation';
+} from '@/lib/legislation'
 
 type Props = {
-  params: Promise<{locale: string}>;
-};
+  params: Promise<{locale: string}>
+}
 
 function getMetadataCopy(locale: string) {
   if (locale === 'uz') {
@@ -18,7 +18,7 @@ function getMetadataCopy(locale: string) {
       title: 'UzAkademiya.uz — ilmiy jurnallar va maqola nashri platformasi',
       description:
         'Scopus, OAK, ilmiy jurnallar katalogi, foydali materiallar va maqola nashri bo‘yicha aloqa platformasi.'
-    };
+    }
   }
 
   if (locale === 'en') {
@@ -26,20 +26,20 @@ function getMetadataCopy(locale: string) {
       title: 'UzAkademiya.uz — scientific journals and article publication platform',
       description:
         'A platform for Scopus, SAC, scientific journal discovery, useful materials, and article publication support.'
-    };
+    }
   }
 
   return {
     title: 'UzAkademiya.uz — платформа научных журналов и публикации статей',
     description:
       'Scopus, ВАК, каталог научных журналов, полезные материалы и связь по вопросам публикации статей.'
-  };
+  }
 }
 
 export async function generateMetadata({params}: Props): Promise<Metadata> {
-  const {locale: rawLocale} = await params;
-  const locale = normalizeLocale(rawLocale);
-  const meta = getMetadataCopy(locale);
+  const {locale: rawLocale} = await params
+  const locale = normalizeLocale(rawLocale)
+  const meta = getMetadataCopy(locale)
 
   return {
     title: meta.title,
@@ -52,23 +52,23 @@ export async function generateMetadata({params}: Props): Promise<Metadata> {
         en: '/en'
       }
     }
-  };
+  }
 }
 
 type QuickLink = {
-  title: string;
-  text: string;
-  href: string;
-};
+  title: string
+  text: string
+  href: string
+}
 
 type BenefitItem = {
-  title: string;
-  text: string;
-};
+  title: string
+  text: string
+}
 
 function withLocale(locale: string, href: string) {
-  if (href === '/') return `/${locale}`;
-  return `/${locale}${href}`;
+  if (href === '/') return `/${locale}`
+  return `/${locale}${href}`
 }
 
 function getContent(locale: string) {
@@ -130,7 +130,7 @@ function getContent(locale: string) {
           text: 'Platforma faqat ma’lumot bermaydi, balki nashrga tayyorgarlik ko‘rishda yo‘l ko‘rsatadi.'
         }
       ] as BenefitItem[]
-    };
+    }
   }
 
   if (locale === 'en') {
@@ -149,7 +149,8 @@ function getContent(locale: string) {
         oak: 'SAC journals'
       },
       quickLinksTitle: 'Core sections',
-      quickLinksText: 'Jump directly to the section you need and find relevant information in just a few clicks.',
+      quickLinksText:
+        'Jump directly to the section you need and find relevant information in just a few clicks.',
       benefitsTitle: 'Why this platform is useful',
       benefitsText:
         'The platform simplifies journal discovery, comparison, and preparation for publication.',
@@ -191,7 +192,7 @@ function getContent(locale: string) {
           text: 'The platform not only informs but also helps authors navigate the publication process more confidently.'
         }
       ] as BenefitItem[]
-    };
+    }
   }
 
   return {
@@ -251,22 +252,22 @@ function getContent(locale: string) {
         text: 'Платформа не только информирует, но и помогает увереннее ориентироваться в процессе публикации.'
       }
     ] as BenefitItem[]
-  };
+  }
 }
 
 function StatCard({
   value,
   label
 }: {
-  value: number | string;
-  label: string;
+  value: number | string
+  label: string
 }) {
   return (
     <div className="rounded-[28px] border border-[#F0E2D8] bg-white/95 p-5 shadow-[0_8px_24px_rgba(17,17,17,0.05)]">
       <div className="text-3xl font-bold text-[#111111] sm:text-4xl">{value}</div>
       <div className="mt-2 text-sm leading-6 text-[#6B6B6B]">{label}</div>
     </div>
-  );
+  )
 }
 
 function QuickLinkCard({
@@ -274,9 +275,9 @@ function QuickLinkCard({
   text,
   href
 }: {
-  title: string;
-  text: string;
-  href: string;
+  title: string
+  text: string
+  href: string
 }) {
   return (
     <Link
@@ -293,15 +294,15 @@ function QuickLinkCard({
 
       <p className="mt-3 text-sm leading-7 text-[#5C5C5C]">{text}</p>
     </Link>
-  );
+  )
 }
 
 function BenefitCard({
   title,
   text
 }: {
-  title: string;
-  text: string;
+  title: string
+  text: string
 }) {
   return (
     <article className="rounded-[28px] border border-[#F0E2D8] bg-white p-6 shadow-[0_8px_24px_rgba(17,17,17,0.05)]">
@@ -315,65 +316,65 @@ function BenefitCard({
 
       <p className="mt-3 text-sm leading-7 text-[#5C5C5C]">{text}</p>
     </article>
-  );
+  )
 }
 
 export default async function LocaleHomePage({params}: Props) {
-  const {locale} = await params;
-  const normalizedLocale = normalizeLocale(locale);
-  const content = getContent(normalizedLocale);
+  const {locale} = await params
+  const normalizedLocale = normalizeLocale(locale)
+  const content = getContent(normalizedLocale)
 
-  const allJournals = await getAllJournals();
-  const recommended = allJournals.slice(0, 6);
-  const latestDocs = await getLatestLegislation(3);
+  const allJournals = await getAllJournals()
+  const recommended = allJournals.slice(0, 6)
+  const latestDocs = await getLatestLegislation(3)
 
-  const totalCount = allJournals.length;
-  const scopusCount = allJournals.filter((journal) => journal.isScopusIndexed).length;
-  const oakCount = allJournals.filter((journal) => journal.isOakRecommended).length;
+  const totalCount = allJournals.length
+  const scopusCount = allJournals.filter((journal) => journal.isScopusIndexed).length
+  const oakCount = allJournals.filter((journal) => journal.isOakRecommended).length
 
   return (
     <main className="pb-16">
-      <section className="mx-auto max-w-7xl px-4 pt-8 sm:px-6 lg:px-8">
-        <div className="rounded-[36px] border border-[#F1D8C8] bg-gradient-to-br from-[#FFF8F3] via-[#FFF4ED] to-white p-6 shadow-[0_14px_40px_rgba(17,17,17,0.06)] sm:p-8 lg:p-10">
-          <div className="grid gap-8 lg:grid-cols-[1.15fr_0.85fr] lg:items-start">
+      <section className="mx-auto max-w-7xl px-4 pt-10 sm:px-6 lg:px-8 lg:pt-12">
+        <div className="rounded-[40px] border border-[#F1D8C8] bg-gradient-to-br from-[#FFF8F3] via-[#FFF4ED] to-white p-7 shadow-[0_20px_60px_rgba(17,17,17,0.08)] sm:p-10 lg:p-12">
+          <div className="grid gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-start">
             <div>
-              <div className="inline-flex rounded-full border border-[#FFD8C2] bg-white px-4 py-2 text-xs font-bold uppercase tracking-[0.18em] text-[#FF6C26]">
+              <div className="inline-flex rounded-full border border-[#FFD8C2] bg-white/95 px-5 py-2 text-[11px] font-bold uppercase tracking-[0.22em] text-[#FF6C26] shadow-[0_8px_20px_rgba(255,108,38,0.08)]">
                 {content.badge}
               </div>
 
-              <h1 className="mt-5 max-w-4xl text-4xl font-bold leading-tight text-[#111111] sm:text-5xl lg:text-6xl">
+              <h1 className="mt-6 max-w-4xl text-4xl font-bold leading-[1.04] tracking-tight text-[#111111] sm:text-5xl lg:text-[64px]">
                 {content.title}
               </h1>
 
-              <p className="mt-5 max-w-3xl text-base leading-8 text-[#5C5C5C] sm:text-lg">
+              <p className="mt-6 max-w-3xl text-base leading-8 text-[#5C5C5C] sm:text-[18px]">
                 {content.subtitle}
               </p>
 
               <form
                 action={withLocale(normalizedLocale, '/journals')}
                 method="get"
-                className="mt-8 rounded-[26px] border border-[#FFD8C2] bg-white p-3 shadow-sm"
+                className="mt-9 rounded-[30px] border border-[#FFD8C2] bg-white/95 p-4 shadow-[0_14px_34px_rgba(17,17,17,0.06)] backdrop-blur"
               >
                 <div className="flex flex-col gap-3 md:flex-row">
                   <input
                     type="text"
                     name="q"
                     placeholder={content.searchPlaceholder}
-                    className="h-14 flex-1 rounded-2xl border border-[#ECE3DC] bg-[#FFFDFC] px-5 text-sm text-[#111111] outline-none placeholder:text-[#9A8F87] focus:border-[#FF6C26] focus:bg-white"
+                    className="h-14 flex-1 rounded-2xl border border-[#ECE3DC] bg-[#FFFDFC] px-5 text-sm text-[#111111] outline-none placeholder:text-[#9A8F87] transition focus:border-[#FF6C26] focus:bg-white"
                   />
                   <button
                     type="submit"
-                    className="inline-flex h-14 items-center justify-center rounded-2xl bg-[#FF6C26] px-6 text-sm font-bold text-white transition hover:bg-[#E85E1B]"
+                    className="inline-flex h-14 items-center justify-center rounded-2xl bg-[#FF6C26] px-7 text-sm font-bold text-white shadow-[0_12px_24px_rgba(255,108,38,0.22)] transition hover:bg-[#E85E1B]"
                   >
                     {content.searchButton}
                   </button>
                 </div>
               </form>
 
-              <div className="mt-6 flex flex-wrap gap-3">
+              <div className="mt-7 flex flex-wrap gap-3">
                 <Link
                   href={withLocale(normalizedLocale, '/journals')}
-                  className="inline-flex items-center justify-center rounded-2xl bg-[#FF6C26] px-6 py-3 text-sm font-bold text-white transition hover:bg-[#E85E1B]"
+                  className="inline-flex items-center justify-center rounded-2xl bg-[#FF6C26] px-6 py-3 text-sm font-bold text-white shadow-[0_12px_24px_rgba(255,108,38,0.18)] transition hover:bg-[#E85E1B]"
                 >
                   {content.openCatalog}
                 </Link>
@@ -387,7 +388,7 @@ export default async function LocaleHomePage({params}: Props) {
               </div>
             </div>
 
-            <aside className="grid gap-4 sm:grid-cols-3 lg:grid-cols-1">
+            <aside className="grid gap-4 sm:grid-cols-3 lg:grid-cols-1 lg:gap-5">
               <StatCard value={totalCount} label={content.stats.total} />
               <StatCard value={scopusCount} label={content.stats.scopus} />
               <StatCard value={oakCount} label={content.stats.oak} />
@@ -398,7 +399,7 @@ export default async function LocaleHomePage({params}: Props) {
 
       <section className="mx-auto mt-10 max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="mb-6">
-          <h2 className="text-3xl font-bold text-[#111111]">
+          <h2 className="text-3xl font-bold tracking-tight text-[#111111]">
             {content.quickLinksTitle}
           </h2>
           <p className="mt-3 max-w-3xl text-sm leading-7 text-[#6B6B6B]">
@@ -436,78 +437,82 @@ export default async function LocaleHomePage({params}: Props) {
       </section>
 
       <section className="mx-auto mt-14 max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="mb-6 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
-          <div>
-            <h2 className="text-3xl font-bold text-[#111111]">
-              {content.recommendedTitle}
-            </h2>
-            <p className="mt-2 max-w-3xl text-sm leading-7 text-[#6B6B6B]">
-              {content.recommendedText}
-            </p>
-          </div>
-
-          <div className="inline-flex rounded-full border border-[#ECE3DC] bg-[#FFF8F3] px-4 py-2 text-sm font-semibold text-[#6B6B6B]">
-            {content.countLabel}: {recommended.length}
-          </div>
-        </div>
-
-        <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-          {recommended.map((journal) => (
-            <JournalCard key={journal.id} journal={journal} locale={normalizedLocale} />
-          ))}
-        </div>
-      </section>
-
-      <section className="mx-auto mt-14 max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="mb-6 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
-          <div>
-            <h2 className="text-3xl font-bold text-[#111111]">
-              {content.docsTitle}
-            </h2>
-            <p className="mt-2 max-w-3xl text-sm leading-7 text-[#6B6B6B]">
-              {content.docsText}
-            </p>
-          </div>
-
-          <Link
-            href={withLocale(normalizedLocale, '/legislation')}
-            className="inline-flex rounded-2xl border border-[#ECE3DC] bg-white px-5 py-3 text-sm font-semibold text-[#111111] transition hover:bg-[#FFF8F3]"
-          >
-            {content.docsButton}
-          </Link>
-        </div>
-
-        <div className="grid gap-6 lg:grid-cols-3">
-          {latestDocs.map((doc) => (
-            <article
-              key={doc.slug}
-              className="rounded-[28px] border border-[#ECE3DC] bg-white p-6 shadow-[0_8px_24px_rgba(17,17,17,0.05)]"
-            >
-              <div className="inline-flex rounded-full border border-[#F3DDD1] bg-[#FFF8F3] px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-[#B56A42]">
-                {new Date(doc.publishedAt).getFullYear()}
-              </div>
-
-              <h3 className="mt-4 text-2xl font-bold leading-tight text-[#111111]">
-                {pickLocalizedText(doc.title, normalizedLocale)}
-              </h3>
-
-              <p className="mt-4 text-sm leading-7 text-[#5C5C5C]">
-                {pickLocalizedText(doc.summary, normalizedLocale)}
+        <div className="rounded-[36px] border border-[#F1D8C8] bg-gradient-to-br from-white via-[#FFF9F5] to-[#FFF4EC] p-6 shadow-[0_16px_44px_rgba(17,17,17,0.06)] sm:p-8 lg:p-10">
+          <div className="mb-6 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+            <div>
+              <h2 className="text-3xl font-bold text-[#111111]">
+                {content.recommendedTitle}
+              </h2>
+              <p className="mt-2 max-w-3xl text-sm leading-7 text-[#6B6B6B]">
+                {content.recommendedText}
               </p>
+            </div>
 
-              <Link
-                href={withLocale(normalizedLocale, `/legislation/${doc.slug}`)}
-                className="mt-6 inline-flex rounded-2xl bg-[#FF6C26] px-5 py-3 text-sm font-bold text-white transition hover:bg-[#E85E1B]"
-              >
-                {content.docsButton}
-              </Link>
-            </article>
-          ))}
+            <div className="inline-flex rounded-full border border-[#FFD8C2] bg-white px-4 py-2 text-sm font-semibold text-[#A15A33] shadow-[0_8px_20px_rgba(17,17,17,0.04)]">
+              {content.countLabel}: {recommended.length}
+            </div>
+          </div>
+
+          <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+            {recommended.map((journal) => (
+              <JournalCard key={journal.id} journal={journal} locale={normalizedLocale} />
+            ))}
+          </div>
         </div>
       </section>
 
       <section className="mx-auto mt-14 max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="rounded-[36px] border border-[#F1D8C8] bg-gradient-to-r from-[#FFF4EC] via-[#FFF8F4] to-white p-6 shadow-[0_14px_40px_rgba(17,17,17,0.06)] sm:p-8 lg:p-10">
+        <div className="rounded-[36px] border border-[#F1D8C8] bg-white p-6 shadow-[0_14px_40px_rgba(17,17,17,0.05)] sm:p-8 lg:p-10">
+          <div className="mb-6 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+            <div>
+              <h2 className="text-3xl font-bold text-[#111111]">
+                {content.docsTitle}
+              </h2>
+              <p className="mt-2 max-w-3xl text-sm leading-7 text-[#6B6B6B]">
+                {content.docsText}
+              </p>
+            </div>
+
+            <Link
+              href={withLocale(normalizedLocale, '/legislation')}
+              className="inline-flex rounded-2xl border border-[#ECE3DC] bg-white px-5 py-3 text-sm font-semibold text-[#111111] transition hover:bg-[#FFF8F3]"
+            >
+              {content.docsButton}
+            </Link>
+          </div>
+
+          <div className="grid gap-6 lg:grid-cols-3">
+            {latestDocs.map((doc) => (
+              <article
+                key={doc.slug}
+                className="rounded-[28px] border border-[#ECE3DC] bg-white p-6 shadow-[0_8px_24px_rgba(17,17,17,0.05)]"
+              >
+                <div className="inline-flex rounded-full border border-[#F3DDD1] bg-[#FFF8F3] px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-[#B56A42]">
+                  {new Date(doc.publishedAt).getFullYear()}
+                </div>
+
+                <h3 className="mt-4 text-2xl font-bold leading-tight text-[#111111]">
+                  {pickLocalizedText(doc.title, normalizedLocale)}
+                </h3>
+
+                <p className="mt-4 text-sm leading-7 text-[#5C5C5C]">
+                  {pickLocalizedText(doc.summary, normalizedLocale)}
+                </p>
+
+                <Link
+                  href={withLocale(normalizedLocale, `/legislation/${doc.slug}`)}
+                  className="mt-6 inline-flex rounded-2xl bg-[#FF6C26] px-5 py-3 text-sm font-bold text-white transition hover:bg-[#E85E1B]"
+                >
+                  {content.docsButton}
+                </Link>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="mx-auto mt-14 max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="rounded-[40px] border border-[#F1D8C8] bg-gradient-to-r from-[#FFF1E7] via-[#FFF8F4] to-white p-7 shadow-[0_18px_48px_rgba(17,17,17,0.08)] sm:p-9 lg:p-11">
           <div className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
             <div className="max-w-3xl">
               <h2 className="text-3xl font-bold text-[#111111]">
@@ -518,7 +523,7 @@ export default async function LocaleHomePage({params}: Props) {
               </p>
             </div>
 
-            <div className="flex flex-wrap gap-3">
+            <div className="flex flex-wrap gap-3 lg:justify-end">
               <Link
                 href={withLocale(normalizedLocale, '/contacts')}
                 className="inline-flex rounded-2xl bg-[#FF6C26] px-6 py-3 text-sm font-bold text-white transition hover:bg-[#E85E1B]"
@@ -546,5 +551,5 @@ export default async function LocaleHomePage({params}: Props) {
         </div>
       </section>
     </main>
-  );
+  )
 }

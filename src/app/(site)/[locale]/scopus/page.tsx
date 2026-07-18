@@ -304,7 +304,7 @@ function StageCard({
       </div>
 
       <div className="inline-flex rounded-full border border-[#FFD8C2] bg-[#FFF7F2] px-3 py-1 text-xs font-bold uppercase tracking-[0.18em] text-[#FF6C26]">
-        Step
+        {stepLabel}
       </div>
 
       <h3 className="mt-4 max-w-[85%] text-xl font-bold text-[#111111]">
