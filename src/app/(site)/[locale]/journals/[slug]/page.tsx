@@ -94,6 +94,7 @@ function getCopy(locale: string) {
       indexing: 'Indekslash',
       publication: 'Nashr shartlari',
       scopusBlock: 'Scopus ko‘rsatkichlari',
+      scopusContentTitle: 'Scopus bo‘yicha kontent',
       sources: 'Manbalar va havolalar',
       actionPanel: 'Tezkor harakatlar',
       ctaTitle: 'Maqola yuborishga tayyormisiz?',
@@ -120,7 +121,7 @@ function getCopy(locale: string) {
       verification: 'Tekshiruv holati',
       submission: 'Yuborish usuli',
       telegram: 'Telegram mavjud',
-      submissionUrl: 'Submission URL mavjud',
+      submissionUrl: 'Yuborish havolasi mavjud',
       noWebsite: 'Sayt ko‘rsatilmagan',
       noData: 'Ma’lumot yo‘q',
       yes: 'Ha',
@@ -128,8 +129,8 @@ function getCopy(locale: string) {
       year: 'Yil',
       documents: 'Hujjatlar',
       submissionTelegram: 'Telegram',
-      submissionForm: 'Submission URL',
-      submissionWebsite: 'Website',
+      submissionForm: 'Yuborish havolasi',
+      submissionWebsite: 'Sayt',
       journalLanguages: 'Nashr tillari',
       journalFocus: 'Asosiy yo‘nalishlar',
       recommendedFor: 'Kimlar uchun mos',
@@ -152,6 +153,7 @@ function getCopy(locale: string) {
       indexing: 'Indexing',
       publication: 'Publication conditions',
       scopusBlock: 'Scopus metrics',
+      scopusContentTitle: 'Scopus content',
       sources: 'Sources and links',
       actionPanel: 'Quick actions',
       ctaTitle: 'Ready to submit your article?',
@@ -186,7 +188,7 @@ function getCopy(locale: string) {
       year: 'Year',
       documents: 'Documents',
       submissionTelegram: 'Telegram',
-      submissionForm: 'Submission URL',
+      submissionForm: 'Ссылка для подачи',
       submissionWebsite: 'Website',
       journalLanguages: 'Journal languages',
       journalFocus: 'Main focus areas',
@@ -642,7 +644,7 @@ export default async function LocalizedJournalDetailsPage({params}: Props) {
               {journal.scopusContent && journal.scopusContent.length > 0 ? (
                 <div className="mt-6">
                   <div className="mb-4 text-lg font-bold text-[#111111]">
-                    Scopus content
+                    {copy.scopusContentTitle}
                   </div>
 
                   <div className="space-y-3">

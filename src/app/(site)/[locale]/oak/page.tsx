@@ -15,7 +15,7 @@ function withLocale(locale: string, href: string) {
 function getCopy(locale: string) {
   if (locale === 'uz') {
     return {
-      badge: 'OAK guide',
+      badge: 'OAK bo‘yicha yo‘riqnoma',
       title: 'OAK tavsiya etgan jurnallar va nashr bo‘yicha yo‘riqnoma',
       description:
         'Bu sahifada OAK tavsiya etgan jurnallar, tanlash mezonlari, muallif uchun muhim tekshiruv nuqtalari va maqolani yuborishdan oldingi tavsiyalar jamlangan.',
@@ -64,7 +64,7 @@ function getCopy(locale: string) {
 
   if (locale === 'en') {
     return {
-      badge: 'SAC guide',
+      badge: 'SAC guidance',
       title: 'SAC-recommended journals and publication guidance',
       description:
         'This page brings together SAC-recommended journals, key selection criteria, author checkpoints, and practical recommendations before submission.',
@@ -112,7 +112,7 @@ function getCopy(locale: string) {
   }
 
   return {
-    badge: 'ВАК guide',
+    badge: 'Навигация по ВАК',
     title: 'Журналы, рекомендованные ВАК, и навигация по публикации',
     description:
       'На этой странице собраны журналы, рекомендованные ВАК, критерии выбора, ключевые точки проверки для автора и практические рекомендации перед подачей статьи.',

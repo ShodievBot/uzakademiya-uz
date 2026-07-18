@@ -48,7 +48,7 @@ function getCopy(locale: string) {
       scopus: 'Scopus',
       oak: 'OAK',
       legislation: 'Qonunchilik',
-      useful: 'Foydali',
+      useful: 'Foydali materiallar',
       contacts: 'Kontaktlar',
       contactCta: 'Bog‘lanish'
     };
@@ -64,7 +64,7 @@ function getCopy(locale: string) {
       scopus: 'Scopus',
       oak: 'SAC',
       legislation: 'Legislation',
-      useful: 'Useful',
+      useful: 'Useful materials',
       contacts: 'Contacts',
       contactCta: 'Contact us'
     };
@@ -79,7 +79,7 @@ function getCopy(locale: string) {
     scopus: 'Scopus',
     oak: 'ВАК',
     legislation: 'Законодательство',
-    useful: 'Полезное',
+    useful: 'Полезные материалы',
     contacts: 'Контакты',
     contactCta: 'Связаться'
   };

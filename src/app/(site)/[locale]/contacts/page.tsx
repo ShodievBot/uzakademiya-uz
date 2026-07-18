@@ -89,8 +89,8 @@ function getCopy(locale: string) {
       messageLabel: 'Tayyor xabar matni',
       channelsTitle: 'Bog‘lanish kanallari',
       channelsDescription:
-        'Telegram, WhatsApp va Email orqali tayyor xabar bilan tez bog‘lanishingiz mumkin.',
-      email: 'Email',
+        'Telegram, WhatsApp va elektron pochta orqali tayyor xabar bilan tez bog‘lanishingiz mumkin.',
+      email: 'Elektron pochta',
       telegram: 'Telegram',
       whatsapp: 'WhatsApp',
       phone: 'Qo‘ng‘iroq',
@@ -138,7 +138,7 @@ function getCopy(locale: string) {
       channelsTitle: 'Communication channels',
       channelsDescription:
         'Reach us quickly via Telegram, WhatsApp, or Email with a prefilled message.',
-      email: 'Email',
+      email: 'Электронная почта',
       telegram: 'Telegram',
       whatsapp: 'WhatsApp',
       phone: 'Call',
@@ -184,7 +184,7 @@ function getCopy(locale: string) {
     messageLabel: 'Готовый текст сообщения',
     channelsTitle: 'Каналы связи',
     channelsDescription:
-      'Вы можете быстро написать нам через Telegram, WhatsApp или Email с уже подготовленным текстом сообщения.',
+      'Вы можете быстро написать нам через Telegram, WhatsApp или по электронной почте с уже подготовленным текстом сообщения.',
     email: 'Email',
     telegram: 'Telegram',
     whatsapp: 'WhatsApp',
