@@ -19,6 +19,11 @@ enum VerificationStatus {
   NEEDS_MANUAL_REVIEW
 }
 
+enum AdminRole {
+  SUPERADMIN
+  EDITOR
+}
+
 enum UsefulBlockType {
   PARAGRAPH
   LIST
@@ -28,9 +33,9 @@ model Journal {
   id   String @id @default(cuid())
   slug String @unique
 
-  title              String
-  titleRu            String
-  titleUz            String
+  title   String
+  titleRu String
+  titleUz String
 
   shortDescription   String
   shortDescriptionRu String?
@@ -224,4 +229,21 @@ model SiteSettings {
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+}
+
+model User {
+  id           String    @id @default(cuid())
+  email        String    @unique
+  passwordHash String
+  fullName     String?
+  role         AdminRole @default(EDITOR)
+  isActive     Boolean   @default(true)
+  lastLoginAt  DateTime?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([email])
+  @@index([role])
+  @@index([isActive])
 }
