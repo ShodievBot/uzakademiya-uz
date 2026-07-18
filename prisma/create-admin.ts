@@ -10,18 +10,20 @@ if (!connectionString) {
   throw new Error("DATABASE_URL is not set");
 }
 
-const email = process.env.ADMIN_EMAIL?.trim().toLowerCase();
+const rawEmail = process.env.ADMIN_EMAIL?.trim().toLowerCase();
 const password = process.env.ADMIN_PASSWORD ?? "";
 const fullName = process.env.ADMIN_NAME?.trim() || "Super Admin";
 const roleInput = (process.env.ADMIN_ROLE?.trim().toUpperCase() || "SUPERADMIN") as keyof typeof AdminRole;
 
-if (!email) {
+if (!rawEmail) {
   throw new Error("ADMIN_EMAIL is required");
 }
 
 if (!password || password.length < 8) {
   throw new Error("ADMIN_PASSWORD is required and must be at least 8 characters");
 }
+
+const email: string = rawEmail;
 
 if (!(roleInput in AdminRole)) {
   throw new Error(`ADMIN_ROLE must be one of: ${Object.keys(AdminRole).join(", ")}`);
