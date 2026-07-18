@@ -257,9 +257,9 @@ function StatCard({
   label: string;
 }) {
   return (
-    <div className="rounded-[30px] border border-[#F0E2D8] bg-white/95 p-5 shadow-[0_10px_28px_rgba(17,17,17,0.05)] sm:p-6">
+    <div className="rounded-[28px] border border-[#F0E2D8] bg-white/95 p-5 shadow-[0_8px_24px_rgba(17,17,17,0.05)]">
       <div className="text-3xl font-bold text-[#111111] sm:text-4xl">{value}</div>
-      <div className="mt-2 text-sm leading-6 text-[#5F5F5F]">{label}</div>
+      <div className="mt-2 text-sm leading-6 text-[#6B6B6B]">{label}</div>
     </div>
   );
 }
@@ -272,16 +272,16 @@ function HighlightCard({
   text: string;
 }) {
   return (
-    <article className="rounded-[30px] border border-[#F0E2D8] bg-white p-6 shadow-[0_10px_28px_rgba(17,17,17,0.05)] transition duration-200 hover:-translate-y-1 hover:shadow-[0_18px_36px_rgba(17,17,17,0.08)] sm:p-7">
-      <div className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-[#FFF2E9] text-lg font-bold text-[#FF6C26] shadow-[0_8px_18px_rgba(255,108,38,0.08)]">
+    <article className="rounded-[28px] border border-[#F0E2D8] bg-white p-6 shadow-[0_8px_24px_rgba(17,17,17,0.05)]">
+      <div className="inline-flex h-11 w-11 items-center justify-center rounded-2xl bg-[#FFF2E9] text-lg font-bold text-[#FF6C26]">
         ●
       </div>
 
-      <h3 className="mt-5 text-xl font-bold leading-tight text-[#111111] sm:text-[22px]">
+      <h3 className="mt-5 text-xl font-bold leading-tight text-[#111111]">
         {title}
       </h3>
 
-      <p className="mt-3 text-sm leading-7 text-[#5B5B5B] sm:text-[15px]">{text}</p>
+      <p className="mt-3 text-sm leading-7 text-[#5C5C5C]">{text}</p>
     </article>
   );
 }
@@ -298,7 +298,7 @@ function StageCard({
   stepLabel: string;
 }) {
   return (
-    <article className="relative overflow-hidden rounded-[30px] border border-[#ECE3DC] bg-white p-6 shadow-[0_10px_28px_rgba(17,17,17,0.05)] transition duration-200 hover:-translate-y-1 hover:shadow-[0_18px_36px_rgba(17,17,17,0.08)] sm:p-7">
+    <article className="relative overflow-hidden rounded-[28px] border border-[#ECE3DC] bg-white p-6 shadow-[0_8px_24px_rgba(17,17,17,0.05)]">
       <div className="absolute right-5 top-4 text-5xl font-bold text-[#FFF1E8]">
         {index}
       </div>
@@ -311,7 +311,7 @@ function StageCard({
         {title}
       </h3>
 
-      <p className="mt-3 text-sm leading-7 text-[#5B5B5B] sm:text-[15px]">{text}</p>
+      <p className="mt-3 text-sm leading-7 text-[#5C5C5C]">{text}</p>
     </article>
   );
 }
@@ -375,47 +375,47 @@ export default async function LocalizedScopusPage({params}: Props) {
 
   return (
     <main className="pb-16">
-      <section className="mx-auto max-w-7xl px-4 pt-10 sm:px-6 lg:px-8 lg:pt-12">
-        <div className="rounded-[40px] border border-[#F1D8C8] bg-gradient-to-br from-[#FFF9F5] via-[#FFF4ED] to-white p-6 shadow-[0_18px_48px_rgba(17,17,17,0.07)] sm:p-8 lg:p-10">
-          <div className="grid gap-8 lg:grid-cols-[1.15fr_0.85fr] lg:items-center">
+      <section className="mx-auto max-w-7xl px-4 pt-8 sm:px-6 lg:px-8">
+        <div className="rounded-[36px] border border-[#F1D8C8] bg-gradient-to-br from-[#FFF8F3] via-[#FFF4ED] to-white p-6 shadow-[0_14px_40px_rgba(17,17,17,0.06)] sm:p-8 lg:p-10">
+          <div className="grid gap-8 lg:grid-cols-[1.15fr_0.85fr] lg:items-start">
             <div>
-              <div className="inline-flex rounded-full border border-[#FFD8C2] bg-white px-4 py-2 text-xs font-bold uppercase tracking-[0.18em] text-[#FF6C26] shadow-[0_8px_18px_rgba(255,108,38,0.08)]">
+              <div className="inline-flex rounded-full border border-[#FFD8C2] bg-white px-4 py-2 text-xs font-bold uppercase tracking-[0.18em] text-[#FF6C26]">
                 {copy.badge}
               </div>
 
-              <h1 className="mt-5 max-w-4xl text-4xl font-bold leading-[1.05] tracking-tight text-[#111111] sm:text-5xl lg:text-[58px]">
+              <h1 className="mt-5 max-w-4xl text-4xl font-bold leading-tight text-[#111111] sm:text-5xl">
                 {copy.title}
               </h1>
 
-              <p className="mt-5 max-w-3xl text-base leading-8 text-[#565656] sm:text-lg">
+              <p className="mt-5 max-w-3xl text-base leading-8 text-[#5C5C5C] sm:text-lg">
                 {copy.description}
               </p>
 
-              <div className="mt-8 flex flex-wrap gap-3 sm:gap-4">
+              <div className="mt-8 flex flex-wrap gap-3">
                 <Link
                   href={withLocale(locale, '/journals')}
-                  className="inline-flex rounded-2xl bg-[#FF6C26] px-6 py-3.5 text-sm font-bold text-white shadow-[0_14px_28px_rgba(255,108,38,0.18)] transition hover:-translate-y-0.5 hover:bg-[#E85E1B]"
+                  className="inline-flex rounded-2xl bg-[#FF6C26] px-6 py-3 text-sm font-bold text-white transition hover:bg-[#E85E1B]"
                 >
                   {copy.primaryCta}
                 </Link>
 
                 <Link
                   href={withLocale(locale, '/contacts')}
-                  className="inline-flex rounded-2xl border border-[#ECE3DC] bg-white px-6 py-3.5 text-sm font-semibold text-[#111111] transition hover:-translate-y-0.5 hover:bg-[#FFF8F3]"
+                  className="inline-flex rounded-2xl border border-[#ECE3DC] bg-white px-6 py-3 text-sm font-semibold text-[#111111] transition hover:bg-[#FFF8F3]"
                 >
                   {copy.secondaryCta}
                 </Link>
 
                 <Link
                   href={withLocale(locale, '/useful')}
-                  className="inline-flex rounded-2xl border border-[#ECE3DC] bg-white px-6 py-3.5 text-sm font-semibold text-[#111111] transition hover:-translate-y-0.5 hover:bg-[#FFF8F3]"
+                  className="inline-flex rounded-2xl border border-[#ECE3DC] bg-white px-6 py-3 text-sm font-semibold text-[#111111] transition hover:bg-[#FFF8F3]"
                 >
                   {copy.usefulCta}
                 </Link>
               </div>
             </div>
 
-            <aside className="grid gap-4 sm:grid-cols-3 lg:grid-cols-1 lg:self-stretch">
+            <aside className="grid gap-4 sm:grid-cols-3 lg:grid-cols-1">
               <StatCard
                 value={scopusJournals.length}
                 label={copy.stats.journals}
@@ -427,17 +427,17 @@ export default async function LocalizedScopusPage({params}: Props) {
         </div>
       </section>
 
-      <section className="mx-auto mt-12 max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="mb-7">
-          <h2 className="text-3xl font-bold tracking-tight text-[#111111] sm:text-[34px]">
+      <section className="mx-auto mt-10 max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="mb-6">
+          <h2 className="text-3xl font-bold text-[#111111]">
             {copy.highlightsTitle}
           </h2>
-          <p className="mt-3 max-w-3xl text-sm leading-7 text-[#5F5F5F] sm:text-[15px]">
+          <p className="mt-3 max-w-3xl text-sm leading-7 text-[#6B6B6B]">
             {copy.highlightsDescription}
           </p>
         </div>
 
-        <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3 xl:gap-7">
+        <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
           {copy.highlights.map((item) => (
             <HighlightCard
               key={item.title}
@@ -449,16 +449,16 @@ export default async function LocalizedScopusPage({params}: Props) {
       </section>
 
       <section className="mx-auto mt-14 max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="mb-7">
-          <h2 className="text-3xl font-bold tracking-tight text-[#111111] sm:text-[34px]">
+        <div className="mb-6">
+          <h2 className="text-3xl font-bold text-[#111111]">
             {copy.processTitle}
           </h2>
-          <p className="mt-3 text-sm leading-7 text-[#5F5F5F] sm:text-[15px]">
+          <p className="mt-2 text-sm leading-7 text-[#6B6B6B]">
             {copy.processDescription}
           </p>
         </div>
 
-        <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3 xl:gap-7">
+        <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
           {stages.map((stage, index) => (
             <StageCard
               key={stage.title}
@@ -474,58 +474,58 @@ export default async function LocalizedScopusPage({params}: Props) {
       <section className="mx-auto mt-14 max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="mb-6 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
           <div>
-            <h2 className="text-3xl font-bold tracking-tight text-[#111111] sm:text-[34px]">
+            <h2 className="text-3xl font-bold text-[#111111]">
               {copy.showcaseTitle}
             </h2>
-            <p className="mt-3 text-sm leading-7 text-[#5F5F5F] sm:text-[15px]">
+            <p className="mt-2 text-sm leading-7 text-[#6B6B6B]">
               {copy.showcaseDescription}
             </p>
           </div>
 
-          <div className="inline-flex rounded-full border border-[#ECE3DC] bg-[#FFF8F3] px-4 py-2.5 text-sm font-semibold text-[#6B6B6B] shadow-[0_8px_18px_rgba(17,17,17,0.04)]">
+          <div className="inline-flex rounded-full border border-[#ECE3DC] bg-[#FFF8F3] px-4 py-2 text-sm font-semibold text-[#6B6B6B]">
             {copy.found}: {scopusJournals.length}
           </div>
         </div>
 
-        <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3 xl:gap-7">
+        <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
           {scopusJournals.map((journal) => (
             <JournalCard key={journal.id} journal={journal} locale={locale} />
           ))}
         </div>
       </section>
 
-      <section className="mx-auto mt-12 max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="rounded-[32px] border border-[#F1D8C8] bg-[#FFF8F3] p-6 shadow-[0_12px_28px_rgba(17,17,17,0.05)] sm:p-8">
-          <h3 className="text-xl font-bold tracking-tight text-[#111111] sm:text-[24px]">{copy.noteTitle}</h3>
-          <p className="mt-3 max-w-4xl text-sm leading-7 text-[#5B5B5B] sm:text-[15px]">
+      <section className="mx-auto mt-10 max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="rounded-[30px] border border-[#F1D8C8] bg-[#FFF8F3] p-6 shadow-[0_8px_24px_rgba(17,17,17,0.04)] sm:p-8">
+          <h3 className="text-xl font-bold text-[#111111]">{copy.noteTitle}</h3>
+          <p className="mt-3 max-w-4xl text-sm leading-7 text-[#5C5C5C]">
             {copy.noteText}
           </p>
         </div>
       </section>
 
-      <section className="mx-auto mt-12 max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="rounded-[40px] border border-[#F1D8C8] bg-gradient-to-r from-[#FFF4EC] via-[#FFF8F4] to-white p-6 shadow-[0_18px_48px_rgba(17,17,17,0.07)] sm:p-8 lg:p-10">
-          <div className="flex flex-col gap-7 lg:flex-row lg:items-center lg:justify-between">
-            <div className="max-w-3xl lg:pr-8">
-              <h2 className="text-3xl font-bold tracking-tight text-[#111111] sm:text-[34px]">
+      <section className="mx-auto mt-10 max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="rounded-[36px] border border-[#F1D8C8] bg-gradient-to-r from-[#FFF4EC] via-[#FFF8F4] to-white p-6 shadow-[0_14px_40px_rgba(17,17,17,0.06)] sm:p-8 lg:p-10">
+          <div className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
+            <div className="max-w-3xl">
+              <h2 className="text-3xl font-bold text-[#111111]">
                 {copy.bottomTitle}
               </h2>
-              <p className="mt-3 text-sm leading-7 text-[#565656] sm:text-base">
+              <p className="mt-3 text-sm leading-7 text-[#5C5C5C] sm:text-base">
                 {copy.bottomText}
               </p>
             </div>
 
-            <div className="flex flex-wrap gap-3 sm:gap-4">
+            <div className="flex flex-wrap gap-3">
               <Link
                 href={withLocale(locale, '/contacts')}
-                className="inline-flex rounded-2xl bg-[#FF6C26] px-6 py-3.5 text-sm font-bold text-white shadow-[0_14px_28px_rgba(255,108,38,0.18)] transition hover:-translate-y-0.5 hover:bg-[#E85E1B]"
+                className="inline-flex rounded-2xl bg-[#FF6C26] px-6 py-3 text-sm font-bold text-white transition hover:bg-[#E85E1B]"
               >
                 {copy.bottomPrimary}
               </Link>
 
               <Link
                 href={withLocale(locale, '/journals')}
-                className="inline-flex rounded-2xl border border-[#ECE3DC] bg-white px-6 py-3.5 text-sm font-semibold text-[#111111] transition hover:-translate-y-0.5 hover:bg-[#FFF8F3]"
+                className="inline-flex rounded-2xl border border-[#ECE3DC] bg-white px-6 py-3 text-sm font-semibold text-[#111111] transition hover:bg-[#FFF8F3]"
               >
                 {copy.bottomSecondary}
               </Link>
