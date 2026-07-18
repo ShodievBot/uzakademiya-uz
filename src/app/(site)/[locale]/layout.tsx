@@ -9,7 +9,7 @@ import SiteHeader from '@/components/layout/site-header';
 import SiteFooter from '@/components/layout/site-footer';
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://uzakademiya.uz'),
+  metadataBase: new URL(process.env.SITE_URL || 'https://uzakademiya.uz'),
   title: {
     default: 'UzAkademiya.uz',
     template: '%s | UzAkademiya.uz'
