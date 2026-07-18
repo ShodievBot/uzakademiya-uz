@@ -1,3 +1,4 @@
+import type {Metadata} from 'next';
 import Link from 'next/link';
 import {JournalCard} from '@/components/journals/journal-card';
 import {JournalFilters} from '@/components/journals/journal-filters';
@@ -13,6 +14,58 @@ type Props = {
     quartile?: string;
   }>;
 };
+
+function normalizePageLocale(locale: string) {
+  if (locale === 'uz' || locale === 'en') return locale;
+  return 'ru';
+}
+
+function getMetadataCopy(locale: string) {
+  if (locale === 'uz') {
+    return {
+      title: 'Ilmiy jurnallar katalogi',
+      description:
+        'Scopus, OAK, kvartil va yo‘nalish bo‘yicha ilmiy jurnallarni qidiring va taqqoslang.'
+    };
+  }
+
+  if (locale === 'en') {
+    return {
+      title: 'Scientific journals catalog',
+      description:
+        'Browse and compare scientific journals by Scopus, SAC, quartile, and subject area.'
+    };
+  }
+
+  return {
+    title: 'Каталог научных журналов',
+    description:
+      'Подбор и сравнение научных журналов по Scopus, ВАК, квартилю и научному направлению.'
+  };
+}
+
+export async function generateMetadata({
+  params
+}: {
+  params: Promise<{locale: string}>;
+}): Promise<Metadata> {
+  const {locale: rawLocale} = await params;
+  const locale = normalizePageLocale(rawLocale);
+  const meta = getMetadataCopy(locale);
+
+  return {
+    title: meta.title,
+    description: meta.description,
+    alternates: {
+      canonical: `/${locale}/journals`,
+      languages: {
+        ru: '/ru/journals',
+        uz: '/uz/journals',
+        en: '/en/journals'
+      }
+    }
+  };
+}
 
 function withLocale(locale: string, href: string) {
   if (href === '/') return `/${locale}`;

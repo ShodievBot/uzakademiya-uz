@@ -66,6 +66,7 @@ function getJournalTitleByLocale(
         titleRu: string;
         titleUz: string;
       }
+    | null
     | undefined,
   locale: string
 ) {

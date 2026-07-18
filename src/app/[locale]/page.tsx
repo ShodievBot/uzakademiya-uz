@@ -1,3 +1,4 @@
+import type {Metadata} from 'next';
 import Link from 'next/link';
 import {JournalCard} from '@/components/journals/journal-card';
 import {getAllJournals} from '@/lib/journals';
@@ -10,6 +11,49 @@ import {
 type Props = {
   params: Promise<{locale: string}>;
 };
+
+function getMetadataCopy(locale: string) {
+  if (locale === 'uz') {
+    return {
+      title: 'UzAkademiya.uz — ilmiy jurnallar va maqola nashri platformasi',
+      description:
+        'Scopus, OAK, ilmiy jurnallar katalogi, foydali materiallar va maqola nashri bo‘yicha aloqa platformasi.'
+    };
+  }
+
+  if (locale === 'en') {
+    return {
+      title: 'UzAkademiya.uz — scientific journals and article publication platform',
+      description:
+        'A platform for Scopus, SAC, scientific journal discovery, useful materials, and article publication support.'
+    };
+  }
+
+  return {
+    title: 'UzAkademiya.uz — платформа научных журналов и публикации статей',
+    description:
+      'Scopus, ВАК, каталог научных журналов, полезные материалы и связь по вопросам публикации статей.'
+  };
+}
+
+export async function generateMetadata({params}: Props): Promise<Metadata> {
+  const {locale: rawLocale} = await params;
+  const locale = normalizeLocale(rawLocale);
+  const meta = getMetadataCopy(locale);
+
+  return {
+    title: meta.title,
+    description: meta.description,
+    alternates: {
+      canonical: `/${locale}`,
+      languages: {
+        ru: '/ru',
+        uz: '/uz',
+        en: '/en'
+      }
+    }
+  };
+}
 
 type QuickLink = {
   title: string;
