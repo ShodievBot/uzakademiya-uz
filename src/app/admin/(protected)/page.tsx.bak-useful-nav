@@ -121,22 +121,8 @@ export default async function AdminDashboardPage() {
                 Site settings editor
               </Link>
             </li>
-            <li>
-              <Link
-                href="/admin/useful"
-                className="font-medium text-[#111111] underline decoration-[#FFD8C2] underline-offset-4"
-              >
-                Useful pages CRUD
-              </Link>
-            </li>
-            <li>
-              <Link
-                href="/admin/legislation"
-                className="font-medium text-[#111111] underline decoration-[#FFD8C2] underline-offset-4"
-              >
-                Legislation CRUD
-              </Link>
-            </li>
+            <li>Useful pages CRUD</li>
+            <li>Legislation CRUD</li>
             <li>Journals CRUD</li>
           </ol>
         </div>
