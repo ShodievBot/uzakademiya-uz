@@ -1,26 +1,221 @@
 'use client';
 
-import {useActionState} from 'react';
+import {
+  useActionState,
+  useEffect,
+  useState,
+  type ChangeEvent
+} from 'react';
 import {
   updateUsefulPage,
   type UsefulPageFormState,
   type UsefulPageFormValues
 } from './actions';
+import type {LocalizedText, UsefulBlock} from '@/types/useful-page';
+
+type ImportedUsefulPayload = {
+  slug?: unknown;
+  title?: unknown;
+  cardText?: unknown;
+  shortTitle?: unknown;
+  shortText?: unknown;
+  fullTitle?: unknown;
+  sourceKeys?: unknown;
+  blocks?: unknown;
+};
 
 function FieldError({message}: {message?: string}) {
   if (!message) return null;
   return <p className="mt-2 text-sm text-red-600">{message}</p>;
 }
 
+function normalizeLocalizedText(
+  value: unknown,
+  fieldName: string,
+  required = false
+): LocalizedText {
+  if (value == null) {
+    if (required) {
+      throw new Error(`${fieldName} is required.`);
+    }
+
+    return {ru: '', uz: '', en: ''};
+  }
+
+  if (typeof value !== 'object') {
+    throw new Error(`${fieldName} must be an object with ru/uz/en.`);
+  }
+
+  const record = value as Record<string, unknown>;
+
+  const result: LocalizedText = {
+    ru: typeof record.ru === 'string' ? record.ru : '',
+    uz: typeof record.uz === 'string' ? record.uz : '',
+    en: typeof record.en === 'string' ? record.en : ''
+  };
+
+  if (required && !result.ru.trim() && !result.uz.trim() && !result.en.trim()) {
+    throw new Error(`${fieldName} must contain at least one localized value.`);
+  }
+
+  return {
+    ru: result.ru.trim(),
+    uz: result.uz.trim(),
+    en: result.en.trim()
+  };
+}
+
+function hasLocalizedText(value: LocalizedText) {
+  return Boolean(value.ru || value.uz || value.en);
+}
+
+function parseImportedBlocks(value: unknown): UsefulBlock[] {
+  if (value == null) {
+    return [];
+  }
+
+  if (!Array.isArray(value)) {
+    throw new Error('blocks must be an array.');
+  }
+
+  return value.map((item, index) => {
+    if (!item || typeof item !== 'object') {
+      throw new Error(`Block #${index + 1} must be an object.`);
+    }
+
+    const record = item as Record<string, unknown>;
+    const type = record.type;
+
+    if (type !== 'paragraph' && type !== 'list') {
+      throw new Error(
+        `Block #${index + 1} must have type "paragraph" or "list".`
+      );
+    }
+
+    const title = normalizeLocalizedText(
+      record.title,
+      `Block #${index + 1} title`
+    );
+    const text = normalizeLocalizedText(
+      record.text,
+      `Block #${index + 1} text`
+    );
+
+    const block: UsefulBlock = {
+      type
+    };
+
+    if (hasLocalizedText(title)) {
+      block.title = title;
+    }
+
+    if (type === 'paragraph') {
+      if (!hasLocalizedText(text)) {
+        throw new Error(
+          `Paragraph block #${index + 1} must contain localized text.`
+        );
+      }
+
+      block.text = text;
+    }
+
+    if (type === 'list') {
+      if (!Array.isArray(record.items)) {
+        throw new Error(`List block #${index + 1} must contain items array.`);
+      }
+
+      const items = record.items
+        .map((entry, itemIndex) =>
+          normalizeLocalizedText(
+            entry,
+            `Block #${index + 1} item #${itemIndex + 1}`,
+            true
+          )
+        )
+        .filter((entry) => hasLocalizedText(entry));
+
+      if (items.length === 0) {
+        throw new Error(
+          `List block #${index + 1} must contain at least one item.`
+        );
+      }
+
+      block.items = items;
+    }
+
+    return block;
+  });
+}
+
+function parseSourceKeys(value: unknown): string[] {
+  if (value == null) {
+    return [];
+  }
+
+  if (!Array.isArray(value)) {
+    throw new Error('sourceKeys must be an array of strings.');
+  }
+
+  return Array.from(
+    new Set(
+      value
+        .map((item) => (typeof item === 'string' ? item.trim() : ''))
+        .filter(Boolean)
+    )
+  );
+}
+
+function mapImportedPayloadToFormValues(
+  payload: ImportedUsefulPayload,
+  currentSlug: string
+): UsefulPageFormValues {
+  if (payload.slug && payload.slug !== currentSlug) {
+    throw new Error(
+      `Imported slug "${String(payload.slug)}" does not match current page slug "${currentSlug}".`
+    );
+  }
+
+  const title = normalizeLocalizedText(payload.title, 'title', true);
+  const cardText = normalizeLocalizedText(payload.cardText, 'cardText', true);
+  const shortTitle = normalizeLocalizedText(payload.shortTitle, 'shortTitle');
+  const shortText = normalizeLocalizedText(payload.shortText, 'shortText');
+  const fullTitle = normalizeLocalizedText(payload.fullTitle, 'fullTitle');
+  const sourceKeys = parseSourceKeys(payload.sourceKeys);
+  const blocks = parseImportedBlocks(payload.blocks);
+
+  return {
+    slug: currentSlug,
+    titleRu: title.ru,
+    titleUz: title.uz,
+    titleEn: title.en,
+    cardTextRu: cardText.ru,
+    cardTextUz: cardText.uz,
+    cardTextEn: cardText.en,
+    shortTitleRu: shortTitle.ru,
+    shortTitleUz: shortTitle.uz,
+    shortTitleEn: shortTitle.en,
+    shortTextRu: shortText.ru,
+    shortTextUz: shortText.uz,
+    shortTextEn: shortText.en,
+    fullTitleRu: fullTitle.ru,
+    fullTitleUz: fullTitle.uz,
+    fullTitleEn: fullTitle.en,
+    sourceKeysText: sourceKeys.join('\n'),
+    blocksJson: JSON.stringify(blocks, null, 2)
+  };
+}
+
 function InputField({
   label,
   name,
-  defaultValue,
+  value,
+  onChange,
   error
 }: {
   label: string;
   name: keyof UsefulPageFormValues;
-  defaultValue: string;
+  value: string;
+  onChange: (event: ChangeEvent<HTMLInputElement>) => void;
   error?: string;
 }) {
   return (
@@ -30,7 +225,8 @@ function InputField({
       </span>
       <input
         name={name}
-        defaultValue={defaultValue}
+        value={value}
+        onChange={onChange}
         aria-invalid={Boolean(error)}
         className={`w-full rounded-2xl border bg-white px-4 py-3 text-sm text-slate-900 outline-none transition ${
           error
@@ -46,14 +242,16 @@ function InputField({
 function TextareaField({
   label,
   name,
-  defaultValue,
+  value,
+  onChange,
   error,
   rows = 5,
   mono = false
 }: {
   label: string;
   name: keyof UsefulPageFormValues;
-  defaultValue: string;
+  value: string;
+  onChange: (event: ChangeEvent<HTMLTextAreaElement>) => void;
   error?: string;
   rows?: number;
   mono?: boolean;
@@ -65,7 +263,8 @@ function TextareaField({
       </span>
       <textarea
         name={name}
-        defaultValue={defaultValue}
+        value={value}
+        onChange={onChange}
         rows={rows}
         aria-invalid={Boolean(error)}
         className={`w-full rounded-2xl border bg-white px-4 py-3 text-sm text-slate-900 outline-none transition ${
@@ -98,19 +297,111 @@ export default function UsefulPageForm({
   const action = updateUsefulPage.bind(null, slug);
   const [state, formAction, pending] = useActionState(action, initialState);
 
-  const values = state.values;
+  const [draft, setDraft] = useState<UsefulPageFormValues>(initialValues);
+  const [jsonInput, setJsonInput] = useState('');
+  const [jsonMessage, setJsonMessage] = useState('');
+  const [jsonError, setJsonError] = useState('');
+
+  useEffect(() => {
+    setDraft(state.values);
+  }, [state.values]);
+
+  function updateInputField(name: keyof UsefulPageFormValues) {
+    return (event: ChangeEvent<HTMLInputElement>) => {
+      setDraft((current) => ({
+        ...current,
+        [name]: event.target.value
+      }));
+    };
+  }
+
+  function updateTextareaField(name: keyof UsefulPageFormValues) {
+    return (event: ChangeEvent<HTMLTextAreaElement>) => {
+      setDraft((current) => ({
+        ...current,
+        [name]: event.target.value
+      }));
+    };
+  }
+
+  function applyJson() {
+    try {
+      setJsonError('');
+      setJsonMessage('');
+
+      if (!jsonInput.trim()) {
+        throw new Error('Paste JSON before applying.');
+      }
+
+      const parsed = JSON.parse(jsonInput) as ImportedUsefulPayload;
+      const nextValues = mapImportedPayloadToFormValues(parsed, slug);
+
+      setDraft(nextValues);
+      setJsonMessage('JSON applied successfully. Review the fields and click Save useful page.');
+    } catch (error) {
+      setJsonError(
+        error instanceof Error ? error.message : 'Failed to apply JSON.'
+      );
+    }
+  }
 
   return (
-    <form
-      key={JSON.stringify(values)}
-      action={formAction}
-      className="space-y-8"
-    >
+    <form action={formAction} className="space-y-8">
+      <section className="rounded-[28px] border border-orange-100 bg-orange-50/40 p-5">
+        <div className="text-xs font-semibold uppercase tracking-[0.18em] text-orange-600">
+          Import JSON
+        </div>
+
+        <p className="mt-3 text-sm leading-7 text-slate-600">
+          Paste a prepared JSON object to auto-fill this useful page form.
+        </p>
+
+        <div className="mt-4">
+          <textarea
+            value={jsonInput}
+            onChange={(event) => setJsonInput(event.target.value)}
+            rows={14}
+            placeholder='{"title":{"ru":"...","uz":"...","en":"..."},"cardText":{"ru":"...","uz":"...","en":"..."},"sourceKeys":["orcid"],"blocks":[]}'
+            className="w-full rounded-2xl border border-orange-200 bg-white px-4 py-3 font-mono text-sm text-slate-900 outline-none transition focus:border-orange-300"
+          />
+        </div>
+
+        <div className="mt-4 flex flex-wrap gap-3">
+          <button
+            type="button"
+            onClick={applyJson}
+            className="inline-flex items-center justify-center rounded-2xl bg-slate-900 px-5 py-3 text-sm font-semibold text-white transition hover:bg-slate-700"
+          >
+            Apply JSON
+          </button>
+
+          <button
+            type="button"
+            onClick={() => {
+              setJsonInput('');
+              setJsonError('');
+              setJsonMessage('');
+            }}
+            className="inline-flex items-center justify-center rounded-2xl border border-slate-200 bg-white px-5 py-3 text-sm font-semibold text-slate-700 transition hover:bg-slate-50"
+          >
+            Clear JSON
+          </button>
+        </div>
+
+        {jsonMessage ? (
+          <p className="mt-3 text-sm text-emerald-700">{jsonMessage}</p>
+        ) : null}
+
+        {jsonError ? (
+          <p className="mt-3 text-sm text-red-600">{jsonError}</p>
+        ) : null}
+      </section>
+
       <section className="rounded-[28px] border border-slate-200 bg-slate-50/70 p-5">
         <div className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-500">
           Page identifier
         </div>
-        <div className="mt-3 text-lg font-bold text-slate-900">/{values.slug}</div>
+        <div className="mt-3 text-lg font-bold text-slate-900">/{draft.slug}</div>
       </section>
 
       <section className="space-y-5">
@@ -122,19 +413,22 @@ export default function UsefulPageForm({
           <InputField
             label="Title (RU)"
             name="titleRu"
-            defaultValue={values.titleRu}
+            value={draft.titleRu}
+            onChange={updateInputField('titleRu')}
             error={state.errors.titleRu}
           />
           <InputField
             label="Title (UZ)"
             name="titleUz"
-            defaultValue={values.titleUz}
+            value={draft.titleUz}
+            onChange={updateInputField('titleUz')}
             error={state.errors.titleUz}
           />
           <InputField
             label="Title (EN)"
             name="titleEn"
-            defaultValue={values.titleEn}
+            value={draft.titleEn}
+            onChange={updateInputField('titleEn')}
             error={state.errors.titleEn}
           />
         </div>
@@ -143,19 +437,22 @@ export default function UsefulPageForm({
           <TextareaField
             label="Card text (RU)"
             name="cardTextRu"
-            defaultValue={values.cardTextRu}
+            value={draft.cardTextRu}
+            onChange={updateTextareaField('cardTextRu')}
             error={state.errors.cardTextRu}
           />
           <TextareaField
             label="Card text (UZ)"
             name="cardTextUz"
-            defaultValue={values.cardTextUz}
+            value={draft.cardTextUz}
+            onChange={updateTextareaField('cardTextUz')}
             error={state.errors.cardTextUz}
           />
           <TextareaField
             label="Card text (EN)"
             name="cardTextEn"
-            defaultValue={values.cardTextEn}
+            value={draft.cardTextEn}
+            onChange={updateTextareaField('cardTextEn')}
             error={state.errors.cardTextEn}
           />
         </div>
@@ -170,19 +467,22 @@ export default function UsefulPageForm({
           <InputField
             label="Short title (RU)"
             name="shortTitleRu"
-            defaultValue={values.shortTitleRu}
+            value={draft.shortTitleRu}
+            onChange={updateInputField('shortTitleRu')}
             error={state.errors.shortTitleRu}
           />
           <InputField
             label="Short title (UZ)"
             name="shortTitleUz"
-            defaultValue={values.shortTitleUz}
+            value={draft.shortTitleUz}
+            onChange={updateInputField('shortTitleUz')}
             error={state.errors.shortTitleUz}
           />
           <InputField
             label="Short title (EN)"
             name="shortTitleEn"
-            defaultValue={values.shortTitleEn}
+            value={draft.shortTitleEn}
+            onChange={updateInputField('shortTitleEn')}
             error={state.errors.shortTitleEn}
           />
         </div>
@@ -191,19 +491,22 @@ export default function UsefulPageForm({
           <TextareaField
             label="Short text (RU)"
             name="shortTextRu"
-            defaultValue={values.shortTextRu}
+            value={draft.shortTextRu}
+            onChange={updateTextareaField('shortTextRu')}
             error={state.errors.shortTextRu}
           />
           <TextareaField
             label="Short text (UZ)"
             name="shortTextUz"
-            defaultValue={values.shortTextUz}
+            value={draft.shortTextUz}
+            onChange={updateTextareaField('shortTextUz')}
             error={state.errors.shortTextUz}
           />
           <TextareaField
             label="Short text (EN)"
             name="shortTextEn"
-            defaultValue={values.shortTextEn}
+            value={draft.shortTextEn}
+            onChange={updateTextareaField('shortTextEn')}
             error={state.errors.shortTextEn}
           />
         </div>
@@ -212,19 +515,22 @@ export default function UsefulPageForm({
           <InputField
             label="Full title (RU)"
             name="fullTitleRu"
-            defaultValue={values.fullTitleRu}
+            value={draft.fullTitleRu}
+            onChange={updateInputField('fullTitleRu')}
             error={state.errors.fullTitleRu}
           />
           <InputField
             label="Full title (UZ)"
             name="fullTitleUz"
-            defaultValue={values.fullTitleUz}
+            value={draft.fullTitleUz}
+            onChange={updateInputField('fullTitleUz')}
             error={state.errors.fullTitleUz}
           />
           <InputField
             label="Full title (EN)"
             name="fullTitleEn"
-            defaultValue={values.fullTitleEn}
+            value={draft.fullTitleEn}
+            onChange={updateInputField('fullTitleEn')}
             error={state.errors.fullTitleEn}
           />
         </div>
@@ -239,7 +545,8 @@ export default function UsefulPageForm({
           <TextareaField
             label="Source keys"
             name="sourceKeysText"
-            defaultValue={values.sourceKeysText}
+            value={draft.sourceKeysText}
+            onChange={updateTextareaField('sourceKeysText')}
             error={state.errors.sourceKeysText}
             rows={10}
             mono
@@ -266,7 +573,8 @@ export default function UsefulPageForm({
           <TextareaField
             label="Structured blocks"
             name="blocksJson"
-            defaultValue={values.blocksJson}
+            value={draft.blocksJson}
+            onChange={updateTextareaField('blocksJson')}
             error={state.errors.blocksJson}
             rows={22}
             mono
