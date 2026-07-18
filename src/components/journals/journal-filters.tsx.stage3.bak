@@ -108,11 +108,11 @@ export async function JournalFilters({
   const active = hasActiveFilters(searchParams);
 
   return (
-    <section className="rounded-[34px] border border-[#F0E2D8] bg-white p-5 shadow-[0_14px_34px_rgba(17,17,17,0.06)] sm:p-6 lg:p-7">
-      <div className="mb-7 flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
+    <section className="rounded-[32px] border border-[#F0E2D8] bg-white p-5 shadow-[0_10px_28px_rgba(17,17,17,0.05)] sm:p-6 lg:p-7">
+      <div className="mb-6 flex flex-col gap-3 lg:flex-row lg:items-end lg:justify-between">
         <div>
-          <h2 className="text-2xl font-bold tracking-tight text-[#111111] sm:text-[30px]">{copy.title}</h2>
-          <p className="mt-3 max-w-3xl text-sm leading-7 text-[#5F5F5F] sm:text-[15px]">
+          <h2 className="text-2xl font-bold text-[#111111]">{copy.title}</h2>
+          <p className="mt-2 max-w-3xl text-sm leading-7 text-[#6B6B6B]">
             {copy.description}
           </p>
         </div>
@@ -120,14 +120,14 @@ export async function JournalFilters({
         {active && (
           <Link
             href={withLocale(locale, '/journals')}
-            className="inline-flex rounded-2xl border border-[#ECE3DC] bg-[#FFF8F3] px-5 py-3 text-sm font-semibold text-[#111111] transition hover:-translate-y-0.5 hover:bg-white"
+            className="inline-flex rounded-2xl border border-[#ECE3DC] bg-[#FFF8F3] px-5 py-3 text-sm font-semibold text-[#111111] transition hover:bg-white"
           >
             {copy.reset}
           </Link>
         )}
       </div>
 
-      <form className="grid gap-4 md:grid-cols-2 xl:grid-cols-12 xl:gap-5">
+      <form className="grid gap-4 md:grid-cols-2 xl:grid-cols-12">
         <div className="xl:col-span-4">
           <label className="mb-2 block text-sm font-semibold text-[#111111]">
             {copy.searchLabel}
@@ -137,7 +137,7 @@ export async function JournalFilters({
             name="q"
             defaultValue={searchParams.q || ''}
             placeholder={copy.searchPlaceholder}
-            className="w-full rounded-2xl border border-[#ECE3DC] bg-[#FFFDFC] px-4 py-3.5 text-sm text-[#111111] outline-none transition placeholder:text-[#9A8F87] focus:border-[#FF6C26] focus:bg-white focus:shadow-[0_0_0_4px_rgba(255,108,38,0.10)]"
+            className="w-full rounded-2xl border border-[#ECE3DC] bg-[#FFFDFC] px-4 py-3.5 text-sm text-[#111111] outline-none transition placeholder:text-[#9A8F87] focus:border-[#FF6C26] focus:bg-white"
           />
         </div>
 
@@ -148,7 +148,7 @@ export async function JournalFilters({
           <select
             name="scopus"
             defaultValue={searchParams.scopus || ''}
-            className="w-full rounded-2xl border border-[#ECE3DC] bg-white px-4 py-3.5 text-sm text-[#111111] outline-none transition focus:border-[#FF6C26] focus:shadow-[0_0_0_4px_rgba(255,108,38,0.10)]"
+            className="w-full rounded-2xl border border-[#ECE3DC] bg-white px-4 py-3.5 text-sm text-[#111111] outline-none transition focus:border-[#FF6C26]"
           >
             <option value="">{copy.scopusAll}</option>
             <option value="yes">{copy.scopusYes}</option>
@@ -210,7 +210,7 @@ export async function JournalFilters({
           <div className="flex flex-col gap-3 pt-2 sm:flex-row">
             <button
               type="submit"
-              className="inline-flex items-center justify-center rounded-2xl bg-[#FF6C26] px-6 py-3.5 text-sm font-bold text-white shadow-[0_12px_24px_rgba(255,108,38,0.18)] transition hover:-translate-y-0.5 hover:bg-[#E85E1B]"
+              className="inline-flex items-center justify-center rounded-2xl bg-[#FF6C26] px-6 py-3.5 text-sm font-bold text-white transition hover:bg-[#E85E1B]"
             >
               {copy.submit}
             </button>
@@ -218,7 +218,7 @@ export async function JournalFilters({
             {active && (
               <Link
                 href={withLocale(locale, '/journals')}
-                className="inline-flex items-center justify-center rounded-2xl border border-[#ECE3DC] bg-white px-6 py-3.5 text-sm font-semibold text-[#111111] transition hover:-translate-y-0.5 hover:bg-[#FFF8F3]"
+                className="inline-flex items-center justify-center rounded-2xl border border-[#ECE3DC] bg-white px-6 py-3.5 text-sm font-semibold text-[#111111] transition hover:bg-[#FFF8F3]"
               >
                 {copy.reset}
               </Link>
