@@ -37,20 +37,12 @@ export default async function AdminUsefulPagesListPage() {
           and structured content blocks.
         </p>
 
-        <div className="mt-6 flex flex-wrap gap-3">
+        <div className="mt-6">
           <Link
             href="/admin"
             className="inline-flex rounded-2xl border border-[#ECE3DC] bg-white px-5 py-3 text-sm font-semibold text-[#111111] transition hover:bg-[#FFF8F3]"
           >
             Back to dashboard
-          </Link>
-
-          <Link
-            href="/admin/useful/new"
-            style={{color: '#ffffff'}}
-            className="inline-flex min-w-[180px] items-center justify-center rounded-2xl bg-[#111111] px-5 py-3 text-sm font-semibold leading-none whitespace-nowrap transition hover:bg-[#2A2A2A]"
-          >
-            <span style={{color: '#ffffff'}}>Create useful page</span>
           </Link>
         </div>
       </section>
