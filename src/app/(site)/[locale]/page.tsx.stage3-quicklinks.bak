@@ -282,17 +282,17 @@ function QuickLinkCard({
   return (
     <Link
       href={href}
-      className="group rounded-[30px] border border-[#ECE3DC] bg-[#FFF8F3] p-5 shadow-[0_10px_24px_rgba(17,17,17,0.04)] transition duration-200 hover:-translate-y-1.5 hover:border-[#FF6C26] hover:bg-white hover:shadow-[0_18px_36px_rgba(255,108,38,0.12)] sm:p-6"
+      className="group rounded-[28px] border border-[#ECE3DC] bg-[#FFF8F3] p-5 shadow-[0_8px_22px_rgba(17,17,17,0.04)] transition hover:-translate-y-1 hover:border-[#FF6C26] hover:bg-white hover:shadow-[0_14px_30px_rgba(255,108,38,0.10)]"
     >
-      <div className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-white text-lg font-bold text-[#FF6C26] shadow-[0_8px_18px_rgba(17,17,17,0.05)] transition group-hover:scale-105 group-hover:bg-[#FFF2E9]">
+      <div className="inline-flex h-11 w-11 items-center justify-center rounded-2xl bg-white text-lg font-bold text-[#FF6C26] shadow-sm transition group-hover:bg-[#FFF2E9]">
         →
       </div>
 
-      <h3 className="mt-5 text-xl font-bold leading-tight text-[#111111] transition group-hover:text-[#E85E1B]">
+      <h3 className="mt-5 text-xl font-bold text-[#111111] transition group-hover:text-[#E85E1B]">
         {title}
       </h3>
 
-      <p className="mt-3 text-sm leading-7 text-[#5B5B5B]">{text}</p>
+      <p className="mt-3 text-sm leading-7 text-[#5C5C5C]">{text}</p>
     </Link>
   )
 }
@@ -397,17 +397,17 @@ export default async function LocaleHomePage({params}: Props) {
         </div>
       </section>
 
-      <section className="mx-auto mt-12 max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="mb-7">
-          <h2 className="text-3xl font-bold tracking-tight text-[#111111] sm:text-[34px]">
+      <section className="mx-auto mt-10 max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="mb-6">
+          <h2 className="text-3xl font-bold tracking-tight text-[#111111]">
             {content.quickLinksTitle}
           </h2>
-          <p className="mt-3 max-w-3xl text-sm leading-7 text-[#5F5F5F] sm:text-[15px]">
+          <p className="mt-3 max-w-3xl text-sm leading-7 text-[#6B6B6B]">
             {content.quickLinksText}
           </p>
         </div>
 
-        <div className="grid gap-6 sm:grid-cols-2 xl:grid-cols-3 xl:gap-7">
+        <div className="grid gap-6 sm:grid-cols-2 xl:grid-cols-3">
           {content.quickLinks.map((item) => (
             <QuickLinkCard
               key={item.href}
