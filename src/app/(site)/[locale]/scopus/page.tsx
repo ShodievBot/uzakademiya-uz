@@ -15,13 +15,14 @@ function withLocale(locale: string, href: string) {
 function getCopy(locale: string) {
   if (locale === 'uz') {
     return {
-      badge: 'Scopus guide',
+      badge: 'Scopus bo‘yicha yo‘riqnoma',
       title: 'Scopus jurnallari va nashr bo‘yicha yo‘riqnoma',
       description:
         'Bu sahifada Scopus bazasiga kiruvchi jurnallar, asosiy ko‘rsatkichlar va maqolani nashrga tayyorlash bo‘yicha muhim ma’lumotlar jamlangan.',
       primaryCta: 'Jurnallar katalogi',
       secondaryCta: 'Bog‘lanish',
       usefulCta: 'Foydali materiallar',
+      stepLabel: 'Bosqich',
       stats: {
         journals: 'Scopus jurnallari',
         q12: 'Q1–Q2 jurnallar',
@@ -64,13 +65,14 @@ function getCopy(locale: string) {
 
   if (locale === 'en') {
     return {
-      badge: 'Scopus guide',
+      badge: 'Scopus guidance',
       title: 'Scopus journals and publication guidance',
       description:
         'This page brings together Scopus-indexed journals, key metrics, and practical guidance for preparing and submitting an article.',
       primaryCta: 'Journal catalog',
       secondaryCta: 'Contact us',
       usefulCta: 'Useful materials',
+      stepLabel: 'Step',
       stats: {
         journals: 'Scopus journals',
         q12: 'Q1–Q2 journals',
@@ -112,13 +114,14 @@ function getCopy(locale: string) {
   }
 
   return {
-    badge: 'Scopus guide',
+    badge: 'Навигация по Scopus',
     title: 'Scopus-журналы и навигация по публикации',
     description:
       'На этой странице собраны журналы, индексируемые в Scopus, ключевые метрики и практическая информация по подготовке и подаче статьи.',
     primaryCta: 'Каталог журналов',
     secondaryCta: 'Связаться с нами',
     usefulCta: 'Полезные материалы',
+      stepLabel: 'Этап',
     stats: {
       journals: 'Scopus-журналы',
       q12: 'Журналы Q1–Q2',
@@ -286,11 +289,13 @@ function HighlightCard({
 function StageCard({
   index,
   title,
-  text
+  text,
+  stepLabel
 }: {
   index: number;
   title: string;
   text: string;
+  stepLabel: string;
 }) {
   return (
     <article className="relative overflow-hidden rounded-[28px] border border-[#ECE3DC] bg-white p-6 shadow-[0_8px_24px_rgba(17,17,17,0.05)]">
@@ -460,6 +465,7 @@ export default async function LocalizedScopusPage({params}: Props) {
               index={index + 1}
               title={stage.title}
               text={stage.text}
+              stepLabel={copy.stepLabel}
             />
           ))}
         </div>

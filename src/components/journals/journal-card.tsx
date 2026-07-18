@@ -18,7 +18,7 @@ function getCopy(locale: string) {
       issn: 'ISSN',
       subjects: 'Yo‘nalishlar',
       citescore: 'CiteScore 2025',
-      percentile: 'Percentile',
+      percentile: 'Percentil',
       oak: 'OAK',
       verified: 'Tekshirilgan'
     };
@@ -31,7 +31,7 @@ function getCopy(locale: string) {
       issn: 'ISSN',
       subjects: 'Subjects',
       citescore: 'CiteScore 2025',
-      percentile: 'Percentile',
+      percentile: 'Перцентиль',
       oak: 'SAC',
       verified: 'Verified'
     };
