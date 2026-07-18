@@ -1,0 +1,126 @@
+import type {Metadata} from 'next';
+import Link from 'next/link';
+import {redirect} from 'next/navigation';
+import {getCurrentAdminUser} from '@/lib/admin-auth';
+import {
+  getAllJournals,
+  getJournalShortDescriptionByLocale
+} from '@/lib/journals';
+
+export const metadata: Metadata = {
+  title: 'Journals | Admin'
+};
+
+function Badge({children}: {children: React.ReactNode}) {
+  return (
+    <span className="rounded-full bg-[#FFF8F3] px-3 py-1 text-xs font-semibold text-[#B56A42]">
+      {children}
+    </span>
+  );
+}
+
+export default async function AdminJournalsListPage() {
+  const user = await getCurrentAdminUser();
+
+  if (!user) {
+    redirect('/admin/login');
+  }
+
+  if (user.role !== 'SUPERADMIN' && user.role !== 'EDITOR') {
+    redirect('/admin');
+  }
+
+  const journals = await getAllJournals();
+
+  return (
+    <div className="space-y-6">
+      <section className="rounded-[32px] border border-[#F1D8C8] bg-gradient-to-br from-white via-[#FFF9F5] to-[#FFF4ED] p-6 shadow-[0_16px_42px_rgba(17,17,17,0.06)] sm:p-8">
+        <div className="inline-flex rounded-full border border-[#FFD8C2] bg-white px-4 py-1.5 text-xs font-bold uppercase tracking-[0.18em] text-[#FF6C26]">
+          Journals
+        </div>
+
+        <h1 className="mt-5 text-3xl font-bold tracking-tight text-[#111111] sm:text-[36px]">
+          Journal catalog
+        </h1>
+
+        <p className="mt-3 max-w-3xl text-sm leading-7 text-[#5B5B5B] sm:text-[15px]">
+          Review journal cards, indexing flags, subject areas and public links.
+          The journal editor and JSON import will be connected in the next batch.
+        </p>
+
+        <div className="mt-6">
+          <Link
+            href="/admin"
+            className="inline-flex rounded-2xl border border-[#ECE3DC] bg-white px-5 py-3 text-sm font-semibold text-[#111111] transition hover:bg-[#FFF8F3]"
+          >
+            Back to dashboard
+          </Link>
+        </div>
+      </section>
+
+      <section className="grid gap-6 xl:grid-cols-2">
+        {journals.map((journal) => (
+          <article
+            key={journal.id}
+            className="rounded-[28px] border border-[#ECE3DC] bg-white p-6 shadow-[0_10px_28px_rgba(17,17,17,0.05)]"
+          >
+            <div className="flex flex-wrap items-center gap-3">
+              <Badge>/{journal.slug}</Badge>
+
+              {journal.isScopusIndexed ? <Badge>Scopus</Badge> : null}
+              {journal.isOakRecommended ? <Badge>OAK</Badge> : null}
+              {journal.quartile ? <Badge>{journal.quartile}</Badge> : null}
+              {journal.country ? <Badge>{journal.country}</Badge> : null}
+            </div>
+
+            <h2 className="mt-4 text-2xl font-bold leading-tight tracking-tight text-[#111111]">
+              {journal.titleRu || journal.title}
+            </h2>
+
+            <p className="mt-2 text-sm text-[#6B6B6B]">
+              {journal.publisher}
+            </p>
+
+            <p className="mt-4 text-sm leading-7 text-[#5C5C5C]">
+              {getJournalShortDescriptionByLocale(journal, 'ru')}
+            </p>
+
+            <div className="mt-5 flex flex-wrap gap-3 text-sm text-[#6B6B6B]">
+              <span className="rounded-full bg-slate-100 px-3 py-1">
+                ISSN: {journal.issn || '—'}
+              </span>
+              <span className="rounded-full bg-slate-100 px-3 py-1">
+                eISSN: {journal.eissn || '—'}
+              </span>
+              <span className="rounded-full bg-slate-100 px-3 py-1">
+                Subjects: {journal.subjectAreas?.length || 0}
+              </span>
+              <span className="rounded-full bg-slate-100 px-3 py-1">
+                Scopus rows: {journal.scopusContent?.length || 0}
+              </span>
+            </div>
+
+            <div className="mt-6 flex flex-wrap gap-3">
+              <a
+                href={journal.website}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center rounded-2xl border border-[#ECE3DC] bg-white px-5 py-3 text-sm font-semibold text-[#111111] transition hover:bg-[#FFF8F3]"
+              >
+                Open website
+              </a>
+
+              <Link
+                href={`/admin/journals/${journal.slug}`}
+                style={{color: '#ffffff'}}
+                className="inline-flex min-w-[160px] items-center justify-center rounded-2xl bg-[#111111] px-5 py-3 text-sm font-semibold leading-none whitespace-nowrap transition hover:bg-[#2A2A2A]"
+              >
+                <span style={{color: '#ffffff'}}>Edit journal</span>
+              </Link>
+            </div>
+          </article>
+        ))}
+      </section>
+    </div>
+  );
+}
