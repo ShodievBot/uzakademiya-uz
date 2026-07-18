@@ -6,21 +6,18 @@ import {Quartile, VerificationStatus} from '@prisma/client';
 
 loadEnvConfig(process.cwd());
 
-type RawScopusContent = {
-  year?: unknown;
-  documentsCount?: unknown;
-};
-
 type RawJournal = Record<string, unknown>;
-function getNestedRecord(
-  obj: RawJournal,
-  key: string
-): Record<string, unknown> | null {
-  const value = obj[key];
+type RawRecord = Record<string, unknown>;
+
+function asRecord(value: unknown): RawRecord | null {
   if (value && typeof value === 'object' && !Array.isArray(value)) {
-    return value as Record<string, unknown>;
+    return value as RawRecord;
   }
   return null;
+}
+
+function asArray(value: unknown): unknown[] {
+  return Array.isArray(value) ? value : [];
 }
 
 function firstString(value: unknown): string | null {
@@ -29,91 +26,68 @@ function firstString(value: unknown): string | null {
   return trimmed.length ? trimmed : null;
 }
 
-function pickString(obj: RawJournal, keys: string[]): string | null {
-  for (const key of keys) {
-    const value = firstString(obj[key]);
-    if (value) return value;
-  }
-  return null;
-}
+function firstNumber(value: unknown): number | null {
+  if (typeof value === 'number' && Number.isFinite(value)) return value;
 
-function pickNumber(obj: RawJournal, keys: string[]): number | null {
-  for (const key of keys) {
-    const raw = obj[key];
-
-    if (typeof raw === 'number' && Number.isFinite(raw)) {
-      return raw;
-    }
-
-    if (typeof raw === 'string') {
-      const normalized = raw.replace(',', '.').trim();
-      if (!normalized) continue;
-
-      const parsed = Number(normalized);
-      if (Number.isFinite(parsed)) return parsed;
-    }
+  if (typeof value === 'string') {
+    const normalized = value.replace(',', '.').trim();
+    if (!normalized) return null;
+    const parsed = Number(normalized);
+    if (Number.isFinite(parsed)) return parsed;
   }
 
   return null;
 }
 
-function pickBoolean(obj: RawJournal, keys: string[]): boolean {
-  for (const key of keys) {
-    const raw = obj[key];
+function firstBoolean(value: unknown): boolean | null {
+  if (typeof value === 'boolean') return value;
+  if (typeof value === 'number') return value === 1;
 
-    if (typeof raw === 'boolean') return raw;
+  if (typeof value === 'string') {
+    const normalized = value.trim().toLowerCase();
 
-    if (typeof raw === 'number') return raw === 1;
-
-    if (typeof raw === 'string') {
-      const normalized = raw.trim().toLowerCase();
-
-      if (['true', '1', 'yes', 'y', 'да', 'ha'].includes(normalized)) return true;
-      if (['false', '0', 'no', 'n', 'нет', 'yo‘q', "yo'q"].includes(normalized)) return false;
-    }
+    if (['true', '1', 'yes', 'y', 'да', 'ha'].includes(normalized)) return true;
+    if (['false', '0', 'no', 'n', 'нет', 'yo‘q', "yo'q"].includes(normalized)) return false;
   }
 
-  return false;
+  return null;
 }
 
-function pickStringArray(obj: RawJournal, keys: string[]): string[] {
-  for (const key of keys) {
-    const raw = obj[key];
+function extractArray(payload: unknown): RawJournal[] {
+  if (Array.isArray(payload)) return payload as RawJournal[];
 
-    if (Array.isArray(raw)) {
-      const items = raw
-        .map((item) => (typeof item === 'string' ? item.trim() : ''))
-        .filter(Boolean);
-
-      if (items.length) return items;
-    }
-
-    if (typeof raw === 'string') {
-      const items = raw
-        .split(/[,;|]/g)
-        .map((item) => item.trim())
-        .filter(Boolean);
-
-      if (items.length) return items;
-    }
+  const record = asRecord(payload);
+  if (!record) {
+    throw new Error('Некорректный JSON journals.master.json');
   }
 
-  return [];
+  const journals = record.journals;
+  if (Array.isArray(journals)) {
+    return journals as RawJournal[];
+  }
+
+  throw new Error('Не удалось найти массив journals в journals.master.json');
+}
+
+function slugify(input: string): string {
+  return input
+    .toLowerCase()
+    .trim()
+    .replace(/['’]/g, '')
+    .replace(/[^a-z0-9а-яёўқғҳ\-_\\s]/gi, ' ')
+    .replace(/\s+/g, '-')
+    .replace(/-+/g, '-')
+    .replace(/^-|-$/g, '');
 }
 
 function normalizeQuartile(value: string | null): Quartile | null {
   if (!value) return null;
 
   const normalized = value.trim().toUpperCase();
-
-  if (
-    normalized === 'Q1' ||
-    normalized === 'Q2' ||
-    normalized === 'Q3' ||
-    normalized === 'Q4'
-  ) {
-    return normalized as Quartile;
-  }
+  if (normalized === 'Q1') return Quartile.Q1;
+  if (normalized === 'Q2') return Quartile.Q2;
+  if (normalized === 'Q3') return Quartile.Q3;
+  if (normalized === 'Q4') return Quartile.Q4;
 
   return null;
 }
@@ -136,67 +110,89 @@ function normalizeVerificationStatus(
   return null;
 }
 
-function slugify(input: string): string {
-  return input
-    .toLowerCase()
-    .trim()
-    .replace(/['’]/g, '')
-    .replace(/[^a-z0-9а-яёўқғҳ\-_\\s]/gi, ' ')
-    .replace(/\s+/g, '-')
-    .replace(/-+/g, '-')
-    .replace(/^-|-$/g, '');
+function cleanPlaceholder(value: string | null): string | null {
+  if (!value) return null;
+
+  const normalized = value.trim().toLowerCase();
+
+  if (
+    normalized === 'publisher_country' ||
+    normalized === 'publication_languages'
+  ) {
+    return null;
+  }
+
+  return value.trim();
 }
 
-function extractArray(payload: unknown): RawJournal[] {
-  if (Array.isArray(payload)) return payload as RawJournal[];
+function extractSubjectNames(subjectAreasRaw: unknown): string[] {
+  const items = asArray(subjectAreasRaw);
 
-  if (payload && typeof payload === 'object') {
-    const record = payload as Record<string, unknown>;
+  const names = items
+    .map((item) => asRecord(item))
+    .filter(Boolean)
+    .map((item) => firstString(item?.name))
+    .filter((value): value is string => Boolean(value));
 
-    const candidates = [
-      record.journals,
-      record.items,
-      record.data,
-      record.rows,
-      record.results
-    ];
+  return [...new Set(names)];
+}
 
-    for (const candidate of candidates) {
-      if (Array.isArray(candidate)) return candidate as RawJournal[];
+function extractCategoryGroups(subjectAreasRaw: unknown): string[] {
+  const items = asArray(subjectAreasRaw);
+
+  const groups = items
+    .map((item) => asRecord(item))
+    .filter(Boolean)
+    .map((item) => firstString(item?.group))
+    .filter((value): value is string => Boolean(value));
+
+  return [...new Set(groups)];
+}
+
+function extractLanguages(presentationRaw: RawRecord | null): string[] {
+  if (!presentationRaw) return [];
+
+  const langs = asArray(presentationRaw.languages)
+    .map((item) => firstString(item))
+    .filter((value): value is string => Boolean(value))
+    .map((value) => cleanPlaceholder(value))
+    .filter((value): value is string => Boolean(value));
+
+  return [...new Set(langs)];
+}
+
+function extractBestRanking(rankingsRaw: unknown): {
+  percentile: number | null;
+  quartile: Quartile | null;
+} {
+  const rankings = asArray(rankingsRaw)
+    .map((item) => asRecord(item))
+    .filter(Boolean);
+
+  if (!rankings.length) {
+    return {
+      percentile: null,
+      quartile: null
+    };
+  }
+
+  let bestPercentile: number | null = null;
+  let bestQuartile: Quartile | null = null;
+
+  for (const ranking of rankings) {
+    const percentile = firstNumber(ranking?.percentile);
+    const quartile = normalizeQuartile(firstString(ranking?.quartile));
+
+    if (percentile !== null && (bestPercentile === null || percentile > bestPercentile)) {
+      bestPercentile = percentile;
+      bestQuartile = quartile;
     }
   }
 
-  throw new Error(
-    'Не удалось найти массив журналов в src/data/journals.master.json'
-  );
-}
-
-function normalizeScopusContent(raw: unknown) {
-  if (!Array.isArray(raw)) return [];
-
-  return raw
-    .map((item) => item as RawScopusContent)
-    .map((item) => {
-      const year =
-        typeof item.year === 'number'
-          ? item.year
-          : typeof item.year === 'string'
-            ? Number(item.year)
-            : NaN;
-
-      const documentsCount =
-        typeof item.documentsCount === 'number'
-          ? item.documentsCount
-          : typeof item.documentsCount === 'string'
-            ? Number(item.documentsCount)
-            : NaN;
-
-      return {year, documentsCount};
-    })
-    .filter(
-      (item) =>
-        Number.isFinite(item.year) && Number.isFinite(item.documentsCount)
-    );
+  return {
+    percentile: bestPercentile,
+    quartile: bestQuartile
+  };
 }
 
 async function main() {
@@ -217,59 +213,61 @@ async function main() {
   let enCount = 0;
 
   for (const item of rawJournals) {
-    const content = getNestedRecord(item, 'content') ?? {};
-    const title = pickString(item, ['title', 'titleEn', 'name']) || 'Untitled';
-    const titleRu = pickString(item, ['titleRu', 'nameRu']) || title;
-    const titleUz = pickString(item, ['titleUz', 'nameUz']) || title;
+    const titles = asRecord(item.titles);
+    const identifiers = asRecord(item.identifiers);
+    const indexing = asRecord(item.indexing);
+    const metrics = asRecord(item.metrics);
+    const presentation = asRecord(item.presentation);
+    const assets = asRecord(item.assets);
+    const content = asRecord(item.content);
+    const review = asRecord(item.review);
 
-    const shortDescription = pickString(item, [
-      'shortDescription',
-      'description',
-      'summary'
-    ]) || pickString(content, [
-      'shortDescriptionRu',
-      'shortDescriptionEn',
-      'shortDescriptionUz',
-      'descriptionRu',
-      'descriptionEn',
-      'descriptionUz',
-      'summaryRu',
-      'summaryEn',
-      'summaryUz'
-    ]) || '';
+    const title =
+      firstString(titles?.en) ||
+      firstString(titles?.original) ||
+      firstString(item.title) ||
+      'Untitled';
 
-    const shortDescriptionRu =
-      pickString(item, ['shortDescriptionRu', 'descriptionRu', 'summaryRu']) ||
-      pickString(content, ['shortDescriptionRu', 'descriptionRu', 'summaryRu']);
+    const titleRu =
+      firstString(titles?.ru) ||
+      firstString(titles?.original) ||
+      title;
 
-    const shortDescriptionUz =
-      pickString(item, ['shortDescriptionUz', 'descriptionUz', 'summaryUz']) ||
-      pickString(content, ['shortDescriptionUz', 'descriptionUz', 'summaryUz']);
+    const titleUz =
+      firstString(titles?.uz) ||
+      firstString(titles?.original) ||
+      title;
 
-    const shortDescriptionEn =
-      pickString(item, ['shortDescriptionEn', 'descriptionEn', 'summaryEn']) ||
-      pickString(content, ['shortDescriptionEn', 'descriptionEn', 'summaryEn']);
+    const shortDescriptionRu = firstString(content?.shortDescriptionRu);
+    const shortDescriptionUz = firstString(content?.shortDescriptionUz);
+    const shortDescriptionEn = firstString(content?.shortDescriptionEn);
 
     if (shortDescriptionRu) ruCount += 1;
     if (shortDescriptionUz) uzCount += 1;
     if (shortDescriptionEn) enCount += 1;
 
+    const shortDescription =
+      shortDescriptionRu ||
+      shortDescriptionEn ||
+      shortDescriptionUz ||
+      '';
+
     const slugSource =
-      pickString(item, ['slug']) || titleRu || titleUz || title || randomUUID();
+      firstString(item.slug) ||
+      firstString(item.id) ||
+      titleRu ||
+      title ||
+      randomUUID();
 
     const slug = slugify(slugSource) || randomUUID();
 
-    const quartile = normalizeQuartile(
-      pickString(item, ['quartile'])
-    );
+    const subjectAreas = extractSubjectNames(item.subjectAreas);
+    const categories = extractCategoryGroups(item.subjectAreas);
 
-    const verificationStatus = normalizeVerificationStatus(
-      pickString(item, ['verificationStatus'])
-    );
+    const rankingData = extractBestRanking(item.rankings);
 
-    const scopusContent = normalizeScopusContent(
-      item.scopusContent ?? item.scopus_content
-    );
+    const country = cleanPlaceholder(firstString(presentation?.country));
+    const languages = extractLanguages(presentation);
 
     await prisma.journal.create({
       data: {
@@ -283,38 +281,34 @@ async function main() {
         shortDescriptionUz,
         shortDescriptionEn,
 
-        publisher: pickString(item, ['publisher']) || '',
-        website: pickString(item, ['website', 'site', 'url']) || '',
-        coverImage: pickString(item, ['coverImage', 'cover', 'image']),
+        publisher: firstString(item.publisher) || '',
+        website: firstString(assets?.website) || '',
+        coverImage: firstString(presentation?.coverImage),
 
-        issn: pickString(item, ['issn']),
-        eissn: pickString(item, ['eissn', 'eIssn']),
+        issn: firstString(identifiers?.issn),
+        eissn: firstString(identifiers?.eissn),
 
-        country: pickString(item, ['country']),
-        languages: pickStringArray(item, ['languages']),
-        subjectAreas: pickStringArray(item, ['subjectAreas', 'subjects']),
-        categories: pickStringArray(item, ['categories']),
+        country,
+        languages,
+        subjectAreas,
+        categories,
 
-        isScopusIndexed: pickBoolean(item, ['isScopusIndexed']),
-        isOakRecommended: pickBoolean(item, ['isOakRecommended']),
+        isScopusIndexed: firstBoolean(indexing?.isScopusIndexed) ?? false,
+        isOakRecommended: firstBoolean(indexing?.isOakRecommended) ?? false,
 
-        scopusCoverageYears: pickString(item, ['scopusCoverageYears']),
-        citescore2025: pickNumber(item, ['citescore2025']),
-        citescore2026: pickNumber(item, ['citescore2026']),
-        percentile: pickNumber(item, ['percentile']),
-        quartile,
-        verificationStatus,
+        scopusCoverageYears: firstString(indexing?.scopusCoverage),
+        citescore2025: firstNumber(metrics?.citescore2025),
+        citescore2026:
+          firstNumber(metrics?.citescore2026) ??
+          firstNumber(metrics?.citescoreTracker2026),
+        percentile: rankingData.percentile,
+        quartile: rankingData.quartile,
+        verificationStatus: normalizeVerificationStatus(
+          firstString(review?.verificationStatus)
+        ),
 
-        telegramUrl: pickString(item, ['telegramUrl', 'telegram']),
-        submissionUrl: pickString(item, ['submissionUrl', 'submissionLink']),
-
-        ...(scopusContent.length
-          ? {
-              scopusContent: {
-                create: scopusContent
-              }
-            }
-          : {})
+        telegramUrl: null,
+        submissionUrl: null
       }
     });
   }
