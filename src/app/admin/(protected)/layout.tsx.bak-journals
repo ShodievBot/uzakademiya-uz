@@ -56,12 +56,9 @@ export default async function AdminProtectedLayout({
               Dashboard
             </Link>
 
-            <Link
-              href="/admin/journals"
-              className="block rounded-2xl px-4 py-3 text-sm font-medium text-[#111111] transition hover:bg-[#FFF8F3]"
-            >
-              Journals
-            </Link>
+            <div className="block rounded-2xl px-4 py-3 text-sm text-[#8A6A56]">
+              Journals — soon
+            </div>
 
             <Link
               href="/admin/legislation"

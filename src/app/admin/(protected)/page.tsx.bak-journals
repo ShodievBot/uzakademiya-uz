@@ -137,14 +137,7 @@ export default async function AdminDashboardPage() {
                 Legislation CRUD
               </Link>
             </li>
-            <li>
-              <Link
-                href="/admin/journals"
-                className="font-medium text-[#111111] underline decoration-[#FFD8C2] underline-offset-4"
-              >
-                Journals CRUD
-              </Link>
-            </li>
+            <li>Journals CRUD</li>
           </ol>
         </div>
 
