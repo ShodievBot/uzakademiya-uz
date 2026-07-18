@@ -1,0 +1,81 @@
+import Link from 'next/link';
+import {redirect} from 'next/navigation';
+import {getCurrentAdminUser} from '@/lib/admin-auth';
+
+export default async function AdminProtectedLayout({
+  children
+}: {
+  children: React.ReactNode;
+}) {
+  const user = await getCurrentAdminUser();
+
+  if (!user) {
+    redirect('/admin/login');
+  }
+
+  return (
+    <main className="min-h-screen bg-[#FFF8F3]">
+      <header className="border-b border-[#F1D8C8] bg-white/95 backdrop-blur">
+        <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
+          <div>
+            <div className="inline-flex rounded-full border border-[#FFD8C2] bg-[#FFF8F3] px-3 py-1 text-[11px] font-bold uppercase tracking-[0.18em] text-[#FF6C26]">
+              Admin panel
+            </div>
+            <h1 className="mt-2 text-xl font-bold tracking-tight text-[#111111]">
+              UzAkademiya CMS
+            </h1>
+          </div>
+
+          <div className="flex items-center gap-3">
+            <div className="hidden text-right sm:block">
+              <div className="text-sm font-semibold text-[#111111]">
+                {user.fullName || user.email}
+              </div>
+              <div className="text-xs uppercase tracking-[0.14em] text-[#8A6A56]">
+                {user.role}
+              </div>
+            </div>
+
+            <Link
+              href="/admin/logout"
+              className="inline-flex rounded-2xl border border-[#ECE3DC] bg-white px-4 py-2.5 text-sm font-semibold text-[#111111] transition hover:-translate-y-0.5 hover:bg-[#FFF8F3]"
+            >
+              Logout
+            </Link>
+          </div>
+        </div>
+      </header>
+
+      <div className="mx-auto grid max-w-7xl gap-6 px-4 py-6 sm:px-6 lg:grid-cols-[240px_minmax(0,1fr)] lg:px-8">
+        <aside className="rounded-[28px] border border-[#ECE3DC] bg-white p-4 shadow-[0_10px_28px_rgba(17,17,17,0.05)]">
+          <nav className="space-y-2">
+            <Link
+              href="/admin"
+              className="block rounded-2xl bg-[#FFF8F3] px-4 py-3 text-sm font-semibold text-[#111111] transition hover:bg-[#FFF1E7]"
+            >
+              Dashboard
+            </Link>
+
+            <div className="block rounded-2xl px-4 py-3 text-sm text-[#8A6A56]">
+              Journals — soon
+            </div>
+
+            <div className="block rounded-2xl px-4 py-3 text-sm text-[#8A6A56]">
+              Legislation — soon
+            </div>
+
+            <div className="block rounded-2xl px-4 py-3 text-sm text-[#8A6A56]">
+              Useful pages — soon
+            </div>
+
+            <div className="block rounded-2xl px-4 py-3 text-sm text-[#8A6A56]">
+              Site settings — soon
+            </div>
+          </nav>
+        </aside>
+
+        <section>{children}</section>
+      </div>
+    </main>
+  );
+}
