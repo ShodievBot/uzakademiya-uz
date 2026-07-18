@@ -110,13 +110,9 @@ export default async function AdminLegislationListPage() {
                 Open source
               </a>
 
-              <Link
-                href={`/admin/legislation/${doc.slug}`}
-                style={{color: '#ffffff'}}
-                className="inline-flex min-w-[160px] items-center justify-center rounded-2xl bg-[#111111] px-5 py-3 text-sm font-semibold leading-none whitespace-nowrap transition hover:bg-[#2A2A2A]"
-              >
-                <span style={{color: '#ffffff'}}>Edit document</span>
-              </Link>
+              <span className="inline-flex items-center justify-center rounded-2xl bg-[#111111] px-5 py-3 text-sm font-semibold text-white">
+                Editor in part 2
+              </span>
             </div>
           </article>
         ))}
