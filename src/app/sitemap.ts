@@ -18,9 +18,11 @@ const staticPaths = [
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const lastModified = new Date();
 
-  const usefulSlugs = await getUsefulSlugs();
-  const journals = getAllJournals();
-  const legislation = getAllLegislation();
+  const [usefulSlugs, journals, legislation] = await Promise.all([
+    getUsefulSlugs(),
+    getAllJournals(),
+    getAllLegislation()
+  ]);
 
   const localizedStaticPages: MetadataRoute.Sitemap = siteLocales.flatMap((locale) =>
     staticPaths.map((path) => ({

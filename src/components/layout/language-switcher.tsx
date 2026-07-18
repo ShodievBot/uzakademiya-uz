@@ -1,15 +1,19 @@
 'use client';
 
 import Link from 'next/link';
-import {usePathname} from 'next/navigation';
+import {usePathname, useSearchParams} from 'next/navigation';
 
 const locales = ['ru', 'uz', 'en'] as const;
 
-function buildLocalePath(pathname: string, nextLocale: string) {
+function buildLocalePath(
+  pathname: string,
+  nextLocale: string,
+  search: string
+) {
   const segments = pathname.split('/').filter(Boolean);
 
   if (segments.length === 0) {
-    return `/${nextLocale}`;
+    return search ? `/${nextLocale}?${search}` : `/${nextLocale}`;
   }
 
   if (['ru', 'uz', 'en'].includes(segments[0])) {
@@ -18,7 +22,8 @@ function buildLocalePath(pathname: string, nextLocale: string) {
     segments.unshift(nextLocale);
   }
 
-  return `/${segments.join('/')}`;
+  const nextPath = `/${segments.join('/')}`;
+  return search ? `${nextPath}?${search}` : nextPath;
 }
 
 function getCurrentLocale(pathname: string) {
@@ -28,7 +33,9 @@ function getCurrentLocale(pathname: string) {
 
 export default function LanguageSwitcher() {
   const pathname = usePathname();
+  const searchParams = useSearchParams();
   const currentLocale = getCurrentLocale(pathname);
+  const search = searchParams.toString();
 
   return (
     <div className="flex items-center gap-2">
@@ -38,7 +45,7 @@ export default function LanguageSwitcher() {
         return (
           <Link
             key={item}
-            href={buildLocalePath(pathname, item)}
+            href={buildLocalePath(pathname, item, search)}
             className={[
               'inline-flex h-9 min-w-9 items-center justify-center rounded-full border px-3 text-xs transition',
               isActive

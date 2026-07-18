@@ -1,3 +1,4 @@
+import type {Metadata} from 'next';
 import Link from 'next/link';
 import {notFound} from 'next/navigation';
 import {
@@ -12,6 +13,50 @@ import {
 type Props = {
   params: Promise<{locale: string; slug: string}>;
 };
+
+function normalizePageLocale(locale: string) {
+  if (locale === 'uz' || locale === 'en') return locale;
+  return 'ru';
+}
+
+export async function generateMetadata({params}: Props): Promise<Metadata> {
+  const {locale: rawLocale, slug} = await params;
+  const locale = normalizePageLocale(rawLocale);
+  const journal = await getJournalBySlug(slug);
+
+  if (!journal) {
+    return {
+      title:
+        locale === 'uz'
+          ? 'Jurnal topilmadi'
+          : locale === 'en'
+            ? 'Journal not found'
+            : 'Журнал не найден',
+      description:
+        locale === 'uz'
+          ? 'So‘ralgan jurnal topilmadi.'
+          : locale === 'en'
+            ? 'The requested journal was not found.'
+            : 'Запрошенный журнал не найден.'
+    };
+  }
+
+  const title = getJournalTitle(journal, locale);
+  const description = getJournalShortDescriptionByLocale(journal, locale);
+
+  return {
+    title,
+    description,
+    alternates: {
+      canonical: `/${locale}/journals/${journal.slug}`,
+      languages: {
+        ru: `/ru/journals/${journal.slug}`,
+        uz: `/uz/journals/${journal.slug}`,
+        en: `/en/journals/${journal.slug}`
+      }
+    }
+  };
+}
 
 function getJournalTitle(
   journal: {
