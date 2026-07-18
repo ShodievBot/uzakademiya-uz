@@ -10,8 +10,7 @@
     "db:seed:useful": "tsx prisma/seed-useful.ts",
     "db:seed:legislation": "tsx prisma/seed-legislation.ts",
     "db:seed:journals": "tsx prisma/seed-journals.ts",
-    "db:studio": "prisma studio",
-    "db:create-admin": "tsx prisma/create-admin.ts"
+    "db:studio": "prisma studio"
   },
   "dependencies": {
     "@prisma/adapter-pg": "^7.8.0",
