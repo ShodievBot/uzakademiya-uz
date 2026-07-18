@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import {prisma} from '@/lib/prisma';
 
 function StatCard({
@@ -16,6 +17,41 @@ function StatCard({
         {value}
       </div>
     </div>
+  );
+}
+
+function ActionCard({
+  label,
+  title,
+  description,
+  href
+}: {
+  label: string;
+  title: string;
+  description: string;
+  href: string;
+}) {
+  return (
+    <Link
+      href={href}
+      className="group block rounded-[28px] border border-[#F1D8C8] bg-gradient-to-br from-white via-[#FFF9F5] to-[#FFF4ED] p-6 shadow-[0_16px_42px_rgba(17,17,17,0.06)] transition hover:-translate-y-0.5 hover:shadow-[0_20px_48px_rgba(17,17,17,0.08)]"
+    >
+      <div className="text-xs font-semibold uppercase tracking-[0.18em] text-[#B56A42]">
+        {label}
+      </div>
+
+      <h3 className="mt-3 text-xl font-bold tracking-tight text-[#111111]">
+        {title}
+      </h3>
+
+      <p className="mt-3 text-sm leading-7 text-[#5B5B5B] sm:text-[15px]">
+        {description}
+      </p>
+
+      <div className="mt-5 inline-flex items-center text-sm font-semibold text-[#FF6C26] transition group-hover:translate-x-0.5">
+        Open section →
+      </div>
+    </Link>
   );
 }
 
@@ -40,9 +76,27 @@ export default async function AdminDashboardPage() {
         </h2>
 
         <p className="mt-3 max-w-3xl text-sm leading-7 text-[#5B5B5B] sm:text-[15px]">
-          This area is now protected. Next, we will connect real CRUD sections for journals,
-          legislation, useful materials, and site settings.
+          This area is now protected. Site settings are already connected, and
+          the next step is expanding real CRUD sections for useful materials,
+          legislation, and journals.
         </p>
+
+        <div className="mt-6 flex flex-wrap gap-3">
+          <Link
+            href="/admin/settings"
+            style={{color: '#ffffff'}}
+            className="inline-flex min-w-[180px] items-center justify-center rounded-2xl bg-[#111111] px-5 py-3 text-sm font-semibold leading-none whitespace-nowrap transition hover:bg-[#2A2A2A]"
+          >
+            <span style={{color: '#ffffff'}}>Open site settings</span>
+          </Link>
+
+          <Link
+            href="/admin"
+            className="inline-flex rounded-2xl border border-[#ECE3DC] bg-white px-5 py-3 text-sm font-semibold text-[#111111] transition hover:bg-[#FFF8F3]"
+          >
+            Refresh overview
+          </Link>
+        </div>
       </div>
 
       <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
@@ -52,17 +106,33 @@ export default async function AdminDashboardPage() {
         <StatCard label="Admins / users" value={usersCount} />
       </div>
 
-      <div className="rounded-[28px] border border-[#ECE3DC] bg-white p-6 shadow-[0_10px_28px_rgba(17,17,17,0.05)] sm:p-7">
-        <h3 className="text-xl font-bold tracking-tight text-[#111111]">
-          Recommended next implementation order
-        </h3>
+      <div className="grid gap-6 xl:grid-cols-[minmax(0,1.3fr)_minmax(320px,0.7fr)]">
+        <div className="rounded-[28px] border border-[#ECE3DC] bg-white p-6 shadow-[0_10px_28px_rgba(17,17,17,0.05)] sm:p-7">
+          <h3 className="text-xl font-bold tracking-tight text-[#111111]">
+            Recommended next implementation order
+          </h3>
 
-        <ol className="mt-4 list-decimal space-y-3 pl-5 text-sm leading-7 text-[#5B5B5B] sm:text-[15px]">
-          <li>Site settings editor</li>
-          <li>Useful pages CRUD</li>
-          <li>Legislation CRUD</li>
-          <li>Journals CRUD</li>
-        </ol>
+          <ol className="mt-4 list-decimal space-y-3 pl-5 text-sm leading-7 text-[#5B5B5B] sm:text-[15px]">
+            <li>
+              <Link
+                href="/admin/settings"
+                className="font-medium text-[#111111] underline decoration-[#FFD8C2] underline-offset-4"
+              >
+                Site settings editor
+              </Link>
+            </li>
+            <li>Useful pages CRUD</li>
+            <li>Legislation CRUD</li>
+            <li>Journals CRUD</li>
+          </ol>
+        </div>
+
+        <ActionCard
+          label="Ready now"
+          title="Site settings"
+          description="Manage the public site name, primary contacts, social links and default locale from one admin section."
+          href="/admin/settings"
+        />
       </div>
     </div>
   );

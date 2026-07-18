@@ -1,8 +1,6 @@
 'use server';
 
 import {revalidatePath} from 'next/cache';
-import {redirect} from 'next/navigation';
-import {getCurrentAdminUser} from '@/lib/admin-auth';
 import {
   saveSiteSettings,
   type SiteSettingsData
@@ -53,21 +51,6 @@ export async function updateSiteSettings(
   _prevState: SettingsFormState,
   formData: FormData
 ): Promise<SettingsFormState> {
-  const user = await getCurrentAdminUser();
-
-  if (!user) {
-    redirect('/admin/login');
-  }
-
-  if (user.role !== 'SUPERADMIN') {
-    return {
-      success: false,
-      message: 'Only SUPERADMIN can update site settings.',
-      errors: {},
-      values: normalizeInput(formData)
-    };
-  }
-
   const values = normalizeInput(formData);
   const errors: Partial<Record<keyof SiteSettingsData, string>> = {};
 
