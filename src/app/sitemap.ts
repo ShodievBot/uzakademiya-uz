@@ -3,10 +3,9 @@ import {getAllJournals} from '@/lib/journals';
 import {getAllLegislation} from '@/lib/legislation';
 import {getUsefulSlugs, siteLocales} from '@/lib/useful';
 
-const baseUrl = 'https://uzakademiya.uz';
+const baseUrl = process.env.SITE_URL || 'https://uzakademiya.uz';
 
 const staticPaths = [
-  '',
   '/journals',
   '/scopus',
   '/oak',
@@ -25,19 +24,27 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   ]);
 
   const localizedStaticPages: MetadataRoute.Sitemap = siteLocales.flatMap((locale) =>
-    staticPaths.map((path) => ({
-      url: `${baseUrl}/${locale}${path}`,
-      lastModified,
-      changeFrequency: path === '' || path === '/journals' ? 'weekly' : 'monthly',
-      priority: path === '' ? 1 : path === '/journals' ? 0.9 : 0.7
-    }))
+    [
+      {
+        url: `${baseUrl}/${locale}`,
+        lastModified,
+        changeFrequency: 'weekly' as const,
+        priority: 1
+      },
+      ...staticPaths.map((path) => ({
+        url: `${baseUrl}/${locale}${path}`,
+        lastModified,
+        changeFrequency: path === '/journals' ? 'weekly' as const : 'monthly' as const,
+        priority: path === '/journals' ? 0.9 : 0.7
+      }))
+    ]
   );
 
   const usefulPages: MetadataRoute.Sitemap = siteLocales.flatMap((locale) =>
     usefulSlugs.map((slug) => ({
       url: `${baseUrl}/${locale}/useful/${slug}`,
       lastModified,
-      changeFrequency: 'monthly',
+      changeFrequency: 'monthly' as const,
       priority: 0.7
     }))
   );
@@ -46,7 +53,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     legislation.map((doc) => ({
       url: `${baseUrl}/${locale}/legislation/${doc.slug}`,
       lastModified,
-      changeFrequency: 'monthly',
+      changeFrequency: 'monthly' as const,
       priority: 0.7
     }))
   );
@@ -55,18 +62,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     journals.map((journal) => ({
       url: `${baseUrl}/${locale}/journals/${journal.slug}`,
       lastModified,
-      changeFrequency: 'weekly',
+      changeFrequency: 'weekly' as const,
       priority: 0.8
     }))
   );
 
   return [
-    {
-      url: `${baseUrl}/`,
-      lastModified,
-      changeFrequency: 'weekly',
-      priority: 1
-    },
     ...localizedStaticPages,
     ...usefulPages,
     ...legislationPages,

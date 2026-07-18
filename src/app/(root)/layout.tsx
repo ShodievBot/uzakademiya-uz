@@ -2,7 +2,7 @@ import type {Metadata} from 'next';
 import '../globals.css';
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://uzakademiya.uz'),
+  metadataBase: new URL(process.env.SITE_URL || 'https://uzakademiya.uz'),
   title: {
     default: 'UzAkademiya.uz',
     template: '%s | UzAkademiya.uz'
