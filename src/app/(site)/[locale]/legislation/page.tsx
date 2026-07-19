@@ -4,7 +4,6 @@ import {
   getAllLegislation,
   normalizeLocale,
   pickLocalizedText,
-  siteLocales
 } from '@/lib/legislation';
 import type {SiteLocale} from '@/types/legislation';
 
@@ -125,11 +124,7 @@ export async function generateMetadata({
   };
 }
 
-export const dynamicParams = false;
-
-export function generateStaticParams() {
-  return siteLocales.map((locale) => ({locale}));
-}
+export const dynamic = 'force-dynamic';
 
 export default async function LocalizedLegislationPage({params}: Props) {
   const resolvedParams = await Promise.resolve(params);

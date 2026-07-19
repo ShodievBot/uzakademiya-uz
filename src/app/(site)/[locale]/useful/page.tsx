@@ -3,7 +3,6 @@ import {
   getUsefulPages,
   normalizeLocale,
   pickLocale,
-  siteLocales
 } from '@/lib/useful';
 import type {SiteLocale} from '@/types/useful-page';
 import type {Metadata} from 'next';
@@ -102,11 +101,7 @@ export async function generateMetadata({
   };
 }
 
-export const dynamicParams = false;
-
-export function generateStaticParams() {
-  return siteLocales.map((locale) => ({locale}));
-}
+export const dynamic = 'force-dynamic';
 
 export default async function UsefulListPage({
   params
