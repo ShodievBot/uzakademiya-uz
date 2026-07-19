@@ -263,8 +263,11 @@ function StatCard({
   label: string
 }) {
   return (
-    <div className="rounded-[28px] border border-[#F0E2D8] bg-white/95 p-5 shadow-[0_8px_24px_rgba(17,17,17,0.05)]">
-      <div className="text-3xl font-bold text-[#111111] sm:text-4xl">{value}</div>
+    <div className="rounded-[26px] border border-[#F0E2D8] bg-gradient-to-br from-white to-[#FFF8F3] p-5 text-center shadow-[0_12px_30px_rgba(17,17,17,0.06)]">
+      <div className="mx-auto h-1.5 w-14 rounded-full bg-[#FF6C26]" />
+      <div className="mt-4 text-3xl font-bold leading-none text-[#111111] sm:text-4xl">
+        {value}
+      </div>
       <div className="mt-2 text-sm leading-6 text-[#6B6B6B]">{label}</div>
     </div>
   )
@@ -336,24 +339,24 @@ export default async function LocaleHomePage({params}: Props) {
     <main className="pb-16">
       <section className="mx-auto max-w-7xl px-4 pt-10 sm:px-6 lg:px-8 lg:pt-14">
         <div className="rounded-[42px] border border-[#F1D8C8] bg-gradient-to-br from-[#FFF9F5] via-[#FFF4ED] to-white p-7 shadow-[0_24px_70px_rgba(17,17,17,0.08)] sm:p-10 lg:p-12">
-          <div className="grid gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
-            <div>
+          <div className="grid gap-8">
+            <div className="mx-auto max-w-5xl text-center">
               <div className="inline-flex rounded-full border border-[#FFD8C2] bg-white px-5 py-2 text-[11px] font-bold uppercase tracking-[0.22em] text-[#FF6C26] shadow-[0_10px_24px_rgba(255,108,38,0.10)]">
                 {content.badge}
               </div>
 
-              <h1 className="mt-6 max-w-4xl text-4xl font-bold leading-[1.02] tracking-tight text-[#111111] sm:text-5xl lg:text-[68px]">
+              <h1 className="mx-auto mt-6 max-w-4xl text-4xl font-bold leading-[1.04] tracking-tight text-[#111111] sm:text-5xl lg:text-[60px]">
                 {content.title}
               </h1>
 
-              <p className="mt-6 max-w-3xl text-base leading-8 text-[#555555] sm:text-[18px]">
+              <p className="mx-auto mt-6 max-w-3xl text-base leading-8 text-[#555555] sm:text-[17px]">
                 {content.subtitle}
               </p>
 
               <form
                 action={withLocale(normalizedLocale, '/journals')}
                 method="get"
-                className="mt-9 rounded-[30px] border border-[#FFD8C2] bg-white p-4 shadow-[0_16px_38px_rgba(17,17,17,0.07)] backdrop-blur"
+                className="mx-auto mt-9 max-w-4xl rounded-[30px] border border-[#FFD8C2] bg-white/95 p-4 shadow-[0_18px_42px_rgba(255,108,38,0.10)] backdrop-blur"
               >
                 <div className="flex flex-col gap-3 md:flex-row">
                   <input
@@ -371,7 +374,7 @@ export default async function LocaleHomePage({params}: Props) {
                 </div>
               </form>
 
-              <div className="mt-7 flex flex-wrap gap-3 sm:gap-4">
+              <div className="mt-7 flex flex-wrap justify-center gap-3 sm:gap-4">
                 <Link
                   href={withLocale(normalizedLocale, '/journals')}
                   className="inline-flex items-center justify-center rounded-2xl bg-[#FF6C26] px-6 py-3 text-sm font-bold text-white shadow-[0_14px_28px_rgba(255,108,38,0.18)] transition hover:-translate-y-0.5 hover:bg-[#E85E1B]"
@@ -386,13 +389,15 @@ export default async function LocaleHomePage({params}: Props) {
                   {content.contactUs}
                 </Link>
               </div>
+
+              <div className="mx-auto mt-8 grid max-w-4xl gap-4 sm:grid-cols-3">
+                <StatCard value={totalCount} label={content.stats.total} />
+                <StatCard value={scopusCount} label={content.stats.scopus} />
+                <StatCard value={oakCount} label={content.stats.oak} />
+              </div>
             </div>
 
-            <aside className="grid gap-4 sm:grid-cols-3 lg:grid-cols-1 lg:gap-5 lg:self-stretch">
-              <StatCard value={totalCount} label={content.stats.total} />
-              <StatCard value={scopusCount} label={content.stats.scopus} />
-              <StatCard value={oakCount} label={content.stats.oak} />
-            </aside>
+
           </div>
         </div>
       </section>
