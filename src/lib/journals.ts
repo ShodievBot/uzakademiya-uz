@@ -108,6 +108,47 @@ export async function getAllJournals(): Promise<Journal[]> {
   return journals.map(mapJournalFromDb);
 }
 
+
+export async function getFeaturedJournals(limit = 6): Promise<Journal[]> {
+  const journals = await prisma.journal.findMany({
+    orderBy: {
+      createdAt: 'asc'
+    },
+    take: limit,
+    include: {
+      scopusContent: {
+        orderBy: {
+          year: 'asc'
+        }
+      }
+    }
+  });
+
+  return journals.map(mapJournalFromDb);
+}
+
+export async function getJournalCounts(): Promise<{
+  total: number;
+  scopus: number;
+  oak: number;
+}> {
+  const [total, scopus, oak] = await Promise.all([
+    prisma.journal.count(),
+    prisma.journal.count({
+      where: {
+        isScopusIndexed: true
+      }
+    }),
+    prisma.journal.count({
+      where: {
+        isOakRecommended: true
+      }
+    })
+  ]);
+
+  return {total, scopus, oak};
+}
+
 export async function getJournalBySlug(slug: string): Promise<Journal | null> {
   const normalizedSlug = decodeURIComponent(slug).trim().toLowerCase();
 

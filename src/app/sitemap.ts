@@ -1,7 +1,9 @@
 import type {MetadataRoute} from 'next';
-import {getAllJournals} from '@/lib/journals';
-import {getAllLegislation} from '@/lib/legislation';
+import {prisma} from '@/lib/prisma';
+import {getLegislationSlugs} from '@/lib/legislation';
 import {getUsefulSlugs, siteLocales} from '@/lib/useful';
+
+export const dynamic = 'force-dynamic';
 
 const baseUrl = process.env.SITE_URL || 'https://uzakademiya.uz';
 
@@ -17,10 +19,13 @@ const staticPaths = [
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const lastModified = new Date();
 
-  const [usefulSlugs, journals, legislation] = await Promise.all([
+  const [usefulSlugs, legislationSlugs, journals] = await Promise.all([
     getUsefulSlugs(),
-    getAllJournals(),
-    getAllLegislation()
+    getLegislationSlugs(),
+    prisma.journal.findMany({
+      select: {slug: true},
+      orderBy: {createdAt: 'asc'}
+    })
   ]);
 
   const localizedStaticPages: MetadataRoute.Sitemap = siteLocales.flatMap((locale) =>
@@ -34,7 +39,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       ...staticPaths.map((path) => ({
         url: `${baseUrl}/${locale}${path}`,
         lastModified,
-        changeFrequency: path === '/journals' ? 'weekly' as const : 'monthly' as const,
+        changeFrequency: path === '/journals' ? ('weekly' as const) : ('monthly' as const),
         priority: path === '/journals' ? 0.9 : 0.7
       }))
     ]
@@ -50,8 +55,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   );
 
   const legislationPages: MetadataRoute.Sitemap = siteLocales.flatMap((locale) =>
-    legislation.map((doc) => ({
-      url: `${baseUrl}/${locale}/legislation/${doc.slug}`,
+    legislationSlugs.map((slug) => ({
+      url: `${baseUrl}/${locale}/legislation/${slug}`,
       lastModified,
       changeFrequency: 'monthly' as const,
       priority: 0.7
