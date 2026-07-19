@@ -11,8 +11,9 @@
     "db:seed:legislation": "tsx prisma/seed-legislation.ts",
     "db:seed:journals": "tsx prisma/seed-journals.ts",
     "db:studio": "prisma studio",
-    "db:create-admin": "tsx prisma/create-admin.ts",
-    "postinstall": "prisma generate"
+    "db:create-admin": "tsx prisma/create-admin.ts"
+  }
+
   },
   "dependencies": {
     "@prisma/adapter-pg": "^7.8.0",
