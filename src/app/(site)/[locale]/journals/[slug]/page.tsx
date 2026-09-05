@@ -10,6 +10,8 @@ import {
   getJournalPublishLabel
 } from '@/lib/journal-links';
 
+export const revalidate = 600;
+
 type Props = {
   params: Promise<{locale: string; slug: string}>;
 };

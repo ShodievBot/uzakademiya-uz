@@ -2,7 +2,9 @@ import type {Metadata} from 'next';
 import Link from 'next/link';
 import {JournalCard} from '@/components/journals/journal-card';
 import {JournalFilters} from '@/components/journals/journal-filters';
-import {getFilteredJournals} from '@/lib/journals';
+import {getFilteredJournals, getJournalCounts} from '@/lib/journals';
+
+export const revalidate = 300;
 
 type Props = {
   params: Promise<{locale: string}>;
@@ -61,8 +63,15 @@ export async function generateMetadata({
       languages: {
         ru: '/ru/journals',
         uz: '/uz/journals',
-        en: '/en/journals'
+        en: '/en/journals',
+        'x-default': '/ru/journals'
       }
+    },
+    openGraph: {
+      title: meta.title,
+      description: meta.description,
+      url: `/${locale}/journals`,
+      type: 'website'
     }
   };
 }
@@ -267,21 +276,38 @@ export default async function LocalizedJournalsPage({
   const query = (await searchParams) || {};
   const copy = getCopy(locale);
 
-  const filteredJournals = await getFilteredJournals({
-    q: query.q,
-    scopus: query.scopus,
-    oak: query.oak,
-    subject: query.subject,
-    quartile: query.quartile
-  });
+  const [filteredJournals, counts] = await Promise.all([
+    getFilteredJournals({
+      q: query.q,
+      scopus: query.scopus,
+      oak: query.oak,
+      subject: query.subject,
+      quartile: query.quartile
+    }),
+    getJournalCounts()
+  ]);
 
-  const allJournals = await getFilteredJournals({});
-  const scopusCount = allJournals.filter((journal) => journal.isScopusIndexed).length;
-  const oakCount = allJournals.filter((journal) => journal.isOakRecommended).length;
+  const {total: totalCount, scopus: scopusCount, oak: oakCount} = counts;
   const activeFiltersCount = getActiveFiltersCount(query);
+
+  const siteUrl = process.env.SITE_URL || 'https://uzakademiya.uz';
+  const itemListJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    itemListElement: filteredJournals.slice(0, 20).map((journal, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      url: `${siteUrl}/${locale}/journals/${journal.slug}`,
+      name: journal.titleRu || journal.title
+    }))
+  };
 
   return (
     <main className="pb-16">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{__html: JSON.stringify(itemListJsonLd)}}
+      />
       <section className="mx-auto max-w-7xl px-4 pt-10 sm:px-6 lg:px-8 lg:pt-12">
         <div className="rounded-[40px] border border-[#F1D8C8] bg-gradient-to-br from-[#FFF9F5] via-[#FFF4ED] to-white p-6 shadow-[0_18px_48px_rgba(17,17,17,0.07)] sm:p-8 lg:p-10">
           <div className="grid gap-8 lg:grid-cols-[1.15fr_0.85fr] lg:items-center">
@@ -323,7 +349,7 @@ export default async function LocalizedJournalsPage({
             </div>
 
             <aside className="grid gap-4 sm:grid-cols-3 lg:grid-cols-1 lg:self-stretch">
-              <StatCard value={allJournals.length} label={copy.stats.total} />
+              <StatCard value={totalCount} label={copy.stats.total} />
               <StatCard value={scopusCount} label={copy.stats.scopus} />
               <StatCard value={oakCount} label={copy.stats.oak} />
             </aside>

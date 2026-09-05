@@ -1,0 +1,13 @@
+{
+  "name": "UzAkademiya.uz",
+  "short_name": "UzAkademiya",
+  "description": "Каталог научных журналов и справочная платформа по Scopus, ВАК/OAK.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#FF6C26",
+  "lang": "ru",
+  "icons": [
+    {"src": "/favicon.ico", "sizes": "any", "type": "image/x-icon"}
+  ]
+}

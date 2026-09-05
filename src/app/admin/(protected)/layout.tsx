@@ -1,6 +1,11 @@
+import type {Metadata} from 'next';
 import Link from 'next/link';
 import {redirect} from 'next/navigation';
 import {getCurrentAdminUser} from '@/lib/admin-auth';
+
+export const metadata: Metadata = {
+  robots: {index: false, follow: false, noarchive: true, nosnippet: true}
+};
 
 export default async function AdminProtectedLayout({
   children

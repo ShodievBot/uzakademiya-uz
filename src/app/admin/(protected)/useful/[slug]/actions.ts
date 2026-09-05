@@ -1,6 +1,6 @@
 'use server';
 
-import {revalidatePath} from 'next/cache';
+import {revalidatePath, updateTag} from 'next/cache';
 import {redirect} from 'next/navigation';
 import {getCurrentAdminUser} from '@/lib/admin-auth';
 import {
@@ -279,6 +279,7 @@ export async function updateUsefulPage(
       blocks
     });
 
+    updateTag('useful');
     revalidatePath('/admin');
     revalidatePath('/admin/useful');
     revalidatePath(`/admin/useful/${slug}`);

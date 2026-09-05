@@ -1,6 +1,6 @@
 'use server';
 
-import {revalidatePath} from 'next/cache';
+import {revalidatePath, updateTag} from 'next/cache';
 import {redirect} from 'next/navigation';
 import {getCurrentAdminUser} from '@/lib/admin-auth';
 import {
@@ -259,6 +259,7 @@ export async function updateLegislationDocument(
       body
     } satisfies LegislationEditorInput);
 
+    updateTag('legislation');
     revalidatePath('/admin');
     revalidatePath('/admin/legislation');
     revalidatePath(`/admin/legislation/${slug}`);

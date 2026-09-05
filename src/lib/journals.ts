@@ -1,3 +1,4 @@
+import {unstable_cache} from 'next/cache';
 import {
   Quartile,
   type Prisma,
@@ -6,6 +7,8 @@ import {
 import {prisma} from '@/lib/prisma';
 import {getQuartileFromPercentile} from '@/lib/scopus';
 import type {Journal} from '@/types/journal';
+
+const JOURNALS_CACHE_TAG = 'journals';
 
 type JournalFilters = {
   q?: string;
@@ -91,89 +94,71 @@ function mapJournalFromDb(journal: {
   };
 }
 
-export async function getAllJournals(): Promise<Journal[]> {
-  const journals = await prisma.journal.findMany({
-    orderBy: {
-      createdAt: 'asc'
-    },
-    include: {
-      scopusContent: {
-        orderBy: {
-          year: 'asc'
-        }
+export const getAllJournals = unstable_cache(
+  async (): Promise<Journal[]> => {
+    const journals = await prisma.journal.findMany({
+      orderBy: {createdAt: 'asc'},
+      include: {
+        scopusContent: {orderBy: {year: 'asc'}}
       }
-    }
-  });
+    });
+    return journals.map(mapJournalFromDb);
+  },
+  ['journals:all'],
+  {tags: [JOURNALS_CACHE_TAG], revalidate: 300}
+);
 
-  return journals.map(mapJournalFromDb);
-}
-
-
-export async function getFeaturedJournals(limit = 6): Promise<Journal[]> {
-  const journals = await prisma.journal.findMany({
-    orderBy: {
-      createdAt: 'asc'
-    },
-    take: limit,
-    include: {
-      scopusContent: {
-        orderBy: {
-          year: 'asc'
-        }
+export const getFeaturedJournals = unstable_cache(
+  async (limit = 6): Promise<Journal[]> => {
+    const journals = await prisma.journal.findMany({
+      orderBy: {createdAt: 'asc'},
+      take: limit,
+      include: {
+        scopusContent: {orderBy: {year: 'asc'}}
       }
-    }
-  });
+    });
+    return journals.map(mapJournalFromDb);
+  },
+  ['journals:featured'],
+  {tags: [JOURNALS_CACHE_TAG], revalidate: 300}
+);
 
-  return journals.map(mapJournalFromDb);
-}
+export const getJournalCounts = unstable_cache(
+  async (): Promise<{total: number; scopus: number; oak: number}> => {
+    const [total, scopus, oak] = await Promise.all([
+      prisma.journal.count(),
+      prisma.journal.count({where: {isScopusIndexed: true}}),
+      prisma.journal.count({where: {isOakRecommended: true}})
+    ]);
+    return {total, scopus, oak};
+  },
+  ['journals:counts'],
+  {tags: [JOURNALS_CACHE_TAG], revalidate: 300}
+);
 
-export async function getJournalCounts(): Promise<{
-  total: number;
-  scopus: number;
-  oak: number;
-}> {
-  const [total, scopus, oak] = await Promise.all([
-    prisma.journal.count(),
-    prisma.journal.count({
+const journalBySlugCache = unstable_cache(
+  async (normalizedSlug: string): Promise<Journal | null> => {
+    const journal = await prisma.journal.findFirst({
       where: {
-        isScopusIndexed: true
+        slug: {equals: normalizedSlug, mode: 'insensitive'}
+      },
+      include: {
+        scopusContent: {orderBy: {year: 'asc'}}
       }
-    }),
-    prisma.journal.count({
-      where: {
-        isOakRecommended: true
-      }
-    })
-  ]);
+    });
+    if (!journal) return null;
+    return mapJournalFromDb(journal);
+  },
+  ['journals:by-slug'],
+  {tags: [JOURNALS_CACHE_TAG], revalidate: 300}
+);
 
-  return {total, scopus, oak};
-}
-
-export async function getJournalBySlug(slug: string): Promise<Journal | null> {
+export function getJournalBySlug(slug: string): Promise<Journal | null> {
   const normalizedSlug = decodeURIComponent(slug).trim().toLowerCase();
-
-  const journal = await prisma.journal.findFirst({
-    where: {
-      slug: {
-        equals: normalizedSlug,
-        mode: 'insensitive'
-      }
-    },
-    include: {
-      scopusContent: {
-        orderBy: {
-          year: 'asc'
-        }
-      }
-    }
-  });
-
-  if (!journal) return null;
-
-  return mapJournalFromDb(journal);
+  return journalBySlugCache(normalizedSlug);
 }
 
-export async function getFilteredJournals(
+async function fetchFilteredJournals(
   filters: JournalFilters
 ): Promise<Journal[]> {
   const {q, scopus, oak, subject, quartile} = filters;
@@ -243,16 +228,39 @@ export async function getFilteredJournals(
   return journals.map(mapJournalFromDb);
 }
 
-export async function getUniqueSubjects(): Promise<string[]> {
-  const journals = await prisma.journal.findMany({
-    select: {
-      subjectAreas: true
-    }
-  });
+const filteredJournalsCache = unstable_cache(
+  async (key: string): Promise<Journal[]> => {
+    const filters = JSON.parse(key) as JournalFilters;
+    return fetchFilteredJournals(filters);
+  },
+  ['journals:filtered'],
+  {tags: [JOURNALS_CACHE_TAG], revalidate: 300}
+);
 
-  const allSubjects = journals.flatMap((journal) => journal.subjectAreas || []);
-  return [...new Set(allSubjects)].sort((a, b) => a.localeCompare(b));
+export function getFilteredJournals(filters: JournalFilters): Promise<Journal[]> {
+  const normalized: JournalFilters = {
+    q: filters.q?.trim() || undefined,
+    scopus: filters.scopus || undefined,
+    oak: filters.oak || undefined,
+    subject: filters.subject?.trim() || undefined,
+    quartile: filters.quartile?.trim().toUpperCase() || undefined
+  };
+  return filteredJournalsCache(JSON.stringify(normalized));
 }
+
+export const getUniqueSubjects = unstable_cache(
+  async (): Promise<string[]> => {
+    const rows = await prisma.$queryRaw<Array<{subject: string}>>`
+      SELECT DISTINCT unnest("subjectAreas") AS subject
+      FROM "Journal"
+      WHERE array_length("subjectAreas", 1) > 0
+      ORDER BY subject ASC
+    `;
+    return rows.map((row) => row.subject).filter(Boolean);
+  },
+  ['journals:subjects'],
+  {tags: [JOURNALS_CACHE_TAG], revalidate: 3600}
+);
 
 export function getJournalShortDescriptionByLocale(
   journal: Pick<

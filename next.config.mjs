@@ -11,6 +11,24 @@ const __dirname = path.dirname(__filename);
 const nextConfig = {
   turbopack: {
     root: __dirname
+  },
+  compress: true,
+  poweredByHeader: false,
+  images: {
+    formats: ['image/avif', 'image/webp'],
+    remotePatterns: [
+      {protocol: 'https', hostname: '**'}
+    ]
+  },
+  async headers() {
+    return [
+      {
+        source: '/:all*(svg|jpg|png|webp|avif|ico|woff2)',
+        headers: [
+          {key: 'Cache-Control', value: 'public, max-age=86400, stale-while-revalidate=604800'}
+        ]
+      }
+    ];
   }
 };
 
