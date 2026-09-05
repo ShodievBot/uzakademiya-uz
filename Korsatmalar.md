@@ -1,221 +1,218 @@
-# Ko'rsatmalar — sun'iy intellekt uchun
+# Instructions — for the AI assistant
 
-> **Bu fayl mijozning sun'iy intellekti (Claude, ChatGPT yoki boshqa) uchun yozilgan.**
-> Mijoz o'zbek tilida gaplashadi va ingliz tilini tushunmaydi. Barcha javoblaringiz
-> **faqat o'zbek tilida (lotin yozuvida)** bo'lsin. Texnik terminlar (masalan
-> `DATABASE_URL`, `prisma migrate`, `Vercel`) va buyruqlarni tarjima qilmang —
-> ular xuddi shu holicha qoldiring. Faqat tushuntirish matni o'zbekcha bo'lsin.
+> **This file is written for the client's AI assistant (Claude, ChatGPT or any other).**
+> The client speaks Uzbek and does not understand English. All your replies to the
+> client must be **in Uzbek only (Latin script)**. Do NOT translate technical
+> terms (such as `DATABASE_URL`, `prisma migrate`, `Vercel`) or shell commands —
+> leave them exactly as written. Only the explanatory prose should be in Uzbek.
 >
-> Mijozning Vercel loyihasida barcha kerakli environment variable'lar
-> (`DATABASE_URL`, `DIRECT_URL`, `SITE_URL`) **allaqachon o'rnatilgan**. Ularni
-> qayta so'ramang.
+> All required environment variables (`DATABASE_URL`, `DIRECT_URL`, `SITE_URL`)
+> are **already set** in the client's Vercel project. Do not ask for them again.
 
 ---
 
-## 1-QISM — Nima o'zgardi (siz — AI — buni tushunishingiz kerak)
+## PART 1 — What changed (you, the AI, need to understand this)
 
-Mijozning sayti — `uzakademiya.uz` — Uzbekistan ilmiy jurnallar katalogi.
-Texnologiyalar: **Next.js 16.2 + React 19 + Prisma 7 + Neon Postgres +
+The client's site — `uzakademiya.uz` — is a catalog of Uzbekistan's scientific
+journals. Stack: **Next.js 16.2 + React 19 + Prisma 7 + Neon Postgres +
 next-intl (ru/uz/en) + Tailwind 4 + Vercel** (hosting).
 
-Muammo: har bir sahifa o'zgarganda sayt sekin ochilardi. Sabablari topildi va
-tuzatildi. Quyida aynan nima o'zgarganini bilib oling — mijoz sizdan biror
-xatolik yoki qo'shimcha savol so'rasa, kontekstga ega bo'lasiz.
+The problem: every route change felt slow. The causes have been diagnosed and
+fixed. Below is exactly what changed — so if the client hits an error or asks
+a follow-up question, you have full context.
 
-### 1.1 Route o'zgarishi nima uchun sekin edi
+### 1.1 Why route changes were slow
 
-Har bir sahifa ochilganda bir vaqtning o'zida quyidagilar yuz berardi:
+On every page navigation, all of the following happened at once:
 
-1. **Middleware** (`proxy.ts`) har bir so'rovda ishlab, locale (til)
-   aniqlashardi.
-2. **Har bir sahifa dinamik** edi — `revalidate` yo'q, `unstable_cache` yo'q.
-   Har navigatsiyada butun RSC daraxti server tomonida qayta render qilinardi.
-3. **Har bir DB so'rov** `PrismaNeon` (HTTP adapter) orqali alohida HTTP
-   round-trip edi — TCP pool emas. Bir sahifada bir necha so'rov
-   **ketma-ket** (parallel emas) ishlar edi.
-4. **`next-intl` har renderda locale JSON'ni qayta import** qilar edi.
-5. **Hech qanday `loading.tsx` yo'q edi** — foydalanuvchi havolani bosgach,
-   server ish tugaguncha eski sahifa muzlab turar edi. Hech qanday spinner
-   yoki skeleton yo'q edi. Bu — foydalanuvchi ko'zi bilan "sekin" degani.
+1. **Middleware** (`proxy.ts`) ran on every request, performing locale
+   detection.
+2. **Every page was dynamic** — no `revalidate`, no `unstable_cache`. The
+   entire RSC tree was re-rendered on the server on every navigation.
+3. **Each DB query** went through `PrismaNeon` (HTTP adapter) as a separate
+   HTTP round-trip — not a pooled TCP connection. Multiple queries per page
+   ran **sequentially**, not in parallel.
+4. **`next-intl` re-imported the locale JSON** on every render.
+5. **There was no `loading.tsx` anywhere** — after a user clicked a link, the
+   previous page froze until the server finished. No spinner, no skeleton.
+   From the user's point of view, this is what "slow" means.
 
-Eng yomon joy — jurnallar katalog sahifasi:
-- `getFilteredJournals(query)` — jurnallar to'liq ma'lumot bilan (1-so'rov)
-- `getFilteredJournals({})` — xuddi shu jadval yana, faqat count'lar uchun (2-so'rov)
-- `getUniqueSubjects()` — har jurnalning `subjectAreas` massivini tortib,
-  Node'da dedupe qilar edi (3-so'rov, sekvensial, cache'siz)
+The worst offender was the journals catalog page:
+- `getFilteredJournals(query)` — full journal rows (query 1)
+- `getFilteredJournals({})` — the same table again, just to compute counts (query 2)
+- `getUniqueSubjects()` — pulled every journal's `subjectAreas` array and
+  de-duped in Node (query 3, sequential, uncached)
 
-Bosh sahifada ham xuddi shunday muammo: `getAllJournals()` chaqirilib, faqat
-3 ta son (jami/Scopus/OAK) uchun butun jadval yuklanardi.
+The home page had the same problem: `getAllJournals()` was called and the
+whole table loaded just to derive three numbers (total / Scopus / OAK counts).
 
-Va yana:
-- **Qidiruv** (`ILIKE '%q%'`) 8 ta ustunda sequential scan qilardi — indeks
-  ishlatilmasdi.
-- **Sitemap** `force-dynamic` — har crawl'da qayta generatsiya + 3 DB so'rov.
-- **SEO metadata** — OG teglar, Twitter card, JSON-LD schema yo'q edi.
-- **`/admin` sahifalari** `robots.txt`'da bloklanmagandi.
-- **Font** — Arial fallback (custom font yo'q, Cyrillic subset yo'q).
-- **Header/Footer Client Component** — har navigatsiyada re-render.
-- **43 ta `.bak` fayl** repo bo'ylab sochilib yotardi.
+On top of that:
+- **Search** (`ILIKE '%q%'`) ran a sequential scan across 8 columns — no
+  indexes were being used.
+- **Sitemap** was `force-dynamic` — regenerated on every crawl + 3 DB queries.
+- **SEO metadata** — no OG tags, no Twitter card, no JSON-LD schema.
+- **`/admin` pages** were not blocked in `robots.txt`.
+- **Font** — Arial fallback (no custom font, no Cyrillic subset).
+- **Header/Footer were Client Components** — re-rendered on every navigation.
+- **43 `.bak` files** scattered across the repo.
 
-### 1.2 Nima tuzatildi (14 ta muammo, hammasi hal qilindi)
+### 1.2 What was fixed (14 findings, all resolved)
 
-Barcha o'zgarishlar `be82a38` commit'ida `main` shoxida.
+All changes are in commit `be82a38` on the `main` branch.
 
-**Cache va rendering:**
-- Har bir data helper (`getAllJournals`, `getFeaturedJournals`,
+**Cache and rendering:**
+- Every data helper (`getAllJournals`, `getFeaturedJournals`,
   `getJournalCounts`, `getFilteredJournals`, `getJournalBySlug`,
   `getUniqueSubjects`, `getAllLegislation`, `getLatestLegislation`,
   `getLegislationBySlug`, `getLegislationSlugs`, `getUsefulPages`,
-  `getUsefulPageBySlug`, `getUsefulSlugs`) — `unstable_cache` bilan
-  o'ralgan, tag'lar bilan (`'journals'`, `'legislation'`, `'useful'`),
-  TTL 5-60 daqiqa.
-- Har bir public sahifa `export const revalidate = ...` qo'shilgan (ISR).
-- `force-dynamic` — sitemap, legislation va useful sahifalaridan olib
-  tashlangan.
-- Admin action'lar (`journals/[slug]/actions.ts`,
-  `legislation/[slug]/actions.ts`, `useful/[slug]/actions.ts`) endi
-  `updateTag(...)` chaqiradi — mijoz admin panelda o'zgartirsa, cache
-  darhol yangilanadi.
+  `getUsefulPageBySlug`, `getUsefulSlugs`) is now wrapped in
+  `unstable_cache` with tags (`'journals'`, `'legislation'`, `'useful'`)
+  and TTLs of 5–60 minutes.
+- Every public page now exports `export const revalidate = ...` (ISR).
+- `force-dynamic` was removed from the sitemap, legislation and useful pages.
+- Admin server actions (`journals/[slug]/actions.ts`,
+  `legislation/[slug]/actions.ts`, `useful/[slug]/actions.ts`) now call
+  `updateTag(...)` — so when the client edits something in the admin panel,
+  the cache is invalidated immediately.
 
-**Sahifalarning o'zi:**
-- **Bosh sahifa** endi `getFeaturedJournals(6)` + `getJournalCounts()` +
-  `getLatestLegislation(3)` — hammasi `Promise.all` ichida. Butun
-  jadvalni tortmaydi.
-- **Jurnallar sahifasi** — 3 sekvensial so'rov o'rniga 2 ta parallel
-  (`getFilteredJournals` + `getJournalCounts`), `getUniqueSubjects` esa
-  cache'dan keladi.
+**The pages themselves:**
+- **Home page** now uses `getFeaturedJournals(6)` + `getJournalCounts()` +
+  `getLatestLegislation(3)` — all inside one `Promise.all`. It no longer
+  pulls the whole table.
+- **Journals page** — from 3 sequential queries down to 2 in parallel
+  (`getFilteredJournals` + `getJournalCounts`), and `getUniqueSubjects`
+  now comes from cache.
 
-**Ma'lumotlar bazasi:**
-- `getUniqueSubjects` — Node'da dedupe o'rniga
+**Database:**
+- `getUniqueSubjects` — instead of deduping in Node, it now runs
   `SELECT DISTINCT unnest("subjectAreas")` (raw query).
-- Yangi migratsiya —
+- New migration —
   `prisma/migrations/20260905000000_add_search_indexes/migration.sql`:
-  - `pg_trgm` extension yoqiladi
-  - `title`, `titleRu`, `titleUz`, `publisher`, `shortDescription` —
-    GIN trigram indexlari (`ILIKE '%q%'` uchun tez qidiruv)
-  - `subjectAreas` — GIN array index
-  - `isScopusIndexed`, `isOakRecommended`, `quartile`, `createdAt` —
-    b-tree indexlar
-  - **Bu migratsiya ishlab chiqarish DB'siga qo'llanishi kerak** — mijoz
-    buni hali qilmagan.
+  - Enables the `pg_trgm` extension
+  - GIN trigram indexes on `title`, `titleRu`, `titleUz`, `publisher`,
+    `shortDescription` (for fast `ILIKE '%q%'` searches)
+  - GIN array index on `subjectAreas`
+  - B-tree indexes on `isScopusIndexed`, `isOakRecommended`, `quartile`,
+    `createdAt`
+  - **This migration still needs to be applied to the production DB** — the
+    client has not done that yet.
 
-**Ko'rish (loading):**
-- 10 ta `loading.tsx` fayli qo'shildi (`/[locale]`, `/journals`,
-  `/journals/[slug]`, `/scopus`, `/oak`, `/legislation`,
-  `/legislation/[slug]`, `/useful`, `/useful/[slug]`, `/contacts`).
-- Umumiy `PageSkeleton` komponenti —
+**Perceived loading:**
+- 10 `loading.tsx` files added (`/[locale]`, `/journals`, `/journals/[slug]`,
+  `/scopus`, `/oak`, `/legislation`, `/legislation/[slug]`, `/useful`,
+  `/useful/[slug]`, `/contacts`).
+- Shared `PageSkeleton` component at
   `src/components/layout/page-skeleton.tsx`.
 
 **SEO:**
-- `src/app/robots.ts` — `/admin` va `/api` bloklandi, `host` qo'shildi.
-- `src/app/admin/(protected)/layout.tsx` — `robots: {index:false,
-  follow:false}` metadata eksporti.
+- `src/app/robots.ts` — `/admin` and `/api` disallowed, `host` added.
+- `src/app/admin/(protected)/layout.tsx` — exports
+  `robots: {index:false, follow:false}` metadata.
 - `src/app/(site)/[locale]/layout.tsx`:
-  - `viewport` + `themeColor` eksporti
-  - OpenGraph (RU/UZ/EN alternateLocale bilan)
+  - `viewport` + `themeColor` exports
+  - OpenGraph (with RU/UZ/EN alternateLocale)
   - Twitter card
-  - JSON-LD `Organization` va `WebSite` + `SearchAction`
-  - `yandex-verification` meta tag — `YANDEX_VERIFICATION` env
-    o'zgaruvchisidan olinadi
+  - JSON-LD `Organization` and `WebSite` + `SearchAction`
+  - `yandex-verification` meta tag — read from the `YANDEX_VERIFICATION`
+    env variable
   - `manifest: '/manifest.webmanifest'`
-- Bosh sahifa va jurnallar sahifasida `x-default` hreflang qo'shildi.
-- Jurnallar sahifasida JSON-LD `ItemList` schema qo'shildi.
-- `public/manifest.webmanifest` — PWA uchun.
+- `x-default` hreflang added on the home page and the journals page.
+- JSON-LD `ItemList` schema added on the journals page.
+- `public/manifest.webmanifest` — PWA manifest.
 
-**Font va konfiguratsiya:**
-- `next/font/google` — Inter (Latin + Cyrillic + Latin-Ext subsetlar).
-- `globals.css` — Arial fallback olib tashlandi, `prefers-reduced-motion`
-  hurmatga olindi.
+**Font and configuration:**
+- `next/font/google` — Inter (Latin + Cyrillic + Latin-Ext subsets).
+- `globals.css` — Arial fallback removed, `prefers-reduced-motion` respected.
 - `next.config.mjs`:
   - `compress: true`
   - `poweredByHeader: false`
   - `images: {formats: ['image/avif', 'image/webp'], remotePatterns: [...]}`
-  - `headers()` — statik asset'larga Cache-Control
+  - `headers()` — Cache-Control on static assets
 
 **Header, Footer, Accessibility:**
-- `site-header.tsx` va `site-footer.tsx` — Client Component'dan Server
-  Component'ga aylantirildi.
-- Yangi Client island'lar (kichkina):
-  - `src/components/layout/mobile-menu.tsx` — mobil menyu, SVG icon,
+- `site-header.tsx` and `site-footer.tsx` — converted from Client Components
+  to Server Components.
+- New (small) Client islands:
+  - `src/components/layout/mobile-menu.tsx` — mobile menu, SVG icon,
     `aria-controls`, `aria-expanded`, `aria-current`
-  - `src/components/layout/nav-links.tsx` — desktop navigatsiya, active
-    holat
-- Language switcher — `aria-current="page"` qo'shildi.
-- `focus-visible` outline'lar hamma joyda.
+  - `src/components/layout/nav-links.tsx` — desktop navigation with the
+    active state
+- Language switcher — `aria-current="page"` added.
+- `focus-visible` outlines throughout.
 
-**Tozalash:**
-- 43 ta `.bak` va `.stage3*.bak`, `.stage4*.bak` fayl o'chirildi.
-- Ishlatilmagan `site-footer-client.tsx`, `footer.tsx` fayllari o'chirildi.
+**Cleanup:**
+- 43 `.bak`, `.stage3*.bak`, `.stage4*.bak` files deleted.
+- Unused `site-footer-client.tsx` and `footer.tsx` deleted.
 
-### 1.3 Tekshirilgan holat
+### 1.3 Verified state
 
-Repo mahalliy tekshirildi:
-- `tsc --noEmit` — xatoliksiz
-- `eslint` — o'zgartirilgan fayllarda xatolik yo'q
-- `next build` — kompilyatsiya muvaffaqiyatli (page-data collection faqat
-  jonli Neon DB bo'lmagani uchun to'xtaydi — bu kutilgan holat)
+The repo was checked locally:
+- `tsc --noEmit` — clean
+- `eslint` — no errors on touched files
+- `next build` — compilation succeeds (page-data collection stops only
+  because there's no live Neon DB on the machine — expected)
 
 ---
 
-## 2-QISM — Sizning vazifangiz (AI uchun ko'rsatmalar)
+## PART 2 — Your job (instructions for the AI)
 
-**Sizning vazifangiz:** mijozga quyidagi qadamlarni **bittalab, o'zbek tilida,
-oddiy so'zlar bilan** tushuntirish. Har qadamdan keyin: "Bu qadamni bajardingizmi?
-Natijasi qanday bo'ldi?" deb so'rang va javobini kuting. Agar mijoz xatoga uchrasa,
-uni hal qiling.
+**Your job:** walk the client through the following steps **one at a time,
+in Uzbek, in plain words**. After each step ask: "Did you complete this
+step? What was the result?" and wait for the answer. If the client hits an
+error, help resolve it.
 
-**Muhim qoidalar:**
-- Barcha javoblaringiz o'zbek tilida (lotin yozuvi) bo'lsin.
-- Terminal buyruqlarini o'zgartirmasdan bering (`git pull`, `npx prisma migrate deploy` va h.k.).
-- Har bir qadamdan keyin natijani so'rang, keyingisiga o'tmang.
-- Environment variable'lar allaqachon Vercel'da o'rnatilgan — ularni yana so'ramang.
-- Agar mijoz "hammasi tayyor" desa yoki xato bermay o'tsa, keyingi qadamga o'ting.
-- Texnik gapirmang. "Cache", "ISR", "GIN index" — bularni tushuntirmang, faqat
-  buyruqlarni bering va nima kutish kerakligini ayting.
+**Important rules:**
+- All your replies must be in Uzbek (Latin script).
+- Give shell commands unchanged (`git pull`, `npx prisma migrate deploy`, etc.).
+- After each step, ask for the result before moving on.
+- Environment variables are already set on Vercel — do not ask for them again.
+- If the client says "all done" or moves on without an error, proceed to the
+  next step.
+- Do not lecture. Terms like "cache", "ISR", "GIN index" — do not explain
+  them, just give the command and say what to expect.
 
-### 2.1 Mijozdan boshlashda so'raysiz
+### 2.1 What to say when starting
 
-Boshlanishida mijozga shunday deb yozing (yoki shunga o'xshash):
+At the start, say something like this to the client (in Uzbek):
 
-> Salom! Men saytdagi barcha o'zgarishlarni ko'rib chiqdim. Endi biz uchtala
-> ishni birgalikda bajaramiz:
-> 1. Yangi kodni serverga chiqarish (deploy)
-> 2. Ma'lumotlar bazasida yangi indekslarni yaratish (bu qidiruvni tezlashtiradi)
-> 3. Neon va Vercel regionlarini tekshirish
+> Hi! I've reviewed all the site changes. Now we'll do three things together:
+> 1. Get the new code onto the server (deploy)
+> 2. Create the new indexes in the database (this speeds up search)
+> 3. Check that Neon and Vercel are in the same region
 >
-> Har qadamni birma-bir qilamiz. Boshlaymizmi?
+> We'll do each step one by one. Shall we start?
 
-### 2.2 QADAMLAR
+### 2.2 STEPS
 
-**QADAM 1 — Vercel'da deploy tekshirish**
+**STEP 1 — Check the Vercel deploy**
 
-Mijozga aynan shu narsani so'rang:
+Ask the client exactly this:
 
-> Vercel'da loyihangizga kiring va so'nggi deploy'ni tekshiring. `main` shoxidagi
-> commit `be82a38` (nomi: "Apply performance, SEO, and a11y audit fixes")
-> muvaffaqiyatli deploy bo'lganmi? Vercel dashboard'ida "Ready" (yashil) yozuv
-> ko'rinishi kerak. Skrinshot yuborsangiz ham bo'ladi.
+> Open your Vercel project and check the latest deploy. Was commit `be82a38`
+> on the `main` branch (titled "Apply performance, SEO, and a11y audit fixes")
+> deployed successfully? You should see "Ready" (green) in the Vercel
+> dashboard. A screenshot is fine.
 
-Agar deploy avtomatik bo'lmagan bo'lsa, mijozdan qo'lda deploy tugmasini
-bosishni so'rang: **Vercel → loyiha → Deployments → so'nggi commit → "Redeploy"**.
+If the deploy did not run automatically, tell the client to trigger it
+manually: **Vercel → project → Deployments → latest commit → "Redeploy"**.
 
-Agar deploy xato bergan bo'lsa (masalan build fail), xato matnini so'rang va
-tahlil qiling.
+If the deploy failed (e.g. build fail), ask for the error message and
+analyze it.
 
-**QADAM 2 — Ma'lumotlar bazasi migratsiyasini ishga tushirish (eng muhim qadam)**
+**STEP 2 — Run the new database migration (most important step)**
 
-Bu qadam — qidiruv tezligi uchun. Mijozga tushuntiring:
+This step is the one that makes search fast. Explain to the client:
 
-> Endi ma'lumotlar bazasida yangi indekslarni yaratamiz. Buni qilish uchun
-> siz kompyuteringizda terminalni ochib, quyidagilarni ishga tushirasiz.
+> Now we'll create the new indexes in the database. To do this you'll open
+> a terminal on your computer and run a few commands.
 
-Mijozdan `DATABASE_URL`'ni Vercel dashboard'dan olishni so'rang:
+Ask the client to get `DATABASE_URL` from the Vercel dashboard:
 
-> Vercel → loyihangiz → Settings → Environment Variables → `DATABASE_URL` —
-> "Reveal" tugmasini bosing va qiymatni nusxa oling. **Bu qiymatni hech kimga
-> yubormang, faqat o'z terminalingizga ishlating.**
+> Vercel → your project → Settings → Environment Variables → `DATABASE_URL` →
+> click "Reveal" and copy the value. **Do not share this value with anyone;
+> only use it in your own terminal.**
 
-Keyin mijoz kompyuterida terminalni ochsin va shu buyruqlarni ishga tushirsin:
+Then have the client open a terminal and run:
 
 ```bash
 git clone https://github.com/ShodievBot/uzakademiya-uz.git
@@ -223,24 +220,23 @@ cd uzakademiya-uz
 npm install
 ```
 
-Keyin `.env` fayl yaratsin:
+Then create an `.env` file with:
 
 ```bash
 DATABASE_URL="..."
 DIRECT_URL="..."
 ```
 
-(Bu yerga Vercel'dan olingan qiymatlar qo'yiladi. `DIRECT_URL` — Neon
-dashboard'dan olinadi, "Direct connection" bo'limi.)
+(These values come from Vercel. `DIRECT_URL` is from the Neon dashboard
+under "Direct connection".)
 
-Nihoyat:
+Finally:
 
 ```bash
 npx prisma migrate deploy
 ```
 
-Mijozdan buyruq natijasini so'rang. Muvaffaqiyatli bo'lsa, quyidagicha
-ko'rinadi:
+Ask the client for the command output. On success it looks like:
 
 ```
 Applying migration `20260905000000_add_search_indexes`
@@ -248,21 +244,20 @@ The following migration have been applied:
 migrations/20260905000000_add_search_indexes/migration.sql
 ```
 
-Agar xato bersa, xato matnini so'rang va hal qiling.
+If it errors, ask for the error text and troubleshoot.
 
-**QADAM 3 — Neon'da tekshirish**
+**STEP 3 — Verify in Neon**
 
-Mijozdan Neon dashboard'ga kirishni so'rang:
+Ask the client to open the Neon dashboard:
 
-> Neon dashboard → loyihangiz → SQL Editor bo'limini oching va shu so'rovni
-> ishga tushiring:
+> Neon dashboard → your project → open the SQL Editor and run this query:
 >
 > ```sql
 > SELECT indexname FROM pg_indexes
 > WHERE tablename = 'Journal' ORDER BY indexname;
 > ```
 >
-> Natijada quyidagi yangi indekslar ro'yxatda bo'lishi kerak:
+> The result should include these new indexes:
 > - `Journal_title_trgm_idx`
 > - `Journal_titleRu_trgm_idx`
 > - `Journal_titleUz_trgm_idx`
@@ -274,184 +269,181 @@ Mijozdan Neon dashboard'ga kirishni so'rang:
 > - `Journal_quartile_idx`
 > - `Journal_createdAt_idx`
 >
-> Bu indekslar ro'yxatda bo'lsa, migratsiya muvaffaqiyatli o'tgan. Skrinshot
-> yuboring.
+> If those indexes are in the list, the migration ran successfully. Send a
+> screenshot.
 
-Va yana:
+And also:
 
 > ```sql
 > SELECT extname FROM pg_extension WHERE extname = 'pg_trgm';
 > ```
 >
-> Bitta qator qaytarishi kerak.
+> It should return one row.
 
-**QADAM 4 — Neon va Vercel regionlarini solishtirish**
+**STEP 4 — Compare Neon and Vercel regions**
 
-Bu — mijozning o'zi Telegram habarida aytgan ilova/DB regionlarini moslashtirish
-qadami. Aynan shu qismni tushuntiring:
+This is the step the client already asked about in their Telegram message
+— matching the app/DB regions. Explain this exact point:
 
-> Endi eng muhim narsa — Neon ma'lumotlar bazasi va Vercel qayerda ishlashi
-> **bir xil region**da bo'lishi kerak. Aks holda har bir so'rov uzoq masofani
-> bosib o'tadi va sayt sekin ishlaydi.
+> Now the most important thing — the Neon database and Vercel must run in
+> the **same region**. Otherwise every request pays a long round-trip and
+> the site feels slow.
 >
-> **1.** Neon dashboard → loyihangiz → Settings → regionni ko'ring
-> (masalan: `AWS eu-central-1 (Frankfurt)`). Menga yozing.
+> **1.** Neon dashboard → your project → Settings → note the region
+> (e.g. `AWS eu-central-1 (Frankfurt)`). Send it to me.
 >
-> **2.** Vercel → loyihangiz → Settings → Functions → "Function Region"
-> yoki "Edge Network Regions" bo'limini oching. Menga yozing.
+> **2.** Vercel → your project → Settings → Functions → open the "Function
+> Region" or "Edge Network Regions" section. Send it to me.
 
-Mijoz javob bergach:
+Once the client replies:
 
-- Agar regionlar **bir xil** bo'lsa: "A'lo, hech narsa qilish kerak emas."
-- Agar **turlicha** bo'lsa: mijozga variantlarni bering:
-  - Vercel'da funksiya regionini Neon regioniga moslash
+- If the regions **match**: "Great, nothing to do."
+- If they **differ**: give the client options:
+  - Change the Vercel function region to match Neon
     (Vercel → Settings → Functions → Region)
-  - **Yoki** Neon loyihasini boshqa regionga ko'chirish (Neon dashboard →
-    Settings → Region). Bu bir oz vaqt oladi va Neon'dan yordam so'rash
-    kerak bo'lishi mumkin.
-  - **Tavsiya:** Vercel funksiya regionini o'zgartirish osonroq. Neon Frankfurt
-    (eu-central-1)'da bo'lsa, Vercel funksiyasini ham Frankfurt (`fra1`)
-    qilish kerak.
+  - **Or** move the Neon project to a different region (Neon dashboard →
+    Settings → Region). This takes some time and may require asking Neon
+    support for help.
+  - **Recommendation:** changing the Vercel function region is easier. If
+    Neon is in Frankfurt (`eu-central-1`), also set Vercel functions to
+    Frankfurt (`fra1`).
 
-**QADAM 5 — Saytda test qilish**
+**STEP 5 — Test on the live site**
 
-Mijozdan quyidagilarni qilishni so'rang:
+Ask the client to do this:
 
-> Endi saytni sinab ko'ramiz. Telefonda yoki brauzeringizda **inkognito**
-> (yashirin) oyna oching va `https://uzakademiya.uz` saytiga o'ting.
+> Now let's test the site. Open an **incognito** (private) window on your
+> phone or in your browser and go to `https://uzakademiya.uz`.
 >
-> 1. Bosh sahifadan **Jurnallar** ustiga bosing → oldingi sahifa muzlab
->    qolmasdan, kulrang skeleton (bo'sh kartochkalar) darhol paydo bo'lishi
->    kerak, keyin haqiqiy kontent yuklanadi. Bu — eng katta o'zgarish.
-> 2. Jurnallar sahifasidan **Scopus** → **OAK** → **Qonunchilik** → **Foydali
->    materiallar** — orasida yurib chiqing. Har biri tez ochilishi kerak.
-> 3. Jurnallar sahifasiga qaytib borib, biror jurnal nomini qidirib ko'ring.
->    Bir soniyadan kam vaqt ichida natija chiqishi kerak.
-> 4. **/journals** sahifasini ikkinchi marta ochib ko'ring — deyarli darhol
->    ochilishi kerak (bu — cache ishlayotganining belgisi).
+> 1. From the home page, click on **Journals** → the previous page should
+>    NOT freeze; a grey skeleton (empty cards) should appear immediately,
+>    then the real content loads. This is the biggest change.
+> 2. From the journals page, walk through **Scopus** → **OAK** →
+>    **Legislation** → **Useful materials**. Each should open quickly.
+> 3. Go back to journals and search for some journal name. The result
+>    should appear in well under a second.
+> 4. Open **/journals** a second time — it should be almost instant (that's
+>    the cache working).
 >
-> Sayt tez ishlayaptimi? Yoki qaysidir sahifa hali ham sekin? Menga ayting.
+> Does the site feel fast? Or is some page still slow? Tell me.
 
-Agar biror sahifa hali ham sekin bo'lsa:
-- Vercel Dashboard → Deployments → so'nggi deploy → **Functions** → log'larni
-  ko'ring. DB so'rov vaqtlari qancha? 500 ms'dan ko'p bo'lsa — region muammosi
-  bo'lishi mumkin.
-- Neon dashboard → Monitoring → so'rov vaqtlarini ko'ring.
+If any page is still slow:
+- Vercel Dashboard → Deployments → latest deploy → **Functions** → check
+  the logs. What are the DB query times? Anything over 500 ms may indicate
+  a region issue.
+- Neon dashboard → Monitoring → check query times.
 
-**QADAM 6 — Google Search Console (SEO)**
+**STEP 6 — Google Search Console (SEO)**
 
-Sayt endi Google'da yaxshi indekslanishi mumkin. Mijozga tushuntiring:
+The site can now be indexed well on Google. Explain to the client:
 
-> Endi saytni Google'da ko'rinishini yaxshilaymiz.
+> Now let's improve how the site appears on Google.
 >
-> **1.** https://search.google.com/search-console saytiga kiring
-> (Google akkauntingiz bilan).
+> **1.** Go to https://search.google.com/search-console (sign in with your
+> Google account).
 >
-> **2.** "Add property" tugmasini bosing → "URL prefix" → `https://uzakademiya.uz`
-> kiriting.
+> **2.** Click "Add property" → "URL prefix" → enter `https://uzakademiya.uz`.
 >
-> **3.** Google sizdan saytga egaligingizni tasdiqlashni so'raydi. Eng oson
-> yo'l — **HTML tag** usuli. Google sizga `<meta name="google-site-verification"
-> content="..." />` shaklidagi tag beradi. Uni menga yuboring — men saytga
-> qo'shib beraman.
+> **3.** Google will ask you to verify site ownership. The easiest way is
+> the **HTML tag** method. Google gives you a tag like
+> `<meta name="google-site-verification" content="..." />`. Send it to me
+> — I'll add it to the site.
 >
-> **4.** Tasdiqlangandan keyin: chap menyudan **Sitemaps** → `sitemap.xml`
-> kiriting va **Submit** bosing.
+> **4.** Once verified: in the left menu, **Sitemaps** → enter `sitemap.xml`
+> → click **Submit**.
 
-**QADAM 7 — Yandex Webmaster (Rossiya/Uzbekistan foydalanuvchilari uchun muhim)**
+**STEP 7 — Yandex Webmaster (important for Russia/Uzbekistan users)**
 
-Yandex O'zbekistonda ko'p ishlatiladi, shuning uchun bu muhim.
+Yandex is widely used in Uzbekistan, so this matters.
 
-> **1.** https://webmaster.yandex.com saytiga kiring.
+> **1.** Go to https://webmaster.yandex.com.
 >
-> **2.** "Add site" → `https://uzakademiya.uz` kiriting.
+> **2.** "Add site" → enter `https://uzakademiya.uz`.
 >
-> **3.** Tasdiqlash usuli — **Meta tag**. Yandex sizga
-> `abc123def456` shaklidagi kod beradi.
+> **3.** Verification method — **Meta tag**. Yandex gives you a code like
+> `abc123def456`.
 >
-> **4.** Bu kodni Vercel'ga qo'shamiz:
-> Vercel → loyiha → Settings → Environment Variables → **Add**:
-> - Nomi: `YANDEX_VERIFICATION`
-> - Qiymati: (Yandex bergan kod)
-> - Environment: **Production** (barcha muhitlarga qo'ying)
+> **4.** Add this code to Vercel:
+> Vercel → project → Settings → Environment Variables → **Add**:
+> - Name: `YANDEX_VERIFICATION`
+> - Value: (the code from Yandex)
+> - Environment: **Production** (add to all environments)
 >
-> **5.** Saqlang va Vercel'da qayta deploy qiling
-> (Deployments → so'nggi commit → "..." menyu → **Redeploy**).
+> **5.** Save and trigger a redeploy on Vercel
+> (Deployments → latest commit → "..." menu → **Redeploy**).
 >
-> **6.** Qayta deploy tugagach, Yandex Webmaster'ga qayting va **Verify**
-> tugmasini bosing.
+> **6.** After the redeploy finishes, go back to Yandex Webmaster and
+> click **Verify**.
 >
-> **7.** Tasdiqlangandan keyin: **Indexing → Sitemap** →
-> `https://uzakademiya.uz/sitemap.xml` kiriting.
+> **7.** Once verified: **Indexing → Sitemap** →
+> `https://uzakademiya.uz/sitemap.xml`.
 
-**QADAM 8 — Ixtiyoriy takomillashtirishlar**
+**STEP 8 — Optional improvements**
 
-Bu qadamlar shart emas, lekin foydali. Mijozga tushuntiring:
+These are not required, but useful. Explain to the client:
 
-> Sayt endi tez ishlaydi. Yana bir necha kichik yaxshilashlar qilish mumkin,
-> lekin bu shart emas:
+> The site is fast now. There are a few small improvements you can still
+> make, but they're not required:
 >
-> 1. **OpenGraph rasm** — saytga havola Telegram, WhatsApp yoki boshqa
->    joylarda ulashilganda chiqadigan rasm. Dizaynerdan 1200×630 o'lchamdagi
->    UzAkademiya logotipi bilan PNG rasm so'rang. Menga yuboring — saytga
->    qo'shib beraman.
-> 2. **Jurnal muqovalari** — hozir muqova rasmlari yo'q. Agar jurnallarga
->    muqova rasm qo'shilsa, sayt yanada chiroyli ko'rinadi.
-> 3. **Article JSON-LD** — qonunchilik va jurnal batafsil sahifalari uchun
->    qo'shimcha SEO ma'lumot. Kichik SEO yutuq.
+> 1. **OpenGraph image** — the image shown when a link is shared on
+>    Telegram, WhatsApp, etc. Ask your designer for a 1200×630 PNG with
+>    the UzAkademiya logo. Send it to me — I'll add it to the site.
+> 2. **Journal covers** — there are currently no cover images. If covers
+>    get added to journals, the site will look nicer.
+> 3. **Article JSON-LD** — additional SEO data for legislation and journal
+>    detail pages. A small SEO win.
 
-### 2.3 Agar mijoz muammoga uchrasa
+### 2.3 If the client hits trouble
 
-**"Deploy fail bo'ldi"** →
-Vercel deploy log'idan xato matnini so'rang. Odatda:
-- Prisma type xatolari → `npx prisma generate` ishlatilishi kerak (Vercel
-  buni build vaqtida avtomatik qiladi, `package.json`'da `"build": "prisma
-  generate && next build"` bor).
-- Environment variable yo'q → Vercel Settings'da tekshiring.
+**"The deploy failed"** →
+Ask for the error text from the Vercel deploy log. Usually one of:
+- Prisma type errors → `npx prisma generate` needs to run (Vercel does this
+  automatically during build, since `package.json` has
+  `"build": "prisma generate && next build"`).
+- Missing environment variable → check Vercel Settings.
 
-**"Migratsiya xato berdi"** →
-Xato matnini so'rang. Odatda:
-- `permission denied to create extension "pg_trgm"` → Neon'da bu extension
-  Free plan'da ham ishlaydi, lekin ba'zan admin permissions kerak. Neon
-  support'ga yozish kerak bo'lishi mumkin.
-- `relation "Journal" does not exist` → Ma'lumotlar bazasi bo'sh. Avval
-  seed'lar ishlashi kerak: `npx tsx prisma/seed-journals.ts`.
-- `already exists` → Xatosizmiga o'xshaydi, indekslar allaqachon bor.
-  Buyruq oxirigacha ishlab bo'lganmi, tekshiring.
+**"The migration failed"** →
+Ask for the error text. Usually one of:
+- `permission denied to create extension "pg_trgm"` → the extension does
+  work on Neon Free, but sometimes needs admin permissions. May need to
+  contact Neon support.
+- `relation "Journal" does not exist` → the DB is empty. Run the seeds
+  first: `npx tsx prisma/seed-journals.ts`.
+- `already exists` → looks like an error but is fine, the indexes already
+  exist. Check whether the command finished.
 
-**"Sayt hali ham sekin"** →
-1. Cache ochilganini tekshiring: sahifani ikki marta ochsin — ikkinchisi tez
-   bo'lishi kerak.
-2. Vercel Functions log'idan DB so'rov vaqtini ko'ring.
-3. Neon monitoring'ni ko'ring.
-4. Region muammosi bo'lishi mumkin (QADAM 4'ga qayting).
+**"The site is still slow"** →
+1. Check that the cache is warming up: open the same page twice — the
+   second should be fast.
+2. Look at DB query time in the Vercel Functions logs.
+3. Look at Neon monitoring.
+4. May be a region issue (go back to STEP 4).
 
-**"Yandex Verify ishlamayapti"** →
-- Meta tag saytga chiqqanini tekshiring: brauzerda saytni oching → o'ng
-  tugma → "View page source" → `yandex-verification` ni qidiring. Bor bo'lsa —
-  Yandex'da qayta urinib ko'ring (ba'zan bir necha daqiqa vaqt oladi).
-- Yo'q bo'lsa — `YANDEX_VERIFICATION` env variable to'g'ri qo'yilganini
-  tekshiring va qayta deploy qiling.
+**"Yandex Verify isn't working"** →
+- Check that the meta tag actually shipped: open the site in a browser →
+  right-click → "View page source" → search for `yandex-verification`.
+  If present — retry in Yandex (it can take a few minutes).
+- If not — confirm the `YANDEX_VERIFICATION` env variable is set correctly
+  and redeploy.
 
-### 2.4 Yakuniy tekshiruv
+### 2.4 Final wrap-up
 
-Hamma qadamlar bajarilgach, mijozga shuni ayting:
+Once all steps are done, tell the client:
 
-> Tabriklayman! Sayt endi:
-> - Har bir sahifa o'zgarishida darhol skeleton ko'rsatadi (foydalanuvchi
->   "muzlab qoldi" degan tuyg'usi bo'lmaydi)
-> - Ma'lumotlar cache'lanadi — takroriy tashriflar deyarli darhol ochiladi
-> - Qidiruv indekslar orqali ishlaydi — tez javob beradi
-> - Google va Yandex'da yaxshi indekslanadi
-> - Mobile va accessibility bo'yicha yaxshilangan
+> Congratulations! The site now:
+> - Shows a skeleton the instant a page changes (no "frozen" feel for users)
+> - Caches data — repeat visits open almost instantly
+> - Search runs through indexes and returns fast
+> - Indexes well on Google and Yandex
+> - Has better mobile and accessibility behaviour
 >
-> Agar biror muammo yuzaga kelsa yoki yangi funksiya kerak bo'lsa, ayting.
+> If any problem comes up or if you need a new feature, let me know.
 
 ---
 
-## Ilova — texnik ma'lumot
+## Appendix — technical reference
 
-### O'zgartirilgan fayllar (asosiy)
+### Modified files (main)
 
 ```
 next.config.mjs
@@ -478,7 +470,7 @@ src/components/layout/site-footer.tsx
 src/components/layout/language-switcher.tsx
 ```
 
-### Qo'shilgan yangi fayllar
+### New files added
 
 ```
 public/manifest.webmanifest
@@ -498,9 +490,9 @@ src/app/(site)/[locale]/useful/[slug]/loading.tsx
 src/app/(site)/[locale]/contacts/loading.tsx
 ```
 
-### Baholar (avval → keyin, 100 balldan)
+### Scores (before → after, out of 100)
 
-| Ko'rsatkich | Avval | Keyin |
+| Metric | Before | After |
 |---|---|---|
 | Performance | 42 | 86 |
 | Responsiveness | 78 | 88 |
