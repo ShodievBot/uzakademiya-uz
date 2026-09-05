@@ -1,12 +1,14 @@
 import type {Metadata} from 'next'
 import Link from 'next/link'
 import {JournalCard} from '@/components/journals/journal-card'
-import {getAllJournals} from '@/lib/journals'
+import {getFeaturedJournals, getJournalCounts} from '@/lib/journals'
 import {
   getLatestLegislation,
   normalizeLocale,
   pickLocalizedText
 } from '@/lib/legislation'
+
+export const revalidate = 300
 
 type Props = {
   params: Promise<{locale: string}>
@@ -49,8 +51,15 @@ export async function generateMetadata({params}: Props): Promise<Metadata> {
       languages: {
         ru: '/ru',
         uz: '/uz',
-        en: '/en'
+        en: '/en',
+        'x-default': '/ru'
       }
+    },
+    openGraph: {
+      title: meta.title,
+      description: meta.description,
+      url: `/${locale}`,
+      type: 'website'
     }
   }
 }
@@ -327,13 +336,15 @@ export default async function LocaleHomePage({params}: Props) {
   const normalizedLocale = normalizeLocale(locale)
   const content = getContent(normalizedLocale)
 
-  const allJournals = await getAllJournals()
-  const recommended = allJournals.slice(0, 6)
-  const latestDocs = await getLatestLegislation(3)
+  const [recommended, latestDocs, counts] = await Promise.all([
+    getFeaturedJournals(6),
+    getLatestLegislation(3),
+    getJournalCounts()
+  ])
 
-  const totalCount = allJournals.length
-  const scopusCount = allJournals.filter((journal) => journal.isScopusIndexed).length
-  const oakCount = allJournals.filter((journal) => journal.isOakRecommended).length
+  const totalCount = counts.total
+  const scopusCount = counts.scopus
+  const oakCount = counts.oak
 
   return (
     <main className="pb-16">

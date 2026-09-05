@@ -3,7 +3,7 @@ import {prisma} from '@/lib/prisma';
 import {getLegislationSlugs} from '@/lib/legislation';
 import {getUsefulSlugs, siteLocales} from '@/lib/useful';
 
-export const dynamic = 'force-dynamic';
+export const revalidate = 3600;
 
 const baseUrl = process.env.SITE_URL || 'https://uzakademiya.uz';
 

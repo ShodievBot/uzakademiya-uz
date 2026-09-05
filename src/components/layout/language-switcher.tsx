@@ -46,8 +46,11 @@ export default function LanguageSwitcher() {
           <Link
             key={item}
             href={buildLocalePath(pathname, item, search)}
+            hrefLang={item}
+            aria-current={isActive ? 'page' : undefined}
+            aria-label={`Switch language to ${item.toUpperCase()}`}
             className={[
-              'inline-flex h-9 min-w-9 items-center justify-center rounded-full border px-3 text-xs transition',
+              'inline-flex h-9 min-w-9 items-center justify-center rounded-full border px-3 text-xs transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#FF6C26]',
               isActive
                 ? 'border-[#FF6C26] bg-[#FF6C26] font-bold text-white'
                 : 'border-[#E7DDD4] bg-white font-semibold text-[#555555] hover:border-[#FF6C26] hover:bg-[#FFF1E8] hover:text-[#111111]'

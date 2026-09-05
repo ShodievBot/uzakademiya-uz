@@ -1,6 +1,6 @@
 'use server';
 
-import {revalidatePath} from 'next/cache';
+import {revalidatePath, updateTag} from 'next/cache';
 import {redirect} from 'next/navigation';
 import {getCurrentAdminUser} from '@/lib/admin-auth';
 import {getJournalBySlug, updateJournalContent} from '@/lib/journals';
@@ -346,6 +346,7 @@ export async function updateJournal(
       throw new Error('Failed to reload updated journal.');
     }
 
+    updateTag('journals');
     revalidatePath('/admin');
     revalidatePath('/admin/journals');
     revalidatePath(`/admin/journals/${slug}`);

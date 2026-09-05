@@ -101,7 +101,7 @@ export async function generateMetadata({
   };
 }
 
-export const dynamic = 'force-dynamic';
+export const revalidate = 600;
 
 export default async function UsefulListPage({
   params

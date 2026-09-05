@@ -1,3 +1,4 @@
+import {unstable_cache} from 'next/cache';
 import {prisma} from '@/lib/prisma';
 import type {
   LegislationDocument,
@@ -6,6 +7,8 @@ import type {
 } from '@/types/legislation';
 
 export const siteLocales: SiteLocale[] = ['ru', 'uz', 'en'];
+
+const LEGISLATION_CACHE_TAG = 'legislation';
 
 function lt(ru = '', uz = '', en = ''): LocalizedText {
   return {ru, uz, en};
@@ -72,53 +75,56 @@ function mapDocumentFromDb(doc: {
   };
 }
 
-export async function getAllLegislation(): Promise<LegislationDocument[]> {
-  const documents = await prisma.legislationDocument.findMany({
-    orderBy: {
-      publishedAt: 'desc'
-    }
-  });
+export const getAllLegislation = unstable_cache(
+  async (): Promise<LegislationDocument[]> => {
+    const documents = await prisma.legislationDocument.findMany({
+      orderBy: {publishedAt: 'desc'}
+    });
+    return documents.map(mapDocumentFromDb);
+  },
+  ['legislation:all'],
+  {tags: [LEGISLATION_CACHE_TAG], revalidate: 600}
+);
 
-  return documents.map(mapDocumentFromDb);
-}
+export const getLatestLegislation = unstable_cache(
+  async (limit = 3): Promise<LegislationDocument[]> => {
+    const documents = await prisma.legislationDocument.findMany({
+      orderBy: {publishedAt: 'desc'},
+      take: limit
+    });
+    return documents.map(mapDocumentFromDb);
+  },
+  ['legislation:latest'],
+  {tags: [LEGISLATION_CACHE_TAG], revalidate: 600}
+);
 
-export async function getLatestLegislation(
-  limit = 3
-): Promise<LegislationDocument[]> {
-  const documents = await prisma.legislationDocument.findMany({
-    orderBy: {
-      publishedAt: 'desc'
-    },
-    take: limit
-  });
+const legislationBySlugCache = unstable_cache(
+  async (slug: string): Promise<LegislationDocument | null> => {
+    const document = await prisma.legislationDocument.findUnique({where: {slug}});
+    if (!document) return null;
+    return mapDocumentFromDb(document);
+  },
+  ['legislation:by-slug'],
+  {tags: [LEGISLATION_CACHE_TAG], revalidate: 600}
+);
 
-  return documents.map(mapDocumentFromDb);
-}
-
-export async function getLegislationBySlug(
+export function getLegislationBySlug(
   slug: string
 ): Promise<LegislationDocument | null> {
-  const document = await prisma.legislationDocument.findUnique({
-    where: {slug}
-  });
-
-  if (!document) return null;
-
-  return mapDocumentFromDb(document);
+  return legislationBySlugCache(slug);
 }
 
-export async function getLegislationSlugs(): Promise<string[]> {
-  const documents = await prisma.legislationDocument.findMany({
-    select: {
-      slug: true
-    },
-    orderBy: {
-      publishedAt: 'desc'
-    }
-  });
-
-  return documents.map((item) => item.slug);
-}
+export const getLegislationSlugs = unstable_cache(
+  async (): Promise<string[]> => {
+    const documents = await prisma.legislationDocument.findMany({
+      select: {slug: true},
+      orderBy: {publishedAt: 'desc'}
+    });
+    return documents.map((item) => item.slug);
+  },
+  ['legislation:slugs'],
+  {tags: [LEGISLATION_CACHE_TAG], revalidate: 3600}
+);
 
 export type LegislationEditorInput = {
   title: LocalizedText;

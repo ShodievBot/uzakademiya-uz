@@ -3,6 +3,8 @@ import {JournalCard} from '@/components/journals/journal-card';
 import {getFilteredJournals} from '@/lib/journals';
 import type {Metadata} from 'next';
 
+export const revalidate = 600;
+
 type Props = {
   params: Promise<{locale: string}>;
 };

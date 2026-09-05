@@ -1,18 +1,10 @@
-'use client';
-
 import Link from 'next/link';
-import {usePathname} from 'next/navigation';
 
-const LOCALES = ['ru', 'uz', 'en'];
+type SiteFooterProps = {
+  locale: string;
+};
 
-function getCurrentLocale(pathname: string) {
-  const segments = pathname.split('/').filter(Boolean);
-  return segments[0] && LOCALES.includes(segments[0]) ? segments[0] : 'ru';
-}
-
-function withLocale(pathname: string, href: string) {
-  const locale = getCurrentLocale(pathname);
-
+function withLocale(locale: string, href: string) {
   if (href === '/') return `/${locale}`;
   return `/${locale}${href}`;
 }
@@ -86,9 +78,7 @@ function getCopy(locale: string) {
   };
 }
 
-export default function SiteFooter() {
-  const pathname = usePathname();
-  const locale = getCurrentLocale(pathname);
+export default function SiteFooter({locale}: SiteFooterProps) {
   const copy = getCopy(locale);
   const year = new Date().getFullYear();
 
@@ -130,41 +120,39 @@ export default function SiteFooter() {
             </p>
           </div>
 
-          <div>
+          <nav aria-label={copy.navTitle}>
             <h3 className="text-sm font-bold uppercase tracking-[0.18em] text-[#A57252]">
               {copy.navTitle}
             </h3>
-
             <div className="mt-4 flex flex-col gap-3 text-sm">
               {navLinks.map((item) => (
                 <Link
                   key={item.href}
-                  href={withLocale(pathname, item.href)}
-                  className="text-[#3E3E3E] transition hover:text-[#E85E1B]"
+                  href={withLocale(locale, item.href)}
+                  className="text-[#3E3E3E] transition hover:text-[#E85E1B] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#FF6C26]"
                 >
                   {item.label}
                 </Link>
               ))}
             </div>
-          </div>
+          </nav>
 
-          <div>
+          <nav aria-label={copy.guidesTitle}>
             <h3 className="text-sm font-bold uppercase tracking-[0.18em] text-[#A57252]">
               {copy.guidesTitle}
             </h3>
-
             <div className="mt-4 flex flex-col gap-3 text-sm">
               {guideLinks.map((item) => (
                 <Link
                   key={item.href}
-                  href={withLocale(pathname, item.href)}
-                  className="text-[#3E3E3E] transition hover:text-[#E85E1B]"
+                  href={withLocale(locale, item.href)}
+                  className="text-[#3E3E3E] transition hover:text-[#E85E1B] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#FF6C26]"
                 >
                   {item.label}
                 </Link>
               ))}
             </div>
-          </div>
+          </nav>
 
           <div className="rounded-[28px] border border-[#F0E2D8] bg-white/80 p-6 shadow-[0_8px_24px_rgba(17,17,17,0.04)]">
             <h3 className="text-xl font-bold text-[#111111]">
@@ -176,8 +164,8 @@ export default function SiteFooter() {
             </p>
 
             <Link
-              href={withLocale(pathname, '/contacts')}
-              className="mt-5 inline-flex rounded-2xl bg-[#FF6C26] px-5 py-3 text-sm font-bold text-white transition hover:bg-[#E85E1B]"
+              href={withLocale(locale, '/contacts')}
+              className="mt-5 inline-flex rounded-2xl bg-[#FF6C26] px-5 py-3 text-sm font-bold text-white transition hover:bg-[#E85E1B] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#FF6C26]"
             >
               {copy.contactCta}
             </Link>

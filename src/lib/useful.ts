@@ -1,3 +1,4 @@
+import {unstable_cache} from 'next/cache';
 import {prisma} from '@/lib/prisma';
 import type {
   LocalizedText,
@@ -7,6 +8,8 @@ import type {
 } from '@/types/useful-page';
 
 export const siteLocales: SiteLocale[] = ['ru', 'uz', 'en'];
+
+const USEFUL_CACHE_TAG = 'useful';
 
 type UsefulSourceItem = {
   id: string;
@@ -154,64 +157,54 @@ function mapPageFromDb(page: {
   };
 }
 
-export async function getUsefulPages(): Promise<UsefulPageWithSources[]> {
-  const pages = await prisma.usefulPage.findMany({
-    orderBy: {
-      createdAt: 'asc'
-    },
-    include: {
-      blocks: {
-        orderBy: {
-          sortOrder: 'asc'
-        }
-      },
-      sources: {
-        include: {
-          source: true
-        }
+export const getUsefulPages = unstable_cache(
+  async (): Promise<UsefulPageWithSources[]> => {
+    const pages = await prisma.usefulPage.findMany({
+      orderBy: {createdAt: 'asc'},
+      include: {
+        blocks: {orderBy: {sortOrder: 'asc'}},
+        sources: {include: {source: true}}
       }
-    }
-  });
+    });
+    return pages.map(mapPageFromDb);
+  },
+  ['useful:pages'],
+  {tags: [USEFUL_CACHE_TAG], revalidate: 600}
+);
 
-  return pages.map(mapPageFromDb);
-}
+const usefulPageBySlugCache = unstable_cache(
+  async (slug: string): Promise<UsefulPageWithSources | null> => {
+    const page = await prisma.usefulPage.findUnique({
+      where: {slug},
+      include: {
+        blocks: {orderBy: {sortOrder: 'asc'}},
+        sources: {include: {source: true}}
+      }
+    });
+    if (!page) return null;
+    return mapPageFromDb(page);
+  },
+  ['useful:by-slug'],
+  {tags: [USEFUL_CACHE_TAG], revalidate: 600}
+);
 
-export async function getUsefulPageBySlug(
+export function getUsefulPageBySlug(
   slug: string
 ): Promise<UsefulPageWithSources | null> {
-  const page = await prisma.usefulPage.findUnique({
-    where: {slug},
-    include: {
-      blocks: {
-        orderBy: {
-          sortOrder: 'asc'
-        }
-      },
-      sources: {
-        include: {
-          source: true
-        }
-      }
-    }
-  });
-
-  if (!page) return null;
-
-  return mapPageFromDb(page);
+  return usefulPageBySlugCache(slug);
 }
 
-export async function getUsefulSlugs(): Promise<string[]> {
-  const pages = await prisma.usefulPage.findMany({
-    select: {
-      slug: true
-    },
-    orderBy: {
-      createdAt: 'asc'
-    }
-  });
-
-  return pages.map((page) => page.slug);
-}
+export const getUsefulSlugs = unstable_cache(
+  async (): Promise<string[]> => {
+    const pages = await prisma.usefulPage.findMany({
+      select: {slug: true},
+      orderBy: {createdAt: 'asc'}
+    });
+    return pages.map((page) => page.slug);
+  },
+  ['useful:slugs'],
+  {tags: [USEFUL_CACHE_TAG], revalidate: 3600}
+);
 
 export async function getUsefulSourcesByKeys(keys: string[]) {
   if (!keys.length) return [];
