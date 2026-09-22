@@ -44,3 +44,10 @@ next-env.d.ts
 /src/generated/prisma
 
 !.env.example
+
+# Private local backups / database exports
+.sql-export/
+.tmp/
+.backup-ui/
+*.dump
+*.sql
