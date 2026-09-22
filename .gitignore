@@ -50,4 +50,3 @@ next-env.d.ts
 .tmp/
 .backup-ui/
 *.dump
-*.sql
